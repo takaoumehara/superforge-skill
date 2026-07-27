@@ -105,4 +105,4 @@ zip -r superforge-verify.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 전체 체크리스트는 [SKILL.md](SKILL.md)에 있고, 빌려 쓰는 3페르소나 사용성 기법은 [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 전체 체크리스트는 [SKILL.md](SKILL.md)에 있고, 빌려 쓰는 3페르소나 사용성 기법은 [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

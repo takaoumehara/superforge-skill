@@ -108,4 +108,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); la evaluación heurística, la auditoría de accesibilidad, el análisis de carga cognitiva y las pruebas con personas simuladas están en [references/evaluation-methods.md](references/evaluation-methods.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); la evaluación heurística, la auditoría de accesibilidad, el análisis de carga cognitiva y las pruebas con personas simuladas están en [references/evaluation-methods.md](references/evaluation-methods.md). Visión general de la suite: [superforge-skill](../../README.es.md).

@@ -107,4 +107,4 @@ zip -r superforge-dev.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 무인 실행의 전제 조건과 빌드·증명·복구 루프, 아침 보고 형식은 [references/autonomous-run.md](references/autonomous-run.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 무인 실행의 전제 조건과 빌드·증명·복구 루프, 아침 보고 형식은 [references/autonomous-run.md](references/autonomous-run.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

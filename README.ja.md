@@ -1,6 +1,6 @@
 # superforge-skill
 
-[English](./README.md) · **日本語**
+[English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
 サブエージェントを起動する前に、そのタスクに**ふさわしいモデル**を自動で割り当てるAIエージェント用スキルです。何も指定しなければ、すべてのサブエージェントがセッションのデフォルトモデル（たいてい一番高価なモデル）をそのまま引き継いでしまいますが、それを防ぎます。
 
@@ -23,20 +23,20 @@
 
 ## Superforge スイート
 
-[`superforge`](./skills/superforge/) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `superforge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/superforge-ui` など）。
+[`superforge`](./skills/superforge/README.ja.md) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `superforge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/superforge-ui` など）。
 
 | スキル | 用途 | 残す成果物 |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
-| [`superforge-biz`](./skills/superforge-biz/) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
-| [`superforge-ui`](./skills/superforge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
-| [`superforge-test`](./skills/superforge-test/) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
-| [`superforge-debug`](./skills/superforge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
-| [`superforge-roast`](./skills/superforge-roast/) | 出荷前の忖度なし批評 | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/) | 完了宣言前の検証ゲート | `docs/verification.md` |
-| [`superforge-handoff`](./skills/superforge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
+| [`superforge-brain`](./skills/superforge-brain/README.ja.md) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.ja.md) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
+| [`superforge-test`](./skills/superforge-test/README.ja.md) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
+| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
+| [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出荷前の忖度なし批評 | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 完了宣言前の検証ゲート | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
 
 ## このスイートが「プロンプト置き場」で終わらない理由
 

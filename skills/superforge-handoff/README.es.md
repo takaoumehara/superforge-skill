@@ -108,4 +108,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El formato de la cápsula y la plantilla del prompt de reanudación están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El formato de la cápsula y la plantilla del prompt de reanudación están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.es.md).

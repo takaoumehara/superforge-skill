@@ -104,4 +104,4 @@ zip -r superforge-biz.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 앵커링·손실 회피·기본값과 각각의 윤리적 선은 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 앵커링·손실 회피·기본값과 각각의 윤리적 선은 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

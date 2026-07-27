@@ -106,4 +106,4 @@ zip -r superforge-brain.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；让每种技法真正穷尽的子方法，以及判断哪个 Hero Concept 值得动手的筛选标准，都在 [references/ideation-tools.md](references/ideation-tools.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；让每种技法真正穷尽的子方法，以及判断哪个 Hero Concept 值得动手的筛选标准，都在 [references/ideation-tools.md](references/ideation-tools.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

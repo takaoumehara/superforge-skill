@@ -109,4 +109,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El ciclo completo y los comandos de runner por plataforma están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El ciclo completo y los comandos de runner por plataforma están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.es.md).

@@ -107,4 +107,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); las condiciones previas de una ejecución sin supervisión, el bucle de construir, probar y reparar, y el formato del informe matutino están en [references/autonomous-run.md](references/autonomous-run.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); las condiciones previas de una ejecución sin supervisión, el bucle de construir, probar y reparar, y el formato del informe matutino están en [references/autonomous-run.md](references/autonomous-run.md). Visión general de la suite: [superforge-skill](../../README.es.md).

@@ -105,4 +105,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). La lista completa está en [SKILL.md](SKILL.md), y el método de usabilidad con tres personas que toma prestado, en [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). La lista completa está en [SKILL.md](SKILL.md), y el método de usabilidad con tres personas que toma prestado, en [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md). Visión general de la suite: [superforge-skill](../../README.es.md).

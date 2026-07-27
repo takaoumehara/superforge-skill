@@ -1,6 +1,6 @@
 # superforge-skill
 
-**English** · [日本語](./README.ja.md)
+**English** · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
 A drop-in AI agent skill that assigns the **right model to each subagent**
 before it's spawned — instead of every dispatched agent silently inheriting
@@ -34,22 +34,22 @@ edge cases, and the Gemini CLI invocation details are in
 
 ## The Superforge suite
 
-The [`superforge`](./skills/superforge/) skill acts as the **router**: it reads intent and hands the work
+The [`superforge`](./skills/superforge/README.md) skill acts as the **router**: it reads intent and hands the work
 to one of ten specialised `superforge-*` skills, each of which inherits the same
 model-tiering rules. Each is invocable directly too (`/superforge-ui`, …).
 
 | Skill | Use it for | Leaves behind |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
-| [`superforge-biz`](./skills/superforge-biz/) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/) | brand identity + AI image/video production prompts | `docs/brand.md` |
-| [`superforge-ui`](./skills/superforge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
-| [`superforge-test`](./skills/superforge-test/) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
-| [`superforge-debug`](./skills/superforge-debug/) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
-| [`superforge-roast`](./skills/superforge-roast/) | unsparing critique before shipping | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/) | pre-completion verification gateway | `docs/verification.md` |
-| [`superforge-handoff`](./skills/superforge-handoff/) | zero-loss session handoff across models and tools | `.handoff/` |
+| [`superforge-brain`](./skills/superforge-brain/README.md) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.md) | brand identity + AI image/video production prompts | `docs/brand.md` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.md) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
+| [`superforge-test`](./skills/superforge-test/README.md) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
+| [`superforge-debug`](./skills/superforge-debug/README.md) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
+| [`superforge-roast`](./skills/superforge-roast/README.md) | unsparing critique before shipping | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.md) | pre-completion verification gateway | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/README.md) | zero-loss session handoff across models and tools | `.handoff/` |
 
 ## Two things make the suite more than a folder of prompts
 

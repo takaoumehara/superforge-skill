@@ -109,4 +109,4 @@ zip -r superforge-test.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。完整循环和各平台的运行命令都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。完整循环和各平台的运行命令都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

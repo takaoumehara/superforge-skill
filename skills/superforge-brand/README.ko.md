@@ -104,4 +104,4 @@ zip -r superforge-brand.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 두 가지 프롬프트 공식을 포함한 스킬 본문은 [SKILL.md](SKILL.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 두 가지 프롬프트 공식을 포함한 스킬 본문은 [SKILL.md](SKILL.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

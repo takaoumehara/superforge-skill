@@ -105,4 +105,4 @@ zip -r superforge-verify.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。完整检查单在 [SKILL.md](SKILL.md)，它借用的三人物可用性方法在 [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。完整检查单在 [SKILL.md](SKILL.md)，它借用的三人物可用性方法在 [evaluation-methods.md](../superforge-roast/references/evaluation-methods.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

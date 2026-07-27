@@ -105,4 +105,4 @@ zip -r superforge-debug.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 4단계 프로토콜과 `failforward`의 정확한 호출 방법은 [SKILL.md](SKILL.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 4단계 프로토콜과 `failforward`의 정확한 호출 방법은 [SKILL.md](SKILL.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

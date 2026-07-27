@@ -106,4 +106,4 @@ zip -r superforge-brain.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 각 기법을 빠짐없이 만들어 주는 하위 방법과 어떤 Hero Concept을 실제로 만들지 가르는 기준은 [references/ideation-tools.md](references/ideation-tools.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 각 기법을 빠짐없이 만들어 주는 하위 방법과 어떤 Hero Concept을 실제로 만들지 가르는 기준은 [references/ideation-tools.md](references/ideation-tools.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

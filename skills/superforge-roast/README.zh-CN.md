@@ -108,4 +108,4 @@ zip -r superforge-roast.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；启发式评估、无障碍审计、认知负荷分析和模拟人物测试都在 [references/evaluation-methods.md](references/evaluation-methods.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；启发式评估、无障碍审计、认知负荷分析和模拟人物测试都在 [references/evaluation-methods.md](references/evaluation-methods.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

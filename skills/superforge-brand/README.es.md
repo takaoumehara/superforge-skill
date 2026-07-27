@@ -104,4 +104,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill, con las dos fórmulas de prompt, está en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill, con las dos fórmulas de prompt, está en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.es.md).

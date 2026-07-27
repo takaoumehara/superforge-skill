@@ -105,4 +105,4 @@ zip -r superforge-debug.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。四个阶段的流程和 `failforward` 的确切调用方式都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。四个阶段的流程和 `failforward` 的确切调用方式都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

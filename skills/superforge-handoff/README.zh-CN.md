@@ -108,4 +108,4 @@ zip -r superforge-handoff.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。胶囊格式和重启提示词模板都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。胶囊格式和重启提示词模板都在 [SKILL.md](SKILL.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

@@ -107,4 +107,4 @@ zip -r superforge.zip .
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)，按需加载的规则在 [references/intake.md](references/intake.md)、[references/artifacts.md](references/artifacts.md) 和 [references/wiring.md](references/wiring.md)。整套说明见 [superforge-skill](../../README.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)，按需加载的规则在 [references/intake.md](references/intake.md)、[references/artifacts.md](references/artifacts.md) 和 [references/wiring.md](references/wiring.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

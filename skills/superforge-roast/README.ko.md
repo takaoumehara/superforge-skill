@@ -108,4 +108,4 @@ zip -r superforge-roast.zip .
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 휴리스틱 평가·접근성 감사·인지 부하 분석·가상 페르소나 테스트는 [references/evaluation-methods.md](references/evaluation-methods.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 휴리스틱 평가·접근성 감사·인지 부하 분석·가상 페르소나 테스트는 [references/evaluation-methods.md](references/evaluation-methods.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

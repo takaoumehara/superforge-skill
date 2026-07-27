@@ -107,4 +107,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md), y las reglas que carga bajo demanda en [references/intake.md](references/intake.md), [references/artifacts.md](references/artifacts.md) y [references/wiring.md](references/wiring.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md), y las reglas que carga bajo demanda en [references/intake.md](references/intake.md), [references/artifacts.md](references/artifacts.md) y [references/wiring.md](references/wiring.md). Visión general de la suite: [superforge-skill](../../README.es.md).

@@ -106,4 +106,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos que hacen exhaustiva cada técnica y el filtro que decide qué Hero Concept merece construirse están en [references/ideation-tools.md](references/ideation-tools.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos que hacen exhaustiva cada técnica y el filtro que decide qué Hero Concept merece construirse están en [references/ideation-tools.md](references/ideation-tools.md). Visión general de la suite: [superforge-skill](../../README.es.md).

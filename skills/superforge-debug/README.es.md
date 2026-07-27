@@ -105,4 +105,4 @@ La interfaz del navegador acepta una skill por vez, así que repite el proceso p
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El protocolo de cuatro fases y las llamadas exactas a `failforward` están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.md).
+MIT — consulta [LICENSE](../../LICENSE). El protocolo de cuatro fases y las llamadas exactas a `failforward` están en [SKILL.md](SKILL.md). Visión general de la suite: [superforge-skill](../../README.es.md).
