@@ -7,6 +7,14 @@ description: >
   "logo", "identity", "tone of voice", "hero image", "banner", "generate an
   image", "video concept", "moodboard", "ブランド", "ロゴ", "トンマナ",
   "世界観", "ビジュアル", "画像を作って", "動画", or runs /forge-brand.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads docs/product-idea.md when present, writes docs/brand.md.
+  Image and video generation require an available image tool or an external service; without one, it still produces copy-paste-ready prompts.
 ---
 
 # Forge Brand — Brand Identity & AI Media Production Engine
@@ -52,3 +60,19 @@ When creating motion concepts or AI video generation scripts:
   Subject action + Camera movement + Lighting transition + Aesthetic style + FPS / Motion intensity
   ```
 - **Output Artifact**: Deliver copy-paste-ready generation prompts for Higgsfield / AI video tools.
+
+---
+
+## Artifact
+
+Write `docs/brand.md`: the three adjectives, the colour architecture with
+intent, the type matrix, tone of voice, and the generation prompts produced.
+Hand the colour and type decisions to `forge-ui`, which turns them into
+tokens in `docs/design.md` — do not define tokens here.
+
+## Delegate when a sharper skill is installed
+
+`brand-discover`, `content-strategy` (positioning) · `copywriting`,
+`japanese-copywriting` (prose) · `zukai` (diagrams) · `app-icon-generator`,
+`screenshot-planner`, `app-store-assets` (store) · `social-content`,
+`social-export`, `share-card` · `press-media`.

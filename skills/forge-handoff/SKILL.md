@@ -8,6 +8,14 @@ description: >
   "before I clear", "pick this up later", "context is getting long",
   "引き継ぎ", "ハンドオフ", "セッションを保存", "モデルを切り替える",
   "コンテキストが長い", or runs /forge-handoff or /handoff.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Writes .handoff/ in the project root.
+  No other document or skill required.
 ---
 
 # Forge Handoff — Cross-Model Session Transition Protocol
@@ -47,3 +55,17 @@ Read first: <Files to read>
 ## 2. Resuming Session
 
 When a session opens with a Resume Capsule, read the indicated file in `.handoff/` and jump straight to `Next` without asking redundant background questions.
+
+---
+
+## Artifact
+
+The capsule in `.handoff/` is the artifact. Before writing it, make sure every
+skill that ran this session has already written its own `docs/` file — the
+capsule points at those files rather than restating them, which is what keeps
+it under 80 lines.
+
+## Delegate when a sharper skill is installed
+
+`cross-model-handoff:handoff`, `handoff-setup` (tool-agnostic notes) ·
+`memory` (long-term facts worth keeping beyond this project).

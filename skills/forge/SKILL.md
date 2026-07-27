@@ -9,52 +9,101 @@ description: >
   spans several of those areas. Use when the user says "let's build", "I want
   to make", "help me ship", "where do I start", "何か作りたい", "作って",
   "どこから始める", "一気に進めたい", or runs /forge.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone. Reads and writes docs/ in the project root when present.
+  Delegates to installed forge-* skills and to other installed skills when
+  available; falls back to doing the work inline when they are absent.
+  Tier D offload requires the local gemini CLI; without it, Tier D work is
+  downgraded to Haiku.
 ---
 
-# Forge Suite — Concierge & Master Orchestrator
+# Forge — Concierge & Orchestrator
 
-This skill is the **master concierge** for autonomous making, building, and engineering. It analyzes user intent and routes tasks to the appropriate specialized `forge-*` skills while assigning optimal model tiers.
-
----
-
-## 1. Core Principle — Model & Effort Tiering
-
-Always assign the optimal model grade and effort level for the **active LLM environment** before delegating work:
-
-### Golden Rule for Claude 5 Series:
-> **"判断は Opus 5, 量は Sonnet 5, 雑務は Haiku 4.5, 持久戦は Fable 5"**
-
-- **Tier A (Judgment & Architecture) — Opus 5**: System architecture, PRD, security audits, code reviews, main orchestrator.
-- **Tier A (Unattended Long Runs) — Fable 5**: Multi-step autonomous runs, overnight builds, 10+ step refactoring. (Declare library versions explicitly in prompt).
-- **Tier B (Volume & Feature Building) — Sonnet 5**: Feature implementation, UI building, primary QA scanning.
-- **Tier C (Routine Closed Tasks) — Haiku 4.5**: Rote test writing, log formatting, symbol renaming.
-- **Tier D (Bulk Text Processing)**: Offload via local `gemini` CLI (`gemini -p "..." -m "gemini-3.6-flash <effort>"`).
+Routes the work, assigns the model tier, keeps the artifacts. The specialist
+skills own their craft; this skill owns the order of operations and the fact
+that nothing gets lost between them.
 
 ---
 
-## 2. Autonomous Skill Router
+## 1. Model & effort tiering — do this before dispatching anything
 
-Match the user's intent to the corresponding specialized `/forge-*` skill:
+> **判断は Opus 5, 量は Sonnet 5, 雑務は Haiku 4.5, 持久戦は Fable 5**
 
-| Intent / Request | Specialized Skill | Trigger Command |
+| Tier | Work | Model |
 |---|---|---|
-| Brainstorming, non-obvious concepts, radical ideas | Radical Ideation Engine (BreakBias + BMAD) | `/forge-brain` |
-| Monetization, pricing, subscription flows, GTM | Business & Monetization Architecture | `/forge-biz` |
-| Brand system, logos, AI image/video production | Brand Identity & AI Media Production (`generate_image`, Kie.ai, Higgsfield) | `/forge-brand` |
-| UI/UX design, layout, micro-interactions, native mobile (iOS SwiftUI / Android Compose) | Interface Design & Native Engineering (Ren + `ux-spec` + `typeset` + Motion) | `/forge-ui` |
-| Unfiltered critique, flaw hunting before shipping | Uncompromising Roast Review | `/forge-roast` |
-| Multi-agent feature building, plan execution | Multi-Agent Building & Topology Selection (Subagents vs Agent Teams) | `/forge-dev` |
-| Bug fixing, error resolution, crash analysis | Systematic Debugging & FailForward Memory | `/forge-debug` |
-| Writing tests, TDD, feature implementation | Multi-Platform Test-Driven Development | `/forge-test` |
-| Final verification, completion check | Pre-Completion Verification Gateway (Dual-viewport + Native Simulator) | `/forge-verify` |
-| Saving session, switching models, handoff | Cross-Model Session Transition Protocol | `/forge-handoff` |
+| **A — judgment** | architecture, plan review, root-causing, security review, verifying another agent's claim | Opus 5 |
+| **A — endurance** | unattended multi-step runs, overnight builds, 10+ step refactors (declare library versions explicitly) | Fable 5 |
+| **B — volume** | feature implementation, UI building, QA sweeps | Sonnet 5 |
+| **C — routine** | rote tests, formatting, renaming, log updates | Haiku 4.5 |
+| **D — bulk text, no repo access** | N variations, summarising pasted text, translation | local `gemini` CLI: `gemini -p "..." -m "gemini-3.6-flash <effort>"` |
 
----
+Never leave every dispatched agent on the session default. That waste is the
+reason this suite exists.
 
-## 3. Agent Topology Selection (Subagents vs Agent Teams)
+## 2. Intake
 
-Before multi-agent dispatch, evaluate and **notify the user**:
-- **Subagents Pattern (Default — Low Token Cost)**: Isolated, modular task execution.
-- **Agent Teams Pattern (Interactive — High Token Cost)**: Cross-perspective debate and trade-off alignment.
+For work that opens a new product or feature area, run intake first and write
+`docs/brief.md` → **`references/intake.md`**.
 
-*Notification*: *"Proposing **Subagents Pattern** (Sonnet 5 workers) for token-efficient execution. Say 'use Agent Teams' for interactive debate."*
+Draft the brief with your own best guesses filled in, then ask the user to
+correct it. Cap open questions at three per round; assume the rest and log
+the assumption. Skip intake entirely for bounded tasks inside existing work.
+
+## 3. Route
+
+| The user's state | Route to |
+|---|---|
+| 作りたいものが言語化できていない | `/forge-brain` |
+| アイデアはあるが売れるか不明 | `/forge-brain` → `/forge-biz` |
+| ブランド・世界観・画像/動画が要る | `/forge-brand` |
+| 何を作るかは決まっている | `/forge-ui` → `/forge-dev` |
+| 実装を回したい・複数エージェントで進めたい | `/forge-dev` |
+| テストを書きたい・TDDで進めたい | `/forge-test` |
+| バグ・エラー・落ちる | `/forge-debug` |
+| 出す前に叩いてほしい | `/forge-roast` |
+| 本当に動くか確認したい | `/forge-verify` |
+| セッションを保存・モデルを切り替える | `/forge-handoff` |
+
+Announce the route and the tier in one line, then start. Ask for approval of
+the route only when the user's state is genuinely ambiguous between two very
+different paths.
+
+## 4. Artifacts
+
+Every skill leaves a file in `docs/`. A conclusion that exists only in the
+conversation is lost at the next `/clear` → **`references/artifacts.md`**.
+
+Before asking anything, read what `docs/` already contains and confirm rather
+than interrogate.
+
+## 5. Delegation
+
+Where a deeper installed skill exists, invoke it instead of improvising, and
+fold its output back into the forge artifact → **`references/wiring.md`**.
+If a named skill is not installed, do the step inline. Never block on a
+missing skill.
+
+## 6. Agent topology
+
+- **Subagents (default, low cost)** — isolated modular execution
+- **Agent Teams (interactive, high cost)** — cross-perspective debate
+
+State the choice in one line: *"Subagents パターン（Sonnet 5 ワーカー）で進めます。議論させたい場合は Agent Teams と言ってください。"*
+
+## 7. Running long without stopping
+
+Once the direction is agreed, keep going to the end. Resolve open questions
+with a defensible default, log it, and continue. Stop only for irreversible
+loss, spending money, missing credentials, or the goal itself being wrong.
+Loop mechanics → **`skills/forge-dev/references/autonomous-run.md`**.
+
+## 8. Explaining technical terms
+
+Do not explain jargon inline by default. When a technical term genuinely
+gated a decision, finish the point and add one line: 「これは説明できますが、聞きたいですか？」
+Aim any explanation at a product designer's level — design systems, tokens,
+state, APIs, git are assumed; compilers and memory models are not.

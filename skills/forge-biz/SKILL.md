@@ -8,6 +8,13 @@ description: >
   "free trial", "business model", "revenue", "GTM", "how do we make money",
   "価格", "値付け", "課金", "マネタイズ", "サブスク", "ペイウォール",
   "ビジネスモデル", "どう収益化する", or runs /forge-biz.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads docs/product-idea.md and docs/brief.md when present, writes docs/business-model.md.
 ---
 
 # Forge Biz — Business Architecture & Monetization Engine
@@ -42,3 +49,26 @@ Structure the unit economics framework:
 - **Core Value Metric**: What single metric scales as the customer gets more value? (e.g. active projects, generated assets, team members).
 - **Growth Loops**: Build product-led viral loops (e.g., shared links, branded exports, collaborative invites).
 - **Go-To-Market (GTM) Blueprint**: Identify primary launch channels, launch positioning, landing page messaging, and conversion funnel milestones.
+
+---
+
+## Deeper reference
+
+The mechanisms behind pricing, anchoring, trials, defaults, and paywall
+placement — and the ethical line on each — are in
+**`references/behavioral-frameworks.md`**.
+
+## Artifact
+
+Write `docs/business-model.md`. Read `docs/product-idea.md` first if it
+exists; the monetization archetype follows from the product shape, not the
+other way round.
+
+## Delegate when a sharper skill is installed
+
+`monetization`, `indie-business` (models) · `paywall-generator`,
+`subscription-offers`, `offer-codes-setup` (surfaces) ·
+`subscription-lifecycle`, `win-back-offers`, `referral-system` (retention) ·
+`launch-strategy`, `growth`, `marketing-strategy`, `marketing-psychology` (GTM) ·
+the `sales-*` family (B2B) · `app-store`, `product-page-optimization`,
+`apple-search-ads`, `keyword-optimizer` (store) · `legal`, `privacy-policy`.

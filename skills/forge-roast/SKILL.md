@@ -7,6 +7,13 @@ description: >
   "roast", "be brutal", "tear this apart", "what's wrong with", "honest
   feedback", "critique", "poke holes", "don't be nice", "辛口で", "ダメ出し",
   "批評して", "欠点を指摘", "忖度なしで", or runs /forge-roast.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads any docs/ artifact as the critique target, writes docs/critique.md.
 ---
 
 # Forge Roast — Uncompromising Critique Engine
@@ -53,3 +60,22 @@ Analyze the artifact across 4 ruthless lenses:
 - [Fix 1]: <Specific code/design/copy change to execute>
 - [Fix 2]: <Specific change>
 ```
+
+---
+
+## Deeper reference
+
+**`references/evaluation-methods.md`** — heuristic evaluation, accessibility
+audit, cognitive load analysis, simulated persona testing, strategic fit, and
+the synthesis rules that turn thirty findings into a usable verdict.
+
+## Artifact
+
+Write `docs/critique.md`, led by the single worst thing in one sentence.
+Group findings by cause, not by screen. Every finding carries a fix.
+
+## Delegate when a sharper skill is installed
+
+`roast`, `validate-thinking` (multi-persona attack) · `critique`, `ui-review`
+(interface) · `requesting-code-review`, `security`, `harden` (code) ·
+`release-review`.

@@ -7,6 +7,13 @@ description: >
   the user says "bug", "error", "it crashes", "build fails", "test is failing",
   "not working", "why does this happen", "still broken", "バグ", "エラー",
   "動かない", "落ちる", "直らない", "なぜか失敗する", or runs /forge-debug.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  The FailForward memory steps require the local failforward CLI; without it, skip recall and record the lesson in docs/ instead.
 ---
 
 # Forge Debug — Systematic Debugging & FailForward Memory Engine
@@ -56,3 +63,22 @@ If a relevant past failure is recalled:
     --context "<File/function>" \
     --scope project
   ```
+
+---
+
+## When the failforward CLI is unavailable
+
+Skip recall, and record the lesson as a `## Failures` entry in the artifact of
+whatever skill is running — the lesson matters more than the tool. Never let
+a missing CLI stop the diagnosis.
+
+## Artifact
+
+Append the root cause and the fix to the relevant `docs/` file, or to
+`docs/plan.md` under the task that failed. A fix nobody can find again will
+be rediscovered the hard way.
+
+## Delegate when a sharper skill is installed
+
+`systematic-debugging` (root-cause process) · `failforward` (failure memory) ·
+`swiftui-debugging`, `profiling`, `concurrency-patterns` (platform).

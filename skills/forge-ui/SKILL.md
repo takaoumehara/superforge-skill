@@ -3,11 +3,19 @@ name: forge-ui
 description: >
   Design and build interfaces across Web, iOS (SwiftUI), and Android (Jetpack
   Compose), covering layout, visual hierarchy, typography, responsive
-  behaviour, state specification, and micro-interactions. Applies the Ren
-  5-Phase process, Apple HIG, and Material 3. Use when the user says "design",
+  behaviour, state specification, and micro-interactions. Follows a five-phase
+  design process, Apple HIG, and Material 3. Use when the user says "design",
   "UI", "UX", "layout", "screen", "component", "make it look better",
   "animation", "spacing", "typography", "デザイン", "画面", "見た目",
   "レイアウト", "アニメーション", "余白", "使いにくい", or runs /forge-ui.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
+  Falls back to the codebase's existing conventions when no design system exists.
 ---
 
 # Forge UI — Interface Design, Motion & Native Engineering Engine
@@ -16,13 +24,15 @@ Use this skill when designing or implementing user interfaces across Web, iOS (S
 
 ---
 
-## 1. Ren UX Design Partner Process (5 Phases)
+## 1. Five-Phase Design Process
 
 1. **UNDERSTAND**: Surface target user context, map assumptions, and reframe requirements.
 2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies.
 3. **DESIGN**: Construct complete screens, typography grids, color assignments, and content states.
 4. **EVALUATE**: Run accessibility audits (WCAG AA), contrast checks, and simulated persona testing.
 5. **PREPARE**: Output clean production components, design tokens, and implementation specs.
+
+Step-by-step detail for DESIGN and EVALUATE is in `references/design-process.md`.
 
 ---
 
@@ -64,3 +74,33 @@ No UI component is complete until all 7 component states are explicitly engineer
 
 ### Android Native (Jetpack Compose / Kotlin):
 - **Material Design 3 (Material You)**: Dynamic Color extraction (`dynamicDarkColorScheme`), Predictive Back gestures, surface tonal elevation, 48dp minimum touch targets.
+
+---
+
+## Deeper references
+
+- **`references/design-process.md`** — the six design steps in order, the four
+  mandatory data states, and the full quality checklist. Read it before
+  designing screens.
+- **`references/design-system-output.md`** — the `docs/design.md` +
+  `docs/design.html` two-artifact spec. Read it before touching tokens.
+
+## Artifact
+
+Write **both** `docs/design.md` (YAML tokens the agent parses) and
+`docs/design.html` (a self-contained style guide a human can open and review).
+They must never drift: editing one regenerates the other in the same turn.
+
+Never inline a raw colour, size, or radius. If a needed token does not exist,
+add it to `docs/design.md` and record it under `New patterns needed`.
+
+## Delegate when a sharper skill is installed
+
+`impeccable`, `frontend-design`, `taste-skill` (craft) ·
+`design-system-builder`, `design-system` (system generation) · `typeset`,
+`arrange`, `colorize`, `polish`, `normalize` (refinement) · `bolder`,
+`quieter`, `delight`, `minimalist-skill` (tone) · `web-animation-design`,
+`animation-patterns`, `gsap-*` (motion) · `clarify` (UI copy) · `ux-spec` ·
+`accessibility-generator`, `audit` (a11y) · `ios`, `swift`, `liquid-glass`,
+`macos`, `watchos` (native) · `landing-page-creator`, `keynote-slide-page` ·
+`dataviz` · `japanese-text`.

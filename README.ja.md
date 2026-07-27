@@ -25,18 +25,56 @@
 
 [`forge`](./skills/forge/) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `forge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/forge-ui` など）。
 
-| スキル | 用途 |
+| スキル | 用途 | 残す成果物 |
+|---|---|---|
+| [`forge-brain`](./skills/forge-brain/) | 発想 — SITマトリクス、平凡3案の禁止、5軸評価 | `docs/product-idea.md` |
+| [`forge-biz`](./skills/forge-biz/) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
+| [`forge-brand`](./skills/forge-brand/) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
+| [`forge-ui`](./skills/forge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`forge-dev`](./skills/forge-dev/) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
+| [`forge-test`](./skills/forge-test/) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
+| [`forge-debug`](./skills/forge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
+| [`forge-roast`](./skills/forge-roast/) | 出荷前の忖度なし批評 | `docs/critique.md` |
+| [`forge-verify`](./skills/forge-verify/) | 完了宣言前の検証ゲート | `docs/verification.md` |
+| [`forge-handoff`](./skills/forge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
+
+## このスイートが「プロンプト置き場」で終わらない理由
+
+### 結論が必ずファイルに落ちる
+
+会話の中にしか存在しない結論は、次の `/clear` で消えます。各スキルは `docs/` に既にあるものを読んでから動き、報告の前に自分の成果物を書き出します。だからセッションを消しても、モデルを乗り換えても、翌朝ビルドを再開しても、決着済みの判断をやり直さずに済みます。契約: [`skills/forge/references/artifacts.md`](./skills/forge/references/artifacts.md)。
+
+### SKILL.md は薄いまま、知識は `references/` に置く
+
+常時コンテキストに載るのは各スキルの `description` だけです。本体は短い指令書で、深さは `references/` に置いて必要な時だけ読ませます。11個すべて入れてもコンテキストを圧迫しないのはこの構造のためです。
+
+| 参照ファイル | 中身 |
 |---|---|
-| [`forge-brain`](./skills/forge-brain/) | 発想 — BreakBias SITマトリクス + BMADレンズ |
-| [`forge-biz`](./skills/forge-biz/) | マネタイズ、価格設計、ペイウォール、GTM |
-| [`forge-brand`](./skills/forge-brand/) | ブランド設計 + AI画像/動画生成プロンプト |
-| [`forge-ui`](./skills/forge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose |
-| [`forge-dev`](./skills/forge-dev/) | マルチエージェント実装、Subagents / Agent Teams のトポロジー選択 |
-| [`forge-test`](./skills/forge-test/) | Web・iOS・Android のTDD（Red-Green-Refactor） |
-| [`forge-debug`](./skills/forge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ |
-| [`forge-roast`](./skills/forge-roast/) | 出荷前の忖度なし批評 |
-| [`forge-verify`](./skills/forge-verify/) | 完了宣言前の検証ゲート |
-| [`forge-handoff`](./skills/forge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ |
+| [`forge/references/intake.md`](./skills/forge/references/intake.md) | 尋問せずに依頼をブリーフに変える手順 |
+| [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | 既にインストール済みの専門スキルに、どの工程を渡すか |
+| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | SITの5操作、JTBD、リフレーミング、5軸スコアカード |
+| [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | アンカリング、損失回避、デフォルト設計と、それぞれの倫理的な線引き |
+| [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | 設計6ステップ、4つのデータ状態、品質チェックリスト |
+| [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | `design.md` + `design.html` の2枚出し仕様 |
+| [`forge-roast/references/evaluation-methods.md`](./skills/forge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
+| [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md) | 自走の前提条件、build→検証→自己修復ループ、独断で決めてよい範囲 |
+
+## 人がレビューできるデザインシステム
+
+`forge-ui` は、決して乖離してはいけない2つのファイルを出力します。
+
+- **`docs/design.md`** — オープン規格 [design.md](https://github.com/google-labs-code/design.md) 形式のYAMLトークン（AIが実装用に読む）と、スキーマでは表現できない根拠の散文
+- **`docs/design.html`** — 全トークン・コンポーネント・状態を実際にレンダリングし、コントラスト比を実測して合否バッジを出す単体ファイル。`file://` で開けて人がそのまま見られる
+
+HTML側はトークンをCSSカスタムプロパティとして**実際に消費して**描画するので、トークンと食い違ったスタイルガイドが存在しえない構造になっています。
+
+## 自走
+
+目的は判断の回数を減らすことではありません。**判断以外を全部消す**ことです。夜に一言指示すれば、朝には判断する価値のある成果物が出来ている状態を目指します。
+
+無人で走らせてよいのは、進捗を自分で証明できる場合だけです。スコープがチェックボックスで書かれ、各タスクに**それが完了したことを証明するコマンド**が添えられ、失敗時に自己修復し、1タスクごとに状態をディスクへ書き出す。未解決の問いは、妥当なデフォルトで決めて記録し、止まりません。ループが停止するのは、取り返しのつかない破壊・課金・認証情報の不足・ゴール自体が間違っていた場合だけで、それでもブロックされていない作業は進め続けます。
+
+全プロトコル: [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md)。
 
 ## 必要環境
 

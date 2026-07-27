@@ -38,18 +38,75 @@ The [`forge`](./skills/forge/) skill acts as the **router**: it reads intent and
 to one of ten specialised `forge-*` skills, each of which inherits the same
 model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
 
-| Skill | Use it for |
+| Skill | Use it for | Leaves behind |
+|---|---|---|
+| [`forge-brain`](./skills/forge-brain/) | radical ideation — SIT matrix, cliché elimination, five-axis scoring | `docs/product-idea.md` |
+| [`forge-biz`](./skills/forge-biz/) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
+| [`forge-brand`](./skills/forge-brand/) | brand identity + AI image/video production prompts | `docs/brand.md` |
+| [`forge-ui`](./skills/forge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`forge-dev`](./skills/forge-dev/) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
+| [`forge-test`](./skills/forge-test/) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
+| [`forge-debug`](./skills/forge-debug/) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
+| [`forge-roast`](./skills/forge-roast/) | unsparing critique before shipping | `docs/critique.md` |
+| [`forge-verify`](./skills/forge-verify/) | pre-completion verification gateway | `docs/verification.md` |
+| [`forge-handoff`](./skills/forge-handoff/) | zero-loss session handoff across models and tools | `.handoff/` |
+
+## Two things make the suite more than a folder of prompts
+
+### Everything lands on disk
+
+A conclusion that exists only in the conversation dies at the next `/clear`.
+Every skill reads what `docs/` already contains and writes its own artifact
+before reporting back, so a session can be cleared, a model swapped, or a
+build resumed the next morning without relitigating decisions that were
+already made. Contract: [`skills/forge/references/artifacts.md`](./skills/forge/references/artifacts.md).
+
+### The SKILL.md stays thin, the knowledge goes in `references/`
+
+Only the `description` of each skill is always in context. The bodies are
+short directives; the depth sits in `references/` and is read on demand. That
+is what lets you install all eleven without crowding the context window.
+
+| Reference | What it carries |
 |---|---|
-| [`forge-brain`](./skills/forge-brain/) | radical ideation — BreakBias SIT matrix + BMAD lenses |
-| [`forge-biz`](./skills/forge-biz/) | monetization, pricing, paywalls, GTM |
-| [`forge-brand`](./skills/forge-brand/) | brand identity + AI image/video production prompts |
-| [`forge-ui`](./skills/forge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose |
-| [`forge-dev`](./skills/forge-dev/) | multi-agent feature building, Subagents vs Agent Teams topology |
-| [`forge-test`](./skills/forge-test/) | TDD red-green-refactor for Web, iOS, Android |
-| [`forge-debug`](./skills/forge-debug/) | root-cause-first debugging with FailForward memory |
-| [`forge-roast`](./skills/forge-roast/) | unsparing critique before shipping |
-| [`forge-verify`](./skills/forge-verify/) | pre-completion verification gateway |
-| [`forge-handoff`](./skills/forge-handoff/) | zero-loss session handoff across models and tools |
+| [`forge/references/intake.md`](./skills/forge/references/intake.md) | turning a request into a written brief without interrogating the user |
+| [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | when to hand a step to a deeper skill you already have installed |
+| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | SIT operations, JTBD, reframing, the five-axis scorecard |
+| [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
+| [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | six design steps, the four data states, the quality checklist |
+| [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | the `design.md` + `design.html` two-artifact spec |
+| [`forge-roast/references/evaluation-methods.md`](./skills/forge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
+| [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md) | preconditions, the build→prove→repair loop, what may be decided alone |
+
+## Design systems humans can actually review
+
+`forge-ui` emits two mirrored files that must never drift:
+
+- **`docs/design.md`** — YAML tokens in the open [design.md](https://github.com/google-labs-code/design.md)
+  format, for the coding agent, plus the prose rationale no schema can carry
+- **`docs/design.html`** — one self-contained file that renders every token,
+  component, and state live, with measured contrast ratios and pass/fail
+  badges, openable from `file://` and reviewable by a human
+
+The HTML consumes the tokens as CSS custom properties rather than
+hand-drawing them, so a style guide that disagrees with the tokens is
+structurally impossible.
+
+## Autonomous runs
+
+The point is not to make fewer decisions. It is to remove everything that is
+*not* a decision, so one instruction at night produces work worth judging in
+the morning.
+
+A run may proceed unattended only when it can prove its own progress: scope
+written as checkboxes, each with a **proof line** naming the command that
+verifies it, self-repair on failure, and state flushed to disk after every
+task. Open questions are resolved with a defensible default and logged, not
+escalated. The loop stops only for irreversible loss, spending money, missing
+credentials, or the goal itself being wrong — and even then it keeps working
+on everything not blocked by it.
+
+Full protocol: [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md).
 
 ## Requirements
 

@@ -8,6 +8,14 @@ description: >
   done", "did it work", "verify", "double check", "are you sure", "before we
   ship", "確認して", "検証して", "本当に動く", "終わった", "動作確認",
   or runs /forge-verify.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Requires the project's own build and test commands.
+  Writes docs/verification.md.
 ---
 
 # Forge Verify — Pre-Completion Verification Gateway
@@ -32,5 +40,22 @@ NEVER claim a task is resolved, a bug is fixed, or a feature is complete without
 - [ ] **iOS**: Xcode build success, iOS Simulator rendering, Dynamic Type scaling, SF Symbols alignment.
 - [ ] **Android**: Gradle assemble success, Android Emulator execution, Material Design 3 Dynamic Color & ripple effects.
 
-### 4. Ren Simulated Usability Audit (`/test`)
-- [ ] Run a quick 3-persona sanity audit to verify intuitive flow and absence of dead-ends.
+---
+
+## Simulated usability pass
+
+Run the three-persona flow check — 初回・急いでいる / 慣れた常用者 /
+懐疑的・慎重 — and report the point where each would abandon. Method detail is
+in **`skills/forge-roast/references/evaluation-methods.md`**.
+
+## Artifact
+
+Write `docs/verification.md`: every check, the exact command run, and its
+real output. Paste the output rather than describing it. A verification
+report without evidence is an assertion, which is the thing this skill exists
+to prevent.
+
+## Delegate when a sharper skill is installed
+
+`verification-before-completion` (evidence discipline) · `audit`, `optimize`
+(technical sweep) · `run` (launching the actual app).

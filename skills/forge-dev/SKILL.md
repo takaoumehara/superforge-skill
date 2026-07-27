@@ -8,6 +8,14 @@ description: >
   feature", "execute the plan", "in parallel", "dispatch agents", "subagents",
   "which model should", "実装して", "作って", "並列で", "サブエージェント",
   "プランを実行", "どのモデルで", or runs /forge-dev.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads and writes docs/plan.md.
+  Parallel dispatch requires a subagent mechanism; without one it runs the same loop sequentially.
 ---
 
 # Forge Dev — Multi-Agent Building & Model Tiering Engine
@@ -48,3 +56,32 @@ Before dispatching, evaluate and **explicitly notify the user** of the recommend
 1. **Explicit Versioning**: When dispatching `Fable 5` for long runs, ensure library versions (e.g. Next.js 15, Tailwind v4) are explicitly declared in the prompt or `CLAUDE.md`.
 2. **Self-Contained Subagent Context**: Provide complete file paths, acceptance criteria, and background context to every subagent.
 3. **Verification Gateway**: Run tests and verify diffs before accepting subagent output.
+
+---
+
+## Deeper reference
+
+**`references/autonomous-run.md`** — preconditions for an unattended run, the
+build/review/prove/repair loop, what to decide alone versus what must stop the
+run, and the morning report format. Read it before any long or overnight run.
+
+## Artifact
+
+Write and maintain `docs/plan.md`: checkbox tasks, each with a **proof line**
+naming the command or observation that shows it is done. Tick the box and
+append to the progress log after every task, then write the file. A run that
+dies at task 7 must resume at task 8 from disk alone.
+
+## Running to the end
+
+Once the direction is agreed, do not stop to ask. Resolve open questions with
+a defensible default, log it under `Assumptions made`, and continue. Stop only
+for irreversible loss, spending money, missing credentials, or the goal itself
+being wrong — and even then, keep working on everything not blocked by it.
+
+## Delegate when a sharper skill is installed
+
+`writing-plans`, `prd-generator`, `architecture-spec` (planning) ·
+`dispatching-parallel-agents`, `subagent-driven-development`,
+`executing-plans` (dispatch) · `repo-cleanup` · `ci-cd-setup`,
+`logging-setup`, `error-monitoring` · `vercel:*` (deploy).

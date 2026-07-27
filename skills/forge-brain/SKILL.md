@@ -8,6 +8,14 @@ description: >
   with", "what could we build", "reframe this", "concept", "something more
   original", "アイデア", "発想", "ブレスト", "企画", "コンセプト",
   "ありきたりじゃないもの", "何が作れる", or runs /forge-brain.
+license: MIT
+metadata:
+  author: Takao Umehara
+  version: "2.0"
+compatibility: >
+  Standalone.
+  Reads docs/brief.md when present and writes docs/product-idea.md.
+  Delegates to installed ideation skills when available; works alone when they are absent.
 ---
 
 # Forge Brain — Radical Ideation & Bias-Shattering Engine
@@ -67,3 +75,24 @@ Output Top 3 **Hero Concepts** with:
 - Concept Name & Broken Bias
 - Solution-First Storyline
 - Rapid Validation Plan (1 Day / 1 Week)
+
+---
+
+## Deeper reference
+
+Tool details, the five-axis scorecard, and the convergence rules live in
+**`references/ideation-tools.md`**. Read it before running a full session.
+
+## Artifact
+
+Write `docs/product-idea.md` before reporting back — including the banned
+obvious three, so nobody re-proposes them later. Read `docs/brief.md` first
+if it exists and confirm its premise rather than re-asking.
+
+## Delegate when a sharper skill is installed
+
+`brainstorming` (structured divergence) · `idea-generator` (mining the user's
+own expertise) · `validate-thinking` / `roast` (pressure-testing) ·
+`market-research`, `competitive-analysis` (reality check) · `product-name` ·
+`embodied-product-director` (camera, sensor, movement products).
+If a skill is absent, do the step inline. Never block on a missing skill.
