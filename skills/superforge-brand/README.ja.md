@@ -1,0 +1,107 @@
+# 🎭 superforge-brand
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![Artifact](https://img.shields.io/badge/artifact-docs%2Fbrand.md-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
+
+[English](README.md) · **日本語** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [한국어](README.ko.md)
+
+> **プロダクトの見え方と話し方を決め、そのまま素材を生成できるプロンプトを持ち帰る。**
+
+---
+
+## 🔰 これは何？
+
+アートディレクターの仕事は2つあります。1つはトーンを決めること。どんな感触で、何は絶対に言わないか、どの3語で生きるか。もう1つは撮影指示書、つまり明日から手を動かせる具体的な指示です。
+
+ブランド作業の多くは1つ目で止まります。このスキルは両方やります。3つの形容詞で組み立てたブランドシステムと、明示的な公式から作った画像・動画のコピペ可能な生成プロンプトです。
+
+---
+
+## 📐 システム概念図
+
+```mermaid
+flowchart TD
+    I[💡 プロダクトのアイデア] --> A[🎭 3つの形容詞]
+    A --> B[🎨 色・書体・トーン]
+    B --> C[🖼️ 画像と動画のプロンプト]
+    C --> D[(📄 docs/brand.md)]
+    B -.->|色と書体| U[🎨 superforge-ui]
+```
+
+色と書体の判断は `superforge-ui` に渡され、そこでトークンになります。二重定義はしません。
+
+---
+
+## ✨ 3つの強み
+
+### 🎭 すべてが3つの形容詞に説明責任を負う
+ビジュアルの人格をちょうど3語に固定し、以降の判断（パレット、書体の組み合わせ、トーン）はすべてその3語に対して説明できなければなりません。3語は議論できる制約ですが、ムードボードはそうではありません。
+
+### 🖼️ 曖昧なディレクションではなく、プロンプトの公式
+画像は「被写体＋スタイル＋ライティングと配色＋構図＋ムード」、モーションは「動作＋カメラワーク＋光の変化＋質感＋テンポ」。UI素材は既定でフレームなしに生成し、ノートPCのモックアップで囲みません。
+
+### 🔗 トークンは作らず、渡す
+色と書体は `superforge-ui` に渡り、`docs/design.md` のトークンになります。このスキルが意図的にトークンを定義しないからこそ、ブランド資料とデザインシステムが食い違わずに済みます。
+
+---
+
+## 🔄 導入前 / 導入後
+
+| | 導入前 | 導入後 |
+|---|---|---|
+| ブランドの定義 | ムードボードと雰囲気 | 3つの形容詞と機能色 |
+| 素材の生成 | 「もっといい感じに」 | 名前の付いた公式に沿って記述 |
+| UIのビジュアル | ノートPCのモックで囲む | インターフェイス本体だけを生成 |
+| 色の正 | 資料ごとに定義し直す | トークンとして一度だけ定義 |
+
+---
+
+## 🚀 インストールと使い方
+
+必要なのは `git` と、ディレクトリからスキルを読み込む AI ツールだけです。
+
+### 🖥️ Claude Code（CLI）
+
+好きな場所にスイート全体をクローンし、このスキルだけをリンクします。
+
+```bash
+git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
+ln -s ~/src/superforge-skill/skills/superforge-brand ~/.claude/skills/superforge-brand
+```
+
+Claude Code を再起動して呼び出します。
+
+```
+/superforge-brand
+```
+
+画像生成ツールが使えない環境でも、プロンプトはそのまま出力されます。好きなジェネレーターに貼り付けてください。
+
+### 🔗 Codex CLI / Gemini CLI / Antigravity
+
+リンク先のディレクトリを変えるだけです。インストーラーに任せれば、このマシンにあるスキルディレクトリをすべて探して11個を一括でリンクします。
+
+```bash
+cd ~/src/superforge-skill
+./install.sh
+```
+
+何度実行しても結果は同じで、自分が作ったシンボリックリンク以外には触れません。`--dry-run` で確認、`--uninstall` で削除できます。
+
+### 🌐 claude.ai（ブラウザ）
+
+このスキルのフォルダを zip にまとめ、アカウントのスキル設定からアップロードします。
+
+```bash
+cd ~/src/superforge-skill/skills/superforge-brand
+zip -r superforge-brand.zip .
+```
+
+ブラウザ版は一度に1スキルずつなので、入れたい数だけ繰り返してください。
+
+---
+
+## 📄 ライセンス
+
+MIT — [LICENSE](../../LICENSE) を参照してください。2つのプロンプト公式を含むスキル本体は [SKILL.md](SKILL.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。

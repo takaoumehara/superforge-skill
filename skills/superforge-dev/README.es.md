@@ -1,0 +1,110 @@
+# 🔨 superforge-dev
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
+[![Artifact](https://img.shields.io/badge/artifact-docs%2Fplan.md-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
+
+[English](README.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · **Español** · [한국어](README.ko.md)
+
+> **Divide la construcción, reparte los agentes y pon a cada uno sobre el modelo que su subtarea necesita de verdad.**
+
+---
+
+## 🔰 ¿Qué es esto?
+
+En una obra, quien coordina no manda a la ingeniera de estructuras a barrer ni entrega los cálculos de carga a quien esté libre. Emparejar persona y tarea es casi todo lo que hace que una obra termine a tiempo y dentro del presupuesto.
+
+Esta skill es esa figura para los agentes de AI. Descompone una funcionalidad, clasifica cada subtarea según cuánto criterio exige de verdad, lanza cada una sobre el modelo correspondiente y mantiene en disco un plan del que una ejecución caída puede continuar.
+
+---
+
+## 📐 Arquitectura
+
+```mermaid
+flowchart TD
+    P[📋 docs/plan.md] --> T[🎚️ Clasificar cada subtarea]
+    T --> A[🧠 Nivel A — Opus 5 / Fable 5]
+    T --> B[🔨 Nivel B — Sonnet 5]
+    T --> C[🧹 Nivel C — Haiku 4.5]
+    A --> V{✅ Puerta de verificación}
+    B --> V
+    C --> V
+    V -->|marcar la casilla y registrar la prueba| P
+```
+
+Nada se acepta por la palabra del subagente: primero se ejecutan las pruebas y se lee el diff, después se marca la casilla.
+
+---
+
+## ✨ 3 puntos clave
+
+### 🎚️ Un nivel por subtarea, en cuatro familias de modelos
+Criterio a Opus 5, ejecuciones largas sin supervisión a Fable 5, implementación de volumen a Sonnet 5 y tareas rutinarias cerradas a Haiku 4.5, con el nivel equivalente nombrado también para los entornos Gemini, Codex y Kimi. El nivel de esfuerzo se fija junto al modelo, no se deja por defecto.
+
+### 🧩 La topología se elige en voz alta, con su coste
+Subagents (envío en un solo sentido, coste bajo de tokens) es lo predeterminado; Agent Teams (debate interactivo, coste alto) solo se propone cuando el contraste de perspectivas cambia realmente la respuesta. Sabes cuál se usa y por qué antes de que se lance nada.
+
+### 📋 Un plan del que se puede resucitar
+`docs/plan.md` guarda tareas con casilla, cada una con una **línea de prueba** que nombra el comando que demuestra que está hecha. El archivo se escribe después de cada tarea, así que una ejecución que muere en la tarea 7 arranca en la 8 solo con el disco, sin que nadie tenga que resumir nada.
+
+---
+
+## 🔄 Antes / Después
+
+| | Antes | Después |
+|---|---|---|
+| Modelo por agente | El que traiga la sesión por defecto | Un nivel por subtarea, decidido antes |
+| Topología de agentes | Implícita, se descubre en la factura | Anunciada en una línea, con su coste |
+| Tras una caída | Explicarlo todo otra vez en otra sesión | Leer `docs/plan.md` y continuar |
+| Aceptar el resultado | Fiarse del resumen que escribió | Pruebas ejecutadas, diff leído, y luego marcar |
+
+---
+
+## 🚀 Instalación y uso
+
+Solo hacen falta `git` y una herramienta de AI que cargue skills desde un directorio.
+
+### 🖥️ Claude Code (CLI)
+
+Clona la suite donde quieras y enlaza solo esta skill:
+
+```bash
+git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
+ln -s ~/src/superforge-skill/skills/superforge-dev ~/.claude/skills/superforge-dev
+```
+
+Reinicia Claude Code e invócala:
+
+```
+/superforge-dev
+```
+
+Antes de lanzar ningún agente deberías ver anunciadas la topología y el nivel de modelo. Sin mecanismo de subagentes, el mismo bucle se ejecuta en secuencia.
+
+### 🔗 Codex CLI / Gemini CLI / Antigravity
+
+El mismo enlace, otro directorio. O deja que el instalador busque todos los directorios de skills de la máquina y enlace las once de una vez:
+
+```bash
+cd ~/src/superforge-skill
+./install.sh
+```
+
+Es idempotente, solo toca sus propios enlaces simbólicos y acepta `--dry-run` y `--uninstall`.
+
+### 🌐 claude.ai (navegador)
+
+Comprime la carpeta de esta skill y súbela en los ajustes de skills de tu cuenta:
+
+```bash
+cd ~/src/superforge-skill/skills/superforge-dev
+zip -r superforge-dev.zip .
+```
+
+La interfaz del navegador acepta una skill por vez, así que repite el proceso para cada una.
+
+---
+
+## 📄 Licencia
+
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); las condiciones previas de una ejecución sin supervisión, el bucle de construir, probar y reparar, y el formato del informe matutino están en [references/autonomous-run.md](references/autonomous-run.md). Visión general de la suite: [superforge-skill](../../README.md).
