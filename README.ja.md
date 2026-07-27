@@ -1,4 +1,4 @@
-# forge-skills
+# superforge-skill
 
 [English](./README.md) · **日本語**
 
@@ -27,7 +27,7 @@
 
 | スキル | 用途 | 残す成果物 |
 |---|---|---|
-| [`forge-brain`](./skills/forge-brain/) | 発想 — SITマトリクス、平凡3案の禁止、5軸評価 | `docs/product-idea.md` |
+| [`forge-brain`](./skills/forge-brain/) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
 | [`forge-biz`](./skills/forge-biz/) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
 | [`forge-brand`](./skills/forge-brand/) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
 | [`forge-ui`](./skills/forge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
@@ -52,7 +52,7 @@
 |---|---|
 | [`forge/references/intake.md`](./skills/forge/references/intake.md) | 尋問せずに依頼をブリーフに変える手順 |
 | [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | 既にインストール済みの専門スキルに、どの工程を渡すか |
-| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | SITの5操作、JTBD、リフレーミング、5軸スコアカード |
+| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法、スイープ前に確認すべきこと、生き残りのどれを作るか決める絞り込み |
 | [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | アンカリング、損失回避、デフォルト設計と、それぞれの倫理的な線引き |
 | [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | 設計6ステップ、4つのデータ状態、品質チェックリスト |
 | [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | `design.md` + `design.html` の2枚出し仕様 |
@@ -100,8 +100,8 @@ HTML側はトークンをCSSカスタムプロパティとして**実際に消�
 一度クローンし、インストーラを実行すると、ルーターと**10個の`forge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills
-cd forge-skills
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
 ./install.sh              # --dry-run で確認のみ、--uninstall で解除
 ```
 
@@ -112,13 +112,13 @@ cd forge-skills
 ルーターを含む全スキルが `skills/` 直下の独立したディレクトリにあり、どのツールもスキルを**1階層しか探索しません**。そのため、リポジトリをskillsディレクトリの中へクローンしても認識されません。任意の場所にクローンしてから、必要なスキルにリンクを張ってください。
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills ~/src/forge-skills
+git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
 
 # ルーターだけ
-ln -s ~/src/forge-skills/skills/forge ~/.claude/skills/forge
+ln -s ~/src/superforge-skill/skills/forge ~/.claude/skills/forge
 
 # または11個まとめて、1ツールだけに
-for s in ~/src/forge-skills/skills/*/; do
+for s in ~/src/superforge-skill/skills/*/; do
   ln -s "$s" ~/.claude/skills/"$(basename "$s")"
 done
 ```

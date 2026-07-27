@@ -1,13 +1,15 @@
 ---
 name: forge-brain
 description: >
-  Generate non-obvious product and feature concepts using the BreakBias SIT
-  matrix (Closed World, Function Follows Form, Cliche Elimination) plus BMAD
-  strategic lenses. Kills predictable AI list-making and reframes the problem
-  before any solution. Use when the user says "brainstorm", "ideas", "come up
+  Generate non-obvious product and feature concepts by sweeping every element
+  of the problem through Systematic Inventive Thinking (SIT) — Closed World,
+  Function Follows Form, and an explicit ban on the obvious three. Exhaustive
+  by construction rather than by inspiration, and scored on distance from
+  cliche. Use when the user says "brainstorm", "ideas", "come up
   with", "what could we build", "reframe this", "concept", "something more
   original", "アイデア", "発想", "ブレスト", "企画", "コンセプト",
-  "ありきたりじゃないもの", "何が作れる", or runs /forge-brain.
+  "ありきたりじゃないもの", "何が作れる", "BreakBias", "SIT",
+  "虱潰しで考えて", or runs /forge-brain.
 license: MIT
 metadata:
   author: Takao Umehara
@@ -18,9 +20,9 @@ compatibility: >
   Delegates to installed ideation skills when available; works alone when they are absent.
 ---
 
-# Forge Brain — Radical Ideation & Bias-Shattering Engine
+# Forge Brain — Exhaustive SIT Sweep
 
-Use this skill whenever tasked with brainstorming, concept creation, or problem reframing. This engine eliminates predictable AI lists by enforcing strict Systematic Inventive Thinking (SIT) constraints.
+Use this skill whenever tasked with brainstorming, concept creation, or problem reframing. It eliminates predictable AI list-making by sweeping every element through every technique under strict SIT constraints, instead of waiting for a good idea to arrive.
 
 ---
 
@@ -46,6 +48,8 @@ Decompose the problem space across 5 dimensions, identifying the hidden assumpti
 
 ## 2. Phase 2 — SIT Sweep Protocol
 
+Sub-methods for each technique, the per-cell output format, and the collapse-prevention rules are in `references/ideation-tools.md` §1. One pass per technique is a guess; the sub-methods are what make it a sweep.
+
 Sweep each element through 8 transformation vectors:
 1. **Subtraction**: Delete a vital component. (Variant A: Pure removal / Variant B: Task re-allocation to remaining elements)
 2. **Division**: Split by function, time, or spatial boundary.
@@ -58,30 +62,72 @@ Sweep each element through 8 transformation vectors:
 
 ---
 
-## 3. Phase 3 — Strategic Booster Lenses (BMAD Selection)
+## 3. Phase 3 — Unblocking Lenses
 
-Apply secondary lenses to overcome creative deadlocks:
+When a cell keeps producing the same shape, apply a secondary lens before moving on:
 - **TRIZ Trade-off Dissolution**: Name the core trade-off (improving X degrades Y) and engineer a solution where both win.
 - **Inverted Sabotage**: Formulate 5 ways to guarantee spectacular failure, then invert every sabotage into a resilience feature.
-- **Job-to-be-Done (JTBD)**: Re-anchor ideation on the emotional and functional job the user is hiring this product to perform.
+- **Job-to-be-Done (JTBD)**: Re-anchor on the job the user is hiring this product to perform, including what they currently tolerate instead. Detail in `references/ideation-tools.md` §2.
 
 ---
 
-## 4. Phase 4 — High-Impact Synthesis
+## 4. Phase 4 — Scoring (survivors only)
 
-Score concepts across 4 axes (1-10): **Novelty (distance from banned 3)**, **User Impact**, **Wow Factor**, and **Feasibility**.
+Score only the concepts whose reverse-derived benefit held up. Four axes,
+1–10 each. **Novelty is measured as distance from the banned three** — a
+concept close to a cliché scores low no matter how polished it is.
 
-Output Top 3 **Hero Concepts** with:
-- Concept Name & Broken Bias
-- Solution-First Storyline
-- Rapid Validation Plan (1 Day / 1 Week)
+`Novelty` · `Wow Factor` · `User Impact` · `Company Impact`
+
+| Total | Verdict |
+|---|---|
+| < 30 | Discard |
+| 30–33 | Keep |
+| 34–36 | Expand |
+| 37–40 | **Hero Concept** |
+
+Output a table: `| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | Total | 判定 |`
+
+---
+
+## 5. Phase 5 — Synthesis
+
+- **Cluster** the survivors (UX / 収益 / コスト / ブランド / コミュニティ / データ / ラディカル / 即試せる / 長期)
+- **Name the biases that broke repeatedly** — that repetition marks where the
+  real opportunity is
+- **Hero Concepts (top 3–5)**: 一行 / 壊したバイアス / 体験ストーリー / 事業モデル / MVP / 検証計画 / リスク / 次の一歩
+- **Experiment roadmap**: 1日 / 1週間 / 30日で試すことと、その成功指標
+
+Then run the direction filter in `references/ideation-tools.md` §3 to decide
+which Hero Concept is actually worth building. Concept quality and build-worthiness
+are different questions and must be scored separately.
+
+---
+
+## Execution modes
+
+- **Auto** — 確認せず、仮定を明示して全Phaseを走る。長ければ技法ごとに分割出力し、通し番号は維持する
+- **Hybrid (default)** — Phase 0–2 は一緒に確認し、Phase 3 以降は自走する
+- **Facilitation** — 答えの前に問いを渡す（問い → 観点 → ヒント → 小例 → AI案）
+
+## Quality check — ask these after the run
+
+- 分解は下限件数を満たし、各要素にバイアスを命名したか
+- 各セルで「ありえない形」を先に握り、メリットを逆算したか（形が先か）
+- Closed World を守ったか。箱の外から要素を足していないか
+- 平凡3案を禁止してから発想したか
+- 生成中に間引かず、採点は最後にしたか
+- 通し番号を維持し、省略しなかったか
 
 ---
 
 ## Deeper reference
 
-Tool details, the five-axis scorecard, and the convergence rules live in
-**`references/ideation-tools.md`**. Read it before running a full session.
+**`references/ideation-tools.md`** carries what this procedure needs and does
+not contain: §1 the sub-methods that make each technique exhaustive, plus the
+cell format and collapse-prevention rules · §2 the tools that run *before* the
+sweep, to confirm the right thing is being decomposed · §3 the direction
+filter that runs *after*, to decide which Hero Concept is worth building.
 
 ## Artifact
 

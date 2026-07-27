@@ -1,4 +1,4 @@
-# forge-skills
+# superforge-skill
 
 **English** · [日本語](./README.ja.md)
 
@@ -40,7 +40,7 @@ model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
 
 | Skill | Use it for | Leaves behind |
 |---|---|---|
-| [`forge-brain`](./skills/forge-brain/) | radical ideation — SIT matrix, cliché elimination, five-axis scoring | `docs/product-idea.md` |
+| [`forge-brain`](./skills/forge-brain/) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
 | [`forge-biz`](./skills/forge-biz/) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
 | [`forge-brand`](./skills/forge-brand/) | brand identity + AI image/video production prompts | `docs/brand.md` |
 | [`forge-ui`](./skills/forge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
@@ -71,7 +71,7 @@ is what lets you install all eleven without crowding the context window.
 |---|---|
 | [`forge/references/intake.md`](./skills/forge/references/intake.md) | turning a request into a written brief without interrogating the user |
 | [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | when to hand a step to a deeper skill you already have installed |
-| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | SIT operations, JTBD, reframing, the five-axis scorecard |
+| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | the sub-methods that make each SIT technique exhaustive, what to check before the sweep, and the filter for which survivor to build |
 | [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
 | [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | six design steps, the four data states, the quality checklist |
 | [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | the `design.md` + `design.html` two-artifact spec |
@@ -142,8 +142,8 @@ Clone once, then let the installer symlink the router **and all ten
 `~/.gemini/skills`, `~/.gemini/antigravity-ide/skills`):
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills
-cd forge-skills
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
 ./install.sh              # --dry-run to preview, --uninstall to remove
 ```
 
@@ -159,13 +159,13 @@ the repo *into* a skills directory: clone it anywhere, then link the skills
 you want.
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills ~/src/forge-skills
+git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
 
 # the router alone
-ln -s ~/src/forge-skills/skills/forge ~/.claude/skills/forge
+ln -s ~/src/superforge-skill/skills/forge ~/.claude/skills/forge
 
 # or the whole suite, one tool only
-for s in ~/src/forge-skills/skills/*/; do
+for s in ~/src/superforge-skill/skills/*/; do
   ln -s "$s" ~/.claude/skills/"$(basename "$s")"
 done
 ```

@@ -1,37 +1,93 @@
-# Ideation Toolbox
+# Ideation Reference
 
-Use the thinking, not the label. Never present a framework name as the
-output — the user should experience the insight, not the theory. Name the
-tool only if asked.
+`SKILL.md` holds the sweep procedure — the five decomposition lenses, the
+eight techniques, and the scoring. **This file does not restate it.** It
+carries three things the procedure needs and does not contain:
 
-Pick two or three tools per session, deliberately. Running all of them
-produces volume, not originality.
+1. the sub-methods that make each technique exhaustive rather than a single guess
+2. the tools that run **before** the sweep, to make sure the right thing is being decomposed
+3. the filter that runs **after** the sweep, to decide which surviving concept is worth building
+
+Use the thinking, not the label. Never present a framework name as output.
 
 ---
 
-## Understand — before generating anything
+# 1. Sub-methods — the axes that make the sweep exhaustive
 
-### Jobs To Be Done
-Ask what the user is *hiring* this product to do. Phrase it as a struggle in
-the user's own words, not a feature request.
+One pass per technique produces one idea. The sub-methods are what turn a
+technique into a sweep. Run every sub-method of a technique before moving to
+the next technique. If a cell yields fewer than 1–3 concepts, change
+sub-method and regenerate rather than moving on.
+
+| Technique | Sub-methods |
+|---|---|
+| **Subtraction** | ① 除去のみ ② 除去 + 代替（箱の中の別要素に肩代わりさせる） |
+| **Division** | ① 物理分割 ② 機能分割 ③ 時間分割（事前 / 事後 / 非同期） ④ 縮小分割 |
+| **Multiplication** | ×2 / ×5 / ×10 / ×100 それぞれで、増やした複製の属性を1つだけ変える（時間・場所・所有者・頻度・精度・意味） |
+| **Task Unification** | ① 外部要因に内部タスクをやらせる ② 内部要素に新機能を足す ③ 内部要素間でタスクを移す |
+| **Attribute Dependency** | 内部変数（価格・表示・導線・照明）× 外部変数（天候・混雑・気分・時間帯）で依存関係を1本作る |
+| **Reverse** | コア前提を1つ反転。Multiplication や Shift と組み合わせてよい |
+| **Shift** | 2軸チャートに業界標準のベクトルを引き、逆方向・斜め方向のベクトルから概念を取る |
+| **Repurpose** | Scale / Senses / Time / Space の4レンズで用途を転用する |
+
+## The cell format
+
+One cell = (element) × (technique) × (sub-method). Complete all five steps
+before starting the next cell. Keep the running number; never skip with an
+ellipsis.
+
+```
+CELL [n] | 要素: … | 技法: … | サブ手法: …
+1. バイアス命名: 機能 / 構造 / 関係 — 「壊す思い込み」
+2. ありえない形 (Closed World): 技法を適用した"ありえない"状態。判断は保留する
+3. Function Follows Form — 逆算メリット
+   ・提供側:
+   ・ユーザー側:
+4. 市場 / 実現: 市場はあるか。実現に何が必要か
+5. 代替分岐
+   ・代替しない版: 成立するか
+   ・代替する版: 取り除いた機能を、箱の中の別要素で代替する
+→ コンセプト名: 「…」 / 壊したバイアス: …
+```
+
+## Collapse-prevention rules
+
+The sweep degrades in predictable ways. These exist to stop each one.
+
+1. **早期collapse禁止** — 思いついた瞬間の「それっぽい妥当な案」に飛ばない。先に「ありえない形」を握る
+2. **平凡3案の禁止** — 各要素で最初に浮かぶ凡庸な3案を列挙し、**それらを禁止**してから発想する
+3. **下限件数の強制** — 分解も各セルも下限未満なら再発想
+4. **生成中に間引かない** — 重複除去も採点も、生成が終わってから
+5. **番号維持** — 出力が長くなっても通し番号を続ける
+6. **Closed World を破らない** — 箱の外から新しい要素を持ち込んだ時点で、それは非自明ではなくただの追加
+
+---
+
+# 2. Before the sweep — is this the right thing to decompose?
+
+The sweep is exhaustive within whatever it is pointed at. Pointing it at the
+wrong problem produces exhaustive irrelevance. Spend a little here first.
+
+## Jobs To Be Done
+Ask what the user is *hiring* this for. Phrase it as a struggle in their own
+words:
 
 > 「〜したいとき、〜なので、〜できるようにしたい。今は〜で我慢している」
 
-The last clause is the important one. Whatever people currently tolerate is
-your real competitor — including spreadsheets, paper, and doing nothing.
+The last clause matters most. Whatever people currently tolerate is the real
+competitor — including spreadsheets, paper, and doing nothing.
 
-### Five Whys
-Push a stated problem down to a cause that is actually actionable. Stop when
-the next "why" would leave the scope you can affect.
+## Five Whys
+Push a stated problem down to a cause you can actually act on. Stop when the
+next "why" leaves the scope you can affect.
 
-### Assumption mapping
-Plot every belief the idea rests on across two axes: **how certain are we**
-and **how fatal if wrong**. Only the uncertain-and-fatal quadrant deserves
-work before building. Everything else is noise dressed as diligence.
+## Assumption mapping
+Plot each belief the idea rests on: **how certain are we** × **how fatal if
+wrong**. Only the uncertain-and-fatal quadrant deserves work before building.
+Everything else is diligence theatre.
 
-### Problem reframing
-Restate the problem at three altitudes and check which one the user actually
-wants solved.
+## Problem reframing
+Restate at three altitudes and confirm which one the user wants solved.
 
 | Altitude | Example |
 |---|---|
@@ -39,74 +95,45 @@ wants solved.
 | Actual | 「毎回同じことを説明させられている」 |
 | Broad | 「相手が誰かをシステムが覚えていない」 |
 
-Most weak products solve the narrow version of a broad problem.
+Most weak products solve the narrow version of a broad problem. Decomposing
+the narrow version locks that mistake in.
+
+## Analogous domains
+Take the *structure* of the problem and find a field that solved it under
+harsher constraints — aviation checklists, emergency triage, air-traffic
+control, restaurant service, game onboarding. Import the mechanism, not the
+aesthetic. Note this deliberately steps outside Closed World, so use it to
+choose the target, never inside a cell.
 
 ---
 
-## Diverge — generating the non-obvious
+# 3. After the sweep — which survivor is worth building?
 
-### SIT — Systematic Inventive Thinking
-The core engine. SIT works **inside a closed world**: no new components, no
-new budget, no new technology. Only what is already in or immediately around
-the product. Constraint is what forces non-obvious output.
+The sweep's own scoring (`SKILL.md`, Phase 4) measures **how good the concept
+is as a concept** — novelty, wow, impact. That is not the same question as
+**should this be the thing we build.** A Hero Concept can be genuinely novel
+and still be something you have no way to reach anyone with.
 
-Five operations, applied to an existing component:
-
-| Operation | Move | Question it forces |
-|---|---|---|
-| **Subtraction** | Remove an essential component | 「これが無いのに成立するとしたら、何が起きている？」 |
-| **Task unification** | Make one component do another's job | 「既にあるこれに、その役目を兼ねさせられないか？」 |
-| **Multiplication** | Copy a component and change it | 「同じものが2つあり、片方だけ違うとしたら？」 |
-| **Division** | Split a component and redistribute | 「これを分解して別の場所に置いたら？」 |
-| **Attribute dependency** | Make two attributes vary together | 「Aが変わるとBも変わる、としたら何が便利になる？」 |
-
-**Function follows form.** Apply the operation first, then ask what the
-resulting configuration would be good for. This inversion is what produces
-ideas that could not be reached by asking "what does the user want".
-
-### Cliché elimination
-Before presenting anything, write down the three ideas any competent model
-would produce for this prompt. **Those three are now banned.** They are the
-floor, not the output. This is the single highest-leverage rule in the file.
-
-### SCAMPER
-A faster, shallower sweep when SIT is too heavy: Substitute, Combine, Adapt,
-Modify, Put to another use, Eliminate, Reverse. Useful for feature-level work;
-too blunt for concept-level work.
-
-### Analogous domains
-Take the structure of the problem and find a field that solved it under
-harsher constraints — aviation checklists, emergency triage, restaurant
-service, air-traffic control, game onboarding. Import the mechanism, not the
-aesthetic.
-
----
-
-## Converge — choosing without flattening
-
-Do not average the options. Averaging is how five interesting concepts become
-one mediocre one.
-
-### Five-axis scorecard
+Run this second filter on the Hero Concepts only.
 
 | Axis | Question | 1 | 5 |
 |---|---|---|---|
-| Pull | 誰かが今すぐ欲しがるか | 誰も困っていない | 既に代替品に金を払っている |
+| Pull | 誰かが今すぐ欲しがるか | 誰も困っていない | 既に代替手段に金を払っている |
 | Wedge | 最初の一手が小さいか | 全部作らないと成立しない | 1画面で価値が出る |
 | Unfair | 他人より上手くやれる理由 | 誰でも作れる | 経験・資産・視点の優位がある |
 | Reach | 届け方があるか | 届け方が無い | 既にその人たちに接点がある |
 | Energy | 自分が作り続けたいか | 義務感 | 勝手に手が動く |
 
-Score each candidate, then **take the highest single peak rather than the
-highest total.** A concept scoring 5/5/5/1/1 is more interesting than one
-scoring 3s across the board. Flat scores mean the idea has no edge.
+**Take the highest single peak, not the highest total.** A direction scoring
+5/5/5/1/1 is more interesting than one scoring 3s across the board — flat
+scores mean no edge. Then fix the 1s deliberately, or accept them and say so.
 
-### Sharpening the winner
-- Cut it until one sentence describes it.
-- Name the one thing it will be visibly best at.
-- Name what it deliberately does badly, and be glad about it.
-- Write the sentence a user would say to a friend to recommend it. If that
-  sentence is boring, the concept is boring.
+## Sharpening
+- Cut until one sentence describes it
+- Name the one thing it will be visibly best at
+- Name what it does badly on purpose, and be glad about it
+- Write the sentence a user would say to recommend it to a friend. If that
+  sentence is boring, the concept is boring
 
 ---
 
@@ -125,11 +152,15 @@ Write `docs/product-idea.md`:
 ## The struggle it addresses
 ## Why now
 ## What it is deliberately not
-## The banned obvious three
-<what was rejected as cliché, so nobody re-proposes it>
 
-## Candidates considered
-| Concept | Pull | Wedge | Unfair | Reach | Energy | Verdict |
+## The banned obvious three
+<列挙して禁止した凡庸案。後から誰かが再提案しないように残す>
+
+## Hero concepts from the sweep
+| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | Total | 判定 |
+
+## Direction filter
+| 候補 | Pull | Wedge | Unfair | Reach | Energy | 最高峰の軸 |
 
 ## Chosen direction and why
 ## The riskiest assumption
