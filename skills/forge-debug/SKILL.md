@@ -1,6 +1,12 @@
 ---
 name: forge-debug
-description: Execute systematic, root-cause-first debugging integrated with FailForward learning memory. Trigger via /forge-debug or when encountering bugs, build failures, or test errors.
+description: >
+  Root-cause-first debugging with FailForward learning memory, which recalls
+  past failures before diagnosing and records new ones after. Forbids
+  trial-and-error patching and dummy fallbacks that mask symptoms. Use when
+  the user says "bug", "error", "it crashes", "build fails", "test is failing",
+  "not working", "why does this happen", "still broken", "バグ", "エラー",
+  "動かない", "落ちる", "直らない", "なぜか失敗する", or runs /forge-debug.
 ---
 
 # Forge Debug — Systematic Debugging & FailForward Memory Engine

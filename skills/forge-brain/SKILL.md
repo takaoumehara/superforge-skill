@@ -1,6 +1,13 @@
 ---
 name: forge-brain
-description: Execute radical, bias-shattering ideation using the BreakBias SIT matrix (Closed World, Function Follows Form, Cliché Elimination) combined with BMAD strategic lenses. Trigger via /forge-brain or whenever generating non-obvious product/feature concepts.
+description: >
+  Generate non-obvious product and feature concepts using the BreakBias SIT
+  matrix (Closed World, Function Follows Form, Cliche Elimination) plus BMAD
+  strategic lenses. Kills predictable AI list-making and reframes the problem
+  before any solution. Use when the user says "brainstorm", "ideas", "come up
+  with", "what could we build", "reframe this", "concept", "something more
+  original", "アイデア", "発想", "ブレスト", "企画", "コンセプト",
+  "ありきたりじゃないもの", "何が作れる", or runs /forge-brain.
 ---
 
 # Forge Brain — Radical Ideation & Bias-Shattering Engine

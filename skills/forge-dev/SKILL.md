@@ -1,6 +1,13 @@
 ---
 name: forge-dev
-description: Orchestrate multi-agent feature execution using intra-provider model tiering (Claude 5, Gemini 3.6, Codex, Kimi). Proposes Subagents vs Agent Teams topology based on task complexity. Trigger via /forge-dev.
+description: >
+  Build multi-component features by decomposing the work and dispatching
+  subagents, assigning a model tier per subtask across Claude 5, Gemini 3.6,
+  Codex, and Kimi. Proposes Subagents versus Agent Teams topology by task
+  complexity and token cost. Use when the user says "implement", "build this
+  feature", "execute the plan", "in parallel", "dispatch agents", "subagents",
+  "which model should", "実装して", "作って", "並列で", "サブエージェント",
+  "プランを実行", "どのモデルで", or runs /forge-dev.
 ---
 
 # Forge Dev — Multi-Agent Building & Model Tiering Engine

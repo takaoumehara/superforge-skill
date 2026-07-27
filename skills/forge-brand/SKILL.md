@@ -1,6 +1,12 @@
 ---
 name: forge-brand
-description: Define brand identity systems and produce AI-generated visual and motion assets (images, banners, concepts) via prompt engineering for generate_image, Kie.ai, and Higgsfield. Trigger via /forge-brand or when creating brand assets, UI media, or video concepts.
+description: >
+  Define brand identity systems (naming, tone, palette, type, logo direction)
+  and produce AI-generated visual and motion assets through prompt engineering
+  for generate_image, Kie.ai, and Higgsfield. Use when the user says "brand",
+  "logo", "identity", "tone of voice", "hero image", "banner", "generate an
+  image", "video concept", "moodboard", "ブランド", "ロゴ", "トンマナ",
+  "世界観", "ビジュアル", "画像を作って", "動画", or runs /forge-brand.
 ---
 
 # Forge Brand — Brand Identity & AI Media Production Engine

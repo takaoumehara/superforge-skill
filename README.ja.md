@@ -19,11 +19,11 @@
 | **C — 機械的・ツール使用** | フォーマット、定型テスト、ドキュメント/変更履歴の同期、lint/testコマンドの実行 | Claude Haiku |
 | **D — リポジトリ非依存の大量テキスト処理** | バリエーション生成、貼り付けテキストの要約、コピー翻訳、説明文のドラフト | ローカルの`gemini` CLI（`gemini-3.6-flash`、low/medium/high） — Anthropic側の使用量を一切消費しない |
 
-「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`SKILL.md`](./SKILL.md) にあります。
+「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`skills/forge/SKILL.md`](./skills/forge/SKILL.md) にあります。
 
 ## Forge スイート
 
-ルートのスキルは**ルーター**としても働きます。ユーザーの意図を読み取り、10個の専門スキル `forge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/forge-ui` など）。
+[`forge`](./skills/forge/) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `forge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/forge-ui` など）。
 
 | スキル | 用途 |
 |---|---|
@@ -67,57 +67,29 @@ cd forge-skills
 ./install.sh              # --dry-run で確認のみ、--uninstall で解除
 ```
 
-冪等なので `git pull` のたびに再実行して構いません。実体のあるディレクトリは決して上書きせず、自分が張ったリンクだけを扱います。
+冪等なので `git pull` のたびに再実行して構いません。実体のあるディレクトリは決して上書きせず、自分が張ったリンクだけを扱います。各ツールからは11個の独立したスキルとして見え、必要なものだけが読み込まれます。
 
-> `forge-*` は `skills/` の1階層下にあり、どのツールもスキルを**1階層しか探索しません**。そのためリポジトリをskillsディレクトリにクローンしただけではルーターしか認識されません。スイート全体を有効にするには `install.sh` を実行するか、各 `skills/forge-*` に自分でリンクを張ってください。
+### 手動、または単一ツールだけに入れる
 
-### 単一ツールに手動でインストール
-
-使っているツールを選んでください。どれも「そのツールがスキルを探す場所に`SKILL.md`を置くだけ」です。ビルドや設定は不要です。ただしこの方法で入るのは**ルーターだけ**です。10個の`forge-*`も使いたい場合は、あとから `install.sh` を実行してください。
-
-### Claude Code
+ルーターを含む全スキルが `skills/` 直下の独立したディレクトリにあり、どのツールもスキルを**1階層しか探索しません**。そのため、リポジトリをskillsディレクトリの中へクローンしても認識されません。任意の場所にクローンしてから、必要なスキルにリンクを張ってください。
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.claude/skills/forge
+git clone https://github.com/takaoumehara/forge-skills ~/src/forge-skills
+
+# ルーターだけ
+ln -s ~/src/forge-skills/skills/forge ~/.claude/skills/forge
+
+# または11個まとめて、1ツールだけに
+for s in ~/src/forge-skills/skills/*/; do
+  ln -s "$s" ~/.claude/skills/"$(basename "$s")"
+done
 ```
 
-複数ツールで共有したい場合は、下の[複数ツールでの共有インストール](#複数ツールでの共有インストール)を参照してください。
-
-### Codex CLI
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.codex/skills/forge
-```
-
-### Gemini CLI
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.gemini/skills/forge
-```
-
-### Antigravity IDE
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.gemini/antigravity-ide/skills/forge
-```
+`~/.claude/skills` の部分を `~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`、あるいは `~/.agents/skills`（CodexとGemini CLIの両方が読む）に置き換えてください。
 
 ### Claude.ai（ブラウザ）
 
-このリポジトリをZIPでダウンロードし（Code → Download ZIP）、Settings → Capabilities → Skills からカスタムSkillとしてアップロードしてください。
-
-### 複数ツールでの共有インストール
-
-上記のツールを複数使っている場合は、一度だけクローンして各ツールのskillsディレクトリにシンボリックリンクを張ると、実体が一つで済みます。
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.agents/skills/forge
-
-ln -s ../../.agents/skills/forge ~/.claude/skills/forge
-ln -s ../../.agents/skills/forge ~/.gemini/skills/forge
-ln -s ~/.agents/skills/forge ~/.gemini/antigravity-ide/skills/forge
-```
-
-Codexは`~/.agents/skills/`を自動で読むため、追加のリンクは不要です。
+`skills/forge-ui/` のように**スキル1個のディレクトリ**を、Settings → Capabilities → Skills からアップロードしてください。ブラウザのSkills UIは1度に1スキルしか受け付けないため、使いたいものを個別にアップロードします。
 
 ### 常時有効にする（推奨）
 

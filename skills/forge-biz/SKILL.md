@@ -1,6 +1,13 @@
 ---
 name: forge-biz
-description: Architect high-viability business models, monetization strategies, paywall triggers, and Go-To-Market (GTM) execution plans. Trigger via /forge-biz or when defining product pricing, subscription flows, or revenue models.
+description: >
+  Architect business models, pricing tiers, paywall placement, subscription
+  flows, and Go-To-Market plans. Covers monetization archetype selection,
+  price anchoring, trial-to-paid conversion triggers, and growth loops.
+  Use when the user says "pricing", "monetization", "paywall", "subscription",
+  "free trial", "business model", "revenue", "GTM", "how do we make money",
+  "価格", "値付け", "課金", "マネタイズ", "サブスク", "ペイウォール",
+  "ビジネスモデル", "どう収益化する", or runs /forge-biz.
 ---
 
 # Forge Biz — Business Architecture & Monetization Engine

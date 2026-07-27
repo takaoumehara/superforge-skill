@@ -1,6 +1,12 @@
 ---
 name: forge-test
-description: Execute Test-Driven Development (Red-Green-Refactor) for Web, iOS (Swift Testing), and Android (Compose Test). Trigger via /forge-test or when writing new features or refactoring.
+description: >
+  Drive implementation through Red-Green-Refactor TDD across Web (Jest,
+  Vitest, Playwright), iOS (Swift Testing, XCTest), and Android (JUnit,
+  Compose Test), verifying each red and green state by actually running the
+  suite. Use when the user says "write tests", "TDD", "test first", "add test
+  coverage", "refactor safely", "テストを書いて", "テスト先に", "TDD",
+  "リファクタリング", "テストが無い", or runs /forge-test.
 ---
 
 # Forge Test — Multi-Platform Test-Driven Development Engine

@@ -1,6 +1,14 @@
 ---
 name: forge
-description: Master concierge and autonomous router for high-velocity making and building. Automatically parses user intent, routes tasks to specialized /forge-* skills, and assigns intra-provider model tiers across Claude 5, Gemini 3.6, Codex, and Kimi environments before executing work.
+description: >
+  Concierge and router for the whole making process, from idea to shipped
+  product. Reads intent, hands the work to the right forge-* skill (brain,
+  biz, brand, ui, dev, test, debug, roast, verify, handoff), and assigns a
+  model tier per subtask across Claude 5, Gemini 3.6, Codex, and Kimi before
+  any agent is dispatched. Use at the start of any build, or when the request
+  spans several of those areas. Use when the user says "let's build", "I want
+  to make", "help me ship", "where do I start", "何か作りたい", "作って",
+  "どこから始める", "一気に進めたい", or runs /forge.
 ---
 
 # Forge Suite — Concierge & Master Orchestrator

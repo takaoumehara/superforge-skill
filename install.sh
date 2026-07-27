@@ -29,11 +29,14 @@ TARGETS=(
   "$HOME/.gemini/antigravity-ide/skills"    # Antigravity IDE
 )
 
-# The router skill lives at the repo root, installed as `forge`. The alias is
-# this repo's former name — kept so existing `model-aware-superpowers`
-# references in CLAUDE.md / AGENTS.md keep resolving. Drop it once they're
-# updated (delete the symlink, or remove the name from ROUTER_NAMES).
-ROUTER_NAMES=("forge" "model-aware-superpowers")
+# Every skill, router included, lives in skills/ — so each installed skill
+# directory is named exactly after its `name:` field, and no repo-level file
+# (README, LICENSE, install.sh) leaks into a skill's context.
+#
+# LEGACY_ALIAS is this repo's former name, pointed at the router so existing
+# `model-aware-superpowers` references in CLAUDE.md / AGENTS.md keep
+# resolving. Set it to "" once those are updated.
+LEGACY_ALIAS="model-aware-superpowers"
 
 link() { # link <source> <destination>
   local src="$1" dest="$2"
@@ -66,16 +69,12 @@ for dir in "${TARGETS[@]}"; do
   [ -d "$dir" ] || { echo "skipping $dir (not present)"; continue; }
   echo "$dir"
   if $UNINSTALL; then
-    for name in "${ROUTER_NAMES[@]}"; do
-      unlink_if_ours "$dir/$name"
-    done
+    if [ -n "$LEGACY_ALIAS" ]; then unlink_if_ours "$dir/$LEGACY_ALIAS"; fi
     for src in "$REPO"/skills/*/; do
       unlink_if_ours "$dir/$(basename "$src")"
     done
   else
-    for name in "${ROUTER_NAMES[@]}"; do
-      link "$REPO" "$dir/$name"
-    done
+    if [ -n "$LEGACY_ALIAS" ]; then link "$REPO/skills/forge" "$dir/$LEGACY_ALIAS"; fi
     for src in "$REPO"/skills/*/; do
       src="${src%/}"
       link "$src" "$dir/$(basename "$src")"

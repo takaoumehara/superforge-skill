@@ -1,6 +1,12 @@
 ---
 name: forge-roast
-description: Execute an unsparing, zero-fluff Roast Review to uncover design flaws, architectural holes, and weak copy before completion. Trigger via /forge-roast or when reviewing plans, code, or UI concepts.
+description: >
+  Deliver an unsparing, compliment-free critique of a design, PRD, plan,
+  architecture, copy, or UI to expose flaws before they ship. Strips AI
+  politeness and names the weakest point first. Use when the user says
+  "roast", "be brutal", "tear this apart", "what's wrong with", "honest
+  feedback", "critique", "poke holes", "don't be nice", "辛口で", "ダメ出し",
+  "批評して", "欠点を指摘", "忖度なしで", or runs /forge-roast.
 ---
 
 # Forge Roast — Uncompromising Critique Engine

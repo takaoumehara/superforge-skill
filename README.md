@@ -30,11 +30,11 @@ and assign a model accordingly:
 Never defaults every agent to the biggest model "just to be safe" — that's
 the exact waste this skill exists to prevent. Full classification rules,
 edge cases, and the Gemini CLI invocation details are in
-[`SKILL.md`](./SKILL.md).
+[`skills/forge/SKILL.md`](./skills/forge/SKILL.md).
 
 ## The Forge suite
 
-The root skill also acts as a **router**: it reads intent and hands the work
+The [`forge`](./skills/forge/) skill acts as the **router**: it reads intent and hands the work
 to one of ten specialised `forge-*` skills, each of which inherits the same
 model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
 
@@ -73,7 +73,7 @@ model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
 | Gemini CLI | ✅ | reads `~/.agents/skills/` |
 | Antigravity IDE | ✅ | reads its own `skills/` directory |
 | Claude.ai (Pro/Team/Enterprise, browser) | ✅ | upload as a custom Skill |
-| Plain chat UI (e.g. ChatGPT/Gemini web with no tools) | ⚠️ | no skill-loading or subagent mechanism exists there — you can paste `SKILL.md` in as custom instructions, but there's no subagent dispatch for the model assignment to apply to |
+| Plain chat UI (e.g. ChatGPT/Gemini web with no tools) | ⚠️ | no skill-loading or subagent mechanism exists there — you can paste a `SKILL.md` in as custom instructions, but there's no subagent dispatch for the model assignment to apply to |
 
 ## Install
 
@@ -91,68 +91,37 @@ cd forge-skills
 ```
 
 It's idempotent — re-run it after `git pull`. It never overwrites a real
-directory, only its own symlinks.
+directory, only its own symlinks. Every tool then sees eleven separate
+skills and loads only the one it needs.
 
-> The `forge-*` skills live one level down in `skills/`, and every tool only
-> discovers skills **one level deep**. So cloning the repo into a skills
-> directory exposes the router alone — run `install.sh` (or symlink each
-> `skills/forge-*` yourself) to get the full suite.
+### Manual, or a single tool
 
-### Single tool, manual
-
-Pick the tool you use. All of these are just "put `SKILL.md` where that tool
-looks for skills" — nothing to build or configure. Note that these install
-the **router only**; run `install.sh` afterwards if you want the ten
-`forge-*` skills as well.
-
-### Claude Code
+Every skill — the router included — lives in its own directory under
+`skills/`, and tools discover skills **one level deep only**. So don't clone
+the repo *into* a skills directory: clone it anywhere, then link the skills
+you want.
 
 ```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.claude/skills/forge
+git clone https://github.com/takaoumehara/forge-skills ~/src/forge-skills
+
+# the router alone
+ln -s ~/src/forge-skills/skills/forge ~/.claude/skills/forge
+
+# or the whole suite, one tool only
+for s in ~/src/forge-skills/skills/*/; do
+  ln -s "$s" ~/.claude/skills/"$(basename "$s")"
+done
 ```
 
-Prefer a directory shared across multiple tools? Clone it once into
-`~/.agents/skills/` and symlink it into each tool instead (see
-[Multi-tool / shared install](#multi-tool--shared-install) below).
-
-### Codex CLI
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.codex/skills/forge
-```
-
-### Gemini CLI
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.gemini/skills/forge
-```
-
-### Antigravity IDE
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.gemini/antigravity-ide/skills/forge
-```
+Swap `~/.claude/skills` for `~/.codex/skills`, `~/.gemini/skills`,
+`~/.gemini/antigravity-ide/skills`, or `~/.agents/skills` (which Codex and
+Gemini CLI both read) as needed.
 
 ### Claude.ai (browser)
 
-Download this repository as a ZIP (Code → Download ZIP), then upload it as a
-custom Skill under Settings → Capabilities → Skills.
-
-### Multi-tool / shared install
-
-If you use more than one of the tools above, clone it once and symlink it
-into each tool's skills directory so there's a single source of truth:
-
-```bash
-git clone https://github.com/takaoumehara/forge-skills ~/.agents/skills/forge
-
-ln -s ../../.agents/skills/forge ~/.claude/skills/forge
-ln -s ../../.agents/skills/forge ~/.gemini/skills/forge
-ln -s ~/.agents/skills/forge ~/.gemini/antigravity-ide/skills/forge
-```
-
-Codex reads `~/.agents/skills/` automatically, so no extra symlink is needed
-there.
+Upload a single skill directory — e.g. `skills/forge-ui/` — under Settings →
+Capabilities → Skills. The browser Skills UI takes one skill at a time, so
+upload each one you want separately.
 
 ### Make it always-on (recommended)
 

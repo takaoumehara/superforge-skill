@@ -1,6 +1,13 @@
 ---
 name: forge-verify
-description: Mandatory pre-completion verification gateway. Enforces empirical test passes, dual-viewport testing (Mobile/Desktop Web), and native iOS/Android simulator runs before claiming success. Trigger via /forge-verify.
+description: >
+  Gate that blocks any completion claim until there is empirical runtime
+  evidence — the test suite actually run, both mobile and desktop viewports
+  checked, and native iOS or Android simulator runs confirmed. Use before
+  saying a task is done, fixed, or shipped. Use when the user says "is it
+  done", "did it work", "verify", "double check", "are you sure", "before we
+  ship", "確認して", "検証して", "本当に動く", "終わった", "動作確認",
+  or runs /forge-verify.
 ---
 
 # Forge Verify — Pre-Completion Verification Gateway

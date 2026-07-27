@@ -1,6 +1,13 @@
 ---
 name: forge-ui
-description: Design and build premium UI/UX interfaces, micro-interactions, responsive layouts, typography, and native iOS/Android screens. Incorporates Ren 5-Phase, ux-spec, typeset perfection, Web motion principles, Apple HIG, and Material 3. Trigger via /forge-ui.
+description: >
+  Design and build interfaces across Web, iOS (SwiftUI), and Android (Jetpack
+  Compose), covering layout, visual hierarchy, typography, responsive
+  behaviour, state specification, and micro-interactions. Applies the Ren
+  5-Phase process, Apple HIG, and Material 3. Use when the user says "design",
+  "UI", "UX", "layout", "screen", "component", "make it look better",
+  "animation", "spacing", "typography", "デザイン", "画面", "見た目",
+  "レイアウト", "アニメーション", "余白", "使いにくい", or runs /forge-ui.
 ---
 
 # Forge UI — Interface Design, Motion & Native Engineering Engine
