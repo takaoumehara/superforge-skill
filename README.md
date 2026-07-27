@@ -30,26 +30,26 @@ and assign a model accordingly:
 Never defaults every agent to the biggest model "just to be safe" — that's
 the exact waste this skill exists to prevent. Full classification rules,
 edge cases, and the Gemini CLI invocation details are in
-[`skills/forge/SKILL.md`](./skills/forge/SKILL.md).
+[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md).
 
-## The Forge suite
+## The Superforge suite
 
-The [`forge`](./skills/forge/) skill acts as the **router**: it reads intent and hands the work
-to one of ten specialised `forge-*` skills, each of which inherits the same
-model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
+The [`superforge`](./skills/superforge/) skill acts as the **router**: it reads intent and hands the work
+to one of ten specialised `superforge-*` skills, each of which inherits the same
+model-tiering rules. Each is invocable directly too (`/superforge-ui`, …).
 
 | Skill | Use it for | Leaves behind |
 |---|---|---|
-| [`forge-brain`](./skills/forge-brain/) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
-| [`forge-biz`](./skills/forge-biz/) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
-| [`forge-brand`](./skills/forge-brand/) | brand identity + AI image/video production prompts | `docs/brand.md` |
-| [`forge-ui`](./skills/forge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`forge-dev`](./skills/forge-dev/) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
-| [`forge-test`](./skills/forge-test/) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
-| [`forge-debug`](./skills/forge-debug/) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
-| [`forge-roast`](./skills/forge-roast/) | unsparing critique before shipping | `docs/critique.md` |
-| [`forge-verify`](./skills/forge-verify/) | pre-completion verification gateway | `docs/verification.md` |
-| [`forge-handoff`](./skills/forge-handoff/) | zero-loss session handoff across models and tools | `.handoff/` |
+| [`superforge-brain`](./skills/superforge-brain/) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/) | brand identity + AI image/video production prompts | `docs/brand.md` |
+| [`superforge-ui`](./skills/superforge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
+| [`superforge-test`](./skills/superforge-test/) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
+| [`superforge-debug`](./skills/superforge-debug/) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
+| [`superforge-roast`](./skills/superforge-roast/) | unsparing critique before shipping | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/) | pre-completion verification gateway | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/) | zero-loss session handoff across models and tools | `.handoff/` |
 
 ## Two things make the suite more than a folder of prompts
 
@@ -59,7 +59,7 @@ A conclusion that exists only in the conversation dies at the next `/clear`.
 Every skill reads what `docs/` already contains and writes its own artifact
 before reporting back, so a session can be cleared, a model swapped, or a
 build resumed the next morning without relitigating decisions that were
-already made. Contract: [`skills/forge/references/artifacts.md`](./skills/forge/references/artifacts.md).
+already made. Contract: [`skills/superforge/references/artifacts.md`](./skills/superforge/references/artifacts.md).
 
 ### The SKILL.md stays thin, the knowledge goes in `references/`
 
@@ -69,18 +69,18 @@ is what lets you install all eleven without crowding the context window.
 
 | Reference | What it carries |
 |---|---|
-| [`forge/references/intake.md`](./skills/forge/references/intake.md) | turning a request into a written brief without interrogating the user |
-| [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | when to hand a step to a deeper skill you already have installed |
-| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | the sub-methods that make each SIT technique exhaustive, what to check before the sweep, and the filter for which survivor to build |
-| [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
-| [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | six design steps, the four data states, the quality checklist |
-| [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | the `design.md` + `design.html` two-artifact spec |
-| [`forge-roast/references/evaluation-methods.md`](./skills/forge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
-| [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md) | preconditions, the build→prove→repair loop, what may be decided alone |
+| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | turning a request into a written brief without interrogating the user |
+| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | when to hand a step to a deeper skill you already have installed |
+| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | the sub-methods that make each SIT technique exhaustive, what to check before the sweep, and the filter for which survivor to build |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
+| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | six design steps, the four data states, the quality checklist |
+| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` two-artifact spec |
+| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
+| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the build→prove→repair loop, what may be decided alone |
 
 ## Design systems humans can actually review
 
-`forge-ui` emits two mirrored files that must never drift:
+`superforge-ui` emits two mirrored files that must never drift:
 
 - **`docs/design.md`** — YAML tokens in the open [design.md](https://github.com/google-labs-code/design.md)
   format, for the coding agent, plus the prose rationale no schema can carry
@@ -106,7 +106,7 @@ escalated. The loop stops only for irreversible loss, spending money, missing
 credentials, or the goal itself being wrong — and even then it keeps working
 on everything not blocked by it.
 
-Full protocol: [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md).
+Full protocol: [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md).
 
 ## Requirements
 
@@ -137,7 +137,7 @@ Full protocol: [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/ref
 ### Every tool at once (recommended)
 
 Clone once, then let the installer symlink the router **and all ten
-`forge-*` skills** into every skills directory it finds on your machine
+`superforge-*` skills** into every skills directory it finds on your machine
 (`~/.claude/skills`, `~/.agents/skills`, `~/.codex/skills`,
 `~/.gemini/skills`, `~/.gemini/antigravity-ide/skills`):
 
@@ -162,7 +162,7 @@ you want.
 git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
 
 # the router alone
-ln -s ~/src/superforge-skill/skills/forge ~/.claude/skills/forge
+ln -s ~/src/superforge-skill/skills/superforge ~/.claude/skills/superforge
 
 # or the whole suite, one tool only
 for s in ~/src/superforge-skill/skills/*/; do
@@ -176,7 +176,7 @@ Gemini CLI both read) as needed.
 
 ### Claude.ai (browser)
 
-Upload a single skill directory — e.g. `skills/forge-ui/` — under Settings →
+Upload a single skill directory — e.g. `skills/superforge-ui/` — under Settings →
 Capabilities → Skills. The browser Skills UI takes one skill at a time, so
 upload each one you want separately.
 
@@ -194,7 +194,7 @@ one repo):
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `forge` skill to
+Before dispatching subagents, consult the `superforge` skill to
 assign the right model per subtask instead of defaulting every agent to the
 same model.
 ```

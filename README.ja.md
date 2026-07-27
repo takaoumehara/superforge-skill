@@ -19,30 +19,30 @@
 | **C — 機械的・ツール使用** | フォーマット、定型テスト、ドキュメント/変更履歴の同期、lint/testコマンドの実行 | Claude Haiku |
 | **D — リポジトリ非依存の大量テキスト処理** | バリエーション生成、貼り付けテキストの要約、コピー翻訳、説明文のドラフト | ローカルの`gemini` CLI（`gemini-3.6-flash`、low/medium/high） — Anthropic側の使用量を一切消費しない |
 
-「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`skills/forge/SKILL.md`](./skills/forge/SKILL.md) にあります。
+「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md) にあります。
 
-## Forge スイート
+## Superforge スイート
 
-[`forge`](./skills/forge/) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `forge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/forge-ui` など）。
+[`superforge`](./skills/superforge/) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `superforge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/superforge-ui` など）。
 
 | スキル | 用途 | 残す成果物 |
 |---|---|---|
-| [`forge-brain`](./skills/forge-brain/) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
-| [`forge-biz`](./skills/forge-biz/) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
-| [`forge-brand`](./skills/forge-brand/) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
-| [`forge-ui`](./skills/forge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`forge-dev`](./skills/forge-dev/) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
-| [`forge-test`](./skills/forge-test/) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
-| [`forge-debug`](./skills/forge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
-| [`forge-roast`](./skills/forge-roast/) | 出荷前の忖度なし批評 | `docs/critique.md` |
-| [`forge-verify`](./skills/forge-verify/) | 完了宣言前の検証ゲート | `docs/verification.md` |
-| [`forge-handoff`](./skills/forge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
+| [`superforge-brain`](./skills/superforge-brain/) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
+| [`superforge-ui`](./skills/superforge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
+| [`superforge-test`](./skills/superforge-test/) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
+| [`superforge-debug`](./skills/superforge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
+| [`superforge-roast`](./skills/superforge-roast/) | 出荷前の忖度なし批評 | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/) | 完了宣言前の検証ゲート | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
 
 ## このスイートが「プロンプト置き場」で終わらない理由
 
 ### 結論が必ずファイルに落ちる
 
-会話の中にしか存在しない結論は、次の `/clear` で消えます。各スキルは `docs/` に既にあるものを読んでから動き、報告の前に自分の成果物を書き出します。だからセッションを消しても、モデルを乗り換えても、翌朝ビルドを再開しても、決着済みの判断をやり直さずに済みます。契約: [`skills/forge/references/artifacts.md`](./skills/forge/references/artifacts.md)。
+会話の中にしか存在しない結論は、次の `/clear` で消えます。各スキルは `docs/` に既にあるものを読んでから動き、報告の前に自分の成果物を書き出します。だからセッションを消しても、モデルを乗り換えても、翌朝ビルドを再開しても、決着済みの判断をやり直さずに済みます。契約: [`skills/superforge/references/artifacts.md`](./skills/superforge/references/artifacts.md)。
 
 ### SKILL.md は薄いまま、知識は `references/` に置く
 
@@ -50,18 +50,18 @@
 
 | 参照ファイル | 中身 |
 |---|---|
-| [`forge/references/intake.md`](./skills/forge/references/intake.md) | 尋問せずに依頼をブリーフに変える手順 |
-| [`forge/references/wiring.md`](./skills/forge/references/wiring.md) | 既にインストール済みの専門スキルに、どの工程を渡すか |
-| [`forge-brain/references/ideation-tools.md`](./skills/forge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法、スイープ前に確認すべきこと、生き残りのどれを作るか決める絞り込み |
-| [`forge-biz/references/behavioral-frameworks.md`](./skills/forge-biz/references/behavioral-frameworks.md) | アンカリング、損失回避、デフォルト設計と、それぞれの倫理的な線引き |
-| [`forge-ui/references/design-process.md`](./skills/forge-ui/references/design-process.md) | 設計6ステップ、4つのデータ状態、品質チェックリスト |
-| [`forge-ui/references/design-system-output.md`](./skills/forge-ui/references/design-system-output.md) | `design.md` + `design.html` の2枚出し仕様 |
-| [`forge-roast/references/evaluation-methods.md`](./skills/forge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
-| [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md) | 自走の前提条件、build→検証→自己修復ループ、独断で決めてよい範囲 |
+| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | 尋問せずに依頼をブリーフに変える手順 |
+| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 既にインストール済みの専門スキルに、どの工程を渡すか |
+| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法、スイープ前に確認すべきこと、生き残りのどれを作るか決める絞り込み |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング、損失回避、デフォルト設計と、それぞれの倫理的な線引き |
+| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計6ステップ、4つのデータ状態、品質チェックリスト |
+| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` の2枚出し仕様 |
+| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
+| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、build→検証→自己修復ループ、独断で決めてよい範囲 |
 
 ## 人がレビューできるデザインシステム
 
-`forge-ui` は、決して乖離してはいけない2つのファイルを出力します。
+`superforge-ui` は、決して乖離してはいけない2つのファイルを出力します。
 
 - **`docs/design.md`** — オープン規格 [design.md](https://github.com/google-labs-code/design.md) 形式のYAMLトークン（AIが実装用に読む）と、スキーマでは表現できない根拠の散文
 - **`docs/design.html`** — 全トークン・コンポーネント・状態を実際にレンダリングし、コントラスト比を実測して合否バッジを出す単体ファイル。`file://` で開けて人がそのまま見られる
@@ -74,7 +74,7 @@ HTML側はトークンをCSSカスタムプロパティとして**実際に消�
 
 無人で走らせてよいのは、進捗を自分で証明できる場合だけです。スコープがチェックボックスで書かれ、各タスクに**それが完了したことを証明するコマンド**が添えられ、失敗時に自己修復し、1タスクごとに状態をディスクへ書き出す。未解決の問いは、妥当なデフォルトで決めて記録し、止まりません。ループが停止するのは、取り返しのつかない破壊・課金・認証情報の不足・ゴール自体が間違っていた場合だけで、それでもブロックされていない作業は進め続けます。
 
-全プロトコル: [`forge-dev/references/autonomous-run.md`](./skills/forge-dev/references/autonomous-run.md)。
+全プロトコル: [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)。
 
 ## 必要環境
 
@@ -97,7 +97,7 @@ HTML側はトークンをCSSカスタムプロパティとして**実際に消�
 
 ### 全ツールに一括インストール（推奨）
 
-一度クローンし、インストーラを実行すると、ルーターと**10個の`forge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
+一度クローンし、インストーラを実行すると、ルーターと**10個の`superforge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -115,7 +115,7 @@ cd superforge-skill
 git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
 
 # ルーターだけ
-ln -s ~/src/superforge-skill/skills/forge ~/.claude/skills/forge
+ln -s ~/src/superforge-skill/skills/superforge ~/.claude/skills/superforge
 
 # または11個まとめて、1ツールだけに
 for s in ~/src/superforge-skill/skills/*/; do
@@ -127,7 +127,7 @@ done
 
 ### Claude.ai（ブラウザ）
 
-`skills/forge-ui/` のように**スキル1個のディレクトリ**を、Settings → Capabilities → Skills からアップロードしてください。ブラウザのSkills UIは1度に1スキルしか受け付けないため、使いたいものを個別にアップロードします。
+`skills/superforge-ui/` のように**スキル1個のディレクトリ**を、Settings → Capabilities → Skills からアップロードしてください。ブラウザのSkills UIは1度に1スキルしか受け付けないため、使いたいものを個別にアップロードします。
 
 ### 常時有効にする（推奨）
 
@@ -140,7 +140,7 @@ done
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-サブエージェントをディスパッチする前に、必ず forge スキルを
+サブエージェントをディスパッチする前に、必ず superforge スキルを
 参照してタスクごとに適切なモデルを割り当てる。全エージェントを同一モデルの
 まま動かさない。
 ```

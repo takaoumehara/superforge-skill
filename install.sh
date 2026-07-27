@@ -74,7 +74,7 @@ for dir in "${TARGETS[@]}"; do
       unlink_if_ours "$dir/$(basename "$src")"
     done
   else
-    if [ -n "$LEGACY_ALIAS" ]; then link "$REPO/skills/forge" "$dir/$LEGACY_ALIAS"; fi
+    if [ -n "$LEGACY_ALIAS" ]; then link "$REPO/skills/superforge" "$dir/$LEGACY_ALIAS"; fi
     for src in "$REPO"/skills/*/; do
       src="${src%/}"
       link "$src" "$dir/$(basename "$src")"
