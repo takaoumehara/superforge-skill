@@ -1,72 +1,52 @@
 ---
-name: model-aware-superpowers
-description: Use this whenever you are about to dispatch subagents — running the Agent tool, the Workflow tool, or any superpowers orchestration skill (dispatching-parallel-agents, subagent-driven-development, executing-plans, requesting-code-review). Also trigger when the user asks to "use the right model for each task", "don't waste Opus/credits on trivial work", "delegate cheap work to Gemini/Flash", or mentions cost-aware, budget-aware, or model-tiered execution. Classifies each subtask by complexity and assigns Claude Opus/Sonnet/Haiku, or — for high-volume mechanical text work that doesn't need repo access — the local `gemini` CLI (gemini-3.6-flash at low/medium/high effort), before any agent is spawned. Works in any project; not tied to a specific codebase.
+name: using-forge
+description: Master concierge and autonomous router for high-velocity making and building. Automatically parses user intent, routes tasks to specialized /forge-* skills, and assigns intra-provider model tiers across Claude 5, Gemini 3.6, Codex, and Kimi environments before executing work.
 ---
 
-# Model-Aware Superpowers
+# Forge Suite — Concierge & Master Orchestrator
 
-Superpowers' orchestration skills (`dispatching-parallel-agents`, `subagent-driven-development`, `executing-plans`) tell you HOW to structure multi-agent work. They don't tell you WHICH model each agent should run on. Left unspecified, every subagent inherits the session's default model — usually the most capable and most expensive one available. That's fine for a couple of agents; at scale it burns budget and rate-limit headroom on work that a cheaper model would have handled just as well, and it means you're never using anything BUT the expensive tier, even for a changelog entry.
+This skill is the **master concierge** for autonomous making, building, and engineering. It analyzes user intent and routes tasks to the appropriate specialized `forge-*` skills while assigning optimal model tiers.
 
-This skill is a thin layer on top of superpowers. It doesn't replace the orchestration skill — it decides the `model` (and, where relevant, `effort`) argument you pass into each `Agent`/`agent()` call before you make it.
+---
 
-## Step 1 — Defer to superpowers for the "how", if it's installed
+## 1. Core Principle — Model & Effort Tiering
 
-If the task involves multiple subagents, a written plan, or parallel dispatch, and the `superpowers` skill set is available, invoke whichever of these actually fits first:
+Always assign the optimal model grade and effort level for the **active LLM environment** before delegating work:
 
-- `superpowers:executing-plans` — a written plan to execute with review checkpoints
-- `superpowers:subagent-driven-development` — executing an implementation plan's independent tasks in the current session
-- `superpowers:dispatching-parallel-agents` — 2+ independent tasks, no shared state
+### Golden Rule for Claude 5 Series:
+> **"判断は Opus 5, 量は Sonnet 5, 雑務は Haiku 4.5, 持久戦は Fable 5"**
 
-Follow that skill's process as written. This skill changes exactly one thing about it: before each agent you're about to spawn, run the classification below and use its result as that agent's `model` (and `effort`) argument.
+- **Tier A (Judgment & Architecture) — Opus 5**: System architecture, PRD, security audits, code reviews, main orchestrator.
+- **Tier A (Unattended Long Runs) — Fable 5**: Multi-step autonomous runs, overnight builds, 10+ step refactoring. (Declare library versions explicitly in prompt).
+- **Tier B (Volume & Feature Building) — Sonnet 5**: Feature implementation, UI building, primary QA scanning.
+- **Tier C (Routine Closed Tasks) — Haiku 4.5**: Rote test writing, log formatting, symbol renaming.
+- **Tier D (Bulk Text Processing)**: Offload via local `gemini` CLI (`gemini -p "..." -m "gemini-3.6-flash <effort>"`).
 
-**No hard dependency.** This skill does not require superpowers to be installed. If none of the skills above are available in this environment, skip straight to Step 2: split the work into independent subtasks using your own judgment (a written plan's steps, or the natural seams in the task), and classify + dispatch each one directly. Superpowers, when present, gives you a more rigorous process for the split and for checkpointing; its absence doesn't block model-aware dispatch, it just means you're doing the splitting yourself instead of following its playbook.
+---
 
-## Step 2 — Classify each subtask
+## 2. Autonomous Skill Router
 
-For every discrete unit of work about to be delegated, work down this list and stop at the first match:
+Match the user's intent to the corresponding specialized `/forge-*` skill:
 
-1. **Judgment under ambiguity** — architecture decisions, weighing tradeoffs, designing an approach, reviewing/verifying another agent's output, resolving a conflict between requirements → **Tier A**
-2. **Well-specified but non-trivial reasoning to produce correct code/content** — typical feature implementation, a bug fix with a known repro, writing a real component, wiring tests to actual behavior → **Tier B** (default)
-3. **Mechanical, well-specified, needs Claude's tools** — formatting, rote test writing, doc/changelog sync, simple refactors, running and interpreting a lint or test command → **Tier C**
-4. **Bulk, pure text-in/text-out, no repo or tool access needed** — generating N variations, summarizing pasted text, translating copy, drafting descriptions, brainstorming a list → **Tier D**, routed off-platform (Step 4)
+| Intent / Request | Specialized Skill | Trigger Command |
+|---|---|---|
+| Brainstorming, non-obvious concepts, radical ideas | Radical Ideation Engine (BreakBias + BMAD) | `/forge-brain` |
+| Monetization, pricing, subscription flows, GTM | Business & Monetization Architecture | `/forge-biz` |
+| Brand system, logos, AI image/video production | Brand Identity & AI Media Production (`generate_image`, Kie.ai, Higgsfield) | `/forge-brand` |
+| UI/UX design, layout, micro-interactions, native mobile (iOS SwiftUI / Android Compose) | Interface Design & Native Engineering (Ren + `ux-spec` + `typeset` + Motion) | `/forge-ui` |
+| Unfiltered critique, flaw hunting before shipping | Uncompromising Roast Review | `/forge-roast` |
+| Multi-agent feature building, plan execution | Multi-Agent Building & Topology Selection (Subagents vs Agent Teams) | `/forge-dev` |
+| Bug fixing, error resolution, crash analysis | Systematic Debugging & FailForward Memory | `/forge-debug` |
+| Writing tests, TDD, feature implementation | Multi-Platform Test-Driven Development | `/forge-test` |
+| Final verification, completion check | Pre-Completion Verification Gateway (Dual-viewport + Native Simulator) | `/forge-verify` |
+| Saving session, switching models, handoff | Cross-Model Session Transition Protocol | `/forge-handoff` |
 
-## Step 3 — Map tier to a Claude model
+---
 
-| Tier | Looks like | `Agent`/`agent()` `model` | `effort` |
-|---|---|---|---|
-| A — Architecture / judgment | approach design, plan review, conflict resolution, verifying another agent's claim, security/correctness review | `opus` | `high` or `xhigh` |
-| B — Feature work (default) | implement a feature, fix a bug, write a real component | omit (inherits session model) or `sonnet` | omit / `medium` |
-| C — Routine, tool-using | formatting, mechanical refactors, rote tests, doc sync, running/reading a lint or test command | `haiku` | `low` |
-| — Creative/narrative-heavy | marketing copy, storytelling, tone-of-voice writing (technical correctness isn't the bottleneck) | `fable` | — |
+## 3. Agent Topology Selection (Subagents vs Agent Teams)
 
-Never default to `opus` "just to be safe" — that's exactly the waste this skill exists to prevent. When unsure between B and C, pick C and check whether the output holds up; routine work rarely needs Sonnet-level reasoning. Verification/adversarial-review passes (per `superpowers:requesting-code-review`, or a workflow's verify stage) default to Tier A even when the original work was B/C — catching a subtle bug needs sharper judgment than writing the code did.
+Before multi-agent dispatch, evaluate and **notify the user**:
+- **Subagents Pattern (Default — Low Token Cost)**: Isolated, modular task execution.
+- **Agent Teams Pattern (Interactive — High Token Cost)**: Cross-perspective debate and trade-off alignment.
 
-## Step 4 — Tier D: offload to Gemini via the local CLI, not an Anthropic agent
-
-Tier D work doesn't touch the repo and doesn't need Claude's tools — it's pure prompt-in, text-out. Routing it through an Anthropic subagent spends Claude usage on work a separately-metered model handles just as well. Use the local `gemini` CLI instead:
-
-```bash
-gemini -p "<self-contained prompt with all needed context inlined>" -m "gemini-3.6-flash <effort>"
-```
-
-i.e. the model name is `gemini-3.6-flash` and the effort word (`low` / `medium` / `high`) rides along in the same `-m` value, space-separated — not hyphenated onto the model name.
-
-Effort tiers — choose based on what the sub-task actually needs, not by default:
-- `low` — trivial: one-line rewrites, simple formatting, single-fact lookups
-- `medium` — default for typical generation/summarization/drafting
-- `high` — reserve for Tier D tasks needing more reasoning but still no repo/tool access (e.g. synthesizing a long pasted transcript, nuanced copy)
-
-**Preflight (once per session, not per call):**
-1. `which gemini` — if missing, tell the user it needs installing (e.g. `npm install -g @google/gemini-cli`, or whatever the current official method is) and authenticating. Don't block the task on it — fall back to Tier C (Haiku) for this work instead.
-2. CLIs change. If `-m "gemini-3.6-flash <effort>"` errors because that exact form isn't accepted by the installed version, run `gemini --help` to see the current flags/model syntax before giving up or falling back — don't hardcode past a failure.
-3. These are synchronous CLI calls, not Task-tool subagents. For many Tier D items, background several Bash calls (`run_in_background: true`) in parallel and collect results, rather than running them one at a time.
-
-## Step 5 — Say what you assigned
-
-When spawning agents under this skill, state the tier/model choice in one line before or as you dispatch — e.g. "Architecture review → Opus; the 4 component implementations → Sonnet; changelog + test formatting → Haiku; the 12 microcopy variants → Gemini Flash (medium)." This is what lets the user catch a miscalibration ("that's not architecture, don't burn Opus on it") the same way they'd catch a bad plan — the assignment stays visible and correctable instead of happening silently inside the dispatch call.
-
-## Edge cases
-
-- A single task spans tiers (e.g. "design the approach AND implement it") — split it into two dispatches at the tier boundary instead of picking one model for both halves.
-- If the user has already specified a model, that wins. This skill fills gaps; it never overrides explicit direction.
-- If you only have one or two agents to spawn total, the overhead of this classification isn't worth belaboring out loud — just pick sensibly and move on. This skill matters most as the agent count and repetition of similar subtasks grows.
+*Notification*: *"Proposing **Subagents Pattern** (Sonnet 5 workers) for token-efficient execution. Say 'use Agent Teams' for interactive debate."*

@@ -1,1 +1,9 @@
 .DS_Store
+
+# Local reference material the Forge skills were distilled from.
+# Third-party repos or separate projects — not part of this repo's product.
+BMAD-METHOD-main*/
+Breakbias_Studio/
+CrossModelHandoff/
+Gem_Ren_Pack/
+superpowers-main/

@@ -32,6 +32,25 @@ the exact waste this skill exists to prevent. Full classification rules,
 edge cases, and the Gemini CLI invocation details are in
 [`SKILL.md`](./SKILL.md).
 
+## The Forge suite
+
+The root skill also acts as a **router**: it reads intent and hands the work
+to one of ten specialised `forge-*` skills, each of which inherits the same
+model-tiering rules. Each is invocable directly too (`/forge-ui`, …).
+
+| Skill | Use it for |
+|---|---|
+| [`forge-brain`](./skills/forge-brain/) | radical ideation — BreakBias SIT matrix + BMAD lenses |
+| [`forge-biz`](./skills/forge-biz/) | monetization, pricing, paywalls, GTM |
+| [`forge-brand`](./skills/forge-brand/) | brand identity + AI image/video production prompts |
+| [`forge-ui`](./skills/forge-ui/) | UI/UX, motion, typography, SwiftUI / Jetpack Compose |
+| [`forge-dev`](./skills/forge-dev/) | multi-agent feature building, Subagents vs Agent Teams topology |
+| [`forge-test`](./skills/forge-test/) | TDD red-green-refactor for Web, iOS, Android |
+| [`forge-debug`](./skills/forge-debug/) | root-cause-first debugging with FailForward memory |
+| [`forge-roast`](./skills/forge-roast/) | unsparing critique before shipping |
+| [`forge-verify`](./skills/forge-verify/) | pre-completion verification gateway |
+| [`forge-handoff`](./skills/forge-handoff/) | zero-loss session handoff across models and tools |
+
 ## Requirements
 
 - **An AI coding tool with a real subagent-dispatch mechanism.** This skill
@@ -57,6 +76,29 @@ edge cases, and the Gemini CLI invocation details are in
 | Plain chat UI (e.g. ChatGPT/Gemini web with no tools) | ⚠️ | no skill-loading or subagent mechanism exists there — you can paste `SKILL.md` in as custom instructions, but there's no subagent dispatch for the model assignment to apply to |
 
 ## Install
+
+### Every tool at once (recommended)
+
+Clone once, then let the installer symlink the router **and all ten
+`forge-*` skills** into every skills directory it finds on your machine
+(`~/.claude/skills`, `~/.agents/skills`, `~/.codex/skills`,
+`~/.gemini/skills`, `~/.gemini/antigravity-ide/skills`):
+
+```bash
+git clone https://github.com/takaoumehara/model-aware-superpowers
+cd model-aware-superpowers
+./install.sh              # --dry-run to preview, --uninstall to remove
+```
+
+It's idempotent — re-run it after `git pull`. It never overwrites a real
+directory, only its own symlinks.
+
+> The `forge-*` skills live one level down in `skills/`, and every tool only
+> discovers skills **one level deep**. So cloning the repo into a skills
+> directory exposes the router alone — run `install.sh` (or symlink each
+> `skills/forge-*` yourself) to get the full suite.
+
+### Single tool, manual
 
 Pick the tool you use. All of these are just "put `SKILL.md` where that tool
 looks for skills" — nothing to build or configure.

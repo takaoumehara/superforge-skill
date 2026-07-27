@@ -21,6 +21,23 @@
 
 「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`SKILL.md`](./SKILL.md) にあります。
 
+## Forge スイート
+
+ルートのスキルは**ルーター**としても働きます。ユーザーの意図を読み取り、10個の専門スキル `forge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/forge-ui` など）。
+
+| スキル | 用途 |
+|---|---|
+| [`forge-brain`](./skills/forge-brain/) | 発想 — BreakBias SITマトリクス + BMADレンズ |
+| [`forge-biz`](./skills/forge-biz/) | マネタイズ、価格設計、ペイウォール、GTM |
+| [`forge-brand`](./skills/forge-brand/) | ブランド設計 + AI画像/動画生成プロンプト |
+| [`forge-ui`](./skills/forge-ui/) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose |
+| [`forge-dev`](./skills/forge-dev/) | マルチエージェント実装、Subagents / Agent Teams のトポロジー選択 |
+| [`forge-test`](./skills/forge-test/) | Web・iOS・Android のTDD（Red-Green-Refactor） |
+| [`forge-debug`](./skills/forge-debug/) | 根本原因優先のデバッグ + FailForward学習メモリ |
+| [`forge-roast`](./skills/forge-roast/) | 出荷前の忖度なし批評 |
+| [`forge-verify`](./skills/forge-verify/) | 完了宣言前の検証ゲート |
+| [`forge-handoff`](./skills/forge-handoff/) | モデル・ツールをまたぐ無損失セッション引き継ぎ |
+
 ## 必要環境
 
 - **実際にサブエージェントをディスパッチできる仕組みを持つAIツール。** ファイルシステムもサブエージェント機構もない素のチャットUIでは、このスキルが作用する対象がそもそも存在しません（[対応状況](#対応状況)参照）。
@@ -39,6 +56,22 @@
 | 素のチャットUI（ツール無しのChatGPT/Gemini webなど） | ⚠️ | スキル読み込みもサブエージェント機構も存在しないため、`SKILL.md`の中身をカスタム指示として貼ることはできても、モデル割り当てロジックを適用する対象がありません |
 
 ## インストール
+
+### 全ツールに一括インストール（推奨）
+
+一度クローンし、インストーラを実行すると、ルーターと**10個の`forge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
+
+```bash
+git clone https://github.com/takaoumehara/model-aware-superpowers
+cd model-aware-superpowers
+./install.sh              # --dry-run で確認のみ、--uninstall で解除
+```
+
+冪等なので `git pull` のたびに再実行して構いません。実体のあるディレクトリは決して上書きせず、自分が張ったリンクだけを扱います。
+
+> `forge-*` は `skills/` の1階層下にあり、どのツールもスキルを**1階層しか探索しません**。そのためリポジトリをskillsディレクトリにクローンしただけではルーターしか認識されません。スイート全体を有効にするには `install.sh` を実行するか、各 `skills/forge-*` に自分でリンクを張ってください。
+
+### 単一ツールに手動でインストール
 
 使っているツールを選んでください。どれも「そのツールがスキルを探す場所に`SKILL.md`を置くだけ」です。ビルドや設定は不要です。
 
