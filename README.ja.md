@@ -1,4 +1,4 @@
-# model-aware-superpowers
+# forge-skills
 
 [English](./README.md) · **日本語**
 
@@ -62,8 +62,8 @@
 一度クローンし、インストーラを実行すると、ルーターと**10個の`forge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers
-cd model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills
+cd forge-skills
 ./install.sh              # --dry-run で確認のみ、--uninstall で解除
 ```
 
@@ -73,12 +73,12 @@ cd model-aware-superpowers
 
 ### 単一ツールに手動でインストール
 
-使っているツールを選んでください。どれも「そのツールがスキルを探す場所に`SKILL.md`を置くだけ」です。ビルドや設定は不要です。
+使っているツールを選んでください。どれも「そのツールがスキルを探す場所に`SKILL.md`を置くだけ」です。ビルドや設定は不要です。ただしこの方法で入るのは**ルーターだけ**です。10個の`forge-*`も使いたい場合は、あとから `install.sh` を実行してください。
 
 ### Claude Code
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.claude/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.claude/skills/forge
 ```
 
 複数ツールで共有したい場合は、下の[複数ツールでの共有インストール](#複数ツールでの共有インストール)を参照してください。
@@ -86,19 +86,19 @@ git clone https://github.com/takaoumehara/model-aware-superpowers ~/.claude/skil
 ### Codex CLI
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.codex/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.codex/skills/forge
 ```
 
 ### Gemini CLI
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.gemini/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.gemini/skills/forge
 ```
 
 ### Antigravity IDE
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.gemini/antigravity-ide/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.gemini/antigravity-ide/skills/forge
 ```
 
 ### Claude.ai（ブラウザ）
@@ -110,11 +110,11 @@ git clone https://github.com/takaoumehara/model-aware-superpowers ~/.gemini/anti
 上記のツールを複数使っている場合は、一度だけクローンして各ツールのskillsディレクトリにシンボリックリンクを張ると、実体が一つで済みます。
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.agents/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.agents/skills/forge
 
-ln -s ../../.agents/skills/model-aware-superpowers ~/.claude/skills/model-aware-superpowers
-ln -s ../../.agents/skills/model-aware-superpowers ~/.gemini/skills/model-aware-superpowers
-ln -s ~/.agents/skills/model-aware-superpowers ~/.gemini/antigravity-ide/skills/model-aware-superpowers
+ln -s ../../.agents/skills/forge ~/.claude/skills/forge
+ln -s ../../.agents/skills/forge ~/.gemini/skills/forge
+ln -s ~/.agents/skills/forge ~/.gemini/antigravity-ide/skills/forge
 ```
 
 Codexは`~/.agents/skills/`を自動で読むため、追加のリンクは不要です。
@@ -130,7 +130,7 @@ Codexは`~/.agents/skills/`を自動で読むため、追加のリンクは不�
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-サブエージェントをディスパッチする前に、必ず model-aware-superpowers スキルを
+サブエージェントをディスパッチする前に、必ず forge スキルを
 参照してタスクごとに適切なモデルを割り当てる。全エージェントを同一モデルの
 まま動かさない。
 ```

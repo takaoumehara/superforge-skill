@@ -1,5 +1,5 @@
 ---
-name: using-forge
+name: forge
 description: Master concierge and autonomous router for high-velocity making and building. Automatically parses user intent, routes tasks to specialized /forge-* skills, and assigns intra-provider model tiers across Claude 5, Gemini 3.6, Codex, and Kimi environments before executing work.
 ---
 

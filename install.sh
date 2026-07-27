@@ -29,9 +29,11 @@ TARGETS=(
   "$HOME/.gemini/antigravity-ide/skills"    # Antigravity IDE
 )
 
-# The router skill lives at the repo root; keep its historical directory name
-# so existing `model-aware-superpowers` references in CLAUDE.md keep resolving.
-ROUTER_NAME="model-aware-superpowers"
+# The router skill lives at the repo root, installed as `forge`. The alias is
+# this repo's former name — kept so existing `model-aware-superpowers`
+# references in CLAUDE.md / AGENTS.md keep resolving. Drop it once they're
+# updated (delete the symlink, or remove the name from ROUTER_NAMES).
+ROUTER_NAMES=("forge" "model-aware-superpowers")
 
 link() { # link <source> <destination>
   local src="$1" dest="$2"
@@ -64,12 +66,16 @@ for dir in "${TARGETS[@]}"; do
   [ -d "$dir" ] || { echo "skipping $dir (not present)"; continue; }
   echo "$dir"
   if $UNINSTALL; then
-    unlink_if_ours "$dir/$ROUTER_NAME"
+    for name in "${ROUTER_NAMES[@]}"; do
+      unlink_if_ours "$dir/$name"
+    done
     for src in "$REPO"/skills/*/; do
       unlink_if_ours "$dir/$(basename "$src")"
     done
   else
-    link "$REPO" "$dir/$ROUTER_NAME"
+    for name in "${ROUTER_NAMES[@]}"; do
+      link "$REPO" "$dir/$name"
+    done
     for src in "$REPO"/skills/*/; do
       src="${src%/}"
       link "$src" "$dir/$(basename "$src")"

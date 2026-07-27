@@ -1,4 +1,4 @@
-# model-aware-superpowers
+# forge-skills
 
 **English** · [日本語](./README.ja.md)
 
@@ -85,8 +85,8 @@ Clone once, then let the installer symlink the router **and all ten
 `~/.gemini/skills`, `~/.gemini/antigravity-ide/skills`):
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers
-cd model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills
+cd forge-skills
 ./install.sh              # --dry-run to preview, --uninstall to remove
 ```
 
@@ -101,12 +101,14 @@ directory, only its own symlinks.
 ### Single tool, manual
 
 Pick the tool you use. All of these are just "put `SKILL.md` where that tool
-looks for skills" — nothing to build or configure.
+looks for skills" — nothing to build or configure. Note that these install
+the **router only**; run `install.sh` afterwards if you want the ten
+`forge-*` skills as well.
 
 ### Claude Code
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.claude/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.claude/skills/forge
 ```
 
 Prefer a directory shared across multiple tools? Clone it once into
@@ -116,19 +118,19 @@ Prefer a directory shared across multiple tools? Clone it once into
 ### Codex CLI
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.codex/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.codex/skills/forge
 ```
 
 ### Gemini CLI
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.gemini/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.gemini/skills/forge
 ```
 
 ### Antigravity IDE
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.gemini/antigravity-ide/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.gemini/antigravity-ide/skills/forge
 ```
 
 ### Claude.ai (browser)
@@ -142,11 +144,11 @@ If you use more than one of the tools above, clone it once and symlink it
 into each tool's skills directory so there's a single source of truth:
 
 ```bash
-git clone https://github.com/takaoumehara/model-aware-superpowers ~/.agents/skills/model-aware-superpowers
+git clone https://github.com/takaoumehara/forge-skills ~/.agents/skills/forge
 
-ln -s ../../.agents/skills/model-aware-superpowers ~/.claude/skills/model-aware-superpowers
-ln -s ../../.agents/skills/model-aware-superpowers ~/.gemini/skills/model-aware-superpowers
-ln -s ~/.agents/skills/model-aware-superpowers ~/.gemini/antigravity-ide/skills/model-aware-superpowers
+ln -s ../../.agents/skills/forge ~/.claude/skills/forge
+ln -s ../../.agents/skills/forge ~/.gemini/skills/forge
+ln -s ~/.agents/skills/forge ~/.gemini/antigravity-ide/skills/forge
 ```
 
 Codex reads `~/.agents/skills/` automatically, so no extra symlink is needed
@@ -166,7 +168,7 @@ one repo):
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `model-aware-superpowers` skill to
+Before dispatching subagents, consult the `forge` skill to
 assign the right model per subtask instead of defaulting every agent to the
 same model.
 ```
