@@ -1,5 +1,14 @@
 .DS_Store
 
+# Build output — zips generated for the claude.ai skill uploader.
+dist/
+
+# This repo is public, and the skills here write their artifacts to docs/.
+# Running them in this checkout must not stage working notes for publication.
+# Positioning and campaign work lives in the private superforge-studio repo.
+# To publish something from here deliberately: git add -f docs/<file>
+docs/
+
 # Local reference material the Forge skills were distilled from.
 # Third-party repos or separate projects — not part of this repo's product.
 BMAD-METHOD-main*/
