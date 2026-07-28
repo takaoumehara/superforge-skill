@@ -62,7 +62,7 @@ treat any absence as "do it inline".
 | Motion | `web-animation-design`, `animation-patterns`, the `gsap-*` family |
 | Copy inside the UI | `clarify` |
 | Spec writing | `ux-spec`, `implementation-spec` |
-| Accessibility | `accessibility-generator`, `audit` |
+| Accessibility | **`superforge-a11y`** first; then `accessibility-generator`, `audit` |
 | Native iOS/macOS/watchOS | `ios`, `swift`, `liquid-glass`, `ipad-patterns`, `macos`, `watchos`, `navigation-patterns`, `toolbars`, `widgets` |
 | Landing and case-study pages | `landing-page-creator`, `keynote-slide-page` |
 | Data visualisation | `dataviz`, `charts-3d` |
@@ -93,6 +93,18 @@ treat any absence as "do it inline".
 | Root-cause process | `systematic-debugging` |
 | Failure memory | `failforward` |
 | Platform-specific | `swiftui-debugging`, `profiling`, `concurrency-patterns` |
+
+### `superforge-a11y` — accessibility
+| Step | Delegate to |
+|---|---|
+| Deeper a11y remediation or generation | `accessibility-generator`, `audit` |
+| Fixing a failing token or component | `superforge-ui` |
+| Locking a fix so it cannot regress | `superforge-test` |
+| Running the app to execute the manual passes | `run` |
+
+`superforge-ui`, `superforge-roast`, and `superforge-verify` all touch
+accessibility. Each of them **calls this skill** rather than restating the
+criteria — one ledger, one set of numbers, one report at `docs/accessibility.md`.
 
 ### `superforge-roast` — critique
 | Step | Delegate to |

@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**用一句话说出你想做什么，十一个技能就按正确的顺序，从想点子一直带到上线前的检查。**
+**用一句话说出你想做什么，十二个技能就按正确的顺序，从想点子一直带到上线前的检查。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「技能」就是**可以加进 Claude Code 这类 AI 工具的一份操作说明**。放进去一个文件夹，AI 就照着那套步骤干活。
 
-superforge 是这样的十一份。站在正中间的 `superforge` 扮演**工坊前台**。
+superforge 是这样的十二份。站在正中间的 `superforge` 扮演**工坊前台**。
 
 > 你：「我想给街角那家咖啡馆做个 App。」
 > 前台：「先把点子理清楚，交给 `superforge-brain`。这活儿需要判断力，用 Opus 5。」
@@ -18,7 +18,7 @@ superforge 是这样的十一份。站在正中间的 `superforge` 扮演**工�
 
 前台只做三件事。
 
-1. **决定交给谁**：想 / 做 / 验 / 出，十一个里挑一个
+1. **决定交给谁**：想 / 做 / 验 / 出，十二个里挑一个
 2. **决定用哪个模型**：聪明的模型贵，便宜的活儿不该用贵模型
 3. **确保结果落成文件**：这样清掉对话，东西也不会跟着没
 
@@ -54,7 +54,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ---
 
-## 十一个技能
+## 十二个技能
 
 正中间的 `superforge` 是前台，其余十个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
@@ -79,6 +79,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先写测试再动手（Web / iOS / Android） | 测试本身 |
 | [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁 | 根因追加到对应文档 |
+| [`superforge-a11y`](./skills/superforge-a11y/README.zh-CN.md) | 认真做无障碍检查——七道检查，不是一个扫描器 | `docs/accessibility.md` |
 
 ### 4. 出 —— 准备见人
 
@@ -96,7 +97,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ### 一次全装好（推荐）
 
-克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十一个一次性链接进去。
+克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十二个一次性链接进去。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -180,6 +181,14 @@ same model.
 
 HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍，所以「文档和实物对不上」在结构上不可能发生。
 
+### 无障碍检查为什么不能只靠工具
+
+自动检测工具给出一个数字，然后就沉默了。**而这份沉默看起来很像通过。** 行业标准的检测引擎针对 WCAG A 级和 AA 级共有 **63 条规则**，而同一级别有 **55 条成功准则**——焦点顺序、上下文中的链接目的、错误纠正建议、拖拽的替代方式、无障碍身份验证，这些**根本没有任何自动规则**，因为它们考的是「意思对不对」。
+
+`superforge-a11y` 会把剩下六道检查真正跑一遍：键盘、屏幕阅读器、缩放与重排、颜色、动效与时限、表单与错误。然后留下一份台账，A 级和 AA 级每条准则都标上 `通过 / 不通过 / 不适用 / 未验证`——因为**报告里没出现的准则，读的人一律当作通过**，那是审计悄悄变成假话最省事的一条路。
+
+只要还有一条「未验证」，它就不会写「合规」。问题按**被挡住的人**来写，而不是规则编号。覆盖 Web、iOS、Android，以及真正落到你头上的那套标准：[欧盟无障碍法案 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3](./skills/superforge-a11y/references/conformance-and-law.md)。
+
 ### 晚上下指令，早上看结果
 
 目标不是让你少做决定，而是把**一切不属于决定的事**清掉。
@@ -190,7 +199,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 完整协议 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 为什么装十一个也不会拖慢 AI
+### 为什么装十二个也不会拖慢 AI
 
 常驻在 AI 上下文里的只有**每个技能那一行描述**。正文按需加载，更深的材料放在 `references/` 里，用到才读。
 
@@ -203,6 +212,11 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 启发式评估、无障碍审计、认知负荷、模拟人物测试 |
+| [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2 全部 86 条准则，以及每条实际该看什么 |
+| [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 七道检查的步骤、合格线，以及各自要留下的证据 |
+| [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各工具能查到什么、确定查不到什么，以及 CI 接法 |
+| [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
+| [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧盟无障碍法案 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、合规声明 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 无人值守的前提、循环方式、可以自行拍板的范围 |
 
 ---

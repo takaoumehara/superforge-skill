@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · **한국어**
 
-**만들고 싶은 것을 한 문장으로 말하면, 열한 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
+**만들고 싶은 것을 한 문장으로 말하면, 열두 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 "스킬"이란 **Claude Code 같은 AI 도구에 나중에 추가할 수 있는 작업 설명서**입니다. 폴더 하나를 놓아 두면 AI가 그 절차대로 움직입니다.
 
-superforge는 그런 설명서 열한 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
+superforge는 그런 설명서 열두 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
 
 > 당신: "동네 카페용 앱을 만들고 싶어요."
 > 안내 데스크: "먼저 아이디어를 다듬죠. `superforge-brain`에 넘기겠습니다. 판단이 필요한 일이라 Opus 5로 돌립니다."
@@ -18,7 +18,7 @@ superforge는 그런 설명서 열한 장입니다. 한가운데 있는 `superfo
 
 안내 데스크가 하는 일은 딱 세 가지입니다.
 
-1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열한 개 중에서
+1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열두 개 중에서
 2. **어떤 모델을 쓸지 정합니다** — 똑똑한 모델은 비싸니, 값싼 작업에 비싼 모델을 붙이지 않습니다
 3. **결과가 반드시 파일로 남게 합니다** — 대화를 지워도 사라지지 않도록
 
@@ -54,9 +54,9 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ---
 
-## 열한 개의 스킬
+## 열두 개의 스킬
 
-한가운데의 `superforge`가 안내 데스크이고 나머지 열 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
+한가운데의 `superforge`가 안내 데스크이고 나머지 열한 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
 
 ### 1. 생각한다 — 무엇을 만들지 정하기
 
@@ -79,6 +79,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.ko.md) | 테스트를 먼저 쓰고 진행할 때 (Web / iOS / Android) | 테스트 자체 |
 | [`superforge-debug`](./skills/superforge-debug/README.ko.md) | 버그가 났고, 임시방편이 아니라 원인을 잡고 싶을 때 | 근본 원인을 해당 문서에 덧붙임 |
+| [`superforge-a11y`](./skills/superforge-a11y/README.ko.md) | 접근성을 제대로 검사할 때 — 스캐너 하나가 아니라 일곱 개 검사로 | `docs/accessibility.md` |
 
 ### 4. 내보낸다 — 내보낼 준비하기
 
@@ -96,7 +97,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ### 한 번에 전부 (권장)
 
-한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열한 개를 링크합니다.
+한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열두 개를 링크합니다.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -180,6 +181,14 @@ same model.
 
 HTML은 `design.md`의 값을 **읽어서** 그립니다. 손으로 옮겨 그리는 것이 아니므로 "명세와 실물이 다르다"는 상태가 구조적으로 생기지 않습니다.
 
+### 접근성 검사가 도구만으로 끝나지 않는 이유
+
+자동 검사 도구는 숫자 하나를 내놓고 조용해집니다. **그리고 그 침묵이 합격처럼 읽힙니다.** 업계 표준 검사 엔진이 WCAG A·AA 등급용으로 갖고 있는 규칙은 **63개**입니다. 같은 등급의 성공 기준은 **55개**이고, 초점 순서·맥락 속 링크 목적·오류 수정 제안·드래그의 대체 수단·접근 가능한 인증에는 **자동 규칙이 아예 없습니다**. 통과 여부가 "의미가 통하는가"에 대한 판단이기 때문입니다.
+
+`superforge-a11y`는 나머지 여섯 검사를 실제로 돌립니다. 키보드, 스크린 리더, 확대와 리플로, 색, 움직임과 시간 제한, 폼과 오류. 그런 다음 A·AA 전 기준에 `적합 / 부적합 / 해당 없음 / 미검증`을 채운 대장을 남깁니다. **보고서에 없는 기준은 통과로 읽히기 때문**이고, 그게 감사가 조용히 거짓이 되는 가장 쉬운 길이기 때문입니다.
+
+"미검증"이 하나라도 남아 있으면 적합이라고 쓰지 않습니다. 발견은 규칙 번호가 아니라 **막히는 사람**으로 적습니다. 웹·iOS·안드로이드를 다루고, 실제로 나에게 적용되는 기준까지 챙깁니다: [유럽 접근성법 / EN 301 549, ADA Title II, Section 508, JIS X 8341-3](./skills/superforge-a11y/references/conformance-and-law.md).
+
 ### 밤에 지시하고, 아침에 결과를 봅니다
 
 목표는 결정을 덜 내리는 것이 아니라, 결정이 **아닌** 모든 것을 걷어내는 것입니다.
@@ -190,7 +199,7 @@ HTML은 `design.md`의 값을 **읽어서** 그립니다. 손으로 옮겨 그�
 
 전체 프로토콜 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 열한 개를 넣어도 AI가 무거워지지 않는 이유
+### 열두 개를 넣어도 AI가 무거워지지 않는 이유
 
 AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명뿐**입니다. 본문은 필요할 때 불러오고, 더 깊은 내용은 `references/`에 나눠 두었다가 필요할 때만 읽습니다.
 
@@ -203,6 +212,11 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 휴리스틱 평가, 접근성 감사, 인지 부하, 가상 페르소나 테스트 |
+| [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2의 86개 기준 전체와, 기준마다 실제로 무엇을 볼지 |
+| [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 일곱 검사의 절차, 합격선, 각 검사가 남겨야 할 근거 |
+| [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 각 도구가 잡는 것과 확실히 놓치는 것, 그리고 CI 연결 |
+| [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, Compose semantics, Switch Access |
+| [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 유럽 접근성법 / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, 적합 선언 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 무인 실행의 전제, 루프를 도는 방식, 혼자 정해도 되는 범위 |
 
 ---

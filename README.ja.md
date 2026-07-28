@@ -2,7 +2,7 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる11個のスキル集です。**
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる12個のスキル集です。**
 
 ---
 
@@ -54,9 +54,9 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ---
 
-## 11個のスキル
+## 12個のスキル
 
-まん中の `superforge` が受付で、残りの10個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
+まん中の `superforge` が受付で、残りの11個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
 
 ### 1. 考える — 何を作るか決める
 
@@ -79,6 +79,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.ja.md) | テストを先に書いて進めたい（Web / iOS / Android） | テスト本体 |
 | [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい | 原因を該当ドキュメントに追記 |
+| [`superforge-a11y`](./skills/superforge-a11y/README.ja.md) | アクセシビリティをきちんと検査したい。ツール1本ではなく7つの検査で | `docs/accessibility.md` |
 
 ### 4. 出す — 世に出す準備をする
 
@@ -96,7 +97,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、11個をまとめてリンクします。
+一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、12個をまとめてリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -179,6 +180,14 @@ zip -r superforge-ui.zip .
 
 HTML側は `design.md` の値を**読み込んで**描画します。手で描き写すのではないので、「仕様書と実物が違う」という状態が構造的に起きません。
 
+### アクセシビリティ検査が、ツールだけでは終わらない理由
+
+自動チェックツールは数値を1つ出して、そこで黙ります。**その沈黙が合格に見えてしまう。** 業界標準の検査エンジンが WCAG レベル A・AA 向けに持つルールは **63件**。対して同レベルの達成基準は **55項目**あり、フォーカス順序、文脈の中でのリンクの目的、エラーの修正提案、ドラッグ操作の代替、アクセシブルな認証——このあたりには**自動ルールが1つも存在しません**。「意味が通っているか」の判断だからです。
+
+`superforge-a11y` は残り6つの検査を実際に走らせます。キーボード、スクリーンリーダー、拡大とリフロー、色、動きと時間制限、フォームとエラー。そのうえで A・AA の全達成基準に `適合 / 不適合 / 該当なし / 未検証` を書き込んだ台帳を残します。**報告書に載っていない基準は「通った」と読まれる**——監査が静かに嘘になる、いちばん簡単な経路がそこだからです。
+
+「未検証」が1つでも残っていれば適合とは書きません。指摘はルール番号ではなく**その不具合で詰まる人**で書きます。Web・iOS・Android に対応し、[欧州アクセシビリティ法 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3](./skills/superforge-a11y/references/conformance-and-law.md) のうち自分に効いてくるものまで面倒を見ます。
+
 ### 夜に指示して、朝に結果を見る（自走）
 
 目的は「判断の回数を減らす」ことではなく、**判断以外を全部消す**ことです。
@@ -189,7 +198,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### なぜ11個入れてもAIが重くならないのか
+### なぜ12個入れてもAIが重くならないのか
 
 常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
 
@@ -202,6 +211,11 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
+| [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2 の全86達成基準と、各基準で実際に何を見るか |
+| [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 7つの検査の手順、合格ライン、残すべき根拠 |
+| [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各ツールが拾えるもの・拾えないことが確定しているもの、CI への組み込み |
+| [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
+| [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧州アクセシビリティ法 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、適合宣言 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、ループの回し方、独断で決めてよい範囲 |
 
 ---

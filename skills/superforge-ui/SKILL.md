@@ -29,7 +29,7 @@ Use this skill when designing or implementing user interfaces across Web, iOS (S
 1. **UNDERSTAND**: Surface target user context, map assumptions, and reframe requirements.
 2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies.
 3. **DESIGN**: Construct complete screens, typography grids, color assignments, and content states.
-4. **EVALUATE**: Run accessibility audits (WCAG AA), contrast checks, and simulated persona testing.
+4. **EVALUATE**: Run accessibility audits (WCAG 2.2 AA), contrast checks, and simulated persona testing. Hand the accessibility half to **`superforge-a11y`** — it owns the criterion ledger and writes `docs/accessibility.md`. Do not restate the criteria here.
 5. **PREPARE**: Output clean production components, design tokens, and implementation specs.
 
 Step-by-step detail for DESIGN and EVALUATE is in `references/design-process.md`.
@@ -101,6 +101,7 @@ add it to `docs/design.md` and record it under `New patterns needed`.
 `arrange`, `colorize`, `polish`, `normalize` (refinement) · `bolder`,
 `quieter`, `delight`, `minimalist-skill` (tone) · `web-animation-design`,
 `animation-patterns`, `gsap-*` (motion) · `clarify` (UI copy) · `ux-spec` ·
-`accessibility-generator`, `audit` (a11y) · `ios`, `swift`, `liquid-glass`,
+`superforge-a11y` (the a11y audit itself) · `accessibility-generator`, `audit`
+(deeper a11y specialists) · `ios`, `swift`, `liquid-glass`,
 `macos`, `watchos` (native) · `landing-page-creator`, `keynote-slide-page` ·
 `dataviz` · `japanese-text`.

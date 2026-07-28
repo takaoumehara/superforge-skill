@@ -34,7 +34,7 @@ NEVER claim a task is resolved, a bug is fixed, or a feature is complete without
 ### 2. Dual-Viewport Web & UX Verification (Web Apps)
 - [ ] **Mobile Viewport (< 640px)**: Tap target sizing (≥ 44px), zero horizontal overflow, touch menu responsiveness.
 - [ ] **Desktop Viewport (> 1024px)**: Multi-column structure, keyboard navigation (`Tab`/`Enter`), hover states.
-- [ ] **Accessibility (a11y)**: Semantic HTML tags (`<main>`, `<button>`), contrast ratio (WCAG AA).
+- [ ] **Accessibility (a11y)**: run **`superforge-a11y`** and require its verdict. The gate passes only when `docs/accessibility.md` exists, has no Blockers, and has no Level A or AA criterion left `not assessed`. A green automated scan on its own does not clear this box.
 
 ### 3. Native Mobile Verification (iOS / Android Apps)
 - [ ] **iOS**: Xcode build success, iOS Simulator rendering, Dynamic Type scaling, SF Symbols alignment.
@@ -57,5 +57,6 @@ to prevent.
 
 ## Delegate when a sharper skill is installed
 
-`verification-before-completion` (evidence discipline) · `audit`, `optimize`
-(technical sweep) · `run` (launching the actual app).
+`verification-before-completion` (evidence discipline) · `superforge-a11y`
+(the accessibility gate) · `audit`, `optimize` (technical sweep) · `run`
+(launching the actual app).

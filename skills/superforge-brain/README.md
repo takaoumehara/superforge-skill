@@ -67,7 +67,7 @@ A cell dies on one of three codes only — **G** (swap the subject and it still 
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all eleven skills (once)
+### 🖥️ Install all twelve skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

@@ -60,9 +60,9 @@ Por debajo de 640px: objetivos táctiles de 44px o más, sin desbordamiento hori
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las once skills (una sola vez)
+### 🖥️ Instala las doce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las once skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

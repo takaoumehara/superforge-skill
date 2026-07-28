@@ -43,16 +43,26 @@ Severity, and be honest about it:
 Not a checklist to feel good about. Each item is a person who cannot use the
 product.
 
+**Call `superforge-a11y` for this method.** It owns the criterion ledger, the
+seven-pass protocol, and `docs/accessibility.md`; duplicating the criteria here
+would mean two sets of numbers that drift apart. Fold its verdict into the
+roast — an accessibility Blocker is a roast Blocker.
+
+If that skill is not installed, run this triage inline and say in the critique
+that it was triage, not an audit:
+
 - Contrast: body 4.5:1, large text and UI components 3:1 — measured, not assumed
 - Keyboard: every action reachable and operable; focus always visible; no traps
-- Focus order matches visual order
-- Touch targets 44×44pt with separation
+- Focus order matches visual order, and focus is never hidden under a sticky bar
+- Touch targets: 24×24px is the WCAG floor, 44×44pt / 48×48dp the platform bar
 - Screen reader: labels on all controls, alt text, headings in order, live
   regions for async change
-- Text scales to 200% without loss of function or content
+- Text scales to 200% without loss of function or content; no horizontal scroll
+  at 320 CSS px
 - Motion respects `prefers-reduced-motion`
 - Meaning never carried by colour alone
-- Forms: label/field association, errors announced and adjacent
+- Forms: label/field association, errors announced and adjacent, paste allowed
+  in password and OTP fields
 
 ## Method 3 — Cognitive load analysis
 

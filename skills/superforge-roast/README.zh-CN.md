@@ -63,9 +63,9 @@ UX 与摩擦——用户会在哪里困惑、在哪里放弃？设计与完成�
 
 ## 🚀 安装与使用
 
-### 🖥️ 一次装好全部 11 个技能（只需一次）
+### 🖥️ 一次装好全部 12 个技能（只需一次）
 
-克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 11 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 12 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

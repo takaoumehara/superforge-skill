@@ -2,7 +2,7 @@
 
 **English** · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**Say what you want to build, in one sentence. Eleven skills take it from idea to pre-launch check, in the right order.**
+**Say what you want to build, in one sentence. Twelve skills take it from idea to pre-launch check, in the right order.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-superforge is eleven of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+superforge is twelve of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
 
 > You: "I want to build an app for the café down the street."
 > Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
@@ -18,7 +18,7 @@ superforge is eleven of them. The one in the middle, `superforge`, works like **
 
 The front desk does exactly three things.
 
-1. **Picks who takes the job** — one of eleven, across think / build / prove / ship
+1. **Picks who takes the job** — one of twelve, across think / build / prove / ship
 2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
 3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
 
@@ -54,9 +54,9 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ---
 
-## The eleven skills
+## The twelve skills
 
-`superforge` is the front desk; the other ten do the work. You can also call any of them directly, like `/superforge-ui`.
+`superforge` is the front desk; the other eleven do the work. You can also call any of them directly, like `/superforge-ui`.
 
 ### 1. Think — decide what to make
 
@@ -79,6 +79,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.md) | write the test first (Web / iOS / Android) | the tests |
 | [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it | root cause appended to the relevant doc |
+| [`superforge-a11y`](./skills/superforge-a11y/README.md) | accessibility, checked properly — seven passes, not one scanner | `docs/accessibility.md` |
 
 ### 4. Ship — get it out the door
 
@@ -96,7 +97,7 @@ You need `git` and an AI tool that loads skills, such as Claude Code.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all eleven.
+Clone once and run the installer. It finds every skills directory on your machine and links all twelve.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -180,6 +181,14 @@ same model.
 
 The HTML **consumes** the values from `design.md` rather than redrawing them by hand, so "the spec and the real thing disagree" cannot structurally happen.
 
+### Accessibility, where a scanner stops being enough
+
+Automated accessibility checking gives one number and then goes quiet, and the quiet reads like approval. The industry-standard engine ships **63 rules** for WCAG Level A and AA. That level has **55 success criteria**, and several of them — focus order, link purpose in context, error suggestion, dragging alternatives, accessible authentication — have **no automated rule at all**, because passing them is a judgment about meaning.
+
+`superforge-a11y` runs the other six passes: keyboard, screen reader, zoom and reflow, colour, motion and time, forms and errors. Then it fills a ledger with every Level A and AA criterion marked `pass` / `fail` / `not present` / `not assessed` — because a criterion missing from a report reads as a pass, which is the easiest way for an audit to quietly become untrue.
+
+It refuses to say "conformant" while anything is `not assessed`, and it names the blocked person on every finding rather than the rule ID. Web, iOS, and Android, with the legal standard that actually applies — [EAA / EN 301 549, ADA Title II, Section 508, JIS X 8341-3](./skills/superforge-a11y/references/conformance-and-law.md).
+
 ### Give an instruction at night, read the result in the morning
 
 The goal is not to make fewer decisions. It is to remove everything that is **not** a decision.
@@ -190,7 +199,7 @@ It stops for four things only — irreversible deletion, spending money, missing
 
 Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Why eleven skills do not slow the AI down
+### Why twelve skills do not slow the AI down
 
 The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
 
@@ -203,6 +212,11 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
+| [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | all 86 WCAG 2.2 criteria, with what to look at for each |
+| [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | the seven passes, their acceptance bars, and the evidence each must leave |
+| [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | what each tool catches, what it provably misses, and the CI wiring |
+| [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, Compose semantics, Switch Access |
+| [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | EAA / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, conformance claims |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the loop, what may be decided alone |
 
 ---
