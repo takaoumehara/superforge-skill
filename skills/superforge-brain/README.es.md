@@ -1,20 +1,24 @@
-# 💡 superforge-brain
+# 💡 superforge-brain — el motor BreakBias
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
-[![Method: SIT](https://img.shields.io/badge/Method-SIT-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
+[![Engine: BreakBias](https://img.shields.io/badge/engine-BreakBias-6C5CE7)](https://github.com/takaoumehara/breakbias-studio)
 
 [English](README.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · **Español** · [한국어](README.ko.md)
 
-> **Deja de esperar a que llegue la buena idea. Pasa cada parte del problema por cada técnica y lee lo que sobreviva.**
+> **Deja de esperar a que llegue la buena idea. Que una máquina barra todas las combinaciones y lee lo que sobreviva.**
 
 ---
 
 ## 🔰 ¿Qué es esto?
 
-Para buscar un anillo perdido en la playa puedes caminar sin rumbo esperando verlo, o trazar una cuadrícula sobre la arena y recorrer casilla por casilla. Esta skill es la cuadrícula.
+A la media hora de cualquier sesión de lluvia de ideas, alguien dice «bueno, esa vale». No porque se haya encontrado algo bueno, sino porque **alguien se cansó primero**.
 
-Descompone el problema en sus partes, prohíbe las tres respuestas más obvias antes de generar nada y empuja cada parte a través de ocho técnicas de transformación. La cobertura sustituye a la inspiración, y lo que sobrevive se puntúa por su distancia al cliché.
+BreakBias no se cansa.
+
+Descompone el sujeto en 20–40 elementos y cruza cada uno con ocho técnicas y sus submétodos. Cada combinación es **una celda** con identificador y estado, y la ejecución termina solo cuando todas están en estado terminal. No «creo que lo vimos todo», sino *300 de 300 celdas completas*.
+
+Una persona no puede rellenar una cuadrícula de 300 filas sin perder el sitio. Una máquina sí. **Esa asimetría es toda la razón de que esto sea una skill y no una reunión.**
 
 ---
 
@@ -22,29 +26,30 @@ Descompone el problema en sus partes, prohíbe las tres respuestas más obvias a
 
 ```mermaid
 flowchart TD
-    P[🧩 Problema] --> A[🔍 Descomponer en 5 dimensiones]
-    A --> B[🚫 Prohibir las tres obvias]
-    B --> C[🔁 8 técnicas × cada elemento]
-    C --> E{🔓 ¿Otra vez la misma forma?}
-    E -->|aplicar una lente| C
-    E -->|supervivientes| F[📊 Puntuar: distancia al cliché]
-    F --> G[(📄 docs/product-idea.md)]
+    A[🧩 Delimitar<br/>A: un objeto / B: una capacidad] --> B[🔍 Descomponer con 5 lentes<br/>nombrar el sesgo de cada elemento]
+    B --> C[🚫 Vetar las tres obvias]
+    C --> D[(📋 Registro de celdas<br/>elemento × 8 técnicas × submétodos)]
+    D --> E[✍️ En cada celda:<br/>forma imposible → valor hacia atrás]
+    E --> F[⚔️ Descartar solo por código<br/>G / C / P + rescate]
+    F --> G[⚖️ Juzgar en contexto separado<br/>sin ver el razonamiento]
+    G --> H[🌐 Mirar el mercado<br/>solo después del juicio]
+    H --> I[(📄 docs/product-idea.md)]
 ```
 
-Durante el barrido no se poda nada: la deduplicación y la puntuación llegan solo al final.
+Durante el barrido no se poda nada. La deduplicación y la puntuación llegan después de generar, nunca durante.
 
 ---
 
 ## ✨ 3 puntos clave
 
-### 🔒 Closed World: nada viene de fuera
-Los conceptos se construyen únicamente con elementos que ya están dentro del sistema y de su frontera inmediata. Esa restricción es la que fuerza una combinación realmente nueva en lugar de una función copiada de la competencia.
+### 📋 «Lo hemos visto todo» se convierte en un número
+Elemento × técnica × submétodo es una fila del registro, y el estado avanza en un solo sentido: `todo → generada → sobrevive/descartada → desarrollada → juzgada`. Terminado significa *cero filas en `todo`*. Una celda saltada no puede convertirse discretamente en una celda que nunca existió.
 
-### 🚫 Las tres obvias se nombran y se prohíben primero
-Las tres respuestas que cualquier modelo daría se listan explícitamente y quedan vetadas antes de empezar a generar. Además se escriben en el artefacto, así que nadie las vuelve a proponer el mes que viene.
+### 🔒 Nada entra desde fuera de la caja (Closed World)
+Las ideas se montan solo con elementos que ya están dentro del sujeto y de su frontera inmediata. En cuanto importas algo externo deja de ser no obvio y pasa a ser un añadido que cualquiera habría hecho. Esa restricción es la que produce una combinación realmente nueva en vez de una función copiada de la competencia.
 
-### 📊 La novedad se mide, no se afirma
-Los supervivientes se puntúan en cuatro ejes, y la novedad es literalmente la distancia a las tres prohibidas. Por debajo de 30 se descarta; a partir de 37 se convierte en Hero Concept, con MVP, plan de validación y primer paso.
+### ⚖️ Descartar exige un motivo, y conservar también
+Una celda muere solo por tres códigos: **G** (cambias el sujeto y sigue leyéndose bien, luego nunca fue sobre este sistema), **C** (ya es corriente), **P** (físicamente imposible). «Parece flojo» no es un motivo. Después, un **pase de rescate** relee las filas descartadas, porque una idea mal descartada no aparece en el informe: es el único fallo que jamás detectarás mirando la salida.
 
 ---
 
@@ -52,58 +57,63 @@ Los supervivientes se puntúan en cuatro ejes, y la novedad es literalmente la d
 
 | | Antes | Después |
 |---|---|---|
-| Origen de las ideas | Lo primero que aparece | Cada elemento × cada técnica |
-| La respuesta obvia | Se propone una y otra vez | Vetada por escrito antes del barrido |
-| Filtrado | Se poda mientras se genera | Se genera todo y se puntúa al final |
-| Qué queda | Un registro de chat | `docs/product-idea.md` con la lista de vetos |
+| Cómo termina | Cuando alguien se cansó | Cuando el registro tiene cero filas en `todo` |
+| De dónde salen las ideas | Lo primero que apareció | Cada elemento × técnica × submétodo |
+| La respuesta obvia | Se propone una y otra vez | Vetada de entrada; la novedad se mide por distancia |
+| Cuándo miras el mercado | Al principio, y el pensamiento se encoge | Tras el juicio, para que no sesgue la novedad |
+| Qué queda | Un registro de chat | `docs/product-idea.md` con los vetos y la cobertura |
 
 ---
 
 ## 🚀 Instalación y uso
 
-Solo hacen falta `git` y una herramienta de AI que cargue skills desde un directorio.
+### 🖥️ Instala las once skills (una sola vez)
 
-### 🖥️ Claude Code (CLI)
-
-Clona la suite donde quieras y enlaza solo esta skill:
+Clona el repositorio y ejecuta el instalador. Enlaza las once skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-brain ~/.claude/skills/superforge-brain
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Reinicia Claude Code e invócala:
+Todas las opciones, la instalación de una sola skill y la ruta de subida a claude.ai están en el [README de la suite](../../README.es.md).
+
+### ⌨️ Invócala
 
 ```
 /superforge-brain
 ```
 
-Si el proyecto ya tiene `docs/brief.md`, lo lee en lugar de volver a preguntar de qué va.
+Empieza fijando dos cosas: si el sujeto es un objeto o una capacidad (Domain A / B) y la resolución — `quick` (~80 celdas), `standard` (~300) o `exhaustive` (900+). Si existe `docs/brief.md`, lo lee en vez de volver a preguntar.
 
-### 🔗 Codex CLI / Gemini CLI / Antigravity
+---
 
-El mismo enlace, otro directorio. O deja que el instalador busque todos los directorios de skills de la máquina y enlace las once de una vez:
+## 🧬 Relación con SIT
 
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
+BreakBias se apoya en dos principios de **SIT (Systematic Inventive Thinking)**:
 
-Es idempotente, solo toca sus propios enlaces simbólicos y acepta `--dry-run` y `--uninstall`.
+- **Closed World** — nunca traer un elemento de fuera de la caja
+- **Function Follows Form** — construir primero la forma imposible y deducir el valor hacia atrás
 
-### 🌐 claude.ai (navegador)
+Eso es lo heredado. Esto es lo que añade BreakBias.
 
-Comprime la carpeta de esta skill y súbela en los ajustes de skills de tu cuenta:
+| | SIT | BreakBias |
+|---|---|---|
+| Técnicas | 5 | **8** (añade Reverse / Shift / Repurpose) |
+| Sesgo | sin tratamiento explícito | **nombrado en cada elemento** (funcional / estructural / relacional) |
+| Clichés | — | **tres vetados de entrada**, y la novedad se puntúa por distancia a ellos |
+| Exhaustividad | depende del aguante humano | **un registro de celdas que una máquina verifica**: si queda algún `todo`, no está terminado |
+| Selección | — | **códigos de descarte G / C / P** más un pase de rescate |
+| Puntuación | — | **un juez en contexto separado**, que nunca ve el razonamiento |
+| Mercado | fuera de alcance | **red / gray / white y veredicto de entrada, solo tras el juicio** |
 
-```bash
-cd ~/src/superforge-skill/skills/superforge-brain
-zip -r superforge-brain.zip .
-```
+SIT es un método para personas en una sala. BreakBias lo reconstruye en algo que **una máquina puede barrer de forma exhaustiva, y demostrar que lo hizo**.
 
-La interfaz del navegador acepta una skill por vez, así que repite el proceso para cada una.
+Implementación y registros de ejecuciones reales: [takaoumehara/breakbias-studio](https://github.com/takaoumehara/breakbias-studio)
 
 ---
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos que hacen exhaustiva cada técnica y el filtro que decide qué Hero Concept merece construirse están en [references/ideation-tools.md](references/ideation-tools.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos, las pruebas de descarte, el protocolo de juicio, la rúbrica de mercado y el filtro de dirección están en [references/ideation-tools.md](references/ideation-tools.md). Visión general de la suite: [superforge-skill](../../README.es.md).

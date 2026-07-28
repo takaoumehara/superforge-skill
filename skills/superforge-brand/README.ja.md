@@ -59,46 +59,25 @@ flowchart TD
 
 ## 🚀 インストールと使い方
 
-必要なのは `git` と、ディレクトリからスキルを読み込む AI ツールだけです。
+### 🖥️ 11個まとめて入れる（最初の1回だけ）
 
-### 🖥️ Claude Code（CLI）
-
-好きな場所にスイート全体をクローンし、このスキルだけをリンクします。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、11個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-brand ~/.claude/skills/superforge-brand
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Claude Code を再起動して呼び出します。
+オプション、1個だけ入れる方法、claude.ai へのアップロード手順は [スイート全体の README](../../README.ja.md) にあります。
+
+### ⌨️ 呼び出す
 
 ```
 /superforge-brand
 ```
 
 画像生成ツールが使えない環境でも、プロンプトはそのまま出力されます。好きなジェネレーターに貼り付けてください。
-
-### 🔗 Codex CLI / Gemini CLI / Antigravity
-
-リンク先のディレクトリを変えるだけです。インストーラーに任せれば、このマシンにあるスキルディレクトリをすべて探して11個を一括でリンクします。
-
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
-
-何度実行しても結果は同じで、自分が作ったシンボリックリンク以外には触れません。`--dry-run` で確認、`--uninstall` で削除できます。
-
-### 🌐 claude.ai（ブラウザ）
-
-このスキルのフォルダを zip にまとめ、アカウントのスキル設定からアップロードします。
-
-```bash
-cd ~/src/superforge-skill/skills/superforge-brand
-zip -r superforge-brand.zip .
-```
-
-ブラウザ版は一度に1スキルずつなので、入れたい数だけ繰り返してください。
 
 ---
 

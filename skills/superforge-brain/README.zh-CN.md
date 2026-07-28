@@ -1,20 +1,24 @@
-# 💡 superforge-brain
+# 💡 superforge-brain — BreakBias 引擎
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
-[![Method: SIT](https://img.shields.io/badge/Method-SIT-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
+[![Engine: BreakBias](https://img.shields.io/badge/engine-BreakBias-6C5CE7)](https://github.com/takaoumehara/breakbias-studio)
 
 [English](README.md) · [日本語](README.ja.md) · **简体中文** · [Español](README.es.md) · [한국어](README.ko.md)
 
-> **别再等好点子自己冒出来。把问题的每个要素都过一遍每种技法，再看谁活了下来。**
+> **别再等好点子自己冒出来。让机器把所有组合跑完一遍，再看谁活下来。**
 
 ---
 
 ## 🔰 这是什么？
 
-在海滩上找丢掉的戒指，你可以漫无目的地走，也可以在沙面上打好网格，一格一格地过。这个技能就是那张网格。
+任何头脑风暴会开到三十分钟左右，总会有人说「差不多就这个吧」。不是因为找到了好方案，而是因为**有人先累了**。
 
-它先把问题拆成要素，在产出任何东西之前点名封禁三个最显而易见的答案，然后让每个要素依次穿过八种变换技法。用覆盖率取代灵感，活下来的概念再按"离陈词滥调有多远"来打分。
+BreakBias 不会累。
+
+它把对象拆成 20–40 个要素，再和八种技法及其子方法逐一相乘。每个组合都是**一个「单元格」**，带编号和状态，全部走到终态才算跑完。不是「我觉得差不多都看过了」，而是「300 格里完成 300 格」。
+
+人没法把三百行的表格一格不漏地填完，机器可以。**这就是它是一个技能而不是一场会议的全部理由。**
 
 ---
 
@@ -22,29 +26,30 @@
 
 ```mermaid
 flowchart TD
-    P[🧩 问题] --> A[🔍 拆成 5 个维度]
-    A --> B[🚫 封禁三个显而易见的答案]
-    B --> C[🔁 8 种技法 × 每个要素]
-    C --> E{🔓 又是同一个形状？}
-    E -->|换一个透镜| C
-    E -->|幸存者| F[📊 打分：离陈词滥调的距离]
-    F --> G[(📄 docs/product-idea.md)]
+    A[🧩 圈定对象<br/>A：具体事物 / B：某项能力] --> B[🔍 五个视角拆解<br/>给每个要素命名偏见]
+    B --> C[🚫 封禁三个平庸方案]
+    C --> D[(📋 单元格台账<br/>要素 × 8 技法 × 子方法)]
+    D --> E[✍️ 每一格：<br/>先造不可能的形态，再倒推价值]
+    E --> F[⚔️ 只按代码判死<br/>G / C / P + 救回]
+    F --> G[⚖️ 独立上下文里审判<br/>不给看推导过程]
+    G --> H[🌐 市场判定<br/>只在审判之后]
+    H --> I[(📄 docs/product-idea.md)]
 ```
 
-扫描过程中不做任何裁剪，去重和打分都放到最后一次性完成。
+扫描过程中一格都不裁。去重和打分都放在生成结束之后。
 
 ---
 
 ## ✨ 三大亮点
 
-### 🔒 Closed World — 不从盒子外面拿东西
-概念只能用系统内部的要素及其紧邻的边界来搭建。正是这条约束逼出真正新的组合，而不是把竞品的功能生搬过来。
+### 📋 「都看过了」变成一个数字
+要素 × 技法 × 子方法就是台账里的一行，状态只能单向前进：`todo → 已生成 → 存活/淘汰 → 已展开 → 已审判`。完成的定义是**没有一行停在 `todo`**。漏掉的格子没法悄悄变成「本来就不存在的格子」。
 
-### 🚫 先点名封禁三个平庸方案
-把任何模型都会最先想到的三个答案明确列出来并禁用，然后才开始发想；而且它们会被写进产物，下个月不会有人再提一遍。
+### 🔒 不从盒子外面拿东西（Closed World）
+点子只能用对象内部及其紧邻边界的要素来搭。一旦从外面引入新东西，它就不再是非自明的，而是谁都想得到的添加。正是这条约束，逼出真正新的组合，而不是把竞品的功能生搬过来。
 
-### 📊 新颖度是量出来的，不是自封的
-幸存概念按四个维度打分，其中新颖度就等于"离被封禁的三个方案有多远"。低于 30 分丢弃，37 分以上升级为 Hero Concept，附带 MVP、验证计划和第一步动作。
+### ⚖️ 判死要有理由，留下也要有理由
+一格只因三种代码而死——**G**（把主语换成别的照样成立，说明这事跟本对象无关）、**C**（已经很常见）、**P**（物理上不成立）。「感觉弱」不构成理由。之后还有**救回环节**重读被判死的行，因为被误杀的点子根本不会出现在报告里，这是唯一一种看输出永远发现不了的失误。
 
 ---
 
@@ -52,58 +57,63 @@ flowchart TD
 
 | | 使用前 | 使用后 |
 |---|---|---|
-| 点子来源 | 最先冒出来的那个 | 每个要素 × 每种技法 |
-| 显而易见的方案 | 每次都会再来一遍 | 扫描前就写进禁用清单 |
-| 收敛方式 | 边生成边裁剪 | 先出完，最后统一打分 |
-| 留下什么 | 一段对话记录 | 带禁用清单的 `docs/product-idea.md` |
+| 什么时候结束 | 有人累了的时候 | 台账里 `todo` 归零的时候 |
+| 点子从哪来 | 最先冒出来的那个 | 每个要素 × 每种技法 × 每种子方法 |
+| 显而易见的方案 | 每次都会再来一遍 | 开跑前先封禁，再按距离打新颖度 |
+| 什么时候看市场 | 一开始就看，然后想法就缩了 | 审判之后，不影响新颖度评分 |
+| 留下什么 | 一段对话记录 | 带禁用清单和覆盖率的 `docs/product-idea.md` |
 
 ---
 
 ## 🚀 安装与使用
 
-只需要 `git`，以及一个从目录加载技能的 AI 工具。
+### 🖥️ 一次装好全部 11 个技能（只需一次）
 
-### 🖥️ Claude Code（CLI）
-
-把整套克隆到任意位置，然后只链接这一个技能：
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 11 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-brain ~/.claude/skills/superforge-brain
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-重启 Claude Code，然后调用：
+完整选项、只装单个技能的方法，以及 claude.ai 的上传步骤，都在[整套 README](../../README.zh-CN.md)。
+
+### ⌨️ 调用它
 
 ```
 /superforge-brain
 ```
 
-如果项目里已有 `docs/brief.md`，它会直接读，而不是重新追问项目背景。
+开跑前先定两件事：对象是具体事物还是一项能力（Domain A / B），以及覆盖档位——`quick`（约 80 格）、`standard`（约 300）、`exhaustive`（900+）。项目里若已有 `docs/brief.md`，它会直接读而不再追问。
 
-### 🔗 Codex CLI / Gemini CLI / Antigravity
+---
 
-链接方式相同，只是目录不同。也可以交给安装脚本，它会找出本机所有技能目录，一次性链接全部 11 个技能：
+## 🧬 和 SIT 的关系
 
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
+BreakBias 的地基是 **SIT（Systematic Inventive Thinking）** 的两条原则：
 
-脚本可重复执行，只处理自己创建的符号链接，并支持 `--dry-run` 预览和 `--uninstall` 卸载。
+- **Closed World** —— 不从盒子外面拿东西
+- **Function Follows Form** —— 先造出不可能的形态，价值再倒推
 
-### 🌐 claude.ai（浏览器）
+这两条是继承来的。BreakBias 在此之上加了这些。
 
-把这个技能的文件夹打包成 zip，在账号的技能设置里上传：
+| | SIT | BreakBias |
+|---|---|---|
+| 技法 | 5 种 | **8 种**（增加 Reverse / Shift / Repurpose） |
+| 偏见 | 没有明确处理 | **强制给每个要素命名**（功能性 / 结构性 / 关系性） |
+| 平庸方案 | — | **开跑前封禁三个**，再按离它们多远来打新颖度 |
+| 穷尽性 | 靠人的耐力 | **机器可验证的单元格台账**，还有 `todo` 就是没跑完 |
+| 筛选 | — | **G / C / P 判死代码**，外加误杀救回环节 |
+| 打分 | — | **独立上下文的审判**，看不到推导过程 |
+| 市场 | 不涉及 | **red / gray / white 加参入判定，且只在审判之后** |
 
-```bash
-cd ~/src/superforge-skill/skills/superforge-brain
-zip -r superforge-brain.zip .
-```
+SIT 是给一屋子人开会用的方法。BreakBias 把它重建成**机器能穷尽扫描、而且能证明自己扫完了**的东西。
 
-浏览器端一次只能传一个技能，需要几个就重复几次。
+实现与实跑记录：[takaoumehara/breakbias-studio](https://github.com/takaoumehara/breakbias-studio)
 
 ---
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；让每种技法真正穷尽的子方法，以及判断哪个 Hero Concept 值得动手的筛选标准，都在 [references/ideation-tools.md](references/ideation-tools.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；子方法、判死测试、审判协议、市场评估表和方向筛选都在 [references/ideation-tools.md](references/ideation-tools.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

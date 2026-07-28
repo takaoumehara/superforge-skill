@@ -63,46 +63,25 @@ Claude Code、Codex、Gemini CLI、Antigravity、Cursor 都行。胶囊是你仓
 
 ## 🚀 安装与使用
 
-只需要 `git`，以及一个从目录加载技能的 AI 工具。
+### 🖥️ 一次装好全部 11 个技能（只需一次）
 
-### 🖥️ Claude Code（CLI）
-
-把整套克隆到任意位置，然后只链接这一个技能：
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 11 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-handoff ~/.claude/skills/superforge-handoff
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-重启 Claude Code，然后调用：
+完整选项、只装单个技能的方法，以及 claude.ai 的上传步骤，都在[整套 README](../../README.zh-CN.md)。
+
+### ⌨️ 调用它
 
 ```
 /superforge-handoff
 ```
 
 `.handoff/` 里会出现一个带日期的文件，回复中紧跟着重启提示词。项目这边不需要任何额外准备。
-
-### 🔗 Codex CLI / Gemini CLI / Antigravity
-
-链接方式相同，只是目录不同。也可以交给安装脚本，它会找出本机所有技能目录，一次性链接全部 11 个技能：
-
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
-
-脚本可重复执行，只处理自己创建的符号链接，并支持 `--dry-run` 预览和 `--uninstall` 卸载。
-
-### 🌐 claude.ai（浏览器）
-
-把这个技能的文件夹打包成 zip，在账号的技能设置里上传：
-
-```bash
-cd ~/src/superforge-skill/skills/superforge-handoff
-zip -r superforge-handoff.zip .
-```
-
-浏览器端一次只能传一个技能，需要几个就重复几次。
 
 ---
 

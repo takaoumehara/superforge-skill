@@ -59,46 +59,25 @@ flowchart TD
 
 ## 🚀 설치 및 사용법
 
-`git`과 디렉터리에서 스킬을 불러오는 AI 도구만 있으면 됩니다.
+### 🖥️ 열한 개를 한 번에 설치 (처음 한 번만)
 
-### 🖥️ Claude Code (CLI)
-
-원하는 위치에 전체 스위트를 클론한 뒤, 이 스킬 하나만 링크합니다.
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열한 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-biz ~/.claude/skills/superforge-biz
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Claude Code를 다시 시작하고 호출합니다.
+옵션 전체와 스킬 하나만 설치하는 방법, claude.ai 업로드 절차는 [스위트 README](../../README.ko.md)에 있습니다.
+
+### ⌨️ 호출하기
 
 ```
 /superforge-biz
 ```
 
 `docs/product-idea.md`와 `docs/brief.md`가 있으면 먼저 읽습니다.
-
-### 🔗 Codex CLI / Gemini CLI / Antigravity
-
-링크할 디렉터리만 다릅니다. 설치 스크립트에 맡기면 이 머신의 모든 스킬 디렉터리를 찾아 열한 개를 한 번에 링크합니다.
-
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
-
-여러 번 실행해도 결과가 같고, 자기가 만든 심볼릭 링크만 건드리며, `--dry-run`과 `--uninstall`을 지원합니다.
-
-### 🌐 claude.ai (브라우저)
-
-이 스킬 폴더를 zip으로 묶어 계정의 스킬 설정에서 업로드합니다.
-
-```bash
-cd ~/src/superforge-skill/skills/superforge-biz
-zip -r superforge-biz.zip .
-```
-
-브라우저에서는 한 번에 하나씩만 올릴 수 있으므로 필요한 스킬 수만큼 반복합니다.
 
 ---
 

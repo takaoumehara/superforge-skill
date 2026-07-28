@@ -59,46 +59,25 @@ Colour and type go to `superforge-ui` to become tokens in `docs/design.md`. This
 
 ## 🚀 Install & Usage
 
-You need `git` and an AI tool that loads skills from a directory.
+### 🖥️ Install all eleven skills (once)
 
-### 🖥️ Claude Code (CLI)
-
-Clone the suite anywhere, then link this one skill:
+Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-brand ~/.claude/skills/superforge-brand
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Restart Claude Code, then invoke it:
+Full options, single-skill installs, and the claude.ai upload route are in the [suite README](../../README.md).
+
+### ⌨️ Call it
 
 ```
 /superforge-brand
 ```
 
 Without an image tool available it still produces the prompts, ready to paste into whichever generator you use.
-
-### 🔗 Codex CLI / Gemini CLI / Antigravity
-
-The same link, a different directory. Or let the installer find every skills directory on this machine and link all eleven skills at once:
-
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
-
-It is idempotent, touches only its own symlinks, and accepts `--dry-run` and `--uninstall`.
-
-### 🌐 claude.ai (browser)
-
-Zip this skill's folder and upload it in your account's skill settings:
-
-```bash
-cd ~/src/superforge-skill/skills/superforge-brand
-zip -r superforge-brand.zip .
-```
-
-The browser UI takes one skill at a time, so repeat it for each skill you want.
 
 ---
 

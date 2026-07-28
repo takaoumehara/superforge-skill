@@ -2,11 +2,12 @@
 
 `SKILL.md` holds the sweep procedure — the five decomposition lenses, the
 eight techniques, and the scoring. **This file does not restate it.** It
-carries three things the procedure needs and does not contain:
+carries four things the procedure needs and does not contain:
 
 1. the sub-methods that make each technique exhaustive rather than a single guess
 2. the tools that run **before** the sweep, to make sure the right thing is being decomposed
 3. the filter that runs **after** the sweep, to decide which surviving concept is worth building
+4. the kill-code tests, the judge protocol, and the market rubric
 
 Use the thinking, not the label. Never present a framework name as output.
 
@@ -137,6 +138,88 @@ scores mean no edge. Then fix the 1s deliberately, or accept them and say so.
 
 ---
 
+# 4. Selection — kill, judge, and only then look at the market
+
+Generation is the cheap half. Everything below exists because the expensive
+failures happen after the ideas exist: a good one gets killed for a bad
+reason, a cliché survives because it was written well, or the whole sweep
+collapses toward the safe answer because someone mentioned the competition too
+early.
+
+## 4.1 The three kill tests
+
+Survival is the default. A cell dies only when one of these returns true, and
+the code goes in the ledger so the decision can be re-examined.
+
+| Code | Test | How to apply it |
+|---|---|---|
+| **G — generic** | Swap the subject for an unrelated one. Does the idea still read as sensible? | 「カフェ」を「歯科医院」に置き換えても同じ文が成立するなら、それはこのシステムの話ではない |
+| **C — commonly exists** | Does this already ship somewhere in this or an adjacent market? | 「既にある」ではなく「既にありふれている」が基準。珍しい先行例は殺す理由にならない |
+| **P — physically impossible** | Does it contradict reality in a way no reinterpretation can rescue? | 再解釈で成立するなら殺さない。SITの「ありえない形」は殺す対象ではない |
+
+Anything else — feels weak, sounds risky, would be hard to build — is **not a
+kill reason**. Those are scoring inputs, and scoring happens later.
+
+## 4.2 The salvage pass
+
+After killing, re-read the killed rows once, cold, with only the concept text
+and the kill code. Ask a single question: *is this code actually true?*
+
+A wrongful kill is invisible in the final report — the idea simply never
+appears — which makes it the one failure mode that never gets caught by
+looking at the output. Budget one pass for it every run.
+
+## 4.3 The judge protocol
+
+The judge is a separate context, given three inputs and nothing else:
+
+1. the concept card (one sentence, why surprising, user value, business value, risks, next experiment)
+2. the banned obvious three
+3. the scoring anchors below
+
+**Explicitly withheld:** the element, the technique, the sub-method, the
+impossible form, and the backwards derivation. A judge who sees the reasoning
+grades the reasoning; a judge who sees only the card grades the idea. It is
+also the only way `Novelty` can be measured honestly, because a clever
+derivation makes a familiar concept feel new to whoever followed it.
+
+Anchors, so scores mean the same thing across runs:
+
+| Score | Novelty means |
+|---|---|
+| 1–3 | 禁止した3案の言い換え、または業界の標準解 |
+| 4–6 | 既存の型の組み替え。説明すれば「なるほど」で終わる |
+| 7–8 | 前提が1つ壊れている。競合が真似るには方針転換が要る |
+| 9–10 | そのカテゴリの定義が変わる。既存プレイヤーの強みが負債になる |
+
+## 4.4 The market rubric — after judgment, never before
+
+Run only on `Keep` and above. Doing this earlier is the single most reliable
+way to destroy a sweep: once a model knows a space is crowded, it stops
+proposing anything in that space, including the thing that would have won.
+
+| Status | Meaning | What it implies |
+|---|---|---|
+| **red** | 直接の競合が複数、資金も入っている | 正面からは行かない。楔になる一点を探す |
+| **gray** | 隣接領域の既存プレイヤーが片手間でやっている | 本気度の差が参入余地。速度で勝てるか |
+| **white** | 誰もいない | 市場が無いのか、まだ気づかれていないのかを必ず切り分ける |
+
+`white` は歓迎する結果ではありません。**「誰もやっていない」の大半は「誰も欲しがっていない」です。**
+white を出したら、なぜ誰も来ていないのかを一文で説明できるまで先へ進まないこと。
+
+Then the entry verdict:
+
+- **wedge** — 狭い一点なら勝てる。そこから広げる筋道がある
+- **open** — 素直に入れる。速度と実行力の勝負
+- **avoid** — 構造的に不利。理由を書いて畳む
+- **watch** — 今は無理だが、条件が変われば変わる。その条件を書く
+
+Each verdict carries named incumbents with URLs, and a willingness-to-pay
+hypothesis in the form *who / what they would pay for / what they pay for
+today that is comparable*. Without that last clause the hypothesis is a wish.
+
+---
+
 ## Output
 
 Write `docs/product-idea.md`:
@@ -156,8 +239,17 @@ Write `docs/product-idea.md`:
 ## The banned obvious three
 <列挙して禁止した凡庸案。後から誰かが再提案しないように残す>
 
+## Sweep coverage
+Domain: A / B · Resolution: quick / standard / exhaustive
+要素 <n> × 技法 8 × サブ手法 = <total> セル
+generated <n> · killed G<n> C<n> P<n> · salvaged <n> · judged <n>
+<未踏破のセルがあるなら、その数と理由をここに書く。書かないより残す>
+
 ## Hero concepts from the sweep
 | コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | Total | 判定 |
+
+## Market (judged Keep or above only)
+| コンセプト | red/gray/white | 既存プレイヤー | entry verdict | 支払い仮説 |
 
 ## Direction filter
 | 候補 | Pull | Wedge | Unfair | Reach | Energy | 最高峰の軸 |

@@ -60,46 +60,25 @@ Por debajo de 640px: objetivos táctiles de 44px o más, sin desbordamiento hori
 
 ## 🚀 Instalación y uso
 
-Solo hacen falta `git` y una herramienta de AI que cargue skills desde un directorio.
+### 🖥️ Instala las once skills (una sola vez)
 
-### 🖥️ Claude Code (CLI)
-
-Clona la suite donde quieras y enlaza solo esta skill:
+Clona el repositorio y ejecuta el instalador. Enlaza las once skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-verify ~/.claude/skills/superforge-verify
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Reinicia Claude Code e invócala:
+Todas las opciones, la instalación de una sola skill y la ruta de subida a claude.ai están en el [README de la suite](../../README.es.md).
+
+### ⌨️ Invócala
 
 ```
 /superforge-verify
 ```
 
 Usa los comandos de build y de pruebas del propio proyecto, así que esos deben funcionar antes. El resultado queda en `docs/verification.md`.
-
-### 🔗 Codex CLI / Gemini CLI / Antigravity
-
-El mismo enlace, otro directorio. O deja que el instalador busque todos los directorios de skills de la máquina y enlace las once de una vez:
-
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
-
-Es idempotente, solo toca sus propios enlaces simbólicos y acepta `--dry-run` y `--uninstall`.
-
-### 🌐 claude.ai (navegador)
-
-Comprime la carpeta de esta skill y súbela en los ajustes de skills de tu cuenta:
-
-```bash
-cd ~/src/superforge-skill/skills/superforge-verify
-zip -r superforge-verify.zip .
-```
-
-La interfaz del navegador acepta una skill por vez, así que repite el proceso para cada una.
 
 ---
 

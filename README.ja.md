@@ -2,148 +2,235 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-サブエージェントを起動する前に、そのタスクに**ふさわしいモデル**を自動で割り当てるAIエージェント用スキルです。何も指定しなければ、すべてのサブエージェントがセッションのデフォルトモデル（たいてい一番高価なモデル）をそのまま引き継いでしまいますが、それを防ぎます。
-
-[obra/superpowers](https://github.com/obra/superpowers) を補完する薄いレイヤーとして設計しています。superpowers は「マルチエージェント作業を**どう組み立てるか**」（`dispatching-parallel-agents`、`subagent-driven-development`、`executing-plans`）を教えてくれますが、「各エージェントを**どのモデルで**動かすか」は決めてくれません。このスキルはその部分だけを担当します。superpowersは必須ではありません（詳細は[必要環境](#必要環境)参照）。
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる11個のスキル集です。**
 
 ---
 
-## やること
+## これは何？（はじめての方へ）
 
-サブエージェントを投げる前に、タスクを4段階に分類してモデルを割り当てます。
+「スキル」とは、Claude Code のような **AIツールに後から足せる"やり方の説明書"** のことです。フォルダを1つ置くだけで、AIがその手順どおりに動くようになります。
 
-| ティア | 内容 | モデル |
+superforge は、その説明書を11枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
+
+> あなた：「近所のカフェ向けのアプリを作りたい」
+> 受付：「まずアイデアを固めますね。`superforge-brain` に渡します。判断が要る作業なので Opus 5 を使います」
+> — そして、作業が始まります。
+
+受付係がやることは3つだけです。
+
+1. **どの担当に渡すか決める**（考える／作る／試す／出す、の11人から選ぶ）
+2. **どのAIモデルを使うか決める**（賢いモデルは高い。安い作業に高いモデルを使わない）
+3. **結果を必ずファイルに残させる**（会話を消しても、決めたことが消えないように）
+
+<p align="center">
+  <img src="./assets/superforge-map.ja.svg" alt="superforge の全体像" width="100%">
+</p>
+
+---
+
+## 何がうれしいのか
+
+### 1. 「どこから手をつければいいか」を考えなくてよくなる
+
+作りたいものが頭にあるのに、最初の一歩が分からないことがあります。superforge は一言受け取れば、「では、こういう順番で進めます」と宣言して、そのまま動きます。毎回こちらが指示を組み立てる必要がありません。
+
+### 2. 安い作業に高いモデルを使わなくなる
+
+AIには賢い（＝高い）モデルと、速くて安いモデルがあります。ふつうに使うと、**全部の作業が同じ高いモデルで動いてしまいます**。ファイル名の一括置換のような単純作業まで、設計判断と同じ料金で処理されるということです。
+
+superforge は作業を始める前に「これは判断の仕事か、単純作業か」を4段階で仕分けし、それぞれに合ったモデルを割り当てます。しかも Claude だけでなく、Gemini・Codex・Kimi の各環境でも同じ考え方で対応表を持っています。
+
+<p align="center">
+  <img src="./assets/superforge-models.ja.svg" alt="サブタスクごとのモデル割り当て" width="100%">
+</p>
+
+いちばん下の **D（大量テキスト）** は、リポジトリを触る必要がない作業（翻訳、要約、バリエーションの量産など）です。これはローカルの `gemini` CLI に流すので、**Anthropic の使用量をまったく消費しません**。
+
+### 3. 会話を消しても、決めたことが消えない
+
+AIとの相談は、そのスレッドを消した瞬間に全部なくなります。翌日にはまた同じ説明からやり直しです。
+
+superforge のスキルは、報告する前に必ず `docs/` の中にファイルを書きます。デザインを決めたら `docs/design.md`、価格を決めたら `docs/business-model.md`。だから `/clear` しても、モデルを乗り換えても、一週間空けても、**決まったことは読み直せます**。
+
+---
+
+## 11個のスキル
+
+まん中の `superforge` が受付で、残りの10個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
+
+### 1. 考える — 何を作るか決める
+
+| スキル | どんなとき | 残るファイル |
 |---|---|---|
-| **A — 設計判断** | アプローチ設計、プランレビュー、他エージェントの成果検証、セキュリティ/正確性レビュー | Claude Opus |
-| **B — 通常の実装**（デフォルト） | 機能実装、バグ修正、実コンポーネントの作成 | Claude Sonnet |
-| **C — 機械的・ツール使用** | フォーマット、定型テスト、ドキュメント/変更履歴の同期、lint/testコマンドの実行 | Claude Haiku |
-| **D — リポジトリ非依存の大量テキスト処理** | バリエーション生成、貼り付けテキストの要約、コピー翻訳、説明文のドラフト | ローカルの`gemini` CLI（`gemini-3.6-flash`、low/medium/high） — Anthropic側の使用量を一切消費しない |
+| [`superforge-brain`](./skills/superforge-brain/README.ja.md) | ありきたりじゃないアイデアが欲しい（**BreakBias エンジン**） | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | いくらで売るか、どこから課金するか決めたい | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
 
-「念のため全部Opus」を絶対にしない、というのがこのスキルの存在理由そのものです。詳細な分類ルール・エッジケース・Gemini CLIの呼び出し方法は [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md) にあります。
+### 2. 作る — 形にする
 
-## Superforge スイート
-
-[`superforge`](./skills/superforge/README.ja.md) スキルが**ルーター**です。ユーザーの意図を読み取り、10個の専門スキル `superforge-*` のいずれかに作業を振り分けます。各スキルは同じモデル階層ルールを引き継ぎます。個別に直接呼ぶこともできます（`/superforge-ui` など）。
-
-| スキル | 用途 | 残す成果物 |
+| スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.ja.md) | SIT全数スイープ — Closed World、平凡3案の禁止、凡庸さからの距離で採点 | `docs/product-idea.md` |
-| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | マネタイズ、価格設計、ペイウォール配置、GTM | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/README.ja.md) | ブランド設計 + AI画像/動画生成プロンプト | `docs/brand.md` |
-| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | UI/UX、モーション、タイポグラフィ、SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | マルチエージェント実装、モデル階層割り当て、自走 | `docs/plan.md` |
-| [`superforge-test`](./skills/superforge-test/README.ja.md) | Web・iOS・Android のTDD | テスト本体 + `docs/plan.md` の検証コマンド |
-| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | 根本原因優先のデバッグ + FailForward学習メモリ | 根本原因を該当ドキュメントに追記 |
-| [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出荷前の忖度なし批評 | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 完了宣言前の検証ゲート | `docs/verification.md` |
-| [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | モデル・ツールをまたぐ無損失セッション引き継ぎ | `.handoff/` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。作業を分けて複数のAIに配り、それぞれに合うモデルを割り当てる | `docs/plan.md` |
 
-## このスイートが「プロンプト置き場」で終わらない理由
+### 3. 試す — 壊れていないか確かめる
 
-### 結論が必ずファイルに落ちる
-
-会話の中にしか存在しない結論は、次の `/clear` で消えます。各スキルは `docs/` に既にあるものを読んでから動き、報告の前に自分の成果物を書き出します。だからセッションを消しても、モデルを乗り換えても、翌朝ビルドを再開しても、決着済みの判断をやり直さずに済みます。契約: [`skills/superforge/references/artifacts.md`](./skills/superforge/references/artifacts.md)。
-
-### SKILL.md は薄いまま、知識は `references/` に置く
-
-常時コンテキストに載るのは各スキルの `description` だけです。本体は短い指令書で、深さは `references/` に置いて必要な時だけ読ませます。11個すべて入れてもコンテキストを圧迫しないのはこの構造のためです。
-
-| 参照ファイル | 中身 |
-|---|---|
-| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | 尋問せずに依頼をブリーフに変える手順 |
-| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 既にインストール済みの専門スキルに、どの工程を渡すか |
-| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法、スイープ前に確認すべきこと、生き残りのどれを作るか決める絞り込み |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング、損失回避、デフォルト設計と、それぞれの倫理的な線引き |
-| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計6ステップ、4つのデータ状態、品質チェックリスト |
-| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` の2枚出し仕様 |
-| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
-| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、build→検証→自己修復ループ、独断で決めてよい範囲 |
-
-## 人がレビューできるデザインシステム
-
-`superforge-ui` は、決して乖離してはいけない2つのファイルを出力します。
-
-- **`docs/design.md`** — オープン規格 [design.md](https://github.com/google-labs-code/design.md) 形式のYAMLトークン（AIが実装用に読む）と、スキーマでは表現できない根拠の散文
-- **`docs/design.html`** — 全トークン・コンポーネント・状態を実際にレンダリングし、コントラスト比を実測して合否バッジを出す単体ファイル。`file://` で開けて人がそのまま見られる
-
-HTML側はトークンをCSSカスタムプロパティとして**実際に消費して**描画するので、トークンと食い違ったスタイルガイドが存在しえない構造になっています。
-
-## 自走
-
-目的は判断の回数を減らすことではありません。**判断以外を全部消す**ことです。夜に一言指示すれば、朝には判断する価値のある成果物が出来ている状態を目指します。
-
-無人で走らせてよいのは、進捗を自分で証明できる場合だけです。スコープがチェックボックスで書かれ、各タスクに**それが完了したことを証明するコマンド**が添えられ、失敗時に自己修復し、1タスクごとに状態をディスクへ書き出す。未解決の問いは、妥当なデフォルトで決めて記録し、止まりません。ループが停止するのは、取り返しのつかない破壊・課金・認証情報の不足・ゴール自体が間違っていた場合だけで、それでもブロックされていない作業は進め続けます。
-
-全プロトコル: [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)。
-
-## 必要環境
-
-- **実際にサブエージェントをディスパッチできる仕組みを持つAIツール。** ファイルシステムもサブエージェント機構もない素のチャットUIでは、このスキルが作用する対象がそもそも存在しません（[対応状況](#対応状況)参照）。
-- **[obra/superpowers](https://github.com/obra/superpowers) — 任意、必須ではありません。** インストールされていれば、作業の組み立て方（どう分割するか）はそちらに従います。無ければ、このスキル自身が同じモデル判定ロジックでタスクを分割・ディスパッチします。
-- **[`gemini` CLI](https://github.com/google-gemini/gemini-cli) — 任意、Tier D用。** 無くても失敗はせず、Tier DのタスクはClaude Haikuに格下げされるだけです。
-
-## 対応状況
-
-| 環境 | 対応 | 備考 |
+| スキル | どんなとき | 残るファイル |
 |---|---|---|
-| Claude Code（CLI、VS Code/JetBrains拡張） | ✅ | ネイティブでSkillsに対応 |
-| Codex CLI | ✅ | `~/.agents/skills/` とプロジェクトの`AGENTS.md`を読む |
-| Gemini CLI | ✅ | `~/.agents/skills/` を読む |
-| Antigravity IDE | ✅ | 独自の`skills/`ディレクトリを読む |
-| Claude.ai（ブラウザ、Pro/Team/Enterprise） | ✅ | カスタムSkillとしてアップロード |
-| 素のチャットUI（ツール無しのChatGPT/Gemini webなど） | ⚠️ | スキル読み込みもサブエージェント機構も存在しないため、`SKILL.md`の中身をカスタム指示として貼ることはできても、モデル割り当てロジックを適用する対象がありません |
+| [`superforge-test`](./skills/superforge-test/README.ja.md) | テストを先に書いて進めたい（Web / iOS / Android） | テスト本体 |
+| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい | 原因を該当ドキュメントに追記 |
+
+### 4. 出す — 世に出す準備をする
+
+| スキル | どんなとき | 残るファイル |
+|---|---|---|
+| [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出す前に、忖度なしでダメ出ししてほしい | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、本当に動くか証拠つきで確認したい | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | セッションを消す前・別のツールに乗り換える前に引き継ぎたい | `.handoff/` |
+
+---
 
 ## インストール
 
-### 全ツールに一括インストール（推奨）
+必要なのは `git` と、スキルを読み込めるAIツール（Claude Code など）だけです。
 
-一度クローンし、インストーラを実行すると、ルーターと**10個の`superforge-*`スキル全部**を、マシン上に存在する全てのskillsディレクトリ（`~/.claude/skills`、`~/.agents/skills`、`~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`）へシンボリックリンクします。
+### 全部まとめて入れる（おすすめ）
+
+一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、11個をまとめてリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
-./install.sh              # --dry-run で確認のみ、--uninstall で解除
+./install.sh
 ```
 
-冪等なので `git pull` のたびに再実行して構いません。実体のあるディレクトリは決して上書きせず、自分が張ったリンクだけを扱います。各ツールからは11個の独立したスキルとして見え、必要なものだけが読み込まれます。
+`--dry-run` を付けると、何もせず「何が起きるか」だけ表示します。`--uninstall` で外せます。何度実行しても結果は同じで、自分が作ったリンク以外には触りません。`git pull` のたびに走らせて構いません。
 
-### 手動、または単一ツールだけに入れる
+対象になるフォルダはこの5つです。存在するものだけにリンクされます。
 
-ルーターを含む全スキルが `skills/` 直下の独立したディレクトリにあり、どのツールもスキルを**1階層しか探索しません**。そのため、リポジトリをskillsディレクトリの中へクローンしても認識されません。任意の場所にクローンしてから、必要なスキルにリンクを張ってください。
+```
+~/.claude/skills                    Claude Code
+~/.agents/skills                    Codex CLI と Gemini CLI が共通で読む場所
+~/.codex/skills                     Codex CLI
+~/.gemini/skills                    Gemini CLI
+~/.gemini/antigravity-ide/skills    Antigravity IDE
+```
+
+終わったらAIツールを再起動して、`/superforge` と打ってください。
+
+### 1個だけ入れたい場合
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-
-# ルーターだけ
-ln -s ~/src/superforge-skill/skills/superforge ~/.claude/skills/superforge
-
-# または11個まとめて、1ツールだけに
-for s in ~/src/superforge-skill/skills/*/; do
-  ln -s "$s" ~/.claude/skills/"$(basename "$s")"
-done
+ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 ```
 
-`~/.claude/skills` の部分を `~/.codex/skills`、`~/.gemini/skills`、`~/.gemini/antigravity-ide/skills`、あるいは `~/.agents/skills`（CodexとGemini CLIの両方が読む）に置き換えてください。
+`superforge-ui` の部分を入れたいスキル名に、`~/.claude/skills` の部分を使っているツールのフォルダに置き換えてください。
 
-### Claude.ai（ブラウザ）
+> **注意：** リポジトリごとスキルフォルダの中にクローンしないでください。AIツールはスキルを**1階層しか探しません**。好きな場所にクローンして、リンクを張るのが正しい入れ方です。
 
-`skills/superforge-ui/` のように**スキル1個のディレクトリ**を、Settings → Capabilities → Skills からアップロードしてください。ブラウザのSkills UIは1度に1スキルしか受け付けないため、使いたいものを個別にアップロードします。
+### claude.ai（ブラウザ）で使う
 
-### 常時有効にする（推奨）
+スキル1個分のフォルダを zip にして、Settings → Capabilities → Skills からアップロードします。ブラウザ版は一度に1個ずつです。
 
-スキルはモデルが「関連する」と判断した時にしか自動発火しません。モデル割り当てを絶対に見落とさないようにするには、使っているツールの**グローバル**指示ファイル（特定のプロジェクトではなく全プロジェクトに効くファイル）に一文追記してください。
+```bash
+cd ~/src/superforge-skill/skills/superforge-ui
+zip -r superforge-ui.zip .
+```
 
-| ツール | グローバル指示ファイル |
+### 毎回きちんと働かせる（おすすめ）
+
+スキルは、AIが「今の相談に関係ありそうだ」と判断したときだけ自動で起動します。モデルの割り当てを絶対に飛ばしたくない場合は、使っているツールの**全プロジェクト共通の指示ファイル**に一文足してください。
+
+| ツール | ファイル |
 |---|---|
 | Claude Code | `~/.claude/CLAUDE.md` |
 | Codex CLI | `~/.codex/AGENTS.md` |
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-サブエージェントをディスパッチする前に、必ず superforge スキルを
-参照してタスクごとに適切なモデルを割り当てる。全エージェントを同一モデルの
-まま動かさない。
+サブエージェントを起動する前に superforge スキルを参照し、
+作業ごとに適切なモデルを割り当てること。全部を同じモデルで動かさない。
 ```
+
+---
+
+## 動く環境
+
+| 環境 | 対応 | 備考 |
+|---|---|---|
+| Claude Code（CLI、VS Code / JetBrains 拡張） | ✅ | スキルに標準対応 |
+| Codex CLI | ✅ | `~/.agents/skills/` とプロジェクトの `AGENTS.md` を読む |
+| Gemini CLI | ✅ | `~/.agents/skills/` を読む |
+| Antigravity IDE | ✅ | 独自の `skills/` フォルダを読む |
+| claude.ai（ブラウザ、Pro / Team / Enterprise） | ✅ | カスタムスキルとしてアップロード |
+| 素のチャット画面（ツールなしの ChatGPT / Gemini web など） | ⚠️ | スキルを読み込む仕組みも、作業を分担させる仕組みもありません。`SKILL.md` の中身をカスタム指示として貼ることはできますが、モデルの割り当ては働きません |
+
+---
+
+## もう少し詳しく知りたい方へ
+
+### 人が目で確認できるデザインシステム
+
+`superforge-ui` は、**絶対にズレてはいけない2つのファイル**を出します。
+
+- **`docs/design.md`** — 色やサイズの定義（AIが読む側）。オープン規格の [design.md](https://github.com/google-labs-code/design.md) 形式
+- **`docs/design.html`** — ブラウザで開くだけで、全部の色・部品・状態が実物として並ぶ1枚のファイル。文字と背景のコントラスト比が実測値で出て、合否バッジが付きます
+
+HTML側は `design.md` の値を**読み込んで**描画します。手で描き写すのではないので、「仕様書と実物が違う」という状態が構造的に起きません。
+
+### 夜に指示して、朝に結果を見る（自走）
+
+目的は「判断の回数を減らす」ことではなく、**判断以外を全部消す**ことです。
+
+無人で走らせてよいのは、AIが自分で進捗を証明できるときだけ。作業をチェックボックスで書き、1つ1つに「**これが完了した証拠になるコマンド**」を添え、失敗したら自分で直し、1タスク終わるごとにファイルに書き出す。迷ったら妥当な既定値で決めて記録し、止まりません。
+
+止まるのは4つの場合だけです — 取り返しがつかない削除、お金が出ていく操作、認証情報がない、ゴール自体が間違っている。そのときも、それに関係ない作業は進め続けます。
+
+詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
+
+### なぜ11個入れてもAIが重くならないのか
+
+常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
+
+| 参照ファイル | 中身 |
+|---|---|
+| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | 質問攻めにせずに、依頼を要件にまとめる手順 |
+| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | すでに入っている別のスキルに、どの工程を任せるか |
+| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法と、どの案を実際に作るか決める判定 |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値と、それぞれの倫理的な線引き |
+| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
+| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
+| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
+| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、ループの回し方、独断で決めてよい範囲 |
+
+---
+
+## 由来とクレジット
+
+このリポジトリのスキルは、6つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードは1バイトも含んでいません。
+
+| 素材 | 出所 | ここから受け取ったもの |
+|---|---|---|
+| [BreakBias Studio](https://github.com/takaoumehara/breakbias-studio) | 自作 | `superforge-brain` の発想エンジン本体 |
+| [cross-model-handoff](https://github.com/takaoumehara/cross-model-handoff) | 自作 | `superforge-handoff` の引き継ぎ形式 |
+| [obra/superpowers](https://github.com/obra/superpowers) | MIT © Jesse Vincent | 複数エージェントに作業を配るという考え方 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 役割を分けたエージェント編成の型 |
+| [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | スキルを小さく分けて配布する形 |
+| Gem_Ren_Pack | 自作 | 設計・評価まわりのフレームワーク |
+
+**`superforge-brain` の BreakBias エンジンについて** — 土台は SIT（Systematic Inventive Thinking）の2原則、Closed World（箱の外から要素を足さない）と Function Follows Form（ありえない形を先に作り、価値を後から逆算する）です。BreakBias はそこに独自の要素を足しています。
+
+- 技法を **5つから8つへ**（Reverse / Shift / Repurpose を追加）
+- **全要素にバイアスを命名**させる（機能性 / 構造性 / 関係性）
+- **平凡3案を先に禁止**し、そこからの距離で新規性を採点する
+- **要素 × 技法 × サブ手法**を1セルとして台帳化し、飛ばしたセルがないことを機械が検証できる
+- **生成と審判をコンテキストごと分離**（審判役は、なぜそう考えたかを見ない）
+- **市場判定を審判の後ろに隔離**（市場の常識が新規性の採点を汚さないように）
+
+SITは人が集まって行うワークショップ手法です。BreakBias は、それを**機械が全数踏破できる形**に作り替えたものです。
+
+---
 
 ## ライセンス
 

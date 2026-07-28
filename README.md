@@ -2,192 +2,147 @@
 
 **English** · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-A drop-in AI agent skill that assigns the **right model to each subagent**
-before it's spawned — instead of every dispatched agent silently inheriting
-the same (usually most expensive) default model.
-
-It's a thin, complementary layer for [obra/superpowers](https://github.com/obra/superpowers):
-superpowers tells an agent **how** to structure multi-agent work
-(`dispatching-parallel-agents`, `subagent-driven-development`,
-`executing-plans`); this skill decides **which model** each spawned agent
-should actually run on, based on how hard the subtask really is. Superpowers
-is not required — see [Requirements](#requirements).
+**Say what you want to build, in one sentence. Eleven skills take it from idea to pre-launch check, in the right order.**
 
 ---
 
-## What it does
+## What is this?
 
-Before dispatching any subagent, classify the subtask into one of four tiers
-and assign a model accordingly:
+A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-| Tier | Looks like | Model |
+superforge is eleven of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+
+> You: "I want to build an app for the café down the street."
+> Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
+> — and the work starts.
+
+The front desk does exactly three things.
+
+1. **Picks who takes the job** — one of eleven, across think / build / prove / ship
+2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
+3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
+
+<p align="center">
+  <img src="./assets/superforge-map.svg" alt="How superforge fits together" width="100%">
+</p>
+
+---
+
+## Why it helps
+
+### 1. You stop having to work out where to begin
+
+You know what you want to make, but not what the first step is. superforge takes one sentence, announces the order it will work in, and starts. You are not assembling the instructions every time.
+
+### 2. Cheap work stops running on expensive models
+
+AI models come in smart-and-expensive and fast-and-cheap. Left alone, **everything runs on the same expensive one** — a bulk rename gets billed at the same rate as an architecture decision.
+
+superforge sorts each subtask into one of four tiers before starting, and assigns a model to match. Not only for Claude: it carries the equivalent mapping for the Gemini, Codex, and Kimi environments too.
+
+<p align="center">
+  <img src="./assets/superforge-models.svg" alt="Model assignment per subtask" width="100%">
+</p>
+
+The bottom row, **D (bulk text)**, is work that never touches the repository — translation, summarising, generating variations. That goes to the local `gemini` CLI, so it **consumes no Anthropic usage at all**.
+
+### 3. What you decided does not disappear with the conversation
+
+Everything you work out with an AI vanishes the moment you clear the thread. Tomorrow you start the explanation again.
+
+superforge skills write a file under `docs/` before they report back. Decide the design, you get `docs/design.md`. Decide the pricing, you get `docs/business-model.md`. So `/clear`, a model switch, or a week away all cost you nothing — **the decisions are still readable**.
+
+---
+
+## The eleven skills
+
+`superforge` is the front desk; the other ten do the work. You can also call any of them directly, like `/superforge-ui`.
+
+### 1. Think — decide what to make
+
+| Skill | When | File it leaves |
 |---|---|---|
-| **A — Architecture / judgment** | approach design, plan review, verifying another agent's claim, security/correctness review | Claude Opus |
-| **B — Feature work** (default) | implement a feature, fix a bug, write a real component | Claude Sonnet |
-| **C — Routine, tool-using** | formatting, rote tests, doc/changelog sync, running a lint or test command | Claude Haiku |
-| **D — Bulk text, no repo/tools needed** | generating N variations, summarizing pasted text, translating copy, drafting descriptions | local `gemini` CLI (`gemini-3.6-flash`, low/medium/high effort) — kept off Anthropic usage entirely |
+| [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea that is not the obvious one (**BreakBias engine**) | `docs/product-idea.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | you need a price and a place to put the paywall | `docs/business-model.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
 
-Never defaults every agent to the biggest model "just to be safe" — that's
-the exact waste this skill exists to prevent. Full classification rules,
-edge cases, and the Gemini CLI invocation details are in
-[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md).
+### 2. Build — make it real
 
-## The Superforge suite
-
-The [`superforge`](./skills/superforge/README.md) skill acts as the **router**: it reads intent and hands the work
-to one of ten specialised `superforge-*` skills, each of which inherits the same
-model-tiering rules. Each is invocable directly too (`/superforge-ui`, …).
-
-| Skill | Use it for | Leaves behind |
+| Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.md) | exhaustive SIT sweep — closed world, banned obvious three, scored on distance from cliché | `docs/product-idea.md` |
-| [`superforge-biz`](./skills/superforge-biz/README.md) | monetization, pricing, paywall placement, GTM | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/README.md) | brand identity + AI image/video production prompts | `docs/brand.md` |
-| [`superforge-ui`](./skills/superforge-ui/README.md) | UI/UX, motion, typography, SwiftUI / Jetpack Compose | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.md) | multi-agent building, model tiering, autonomous runs | `docs/plan.md` |
-| [`superforge-test`](./skills/superforge-test/README.md) | TDD red-green-refactor for Web, iOS, Android | the tests, plus proof lines in `docs/plan.md` |
-| [`superforge-debug`](./skills/superforge-debug/README.md) | root-cause-first debugging with FailForward memory | root cause appended to the relevant doc |
-| [`superforge-roast`](./skills/superforge-roast/README.md) | unsparing critique before shipping | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.md) | pre-completion verification gateway | `docs/verification.md` |
-| [`superforge-handoff`](./skills/superforge-handoff/README.md) | zero-loss session handoff across models and tools | `.handoff/` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design, with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work across agents, each on a fitting model | `docs/plan.md` |
 
-## Two things make the suite more than a folder of prompts
+### 3. Prove — check nothing is broken
 
-### Everything lands on disk
-
-A conclusion that exists only in the conversation dies at the next `/clear`.
-Every skill reads what `docs/` already contains and writes its own artifact
-before reporting back, so a session can be cleared, a model swapped, or a
-build resumed the next morning without relitigating decisions that were
-already made. Contract: [`skills/superforge/references/artifacts.md`](./skills/superforge/references/artifacts.md).
-
-### The SKILL.md stays thin, the knowledge goes in `references/`
-
-Only the `description` of each skill is always in context. The bodies are
-short directives; the depth sits in `references/` and is read on demand. That
-is what lets you install all eleven without crowding the context window.
-
-| Reference | What it carries |
-|---|---|
-| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | turning a request into a written brief without interrogating the user |
-| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | when to hand a step to a deeper skill you already have installed |
-| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | the sub-methods that make each SIT technique exhaustive, what to check before the sweep, and the filter for which survivor to build |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
-| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | six design steps, the four data states, the quality checklist |
-| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` two-artifact spec |
-| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
-| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the build→prove→repair loop, what may be decided alone |
-
-## Design systems humans can actually review
-
-`superforge-ui` emits two mirrored files that must never drift:
-
-- **`docs/design.md`** — YAML tokens in the open [design.md](https://github.com/google-labs-code/design.md)
-  format, for the coding agent, plus the prose rationale no schema can carry
-- **`docs/design.html`** — one self-contained file that renders every token,
-  component, and state live, with measured contrast ratios and pass/fail
-  badges, openable from `file://` and reviewable by a human
-
-The HTML consumes the tokens as CSS custom properties rather than
-hand-drawing them, so a style guide that disagrees with the tokens is
-structurally impossible.
-
-## Autonomous runs
-
-The point is not to make fewer decisions. It is to remove everything that is
-*not* a decision, so one instruction at night produces work worth judging in
-the morning.
-
-A run may proceed unattended only when it can prove its own progress: scope
-written as checkboxes, each with a **proof line** naming the command that
-verifies it, self-repair on failure, and state flushed to disk after every
-task. Open questions are resolved with a defensible default and logged, not
-escalated. The loop stops only for irreversible loss, spending money, missing
-credentials, or the goal itself being wrong — and even then it keeps working
-on everything not blocked by it.
-
-Full protocol: [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md).
-
-## Requirements
-
-- **An AI coding tool with a real subagent-dispatch mechanism.** This skill
-  has nothing to act on in a plain chat interface with no file system or
-  subagent tools — see [Compatibility](#compatibility).
-- **[obra/superpowers](https://github.com/obra/superpowers) — optional, not required.**
-  If it's installed, this skill defers to its orchestration skills for *how*
-  to structure the work. If it isn't, this skill falls back to splitting and
-  dispatching the work itself, using the same model-tiering logic either way.
-- **The [`gemini` CLI](https://github.com/google-gemini/gemini-cli) — optional, for Tier D.**
-  Without it, Tier D work is simply downgraded to Claude Haiku instead of
-  failing.
-
-## Compatibility
-
-| Environment | Works? | Notes |
+| Skill | When | File it leaves |
 |---|---|---|
-| Claude Code (CLI, VS Code / JetBrains extensions) | ✅ | native Skills support |
-| Codex CLI | ✅ | reads `~/.agents/skills/` and project `AGENTS.md` |
-| Gemini CLI | ✅ | reads `~/.agents/skills/` |
-| Antigravity IDE | ✅ | reads its own `skills/` directory |
-| Claude.ai (Pro/Team/Enterprise, browser) | ✅ | upload as a custom Skill |
-| Plain chat UI (e.g. ChatGPT/Gemini web with no tools) | ⚠️ | no skill-loading or subagent mechanism exists there — you can paste a `SKILL.md` in as custom instructions, but there's no subagent dispatch for the model assignment to apply to |
+| [`superforge-test`](./skills/superforge-test/README.md) | write the test first (Web / iOS / Android) | the tests |
+| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it | root cause appended to the relevant doc |
+
+### 4. Ship — get it out the door
+
+| Skill | When | File it leaves |
+|---|---|---|
+| [`superforge-roast`](./skills/superforge-roast/README.md) | you want the flaws named before your users find them | `docs/critique.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached | `docs/verification.md` |
+| [`superforge-handoff`](./skills/superforge-handoff/README.md) | before clearing a session or switching tools | `.handoff/` |
+
+---
 
 ## Install
 
-### Every tool at once (recommended)
+You need `git` and an AI tool that loads skills, such as Claude Code.
 
-Clone once, then let the installer symlink the router **and all ten
-`superforge-*` skills** into every skills directory it finds on your machine
-(`~/.claude/skills`, `~/.agents/skills`, `~/.codex/skills`,
-`~/.gemini/skills`, `~/.gemini/antigravity-ide/skills`):
+### All of them at once (recommended)
+
+Clone once and run the installer. It finds every skills directory on your machine and links all eleven.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
-./install.sh              # --dry-run to preview, --uninstall to remove
+./install.sh
 ```
 
-It's idempotent — re-run it after `git pull`. It never overwrites a real
-directory, only its own symlinks. Every tool then sees eleven separate
-skills and loads only the one it needs.
+`--dry-run` shows what would happen and changes nothing. `--uninstall` removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
 
-### Manual, or a single tool
+These are the directories it looks for. Only the ones that exist get linked.
 
-Every skill — the router included — lives in its own directory under
-`skills/`, and tools discover skills **one level deep only**. So don't clone
-the repo *into* a skills directory: clone it anywhere, then link the skills
-you want.
+```
+~/.claude/skills                    Claude Code
+~/.agents/skills                    read by both Codex CLI and Gemini CLI
+~/.codex/skills                     Codex CLI
+~/.gemini/skills                    Gemini CLI
+~/.gemini/antigravity-ide/skills    Antigravity IDE
+```
+
+Restart your AI tool, then type `/superforge`.
+
+### Just one skill
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-
-# the router alone
-ln -s ~/src/superforge-skill/skills/superforge ~/.claude/skills/superforge
-
-# or the whole suite, one tool only
-for s in ~/src/superforge-skill/skills/*/; do
-  ln -s "$s" ~/.claude/skills/"$(basename "$s")"
-done
+ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 ```
 
-Swap `~/.claude/skills` for `~/.codex/skills`, `~/.gemini/skills`,
-`~/.gemini/antigravity-ide/skills`, or `~/.agents/skills` (which Codex and
-Gemini CLI both read) as needed.
+Swap `superforge-ui` for the skill you want and `~/.claude/skills` for your tool's directory.
 
-### Claude.ai (browser)
+> **Careful:** do not clone the repository *into* a skills directory. Tools discover skills **one level deep only**. Clone it anywhere, then link.
 
-Upload a single skill directory — e.g. `skills/superforge-ui/` — under Settings →
-Capabilities → Skills. The browser Skills UI takes one skill at a time, so
-upload each one you want separately.
+### claude.ai (browser)
+
+Zip one skill's folder and upload it under Settings → Capabilities → Skills. The browser takes one skill at a time.
+
+```bash
+cd ~/src/superforge-skill/skills/superforge-ui
+zip -r superforge-ui.zip .
+```
 
 ### Make it always-on (recommended)
 
-Skills only trigger when the model judges them relevant to the current
-request. To make sure model-aware dispatch is never skipped, add one line to
-your tool's **global** instructions file (applies to every project, not just
-one repo):
+Skills only fire when the AI judges them relevant to the request. To be sure the model assignment is never skipped, add one line to your tool's **global** instructions file — the one that applies to every project.
 
-| Tool | Global instructions file |
+| Tool | File |
 |---|---|
 | Claude Code | `~/.claude/CLAUDE.md` |
 | Codex CLI | `~/.codex/AGENTS.md` |
@@ -198,6 +153,85 @@ Before dispatching subagents, consult the `superforge` skill to
 assign the right model per subtask instead of defaulting every agent to the
 same model.
 ```
+
+---
+
+## Where it runs
+
+| Environment | Works? | Notes |
+|---|---|---|
+| Claude Code (CLI, VS Code / JetBrains extensions) | ✅ | native Skills support |
+| Codex CLI | ✅ | reads `~/.agents/skills/` and the project's `AGENTS.md` |
+| Gemini CLI | ✅ | reads `~/.agents/skills/` |
+| Antigravity IDE | ✅ | reads its own `skills/` directory |
+| claude.ai (browser, Pro / Team / Enterprise) | ✅ | upload as a custom skill |
+| Plain chat UI (ChatGPT / Gemini web with no tools) | ⚠️ | there is no skill loading and no way to hand work to another agent. You can paste a `SKILL.md` in as custom instructions, but the model assignment has nothing to act on |
+
+---
+
+## Going deeper
+
+### A design system a human can actually check
+
+`superforge-ui` emits **two files that must never disagree**.
+
+- **`docs/design.md`** — the colour and size definitions, for the agent to read. Open [design.md](https://github.com/google-labs-code/design.md) format
+- **`docs/design.html`** — one file you open in a browser to see every colour, component, and state rendered for real, with measured contrast ratios and pass/fail badges
+
+The HTML **consumes** the values from `design.md` rather than redrawing them by hand, so "the spec and the real thing disagree" cannot structurally happen.
+
+### Give an instruction at night, read the result in the morning
+
+The goal is not to make fewer decisions. It is to remove everything that is **not** a decision.
+
+A run may go unattended only when it can prove its own progress: scope written as checkboxes, each with **the command that proves it is done**, self-repair on failure, and state flushed to disk after every task. Open questions get a defensible default and a log entry, not a stop.
+
+It stops for four things only — irreversible deletion, spending money, missing credentials, or the goal itself being wrong. Even then it keeps working on everything unaffected.
+
+Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
+
+### Why eleven skills do not slow the AI down
+
+The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
+
+| Reference | What it carries |
+|---|---|
+| [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | turning a request into a written brief without interrogating anyone |
+| [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | when to hand a step to another skill you already have installed |
+| [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | the sub-methods that make each technique exhaustive, the kill tests, the judge protocol, the market rubric |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
+| [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
+| [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
+| [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
+| [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the loop, what may be decided alone |
+
+---
+
+## Credits & prior art
+
+The skills here were distilled from six sources and **rewritten in my own words**. No third-party code is included.
+
+| Source | Origin | What it contributed |
+|---|---|---|
+| [BreakBias Studio](https://github.com/takaoumehara/breakbias-studio) | mine | the ideation engine behind `superforge-brain` |
+| [cross-model-handoff](https://github.com/takaoumehara/cross-model-handoff) | mine | the capsule format behind `superforge-handoff` |
+| [obra/superpowers](https://github.com/obra/superpowers) | MIT © Jesse Vincent | the idea of handing work to multiple agents |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | role-separated agent structures |
+| [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | packaging skills small and distributable |
+| Gem_Ren_Pack | mine | design and evaluation frameworks |
+
+**On the BreakBias engine in `superforge-brain`** — its floor is the two SIT (Systematic Inventive Thinking) constraints: Closed World (never import an element from outside the box) and Function Follows Form (build the impossible shape first, derive the value backwards). BreakBias adds to that:
+
+- **eight techniques instead of five** (Reverse / Shift / Repurpose)
+- **a named bias on every element** (functional / structural / relational)
+- **the obvious three banned first**, with novelty then scored as distance from them
+- **element × technique × sub-method as a tracked cell ledger**, so a machine can verify no cell was skipped
+- **judgment in a separate context** — the judge never sees why the idea was reached
+- **a market gate after judgment**, so market knowledge cannot contaminate the novelty score
+
+SIT is a method for people in a room. BreakBias rebuilds it into something **a machine can sweep exhaustively, and prove it did**.
+
+---
 
 ## License
 

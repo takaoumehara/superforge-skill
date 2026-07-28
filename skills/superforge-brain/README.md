@@ -1,20 +1,24 @@
-# 💡 superforge-brain
+# 💡 superforge-brain — the BreakBias engine
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
-[![Method: SIT](https://img.shields.io/badge/Method-SIT-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
+[![Engine: BreakBias](https://img.shields.io/badge/engine-BreakBias-6C5CE7)](https://github.com/takaoumehara/breakbias-studio)
 
 **English** · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [한국어](README.ko.md)
 
-> **Stop waiting for a good idea to arrive. Sweep every part of the problem through every technique, and read what survives.**
+> **Stop waiting for a good idea to arrive. Make a machine sweep every combination, and read what survives.**
 
 ---
 
 ## 🔰 What is this?
 
-Searching a beach for a lost ring, you can wander around hoping to spot it — or you can lay a grid over the sand and cover every square. This skill is the grid.
+About thirty minutes into any brainstorming meeting, someone says "yeah, that one's probably fine." Not because a good idea was found, but because **somebody got tired first**.
 
-It decomposes the problem into its parts, forbids the three most obvious answers before generating anything, and pushes every part through eight transformation techniques. Coverage replaces inspiration, and the ideas that survive are scored on how far they sit from the cliché.
+BreakBias does not get tired.
+
+It breaks the subject into 20–40 elements and crosses each one with eight techniques and their sub-methods. Every combination is **a cell** with an ID and a status, and the run finishes only when all of them are terminal. Not "I think we covered everything" — *300 of 300 cells complete*.
+
+A person cannot fill a 300-row grid without losing their place. Software can. **That asymmetry is the entire reason this is a skill and not a meeting.**
 
 ---
 
@@ -22,29 +26,30 @@ It decomposes the problem into its parts, forbids the three most obvious answers
 
 ```mermaid
 flowchart TD
-    P[🧩 Problem] --> A[🔍 Decompose into 5 dimensions]
-    A --> B[🚫 Ban the obvious three]
-    B --> C[🔁 8 techniques × every element]
-    C --> E{🔓 Same shape again?}
-    E -->|apply a lens| C
-    E -->|survivors| F[📊 Score: distance from the cliché]
-    F --> G[(📄 docs/product-idea.md)]
+    A[🧩 Scope it<br/>A: an object / B: a capability] --> B[🔍 Decompose across 5 lenses<br/>name the bias on every element]
+    B --> C[🚫 Ban the obvious three]
+    C --> D[(📋 Cell ledger<br/>element × 8 techniques × sub-methods)]
+    D --> E[✍️ Every cell:<br/>impossible form → derive value backwards]
+    E --> F[⚔️ Kill only by code<br/>G / C / P + salvage]
+    F --> G[⚖️ Judge in a separate context<br/>the rationale is withheld]
+    G --> H[🌐 Market check<br/>after judgment only]
+    H --> I[(📄 docs/product-idea.md)]
 ```
 
-Nothing is pruned mid-sweep. Deduplication and scoring happen only at the end.
+Nothing is pruned mid-sweep. Deduplication and scoring happen after generation, never during.
 
 ---
 
 ## ✨ Features
 
-### 🔒 Closed World — no borrowing from outside
-Concepts are built only from elements already inside the system and its immediate boundary. That constraint is what forces a genuinely new arrangement instead of a competitor's feature bolted on.
+### 📋 "We covered everything" becomes a number
+Element × technique × sub-method is one row in a ledger, and status moves one way only: `todo → generated → survived/killed → developed → judged`. Done means *zero rows left at `todo`*. A skipped cell cannot quietly become a cell that never existed.
 
-### 🚫 The obvious three are named and outlawed first
-The three answers any model would reach for are listed explicitly and banned before generation begins — and they are written into the artifact, so nobody proposes them again next month.
+### 🔒 Nothing comes in from outside the box (Closed World)
+Ideas are assembled only from elements already inside the subject and its immediate boundary. The moment you import something external it stops being non-obvious and becomes an addition anyone could have made. That constraint is what produces a genuinely new arrangement instead of a competitor's feature bolted on.
 
-### 📊 Novelty measured, not asserted
-Survivors are scored on four axes, where novelty is literally the distance from the banned three. Under 30 is discarded; 37 or above becomes a Hero Concept with an MVP, a validation plan, and a first step.
+### ⚖️ Killing needs a reason, and so does keeping
+A cell dies on one of three codes only — **G** (swap the subject and it still reads fine, so it was never about this system), **C** (already ordinary), **P** (physically impossible). "Feels weak" is not a kill reason. Then a **salvage pass** re-reads the killed rows, because a wrongly killed idea never appears in the report — making it the one failure you can never catch by looking at the output.
 
 ---
 
@@ -52,58 +57,63 @@ Survivors are scored on four axes, where novelty is literally the distance from 
 
 | | Before | After |
 |---|---|---|
-| Where ideas come from | Whatever surfaces first | Every element × every technique |
-| The obvious answer | Proposed again every time | Banned in writing before the sweep |
-| Filtering | Pruned while generating | Generated fully, scored at the end |
-| What remains | A chat log | `docs/product-idea.md` with the ban list |
+| How it ends | When someone got tired | When the ledger has zero `todo` rows |
+| Where ideas come from | Whatever surfaced first | Every element × technique × sub-method |
+| The obvious answer | Proposed again every time | Banned up front; novelty scored as distance from it |
+| When you look at the market | First — and the thinking shrinks | After judgment, so it cannot skew novelty |
+| What remains | A chat log | `docs/product-idea.md` with the ban list and the coverage count |
 
 ---
 
 ## 🚀 Install & Usage
 
-You need `git` and an AI tool that loads skills from a directory.
+### 🖥️ Install all eleven skills (once)
 
-### 🖥️ Claude Code (CLI)
-
-Clone the suite anywhere, then link this one skill:
+Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
 ```bash
-git clone https://github.com/takaoumehara/superforge-skill ~/src/superforge-skill
-ln -s ~/src/superforge-skill/skills/superforge-brain ~/.claude/skills/superforge-brain
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+./install.sh
 ```
 
-Restart Claude Code, then invoke it:
+Full options, single-skill installs, and the claude.ai upload route are in the [suite README](../../README.md).
+
+### ⌨️ Call it
 
 ```
 /superforge-brain
 ```
 
-It reads `docs/brief.md` when that file exists rather than re-asking what the project is.
+It starts by settling two things: whether the subject is an object or a capability (Domain A / B), and the resolution — `quick` (~80 cells), `standard` (~300), or `exhaustive` (900+). If `docs/brief.md` exists it reads that instead of re-asking.
 
-### 🔗 Codex CLI / Gemini CLI / Antigravity
+---
 
-The same link, a different directory. Or let the installer find every skills directory on this machine and link all eleven skills at once:
+## 🧬 Relationship to SIT
 
-```bash
-cd ~/src/superforge-skill
-./install.sh
-```
+BreakBias stands on two principles from **SIT (Systematic Inventive Thinking)**:
 
-It is idempotent, touches only its own symlinks, and accepts `--dry-run` and `--uninstall`.
+- **Closed World** — never import an element from outside the box
+- **Function Follows Form** — build the impossible shape first, derive the value backwards
 
-### 🌐 claude.ai (browser)
+Those are inherited. Here is what BreakBias adds.
 
-Zip this skill's folder and upload it in your account's skill settings:
+| | SIT | BreakBias |
+|---|---|---|
+| Techniques | 5 | **8** (adds Reverse / Shift / Repurpose) |
+| Bias | not handled explicitly | **named on every element** (functional / structural / relational) |
+| Clichés | — | **three banned up front**, and novelty is scored as distance from them |
+| Exhaustiveness | depends on human stamina | **a cell ledger a machine verifies** — any `todo` left means unfinished |
+| Selection | — | **G / C / P kill codes** plus a salvage pass for wrongful kills |
+| Scoring | — | **a judge in a separate context**, never shown the rationale |
+| Market | out of scope | **red / gray / white plus an entry verdict, after judgment only** |
 
-```bash
-cd ~/src/superforge-skill/skills/superforge-brain
-zip -r superforge-brain.zip .
-```
+SIT is a method for people in a room. BreakBias rebuilds it into something **a machine can sweep exhaustively, and prove that it did**.
 
-The browser UI takes one skill at a time, so repeat it for each skill you want.
+Implementation and real run logs: [takaoumehara/breakbias-studio](https://github.com/takaoumehara/breakbias-studio)
 
 ---
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the sub-methods that make each technique exhaustive, and the filter that decides which Hero Concept is worth building, are in [references/ideation-tools.md](references/ideation-tools.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The skill body is in [SKILL.md](SKILL.md); the sub-methods, kill tests, judge protocol, market rubric, and direction filter are in [references/ideation-tools.md](references/ideation-tools.md). Suite overview: [superforge-skill](../../README.md).
