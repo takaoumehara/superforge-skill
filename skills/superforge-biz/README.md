@@ -59,7 +59,7 @@ Anchoring, loss aversion, and defaults work — and each one has a point past wh
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all eleven skills (once)
+### 🖥️ Install all twelve skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

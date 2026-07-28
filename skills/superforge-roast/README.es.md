@@ -63,9 +63,9 @@ La salida son dos bloques: **THE ROAST** nombra lo que está flojo y **THE FORGE
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las once skills (una sola vez)
+### 🖥️ Instala las doce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las once skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

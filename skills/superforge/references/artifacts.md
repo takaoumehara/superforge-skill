@@ -20,6 +20,7 @@ conclusion that exists only in the conversation is lost at the next
 | `docs/design.md` | `superforge-ui` | `superforge-dev`, `superforge-verify` |
 | `docs/design.html` | `superforge-ui` | humans only — the rendered style guide |
 | `docs/plan.md` | `superforge-dev` | `superforge-dev` (progress), `superforge-test`, `superforge-verify` |
+| `docs/accessibility.md` | `superforge-a11y` | `superforge-ui` (token fixes), `superforge-verify` (the gate) |
 | `docs/critique.md` | `superforge-roast` | whoever is fixing the findings |
 | `docs/verification.md` | `superforge-verify` | you, before shipping |
 | `.handoff/*.md` | `superforge-handoff` | the next session, any tool |

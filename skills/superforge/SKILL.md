@@ -64,6 +64,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | 実装を回したい・複数エージェントで進めたい | `/superforge-dev` |
 | テストを書きたい・TDDで進めたい | `/superforge-test` |
 | バグ・エラー・落ちる | `/superforge-debug` |
+| アクセシビリティ・WCAG・読み上げ・コントラスト | `/superforge-a11y` |
 | 出す前に叩いてほしい | `/superforge-roast` |
 | 本当に動くか確認したい | `/superforge-verify` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
