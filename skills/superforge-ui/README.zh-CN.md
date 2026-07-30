@@ -45,6 +45,9 @@ Default、Hover、Focus、Active、Disabled、Loading、Error 逐一写清楚，
 ### 📱 移动端不套用 Web 的那一套
 SwiftUI 走 Apple HIG（Dynamic Type、SF Symbols、`.presentationDetents`、触觉反馈），Compose 走 Material 3（动态取色、预测式返回、48dp 点击区域）。Web 侧的动效规则则只允许动 `transform` 和 `opacity`。
 
+### 💰 「卖货页面」单独一套打法
+落地页的评判标准跟产品界面不一样——面对的是一个抬手就能离开的陌生人，不是要完成任务的老用户。把版块顺序当成一段论证来设计，首屏单独立规矩，移动端不是把桌面端缩小，而是当成另一个页面来做。
+
 ---
 
 ## 🔄 使用前 / 使用后
@@ -84,4 +87,4 @@ cd superforge-skill
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)，卖货型落地页设计在 [references/landing-page.md](references/landing-page.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

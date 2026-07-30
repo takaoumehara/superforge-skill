@@ -26,7 +26,9 @@ Una persona no puede rellenar una cuadrícula de 300 filas sin perder el sitio. 
 
 ```mermaid
 flowchart TD
-    A[🧩 Delimitar<br/>A: un objeto / B: una capacidad] --> B[🔍 Descomponer con 5 lentes<br/>nombrar el sesgo de cada elemento]
+    Z{🔀 ¿Barrido completo o método clásico?} -->|método clásico| ZC[SCAMPER / Seis Sombreros / Crazy 8s / HMW — rápido, sin registro]
+    Z -->|barrido BreakBias| A[🧩 Delimitar<br/>A: un objeto / B: una capacidad]
+    A --> B[🔍 Descomponer con 5 lentes<br/>nombrar el sesgo de cada elemento]
     B --> C[🚫 Vetar las tres obvias]
     C --> D[(📋 Registro de celdas<br/>elemento × 8 técnicas × submétodos)]
     D --> E[✍️ En cada celda:<br/>forma imposible → valor hacia atrás]
@@ -34,9 +36,10 @@ flowchart TD
     F --> G[⚖️ Juzgar en contexto separado<br/>sin ver el razonamiento]
     G --> H[🌐 Mirar el mercado<br/>solo después del juicio]
     H --> I[(📄 docs/product-idea.md)]
+    H --> J[(🗺️ docs/product-idea.html — todas las celdas, incluidas las descartadas, más dos mapas 2×2)]
 ```
 
-Durante el barrido no se poda nada. La deduplicación y la puntuación llegan después de generar, nunca durante.
+Durante el barrido no se poda nada. La deduplicación y la puntuación llegan después de generar, nunca durante. El propio método es una elección declarada de antemano, no un supuesto.
 
 ---
 
@@ -51,6 +54,12 @@ Las ideas se montan solo con elementos que ya están dentro del sujeto y de su f
 ### ⚖️ Descartar exige un motivo, y conservar también
 Una celda muere solo por tres códigos: **G** (cambias el sujeto y sigue leyéndose bien, luego nunca fue sobre este sistema), **C** (ya es corriente), **P** (físicamente imposible). «Parece flojo» no es un motivo. Después, un **pase de rescate** relee las filas descartadas, porque una idea mal descartada no aparece en el informe: es el único fallo que jamás detectarás mirando la salida.
 
+### 🗺️ Ves lo que se descartó, no solo lo que sobrevivió
+`docs/product-idea.html` muestra **cada idea generada**, incluidas las descartadas, cada una con su código de descarte y el motivo en una línea — se acabó recibir solo los tres nombres finales. Dos mapas 2×2 ubican a las supervivientes espacialmente: Impacto × Esfuerzo (con el cuadrante de «fruta al alcance de la mano» nombrado) y Impacto en el usuario × Impacto en la empresa, para ver la prioridad antes de leer una sola tarjeta.
+
+### 🔀 BreakBias es una opción, no la única
+Se pregunta una sola vez, de entrada: el barrido completo y trazado, o un método clásico — SCAMPER, los Seis Sombreros, Crazy 8s, How Might We, brainwriting, lluvia de ideas inversa. El motor pesado es para cuando la idea tiene que aguantar el escrutinio; un método clásico es para una primera pasada rápida y de poco riesgo. Menú completo en [references/classic-methods.md](references/classic-methods.md).
+
 ---
 
 ## 🔄 Antes / Después
@@ -61,7 +70,10 @@ Una celda muere solo por tres códigos: **G** (cambias el sujeto y sigue leyénd
 | De dónde salen las ideas | Lo primero que apareció | Cada elemento × técnica × submétodo |
 | La respuesta obvia | Se propone una y otra vez | Vetada de entrada; la novedad se mide por distancia |
 | Cuándo miras el mercado | Al principio, y el pensamiento se encoge | Tras el juicio, para que no sesgue la novedad |
-| Qué queda | Un registro de chat | `docs/product-idea.md` con los vetos y la cobertura |
+| Qué llegas a ver | Los tres nombres finales | Cada idea generada, qué se descartó y por qué |
+| Cómo priorizas lo que sobrevive | Leer cada tarjeta y adivinar | Dos mapas 2×2 — Impacto × Esfuerzo, Usuario × Impacto en la empresa |
+| Qué método corre | BreakBias, dado por hecho | Una elección, declarada de antemano — barrido completo o método clásico |
+| Qué queda | Un registro de chat | `docs/product-idea.md` + `docs/product-idea.html` con los vetos y la cobertura |
 
 ---
 
@@ -85,7 +97,7 @@ Todas las opciones, la instalación de una sola skill y la ruta de subida a clau
 /superforge-brain
 ```
 
-Empieza fijando dos cosas: si el sujeto es un objeto o una capacidad (Domain A / B) y la resolución — `quick` (~80 celdas), `standard` (~300) o `exhaustive` (900+). Si existe `docs/brief.md`, lo lee en vez de volver a preguntar.
+Empieza preguntando qué método: el barrido BreakBias completo, o un método clásico más rápido (SCAMPER, Seis Sombreros, Crazy 8s, How Might We — ver [references/classic-methods.md](references/classic-methods.md)). Para un barrido, fija después si el sujeto es un objeto o una capacidad (Domain A / B) y explica la resolución en términos llanos antes de preguntar — `quick` (~80 celdas, una pasada sobre los elementos de mayor potencial), `standard` (~300, cada elemento × cada técnica una vez) o `exhaustive` (900+, más pasadas de desbloqueo donde se repita una forma). Si existe `docs/brief.md`, lo lee en vez de volver a preguntar.
 
 ---
 
@@ -116,4 +128,4 @@ Implementación y registros de ejecuciones reales: [takaoumehara/breakbias-studi
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos, las pruebas de descarte, el protocolo de juicio, la rúbrica de mercado y el filtro de dirección están en [references/ideation-tools.md](references/ideation-tools.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los submétodos, las pruebas de descarte, el protocolo de juicio, la rúbrica de mercado y el filtro de dirección están en [references/ideation-tools.md](references/ideation-tools.md); el menú de métodos clásicos (SCAMPER, Seis Sombreros, Crazy 8s y más) está en [references/classic-methods.md](references/classic-methods.md); la especificación de `docs/product-idea.html` — cada idea visualizada, más los mapas de Impacto×Esfuerzo y Usuario×Impacto en la empresa — está en [references/idea-map-output.md](references/idea-map-output.md). Visión general de la suite: [superforge-skill](../../README.es.md).

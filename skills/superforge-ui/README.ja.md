@@ -45,6 +45,9 @@ Default / Hover / Focus / Active / Disabled / Loading / Error を1つずつ仕�
 ### 📱 モバイルにWebの作法を貼らない
 SwiftUI には Apple HIG（Dynamic Type、SF Symbols、`.presentationDetents`、触覚フィードバック）、Compose には Material 3（ダイナミックカラー、予測型「戻る」、48dpのタップ領域）。Web側のモーション規則は、アニメーションを `transform` と `opacity` に限定します。
 
+### 💰 「売るためのページ」専用の作法
+ランディングページはプロダクト画面とは別の基準で評価されます——タスクを終えるリピーターではなく、ワンタップで離脱できる初対面の他人が相手です。セクション順を「論の運び」として設計し、ファーストビューには専用の規則を課し、モバイルはデスクトップを縮めたものではなく別のページとして作ります。
+
 ---
 
 ## 🔄 導入前 / 導入後
@@ -84,4 +87,4 @@ cd superforge-skill
 
 ## 📄 ライセンス
 
-MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。
+MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md)、売るためのランディングページ設計は [references/landing-page.md](references/landing-page.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。

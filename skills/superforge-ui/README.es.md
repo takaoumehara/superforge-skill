@@ -45,6 +45,9 @@ Default, hover, focus, active, disabled, loading y error se especifican uno a un
 ### 📱 Reglas de plataforma, no reglas web pegadas sobre móvil
 Apple HIG para SwiftUI (Dynamic Type, SF Symbols, `.presentationDetents`, háptica) y Material 3 para Compose (color dinámico, gesto de volver predictivo, objetivos de 48dp), junto a las reglas de movimiento web: animar solo `transform` y `opacity`.
 
+### 💰 Un manual aparte para páginas hechas para vender
+Una landing page se juzga con otra métrica que una pantalla de producto: un desconocido que puede irse con un solo toque, no un usuario recurrente terminando una tarea. El orden de las secciones se diseña como un argumento, el hero tiene sus propias reglas, y el móvil se trata como una página distinta al escritorio, no como la misma reducida.
+
 ---
 
 ## 🔄 Antes / Después
@@ -84,4 +87,4 @@ Al terminar, abre `docs/design.html` en el navegador: deberías ver cada token y
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los pasos de diseño, los cuatro estados de datos y la lista de calidad están en [references/design-process.md](references/design-process.md), y la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los pasos de diseño, los cuatro estados de datos y la lista de calidad están en [references/design-process.md](references/design-process.md), la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md), y el diseño de landing pages de venta en [references/landing-page.md](references/landing-page.md). Visión general de la suite: [superforge-skill](../../README.es.md).

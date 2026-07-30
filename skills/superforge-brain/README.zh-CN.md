@@ -26,7 +26,9 @@ BreakBias 不会累。
 
 ```mermaid
 flowchart TD
-    A[🧩 圈定对象<br/>A：具体事物 / B：某项能力] --> B[🔍 五个视角拆解<br/>给每个要素命名偏见]
+    Z{🔀 彻底扫描，还是轻量方法} -->|轻量方法| ZC[SCAMPER / 六顶思考帽 / Crazy 8s / HMW — 快、无台账]
+    Z -->|BreakBias 扫描| A[🧩 圈定对象<br/>A：具体事物 / B：某项能力]
+    A --> B[🔍 五个视角拆解<br/>给每个要素命名偏见]
     B --> C[🚫 封禁三个平庸方案]
     C --> D[(📋 单元格台账<br/>要素 × 8 技法 × 子方法)]
     D --> E[✍️ 每一格：<br/>先造不可能的形态，再倒推价值]
@@ -34,9 +36,10 @@ flowchart TD
     F --> G[⚖️ 独立上下文里审判<br/>不给看推导过程]
     G --> H[🌐 市场判定<br/>只在审判之后]
     H --> I[(📄 docs/product-idea.md)]
+    H --> J[(🗺️ docs/product-idea.html — 含淘汰项的全部单元格 + 两张 2×2 地图)]
 ```
 
-扫描过程中一格都不裁。去重和打分都放在生成结束之后。
+扫描过程中一格都不裁。去重和打分都放在生成结束之后。用哪种方法本身，也是先摆出来让人选，而不是替人假定。
 
 ---
 
@@ -51,6 +54,12 @@ flowchart TD
 ### ⚖️ 判死要有理由，留下也要有理由
 一格只因三种代码而死——**G**（把主语换成别的照样成立，说明这事跟本对象无关）、**C**（已经很常见）、**P**（物理上不成立）。「感觉弱」不构成理由。之后还有**救回环节**重读被判死的行，因为被误杀的点子根本不会出现在报告里，这是唯一一种看输出永远发现不了的失误。
 
+### 🗺️ 不只看到活下来的，也看到被砍掉的
+`docs/product-idea.html` 展示**每一个生成过的点子**，包括被淘汰的，各自带着判死代码和一句话理由——不会再只拿到最后三个名字。生存下来的点子被摆进两张 2×2 地图：Impact × Effort（标出「low-hanging fruit」象限）和 User Impact × Company Impact，不用逐张卡片读完就能看出优先级。
+
+### 🔀 BreakBias 是一个选项，不是唯一方法
+一开始就问清楚：要彻底追踪的扫描，还是一种轻量方法——SCAMPER、六顶思考帽、Crazy 8s、How Might We、脑力写作、逆向头脑风暴。重的那套用在经得起推敲的时候，轻的那套用在快、低风险的第一轮。完整菜单见 [references/classic-methods.md](references/classic-methods.md)。
+
 ---
 
 ## 🔄 使用前 / 使用后
@@ -61,7 +70,10 @@ flowchart TD
 | 点子从哪来 | 最先冒出来的那个 | 每个要素 × 每种技法 × 每种子方法 |
 | 显而易见的方案 | 每次都会再来一遍 | 开跑前先封禁，再按距离打新颖度 |
 | 什么时候看市场 | 一开始就看，然后想法就缩了 | 审判之后，不影响新颖度评分 |
-| 留下什么 | 一段对话记录 | 带禁用清单和覆盖率的 `docs/product-idea.md` |
+| 能看到什么 | 只有最后三个名字 | 生成过的全部点子、淘汰了什么、为什么 |
+| 怎么给生存的点子排优先级 | 逐张卡片读完再凭感觉 | 两张 2×2 地图——Impact×Effort、User×Company Impact |
+| 用哪种方法跑 | 默认 BreakBias | 先摆出来选——彻底扫描还是轻量方法 |
+| 留下什么 | 一段对话记录 | 带禁用清单和覆盖率的 `docs/product-idea.md` + `docs/product-idea.html` |
 
 ---
 
@@ -85,7 +97,7 @@ cd superforge-skill
 /superforge-brain
 ```
 
-开跑前先定两件事：对象是具体事物还是一项能力（Domain A / B），以及覆盖档位——`quick`（约 80 格）、`standard`（约 300）、`exhaustive`（900+）。项目里若已有 `docs/brief.md`，它会直接读而不再追问。
+先问用哪种方法：彻底的 BreakBias 扫描，还是更快的轻量方法（SCAMPER、六顶思考帽、Crazy 8s、How Might We——见 [references/classic-methods.md](references/classic-methods.md)）。选扫描的话，接着定对象是具体事物还是一项能力（Domain A / B），并在问之前用大白话讲清楚覆盖档位的意思——`quick`（约 80 格，只在潜力最高的要素上各跑一遍）、`standard`（约 300，每个要素 × 每种技法各一遍）、`exhaustive`（900+，遇到重复的形态还会追加解锁手法）。项目里若已有 `docs/brief.md`，它会直接读而不再追问。
 
 ---
 
@@ -116,4 +128,4 @@ SIT 是给一屋子人开会用的方法。BreakBias 把它重建成**机器能�
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；子方法、判死测试、审判协议、市场评估表和方向筛选都在 [references/ideation-tools.md](references/ideation-tools.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；子方法、判死测试、审判协议、市场评估表和方向筛选都在 [references/ideation-tools.md](references/ideation-tools.md)；轻量方法菜单（SCAMPER、六顶思考帽等）在 [references/classic-methods.md](references/classic-methods.md)；`docs/product-idea.html` 的规格——全部点子可视化，加 Impact×Effort 和 User×Company Impact 地图——在 [references/idea-map-output.md](references/idea-map-output.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

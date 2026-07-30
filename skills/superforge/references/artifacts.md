@@ -15,6 +15,7 @@ conclusion that exists only in the conversation is lost at the next
 |---|---|---|
 | `docs/brief.md` | `superforge` (intake) | every skill |
 | `docs/product-idea.md` | `superforge-brain` | `superforge-biz`, `superforge-brand`, `superforge-ui`, `superforge-dev` |
+| `docs/product-idea.html` | `superforge-brain` (full sweep only) | humans only — every generated idea, killed ones included, plus the Impact×Effort and User×Company Impact maps |
 | `docs/business-model.md` | `superforge-biz` | `superforge-ui` (paywall placement), `superforge-dev` |
 | `docs/brand.md` | `superforge-brand` | `superforge-ui` |
 | `docs/design.md` | `superforge-ui` | `superforge-dev`, `superforge-verify` |

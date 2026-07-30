@@ -26,7 +26,9 @@ BreakBias は疲れません。
 
 ```mermaid
 flowchart TD
-    A[🧩 対象を決める<br/>A:モノ / B:技術シード] --> B[🔍 5レンズで分解<br/>全要素にバイアスを命名]
+    Z{🔀 徹底スイープか、軽い手法か} -->|軽い手法| ZC[SCAMPER / シックスハット / Crazy 8s / HMW — 速い・台帳なし]
+    Z -->|BreakBiasスイープ| A[🧩 対象を決める<br/>A:モノ / B:技術シード]
+    A --> B[🔍 5レンズで分解<br/>全要素にバイアスを命名]
     B --> C[🚫 平凡3案を禁止]
     C --> D[(📋 セル台帳<br/>要素 × 技法8 × サブ手法)]
     D --> E[✍️ 全セルで<br/>ありえない形 → 価値を逆算]
@@ -34,9 +36,10 @@ flowchart TD
     F --> G[⚖️ 別コンテキストで審判<br/>生成過程は見せない]
     G --> H[🌐 市場判定<br/>審判の後だけ]
     H --> I[(📄 docs/product-idea.md)]
+    H --> J[(🗺️ docs/product-idea.html — 殺したセルも含む全件 + 2種の4象限マップ)]
 ```
 
-スイープ中は1つも間引きません。重複整理も採点も、生成が終わってからです。
+スイープ中は1つも間引きません。重複整理も採点も、生成が終わってからです。手法そのものも、決めつけずに先に選ばせます。
 
 ---
 
@@ -51,6 +54,12 @@ flowchart TD
 ### ⚖️ 殺すときも褒めるときも、理由を残す
 kill は3つのコードでのみ行います — **G**（主語を入れ替えても成立する＝この対象の話ではない）、**C**（すでにありふれている）、**P**（物理的に破綻）。「なんとなく弱い」は kill の理由になりません。そして誤殺を戻す**救済パス**を毎回走らせます。捨てられた案は最終レポートに載らないので、誤殺だけは出力を見ても永遠に気づけないからです。
 
+### 🗺️ 生き残った案だけでなく、削られた案も見える
+`docs/product-idea.html` には**生成した全アイデア**が、殺したものも含めて、kill コードと一言の理由つきで並びます。最後の3案だけを渡されることはもうありません。生存案は2種類の4象限マップに配置されます——Impact × Effort（low-hanging fruit 象限に名前つき）と User Impact × Company Impact。カードを1枚も読まずに、優先度が視覚的にわかります。
+
+### 🔀 BreakBias は選択肢の1つ、唯一の方法ではない
+最初に一度だけ確認します——徹底的に追跡するスイープか、軽い手法か。SCAMPER、シックスハット、Crazy 8s、How Might We、ブレインライティング、逆ブレスト。重い方は精査に耐える必要があるとき、軽い方は速くて低リスクな最初の一手のときに使います。全メニューは [references/classic-methods.md](references/classic-methods.md)。
+
 ---
 
 ## 🔄 導入前 / 導入後
@@ -61,7 +70,10 @@ kill は3つのコードでのみ行います — **G**（主語を入れ替え�
 | アイデアの出どころ | 最初に浮かんだもの | 全要素 × 全技法 × 全サブ手法 |
 | ありがちな案 | 毎回また出てくる | 開始前に禁止し、その距離で新規性を採点 |
 | 市場を見るタイミング | 最初（そして発想が縮こまる） | 審判のあと（新規性の採点を汚さない） |
-| 残るもの | 会話ログ | 禁止リストと踏破率つきの `docs/product-idea.md` |
+| 見えるもの | 最後の3案の名前だけ | 生成した全アイデア、何を殺したか、その理由 |
+| 生存案の優先順位づけ | カードを全部読んで勘で判断 | Impact×Effort と User×Company Impact の2種のマップ |
+| 使う手法 | BreakBias 前提 | 先に選ばせる——徹底スイープか軽い手法か |
+| 残るもの | 会話ログ | 禁止リストと踏破率つきの `docs/product-idea.md` + `docs/product-idea.html` |
 
 ---
 
@@ -85,7 +97,7 @@ cd superforge-skill
 /superforge-brain
 ```
 
-最初に「対象はモノか技術か（Domain A / B）」と「網羅度（quick 約80セル / standard 約300 / exhaustive 900+）」を決めます。`docs/brief.md` があればそれを読み、前提を聞き直しません。
+最初に「どの手法で進めるか」を聞きます——徹底スイープか、速い軽量手法（SCAMPER、シックスハット、Crazy 8s、How Might We。[references/classic-methods.md](references/classic-methods.md)）か。スイープの場合は続けて「対象はモノか技術か（Domain A / B）」と、網羅度ダイヤルの意味を説明してから決めます——`quick`（約80セル、可能性が高い要素だけに1回ずつ）／`standard`（約300、全要素×全技法を1回ずつ）／`exhaustive`（900+、同じ形が繰り返す箇所には追加のブロック解除も）。`docs/brief.md` があればそれを読み、前提を聞き直しません。
 
 ---
 
@@ -116,4 +128,4 @@ SIT は人が集まって行うワークショップ手法です。BreakBias は
 
 ## 📄 ライセンス
 
-MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、サブ手法・kill テスト・審判プロトコル・市場ルーブリック・方向性フィルタは [references/ideation-tools.md](references/ideation-tools.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。
+MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、サブ手法・kill テスト・審判プロトコル・市場ルーブリック・方向性フィルタは [references/ideation-tools.md](references/ideation-tools.md)、軽量な手法メニュー（SCAMPER・シックスハット・Crazy 8s ほか）は [references/classic-methods.md](references/classic-methods.md)、`docs/product-idea.html` の仕様（全アイデアの可視化＋Impact×Effort・User×Company Impact マップ）は [references/idea-map-output.md](references/idea-map-output.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。

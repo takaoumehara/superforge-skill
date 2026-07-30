@@ -45,6 +45,9 @@ Default, hover, focus, active, disabled, loading, error를 하나씩 명세합�
 ### 📱 모바일에 웹 규칙을 덧붙이지 않습니다
 SwiftUI에는 Apple HIG(Dynamic Type, SF Symbols, `.presentationDetents`, 햅틱), Compose에는 Material 3(다이내믹 컬러, 예측형 뒤로 가기, 48dp 터치 영역)를 적용합니다. 웹 모션 규칙은 `transform`과 `opacity`만 애니메이션하도록 제한합니다.
 
+### 💰 "팔기 위한 페이지"만의 별도 원칙
+랜딩 페이지는 제품 화면과 다른 기준으로 평가됩니다 — 일을 끝내려는 재방문 사용자가 아니라, 한 번의 탭으로 떠날 수 있는 낯선 사람이 상대입니다. 섹션 순서를 하나의 논증으로 설계하고, 히어로 영역에는 별도 규칙을 적용하며, 모바일은 데스크톱을 축소한 것이 아니라 다른 페이지로 취급합니다.
+
 ---
 
 ## 🔄 도입 전 / 도입 후
@@ -84,4 +87,4 @@ cd superforge-skill
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 설계 단계와 네 가지 데이터 상태, 품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 설계 단계와 네 가지 데이터 상태, 품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에, 판매용 랜딩 페이지 설계는 [references/landing-page.md](references/landing-page.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
