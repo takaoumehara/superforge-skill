@@ -2,16 +2,21 @@
 name: superforge-biz
 description: >
   Architect business models, pricing tiers, paywall placement, subscription
-  flows, and Go-To-Market plans. Covers monetization archetype selection,
-  price anchoring, trial-to-paid conversion triggers, and growth loops.
-  Use when the user says "pricing", "monetization", "paywall", "subscription",
+  flows, customer acquisition, and Go-To-Market plans. Covers monetization
+  archetype selection, price anchoring, trial-to-paid conversion triggers,
+  growth loops, channel-market fit and lead generation, and quantifying any
+  feature's business value (time saved, cost avoided, revenue captured, risk
+  reduced) as a logic-and-emotion pitch instead of a vague adjective. Use
+  when the user says "pricing", "monetization", "paywall", "subscription",
   "free trial", "business model", "revenue", "GTM", "how do we make money",
-  "価格", "値付け", "課金", "マネタイズ", "サブスク", "ペイウォール",
-  "ビジネスモデル", "どう収益化する", or runs /superforge-biz.
+  "lead generation", "customer acquisition", "marketing", "ROI", "value
+  proposition", "価格", "値付け", "課金", "マネタイズ", "サブスク",
+  "ペイウォール", "ビジネスモデル", "どう収益化する", "リード獲得",
+  "顧客獲得", "マーケティング", "ビジネス視点", or runs /superforge-biz.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "2.1"
 compatibility: >
   Standalone.
   Reads docs/product-idea.md and docs/brief.md when present, writes docs/business-model.md.
@@ -52,17 +57,50 @@ Structure the unit economics framework:
 
 ---
 
+## 4. Customer Acquisition — before there's a loop to grow
+
+§3's growth loops assume a customer already exists. Getting the first ones is
+a different problem: which channel actually fits this product (price point,
+sales cycle, buyer type), what makes a lead magnet convert instead of being
+ignored, how to tell a real lead from a vanity one, and the back-of-envelope
+CAC/LTV math that stops a channel from quietly losing money. Full framework,
+the channel-market-fit matrix, and the first-10-customers playbook (when
+there's no case study yet to make a scalable channel credible) →
+**`references/customer-acquisition.md`**.
+
+## 5. The Value Pitch — quantify it, or it's an adjective
+
+"良いオートメーションがあります" is a spec sheet, not a pitch. Every value claim
+reduces to one of four levers — time saved, cost avoided, revenue captured,
+risk reduced — each with a formula that turns the feature into the
+*customer's own number*, stated before the price and paired with the one
+specific human moment that number changes. This is the discipline behind
+§2's "Value Anchor" step, and the discovery questions that get the real
+numbers before the pitch is written → **`references/value-pitch.md`**.
+
+---
+
 ## Deeper reference
 
 The mechanisms behind pricing, anchoring, trials, defaults, and paywall
 placement — and the ethical line on each — are in
 **`references/behavioral-frameworks.md`**.
 
+**`references/customer-acquisition.md`** — channel-market fit, lead magnets,
+fit×intent qualification, CAC/LTV sanity math, and the first-10-customers
+playbook.
+
+**`references/value-pitch.md`** — the four value levers and their formulas,
+the logic-then-emotion pitch structure, the credibility checklist, and the
+discovery questions that fill in the numbers before the pitch is written.
+
 ## Artifact
 
 Write `docs/business-model.md`. Read `docs/product-idea.md` first if it
 exists; the monetization archetype follows from the product shape, not the
-other way round.
+other way round. Include an `## Acquisition plan` section (from §4) and a
+`## Value pitch` section (from §5) — a business model with a price but no
+way to reach or convince a customer is only half the artifact.
 
 ## Delegate when a sharper skill is installed
 

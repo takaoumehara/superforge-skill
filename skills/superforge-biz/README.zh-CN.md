@@ -25,8 +25,11 @@ flowchart TD
     I[💡 产品创意] --> A[🏷️ 选定收入原型]
     A --> B[🚪 付费墙放在惊喜时刻]
     B --> C[📈 价值指标与增长闭环]
-    C --> D[📣 GTM：渠道 · 定位 · 漏斗]
-    D --> E[(📄 docs/business-model.md)]
+    C --> D[🎯 获客：渠道契合 · 引流磁石 · CAC/LTV]
+    D --> P[💬 价值话术：功能→数字→改变的那一刻]
+    D --> E2[📣 GTM：渠道 · 定位 · 漏斗]
+    P --> E2
+    E2 --> E[(📄 docs/business-model.md)]
 ```
 
 原型由产品形态推导出来，绝不反过来。
@@ -44,6 +47,12 @@ flowchart TD
 ### ⚖️ 说服手法配一条伦理红线
 锚定、损失厌恶、默认选项确实有效，而每一种都有一个"越过就是暗黑模式"的位置。红线画在哪里不靠感觉，而是写在参考文档里。
 
+### 💬 把「很棒的自动化」变成数字，再变成一个瞬间
+任何价值主张都能归到四个杠杆之一——省时间、免成本、抢回营收、降风险——每个都有一条把功能换算成**客户自己的数字**的公式，且要在报价之前说出口。「每周省2小时」单独看是规格书；配上「周五傍晚不用再加班了」这个具体瞬间，才变成购买的理由。
+
+### 🎯 不只是让老客户增长，更是够到第一批客户
+渠道契合度（B2B 企业客户和自助式消费者应用需要完全不同的渠道）、能真正转化而不是被无视的引流磁石、按"匹配度×意向度"筛选让获客数不再是虚荣指标，以及在渠道悄悄亏钱之前发现问题的 CAC/LTV 粗算。
+
 ---
 
 ## 🔄 使用前 / 使用后
@@ -54,6 +63,9 @@ flowchart TD
 | 付费墙位置 | 哪里好加就加在哪 | 价值被证明的那一刻 |
 | 增长 | "获客以后再说" | 闭环和渠道都写进产物 |
 | 说服手法 | 照抄转化率高的同行 | 连同伦理边界一起使用 |
+| 话术 | "很棒的自动化，强大的功能" | 一个数字（时间/金额）加上它改变的具体瞬间 |
+| 用哪个渠道 | 今年流行什么用什么 | 按价位和决策周期匹配，先验证一个再加下一个 |
+| 获客数量 | 收到多少算多少 | 按匹配度×意向度分层，CAC 对照 LTV 检查 |
 
 ---
 
@@ -83,4 +95,4 @@ cd superforge-skill
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；锚定、损失厌恶、默认选项以及各自的伦理边界，都在 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；锚定、损失厌恶、默认选项以及各自的伦理边界，都在 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)；渠道契合、引流磁石、筛选和 CAC/LTV 算法在 [references/customer-acquisition.md](references/customer-acquisition.md)；四个价值杠杆和「先数字后情感」的话术公式在 [references/value-pitch.md](references/value-pitch.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

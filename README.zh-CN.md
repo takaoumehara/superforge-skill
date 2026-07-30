@@ -62,15 +62,15 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要不落俗套的点子（**BreakBias 引擎**） | `docs/product-idea.md` |
-| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 定价，以及付费墙摆在哪 | `docs/business-model.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要不落俗套的点子（**BreakBias 引擎**，也可以选更轻的经典方法） | `docs/product-idea.md`（彻底扫描时还有 `.html` 地图） |
+| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 定价、付费墙位置、怎么获客、把价值讲成数字 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.zh-CN.md) | 名字、配色、语气，外加生成素材的提示词 | `docs/brand.md` |
 
 ### 2. 做 —— 把它做出来
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，也包括卖货型落地页，附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：把活儿拆开分给多个 agent，各配合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
@@ -208,9 +208,14 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | 不靠盘问，把一个请求变成书面需求 |
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 什么时候把某一步交给你已装好的其他技能 |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 让每种技法穷尽的子方法、kill 判定、审判协议、市场评估表 |
+| [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 代替彻底扫描的轻量方法——SCAMPER、六顶思考帽、Crazy 8s、How Might We 等 |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 的规格——含淘汰项的全部点子可视化，加两张优先级地图 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 锚定、损失厌恶、默认选项，以及各自的伦理边界 |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 渠道契合、引流磁石、匹配度×意向度筛选、CAC/LTV 算法 |
+| [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 把任何功能变成量化的、先数字后情感的商业话术 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
+| [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 卖货页面的设计——版块顺序、首屏、移动端和桌面端的区别 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 启发式评估、无障碍审计、认知负荷、模拟人物测试 |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2 全部 86 条准则，以及每条实际该看什么 |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 七道检查的步骤、合格线，以及各自要留下的证据 |

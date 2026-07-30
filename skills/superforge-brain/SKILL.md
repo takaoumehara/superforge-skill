@@ -1,23 +1,28 @@
 ---
 name: superforge-brain
 description: >
-  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep.
-  Decompose the problem across five lenses, name the hidden bias on every
-  element, ban the obvious three, then push every element through eight
-  transformation techniques and their sub-methods as a tracked cell ledger, so
-  no combination is silently skipped. Survivors are killed by explicit codes,
-  judged in a separate context, and only then checked against the market. Use
-  when the user says "brainstorm", "ideas", "come up with", "what could we
-  build", "reframe this", "concept", "something more original", "アイデア",
-  "発想", "ブレスト", "企画", "コンセプト", "ありきたりじゃないもの",
-  "何が作れる", "BreakBias", "SIT", "虱潰しで考えて", or runs /superforge-brain.
+  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep —
+  or, when the stakes don't call for it, a lighter classic method (SCAMPER,
+  Six Hats, Crazy 8s, How Might We). For a full sweep: decompose the problem
+  across five lenses, name the hidden bias on every element, ban the obvious
+  three, then push every element through eight transformation techniques and
+  their sub-methods as a tracked cell ledger, so no combination is silently
+  skipped. Survivors are killed by explicit codes, judged in a separate
+  context, and only then checked against the market — with every generated
+  idea, not just survivors, visualised in docs/product-idea.html alongside
+  an Impact×Effort and a User×Company Impact map. Use when the user says
+  "brainstorm", "ideas", "come up with", "what could we build", "reframe
+  this", "concept", "something more original", "アイデア", "発想",
+  "ブレスト", "企画", "コンセプト", "ありきたりじゃないもの", "何が作れる",
+  "BreakBias", "SIT", "虱潰しで考えて", or runs /superforge-brain.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "3.1"
 compatibility: >
   Standalone.
-  Reads docs/brief.md when present and writes docs/product-idea.md.
+  Reads docs/brief.md when present and writes docs/product-idea.md plus,
+  for a full sweep, docs/product-idea.html.
   The market pass uses web search when available; without it, mark market
   status as unknown rather than guessing.
   Delegates to installed ideation skills when available; works alone when they are absent.
@@ -58,24 +63,54 @@ separate context, and a market gate placed after judgment.
 
 ---
 
-## 1. Scope the run
+## 1. Choose the method — do not assume the full sweep
+
+BreakBias is one way to generate ideas, not the only one this skill offers.
+Ask once, before generating anything:
+
+| Method | What actually happens | Use when |
+|---|---|---|
+| **BreakBias sweep** (recommended default for a real decision) | Every (element × technique × sub-method) combination runs as a tracked cell. Nothing is skipped, every kill carries a reason, survivors are scored blind to how they were generated. Minutes to an hour depending on resolution. | the idea needs to hold up — funding, a pivot, "we've been circling this for weeks" |
+| **A classic method** (SCAMPER, Six Hats, Crazy 8s, How Might We, and others) | A single fast divergent pass, no cell ledger, no kill codes, no blind judging. | a first pass, low stakes, a workshop about participation rather than proof |
+
+Full menu and how to run each classic method →
+**`references/classic-methods.md`**. If the user picks a classic method, that
+file replaces the rest of this procedure for the run; come back here only if
+they later want to upgrade to a full sweep.
+
+The rest of this document (§2 onward) is the BreakBias sweep.
+
+---
+
+## 2. Scope the run
 
 - **Domain A — an object** (a product, a service, a screen, a business).
   Decompose the thing itself.
 - **Domain B — a capability** (a technology, a skill, a dataset with no fixed
   use). Decompose what it can do, then sweep for who would want it.
 
-**Resolution** — the exhaustiveness dial. State it and hold to it:
+**Resolution — the exhaustiveness dial. Explain it before asking, in these
+terms, not just the label:**
 
-| | Cells | Use when |
-|---|---|---|
-| `quick` | ~80 | a first look, one sitting |
-| `standard` | ~300 | a real product decision |
-| `exhaustive` | 900+ | the answer matters more than the hours |
+> "解像度は、要素の数 × 技法8種 × サブ手法の掛け算で決まるセルの総数です。
+> セル1つが『この要素を、この技法のこのやり方で、実際に1つ考えてみる』とい
+> う1回の生成です。多いほど網羅的で、少ないほど速いという単純なトレードオフ
+> です。"
+
+Then offer the three levels with what each one **means**, not only the count:
+
+| | Cells | What that buys you | Use when |
+|---|---|---|---|
+| `quick` | ~80 | one sub-method per technique on the highest-potential elements only — a real pass, not a token gesture, but several corners of the space go untouched | a first look, one sitting |
+| `standard` | ~300 | every element crossed with every technique and its sub-methods once | a real product decision |
+| `exhaustive` | 900+ | `standard`, plus every collapse-prevention unblocking lens applied wherever a technique repeats a shape | the answer matters more than the hours |
+
+State the resolution chosen and hold to it — do not quietly downgrade mid-run
+because the cell count got long.
 
 ---
 
-## 2. Decompose, and name the bias on every element
+## 3. Decompose, and name the bias on every element
 
 Five lenses, minimum counts enforced. Every element carries the hidden
 assumption it rests on, written as a sentence — that named assumption is what
@@ -94,7 +129,7 @@ Break Potential of low / med / high. That list becomes the rows of the ledger.
 
 ---
 
-## 3. The cell ledger
+## 4. The cell ledger
 
 `element × technique × sub-method = one cell`, each with an ID and a status.
 
@@ -109,7 +144,7 @@ progress as *n / total cells terminal* — never as a feeling of completeness.
 
 ---
 
-## 4. Sweep — eight techniques
+## 5. Sweep — eight techniques
 
 Sub-methods, the per-cell output format, and the collapse-prevention rules are
 in `references/ideation-tools.md` §1. One pass per technique is a guess; the
@@ -132,7 +167,7 @@ moving on — TRIZ trade-off dissolution, inverted sabotage, or Jobs To Be Done
 
 ---
 
-## 5. Kill, with a reason code
+## 6. Kill, with a reason code
 
 Default is survival. Kill only on a named code, and record it in the ledger:
 
@@ -148,7 +183,7 @@ because nobody ever sees what was discarded.
 
 ---
 
-## 6. Judge in a separate context
+## 7. Judge in a separate context
 
 Survivors are developed into cards — one sentence, why it is surprising, user
 value, business value, risks, next experiment — and judged **without the
@@ -171,7 +206,7 @@ Output a table: `| コンセプト | 要素 | 技法 | 壊したバイアス | N
 
 ---
 
-## 7. Market, only after judgment
+## 8. Market, only after judgment
 
 Never before. Market knowledge is the strongest source of premature collapse:
 knowing a space is crowded makes a model stop proposing anything in it.
@@ -183,7 +218,7 @@ Detail in `references/ideation-tools.md` §4.
 
 ---
 
-## 8. Synthesise
+## 9. Synthesise
 
 - **Cluster** the survivors (UX / 収益 / コスト / ブランド / コミュニティ / データ / ラディカル / 即試せる / 長期)
 - **Name the biases that broke repeatedly** — that repetition marks where the
@@ -195,6 +230,14 @@ Then run the direction filter in `references/ideation-tools.md` §3 to decide
 which Hero Concept is worth building. Concept quality and build-worthiness are
 different questions and must be scored separately.
 
+**Build `docs/product-idea.html` alongside the markdown** — every generated
+cell, not only survivors, with kill codes and reasons left visible; an
+Impact × Effort map with the low-hanging-fruit quadrant named; and a User
+Impact × Company Impact map from the judge's own axes. Full spec in
+`references/idea-map-output.md`. This is what lets someone who was not in the
+room see what was cut and why, instead of being handed only the last three
+names standing.
+
 ---
 
 ## Execution modes
@@ -205,6 +248,7 @@ different questions and must be scored separately.
 
 ## Quality check — ask these after the run
 
+- 手法（BreakBias か classic method か）を、始める前にユーザーに確認したか
 - 分解は下限件数を満たし、各要素にバイアスを命名したか
 - 台帳に `todo` / `generated` の残りは無いか。飛ばしたセルを「無かったこと」にしていないか
 - 各セルで「ありえない形」を先に握り、メリットを逆算したか（形が先か）
@@ -212,6 +256,7 @@ different questions and must be scored separately.
 - 平凡3案を禁止してから発想したか
 - kill にはすべて G / C / P の理由が付いているか。救済パスを走らせたか
 - 審判は生成過程を見ずに採点したか。市場判定は審判の後だったか
+- `docs/product-idea.html` は殺したセルも含めて全件見えるか。勝者だけになっていないか
 
 ---
 
@@ -224,12 +269,24 @@ sweep, to confirm the right thing is being decomposed · §3 the direction
 filter that runs *after*, to decide which Hero Concept is worth building ·
 §4 the kill-code tests, the judge protocol, and the market rubric.
 
+**`references/classic-methods.md`** — the lighter alternative to a full sweep:
+SCAMPER, Six Thinking Hats, Crazy 8s, How Might We, brainwriting, reverse
+brainstorming, and random input, with what each is for and weak at. Read it at
+§1, before assuming the sweep is the only option.
+
+**`references/idea-map-output.md`** — the `docs/product-idea.html` spec: the
+all-ideas board that keeps killed cells visible, and the two 2×2 maps.
+
 ## Artifact
 
 Write `docs/product-idea.md` before reporting back — including the banned
 obvious three and the final ledger counts, so nobody re-proposes a banned idea
 and nobody mistakes a partial sweep for a complete one. Read `docs/brief.md`
 first if it exists and confirm its premise rather than re-asking.
+
+For a BreakBias sweep, also write `docs/product-idea.html` — see
+`references/idea-map-output.md`. Not required after a classic-method session,
+where there is no ledger to visualise.
 
 ## Delegate when a sharper skill is installed
 

@@ -84,6 +84,10 @@ No UI component is complete until all 7 component states are explicitly engineer
   designing screens.
 - **`references/design-system-output.md`** — the `docs/design.md` +
   `docs/design.html` two-artifact spec. Read it before touching tokens.
+- **`references/landing-page.md`** — the conversion-specific layer for sales
+  and marketing pages: section order as an argument, the hero specifically,
+  and why mobile and desktop are different pages rather than one page scaled.
+  Read it before designing anything meant to sell rather than to be used.
 
 ## Artifact
 
@@ -103,5 +107,6 @@ add it to `docs/design.md` and record it under `New patterns needed`.
 `animation-patterns`, `gsap-*` (motion) · `clarify` (UI copy) · `ux-spec` ·
 `superforge-a11y` (the a11y audit itself) · `accessibility-generator`, `audit`
 (deeper a11y specialists) · `ios`, `swift`, `liquid-glass`,
-`macos`, `watchos` (native) · `landing-page-creator`, `keynote-slide-page` ·
-`dataviz` · `japanese-text`.
+`macos`, `watchos` (native) · `landing-page-creator`, `keynote-slide-page`
+(sales pages — see `references/landing-page.md` first) · `dataviz` ·
+`japanese-text`.

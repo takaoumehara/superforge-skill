@@ -23,6 +23,7 @@ treat any absence as "do it inline".
 ### `superforge-brain` — ideation
 | Step | Delegate to |
 |---|---|
+| Low-stakes or fast first pass instead of a full sweep | the classic-method menu inline — `superforge-brain/references/classic-methods.md` (SCAMPER, Six Hats, Crazy 8s, HMW, and more) — no external skill needed |
 | Structured divergence when SIT alone is not enough | `brainstorming` |
 | Idea discovery from the user's existing work or expertise | `idea-generator` |
 | Pressure-testing an idea from many angles | `validate-thinking`, `roast` |
@@ -33,6 +34,8 @@ treat any absence as "do it inline".
 ### `superforge-biz` — money
 | Step | Delegate to |
 |---|---|
+| Lead generation, channel selection, CAC/LTV | inline — `superforge-biz/references/customer-acquisition.md` — no external skill needed |
+| Quantifying a feature's ROI as a pitch | inline — `superforge-biz/references/value-pitch.md` — no external skill needed |
 | Pricing and monetization models | `monetization`, `indie-business` |
 | Paywall screens and offers | `paywall-generator`, `subscription-offers`, `offer-codes-setup` |
 | Subscription lifecycle, win-back, referral | `subscription-lifecycle`, `win-back-offers`, `referral-system` |
@@ -64,7 +67,7 @@ treat any absence as "do it inline".
 | Spec writing | `ux-spec`, `implementation-spec` |
 | Accessibility | **`superforge-a11y`** first; then `accessibility-generator`, `audit` |
 | Native iOS/macOS/watchOS | `ios`, `swift`, `liquid-glass`, `ipad-patterns`, `macos`, `watchos`, `navigation-patterns`, `toolbars`, `widgets` |
-| Landing and case-study pages | `landing-page-creator`, `keynote-slide-page` |
+| Landing and case-study pages | `superforge-ui/references/landing-page.md` first; then `landing-page-creator`, `keynote-slide-page` |
 | Data visualisation | `dataviz`, `charts-3d` |
 | Japanese typesetting | `japanese-text` |
 
