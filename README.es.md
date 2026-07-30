@@ -62,7 +62,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.es.md) | quieres una idea que no sea la obvia (**motor BreakBias**) | `docs/product-idea.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.es.md) | quieres una idea que no sea la obvia (**motor BreakBias**, o un método clásico más ligero, a elegir) | `docs/product-idea.md` (+ mapa `.html` en un barrido completo) |
 | [`superforge-biz`](./skills/superforge-biz/README.es.md) | necesitas un precio y un sitio donde poner el paywall | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.es.md) | nombre, color, tono, y los prompts que generan los recursos | `docs/brand.md` |
 
@@ -70,7 +70,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz, más landing pages hechas para vender, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.es.md) | implementación: repartir el trabajo entre agentes, cada uno en su modelo | `docs/plan.md` |
 
 ### 3. Probar — comprobar que nada falla
@@ -208,9 +208,12 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | convertir una petición en un brief escrito sin interrogar a nadie |
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | cuándo pasar un paso a otra skill que ya tengas instalada |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | los submétodos que hacen exhaustiva cada técnica, las pruebas de descarte, el protocolo de juicio, la rúbrica de mercado |
+| [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | la alternativa más ligera al barrido completo — SCAMPER, Seis Sombreros, Crazy 8s, How Might We y más |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | la especificación de `product-idea.html` — cada idea visualizada, incluidas las descartadas, más los dos mapas de prioridad |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anclaje, aversión a la pérdida, opciones por defecto y su línea ética |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | los pasos de diseño, los cuatro estados de datos, la lista de calidad |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | la especificación de `design.md` + `design.html` |
+| [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | diseño de páginas hechas para vender — orden de secciones, el hero, móvil frente a escritorio |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | evaluación heurística, auditoría de accesibilidad, carga cognitiva, personas simuladas |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | los 86 criterios de WCAG 2.2 y qué mirar en cada uno |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | las siete pasadas, su listón de aceptación y la evidencia que deja cada una |

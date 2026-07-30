@@ -62,7 +62,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 뻔하지 않은 아이디어가 필요할 때 (**BreakBias 엔진**) | `docs/product-idea.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 뻔하지 않은 아이디어가 필요할 때 (**BreakBias 엔진**, 또는 더 가벼운 정통 기법 중 선택) | `docs/product-idea.md` (전수 스윕이면 `.html` 지도도) |
 | [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 가격과 페이월 위치를 정할 때 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ko.md) | 이름·색·톤과, 소재를 만들어 낼 프롬프트까지 | `docs/brand.md` |
 
@@ -70,7 +70,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 화면 설계. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 화면 설계, 그리고 팔기 위한 랜딩 페이지도. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 작업을 나눠 여러 에이전트에 배분하고 각자 맞는 모델에 태움 | `docs/plan.md` |
 
 ### 3. 확인한다 — 망가진 데가 없는지 보기
@@ -208,9 +208,12 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge/references/intake.md`](./skills/superforge/references/intake.md) | 캐묻지 않고 요청을 문서화된 요건으로 바꾸는 절차 |
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 이미 설치된 다른 스킬에 어느 단계를 맡길지 |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 각 기법을 빠짐없이 만드는 하위 방법, 폐기 판정, 심사 프로토콜, 시장 루브릭 |
+| [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 전수 스윕 대신 쓰는 가벼운 기법 — SCAMPER, 여섯 모자, Crazy 8s, How Might We 등 |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 명세 — 폐기안 포함 전 아이디어 시각화와 두 개의 우선순위 지도 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 앵커링·손실 회피·기본값과 각각의 윤리적 선 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
+| [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 팔기 위한 페이지 설계 — 섹션 순서, 히어로 영역, 모바일과 데스크톱의 차이 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 휴리스틱 평가, 접근성 감사, 인지 부하, 가상 페르소나 테스트 |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2의 86개 기준 전체와, 기준마다 실제로 무엇을 볼지 |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 일곱 검사의 절차, 합격선, 각 검사가 남겨야 할 근거 |

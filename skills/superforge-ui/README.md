@@ -45,6 +45,9 @@ Default, hover, focus, active, disabled, loading, and error are each specified �
 ### 📱 Platform rules, not web rules pasted onto mobile
 Apple HIG for SwiftUI (Dynamic Type, SF Symbols, `.presentationDetents`, haptics) and Material 3 for Compose (dynamic colour, predictive back, 48dp targets), alongside the web motion rules — animate only `transform` and `opacity`.
 
+### 💰 A separate playbook for pages built to sell
+A landing page is judged by a different metric than a product screen — a stranger who can leave in one tap, not a returning user finishing a task. Section order as an argument, the hero held to its own rules, and mobile treated as a different page from desktop rather than the same one scaled down.
+
 ---
 
 ## 🔄 Before / After
@@ -84,4 +87,4 @@ When the run finishes, open `docs/design.html` in a browser: every token and sta
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the design steps, the four data states, and the quality checklist are in [references/design-process.md](references/design-process.md), and the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the design steps, the four data states, and the quality checklist are in [references/design-process.md](references/design-process.md), the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md), and sales/landing page design is in [references/landing-page.md](references/landing-page.md). Suite overview: [superforge-skill](../../README.md).
