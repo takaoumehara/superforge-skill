@@ -34,6 +34,8 @@ treat any absence as "do it inline".
 ### `superforge-biz` — money
 | Step | Delegate to |
 |---|---|
+| Lead generation, channel selection, CAC/LTV | inline — `superforge-biz/references/customer-acquisition.md` — no external skill needed |
+| Quantifying a feature's ROI as a pitch | inline — `superforge-biz/references/value-pitch.md` — no external skill needed |
 | Pricing and monetization models | `monetization`, `indie-business` |
 | Paywall screens and offers | `paywall-generator`, `subscription-offers`, `offer-codes-setup` |
 | Subscription lifecycle, win-back, referral | `subscription-lifecycle`, `win-back-offers`, `referral-system` |
