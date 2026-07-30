@@ -63,7 +63,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea that is not the obvious one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
-| [`superforge-biz`](./skills/superforge-biz/README.md) | you need a price and a place to put the paywall | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | you need a price, a paywall, a way to get customers, and a pitch that quantifies the value | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
 
 ### 2. Build — make it real
@@ -211,6 +211,8 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | the lighter alternative to a full sweep — SCAMPER, Six Hats, Crazy 8s, How Might We, and more |
 | [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | the `product-idea.html` spec — every idea visualised, killed ones included, plus the two priority maps |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | channel-market fit, lead magnets, fit×intent qualification, CAC/LTV math |
+| [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | turning any feature into a quantified, logic-then-emotion business pitch |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | designing a page built to sell — section order, the hero, mobile vs. desktop |

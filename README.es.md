@@ -63,7 +63,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.es.md) | quieres una idea que no sea la obvia (**motor BreakBias**, o un método clásico más ligero, a elegir) | `docs/product-idea.md` (+ mapa `.html` en un barrido completo) |
-| [`superforge-biz`](./skills/superforge-biz/README.es.md) | necesitas un precio y un sitio donde poner el paywall | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.es.md) | necesitas un precio, un paywall, una forma de conseguir clientes y un pitch que cuantifique el valor | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.es.md) | nombre, color, tono, y los prompts que generan los recursos | `docs/brand.md` |
 
 ### 2. Construir — hacerlo real
@@ -211,6 +211,8 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | la alternativa más ligera al barrido completo — SCAMPER, Seis Sombreros, Crazy 8s, How Might We y más |
 | [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | la especificación de `product-idea.html` — cada idea visualizada, incluidas las descartadas, más los dos mapas de prioridad |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anclaje, aversión a la pérdida, opciones por defecto y su línea ética |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | encaje canal-mercado, imanes de leads, cualificación por ajuste×intención, matemática de CAC/LTV |
+| [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | convertir cualquier función en un pitch de negocio cuantificado, lógica y luego emoción |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | los pasos de diseño, los cuatro estados de datos, la lista de calidad |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | la especificación de `design.md` + `design.html` |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | diseño de páginas hechas para vender — orden de secciones, el hero, móvil frente a escritorio |

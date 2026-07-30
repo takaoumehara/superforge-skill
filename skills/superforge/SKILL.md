@@ -58,7 +58,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | The user's state | Route to |
 |---|---|
 | 作りたいものが言語化できていない | `/superforge-brain` |
-| アイデアはあるが売れるか不明 | `/superforge-brain` → `/superforge-biz` |
+| アイデアはあるが売れるか不明・リード獲得やビジネス視点の説明が弱い | `/superforge-brain` → `/superforge-biz` |
 | ブランド・世界観・画像/動画が要る | `/superforge-brand` |
 | 何を作るかは決まっている | `/superforge-ui` → `/superforge-dev` |
 | 実装を回したい・複数エージェントで進めたい | `/superforge-dev` |

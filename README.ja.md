@@ -63,7 +63,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ja.md) | ありきたりじゃないアイデアが欲しい（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
-| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | いくらで売るか、どこから課金するか決めたい | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
 
 ### 2. 作る — 形にする
@@ -210,6 +210,8 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 徹底スイープの代わりに使う軽い手法——SCAMPER、シックスハット、Crazy 8s、How Might We ほか |
 | [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` の仕様——殺した案も含む全アイデアの可視化と、2種の優先度マップ |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値と、それぞれの倫理的な線引き |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | チャネル適合・リードマグネット・適合度×熱意の選別・CAC/LTV計算 |
+| [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | どんな機能も定量化し、論理→感情の順で語るビジネスピッチに変える |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 売るためのページの設計——セクション順、ファーストビュー、モバイルとデスクトップの違い |

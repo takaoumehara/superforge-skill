@@ -63,7 +63,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 뻔하지 않은 아이디어가 필요할 때 (**BreakBias 엔진**, 또는 더 가벼운 정통 기법 중 선택) | `docs/product-idea.md` (전수 스윕이면 `.html` 지도도) |
-| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 가격과 페이월 위치를 정할 때 | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 가격, 페이월 위치, 고객을 얻는 방법, 가치를 숫자로 말하는 법 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ko.md) | 이름·색·톤과, 소재를 만들어 낼 프롬프트까지 | `docs/brand.md` |
 
 ### 2. 만든다 — 실제로 만들기
@@ -211,6 +211,8 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 전수 스윕 대신 쓰는 가벼운 기법 — SCAMPER, 여섯 모자, Crazy 8s, How Might We 등 |
 | [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 명세 — 폐기안 포함 전 아이디어 시각화와 두 개의 우선순위 지도 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 앵커링·손실 회피·기본값과 각각의 윤리적 선 |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 채널 적합도, 리드 마그넷, 적합도×의도 선별, CAC/LTV 계산 |
+| [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 어떤 기능이든 정량화해 논리→감정 순서의 비즈니스 피치로 바꾸기 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 팔기 위한 페이지 설계 — 섹션 순서, 히어로 영역, 모바일과 데스크톱의 차이 |

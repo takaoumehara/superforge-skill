@@ -157,6 +157,10 @@ Fold conclusions into `docs/business-model.md`:
 ## Trial design
 ## Defaults (and what we deliberately did not default to)
 ## Proof we can honestly show today
+## Acquisition plan
+<channel-market fit, lead magnet, qualification, CAC/LTV — see references/customer-acquisition.md>
+## Value pitch
+<the four levers, the numbers, the specific moment each one changes — see references/value-pitch.md>
 ## First 90 days of GTM
 ## Assumptions made
 ## Open questions

@@ -25,8 +25,11 @@ flowchart TD
     I[💡 Idea de producto] --> A[🏷️ Elegir el arquetipo de ingresos]
     A --> B[🚪 Paywall en el momento de máximo valor]
     B --> C[📈 Métrica de valor y bucles de crecimiento]
-    C --> D[📣 GTM: canales, posicionamiento, embudo]
-    D --> E[(📄 docs/business-model.md)]
+    C --> D[🎯 Adquisición: encaje de canal, imán de leads, CAC/LTV]
+    D --> P[💬 El pitch de valor: función → número → el momento que cambia]
+    D --> E2[📣 GTM: canales, posicionamiento, embudo]
+    P --> E2
+    E2 --> E[(📄 docs/business-model.md)]
 ```
 
 El arquetipo se deduce de la forma del producto, nunca al revés.
@@ -44,6 +47,12 @@ La puerta se coloca justo después de que la persona haya generado un resultado 
 ### ⚖️ Persuasión con la línea ética trazada
 El anclaje, la aversión a la pérdida y las opciones por defecto funcionan, y cada uno tiene un punto a partir del cual se convierte en un patrón oscuro. Dónde está ese punto no se deja al gusto: está escrito en la referencia.
 
+### 💬 «Buena automatización» se convierte en un número, y luego en un momento
+Todo argumento de valor se reduce a una de cuatro palancas — tiempo ahorrado, coste evitado, ingresos recuperados, riesgo reducido — cada una con una fórmula que convierte la función en *el número del propio cliente*, antes de mostrar el precio. «2 horas menos a la semana» por sí solo es una ficha técnica; junto con «ya no tiene que quedarse hasta tarde los viernes» se convierte en un motivo para comprar.
+
+### 🎯 Llegar a los primeros clientes, no solo hacer crecer a los que ya hay
+Encaje canal-mercado (una venta B2B enterprise y una app de consumo autoservicio necesitan canales completamente distintos), qué hace que un imán de leads convierta en vez de ser ignorado, la cualificación por ajuste × intención para que el número de leads deje de ser una métrica de vanidad, y las cuentas rápidas de CAC/LTV que detectan un canal que pierde dinero antes de escalarlo.
+
 ---
 
 ## 🔄 Antes / Después
@@ -54,6 +63,9 @@ El anclaje, la aversión a la pérdida y las opciones por defecto funcionan, y c
 | Posición del paywall | Donde era fácil de añadir | En el momento en que se prueba el valor |
 | Crecimiento | «Ya haremos marketing luego» | Bucles y canales dentro del artefacto |
 | Tácticas de persuasión | Copiadas de quien más convierte | Usadas con su límite ético declarado |
+| El pitch | «Buena automatización, funciones potentes» | Un número (horas/€ ahorrados) más el momento concreto que cambia |
+| Qué canal usar | El que esté de moda | Ajustado al precio y al ciclo de venta, probando uno antes de añadir otro |
+| Número de leads | Los que sea que llegaron | Separados por ajuste × intención, con el CAC comprobado contra el LTV |
 
 ---
 
@@ -83,4 +95,4 @@ Si existen `docs/product-idea.md` y `docs/brief.md`, los lee antes de empezar.
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); el anclaje, la aversión a la pérdida, las opciones por defecto y su línea ética están en [references/behavioral-frameworks.md](references/behavioral-frameworks.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); el anclaje, la aversión a la pérdida, las opciones por defecto y su línea ética están en [references/behavioral-frameworks.md](references/behavioral-frameworks.md); el encaje canal-mercado, los imanes de leads, la cualificación y las cuentas de CAC/LTV están en [references/customer-acquisition.md](references/customer-acquisition.md); las cuatro palancas de valor y la fórmula del pitch lógica-luego-emoción están en [references/value-pitch.md](references/value-pitch.md). Visión general de la suite: [superforge-skill](../../README.es.md).
