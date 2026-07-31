@@ -70,7 +70,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 화면 설계, 팔기 위한 랜딩 페이지, 그리고 마음을 정한 직후의 30초(첫 실행)까지. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 모델 자신의 평균이 아니라 실제 레퍼런스에서 방향을 가져오는 화면 설계. 팔기 위한 랜딩 페이지, 마음을 정한 직후의 30초(첫 실행)까지. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 작업을 나눠 여러 에이전트에 배분하고 각자 맞는 모델에 태움 | `docs/plan.md` |
 
 ### 3. 확인한다 — 망가진 데가 없는지 보기
@@ -219,6 +219,8 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 어떤 기능이든 정량화해 논리→감정 순서의 비즈니스 피치로 바꾸기 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | 디자인 방향은 어디서 오는가 — 여섯 층의 추출, 참조와 모방의 경계, 다른 도구로 만든 화면을 시스템으로 바꾸기 |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 지속시간, 움직이는 속성에 따라 고르는 이징, FLIP, 스크롤 동기화, reduced-motion 런타임 정지 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 팔기 위한 페이지 설계 — 섹션 순서, 히어로 영역, 모바일과 데스크톱의 차이 |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 들어온 직후의 30초 — 설명하지 말고 첫 결과까지, 권한은 쓰는 순간에, 나중에도 테스트할 수 있는 완료 기록 |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 제품의 동작이 어떤 의무를 발동시켰는가, 어디서나 대체로 통하는 네 가지 기본, 그리고 변호사가 필수가 되는 선 |
@@ -235,7 +237,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 
 ## 출처와 감사
 
-여기 있는 스킬들은 일곱 가지 자료를 읽고 **제 언어로 다시 쓴 것**입니다. 제3자의 코드도 문장도 한 바이트도 들어 있지 않습니다.
+여기 있는 스킬들은 여덟 가지 자료를 읽고 **제 언어로 다시 쓴 것**입니다. 제3자의 코드도 문장도 한 바이트도 들어 있지 않습니다.
 
 | 자료 | 출처 | 받아 온 것 |
 |---|---|---|
@@ -245,6 +247,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 역할을 나눈 에이전트 편성 방식 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | 스킬을 작게 나눠 배포하는 형태 |
 | Gem_Ren_Pack | 본인 | 설계·평가 관련 프레임워크 |
+| 직접 조사한 인터랙션 설계·모션 연구 노트 | 본인 | `motion-system.md`와 `design-process.md`의 토대 — 지속시간 스케일, 애니메이션되는 속성으로 고르는 이징, FLIP, 스크롤 엔진 동기화, 폼 검증 타이밍, 도달성과 터치 타깃 |
 | 건네받은 앱 개발 스킬 모음 | 제3자, **읽었지만 가져다 쓰지 않음** | **드러난 구멍 쪽**. 시장 규모 산정, 출시 시점의 법적 의무, 첫 실행 설계가 여기엔 하나도 없었다. 가져온 것은 분야의 일반 지식뿐(TAM/SAM/SOM, 데이터 보호법의 발동 조건, 맥락에 맞춘 권한 요청)이고, 모든 파일은 처음부터 새로 썼다 |
 
 **마지막 줄에 대하여.** 남의 스킬 모음을 읽는 것은 내게 무엇이 없는지 알아내는 좋은 방법이고, 그 구멍을 메우는 나쁜 방법입니다. 드러난 것은 세 개의 진짜 구멍이었고, 지금은 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.ko.md), [`first-run.md`](./skills/superforge-ui/references/first-run.md)가 메우고 있습니다. 어느 것도 원본과 닮지 않았습니다. 설계 판단이 반대 방향으로 갔기 때문입니다 — **얼어붙은 법률 문구를 두지 않는다**, 1년이면 낡는 플랫폼 기능 카탈로그를 담지 않는다, 그리고 절차를 나르는 스위트에 코드 템플릿을 넣지 않는다.

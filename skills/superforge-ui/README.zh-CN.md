@@ -85,6 +85,11 @@ cd superforge-skill
 
 ---
 
+### 🧬 从真实依据出发，而不是模型自己的平均值
+让任何模型「做得好看点」，它给你的都是**它见过的一切的平均值**——居中的主视觉、三张功能卡、渐变色块。单看没一处错，可**没有一处是被选出来的**。换更强的模型，只会得到执行得更好的平均值。
+
+所以这个技能先从自身之外取方向：你欣赏的网站，或已经在 Claude Design、Google Stitch、Figma、v0 里做好的界面。然后**分六层只提取系统**——版块结构与节奏、间距比例、字号比例、颜色的**角色**而非色值、动效性格、图像处理，**绝不取内容**。而且**参考要三份以上**：一份只会变成模仿，三份逼你去找它们共通的原理。出处以及你有意偏离的地方都写进 `docs/design.md`，日后能讲清楚。
+
 ### 🚪 没人设计的那三十秒
 落地页负责说服陌生人，产品界面负责服务回访用户。**夹在中间的，才是决定这两笔投入能不能回本的时刻**——而它通常只被塞了一个没人看的轮播。首次启动的目标不是解释产品，而是**用最少的决策把用户送到一个真实的成果**。如果产品不解释也能给出成果，那段解释就只是披着好意外衣的摩擦。
 
@@ -94,4 +99,4 @@ cd superforge-skill
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)，卖货型落地页设计在 [references/landing-page.md](references/landing-page.md)，用户下定决心之后的头三十秒（首次启动、权限请求、激活）在 [references/first-run.md](references/first-run.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；从参考中取方向的流程在 [references/design-sourcing.md](references/design-sourcing.md)，动效时长与渲染管线在 [references/motion-system.md](references/motion-system.md)，设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)，卖货型落地页设计在 [references/landing-page.md](references/landing-page.md)，用户下定决心之后的头三十秒（首次启动、权限请求、激活）在 [references/first-run.md](references/first-run.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

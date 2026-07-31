@@ -70,7 +70,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz, landing pages hechas para vender, y los primeros treinta segundos tras decidirse, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz que parte de una referencia real en vez del promedio del propio modelo, landing pages hechas para vender, y los primeros treinta segundos tras decidirse, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.es.md) | implementación: repartir el trabajo entre agentes, cada uno en su modelo | `docs/plan.md` |
 
 ### 3. Probar — comprobar que nada falla
@@ -219,6 +219,8 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | convertir cualquier función en un pitch de negocio cuantificado, lógica y luego emoción |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | los pasos de diseño, los cuatro estados de datos, la lista de calidad |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | la especificación de `design.md` + `design.html` |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | de dónde sale la dirección visual — seis capas de extracción, la línea entre referencia e imitación, convertir en sistema un diseño hecho en otra herramienta |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | duraciones, curvas elegidas según la propiedad animada, FLIP, sincronía de scroll, reduced-motion en tiempo de ejecución |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | diseño de páginas hechas para vender — orden de secciones, el hero, móvil frente a escritorio |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | los primeros treinta segundos — llegar a un resultado en vez de explicar, permisos en el punto de uso, marcar el final de forma que aún puedas probarlo |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | qué obligaciones activó el propio comportamiento del producto, la base universal de cuatro puntos y dónde el abogado deja de ser opcional |
@@ -235,7 +237,7 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 
 ## Créditos y trabajo previo
 
-Las skills de aquí se destilaron de siete fuentes y están **reescritas con mis propias palabras**. No incluyen código ni texto de terceros.
+Las skills de aquí se destilaron de ocho fuentes y están **reescritas con mis propias palabras**. No incluyen código ni texto de terceros.
 
 | Fuente | Origen | Qué aportó |
 |---|---|---|
@@ -245,6 +247,7 @@ Las skills de aquí se destilaron de siete fuentes y están **reescritas con mis
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | estructuras de agentes separados por rol |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | empaquetar skills pequeñas y distribuibles |
 | Gem_Ren_Pack | mía | marcos de diseño y evaluación |
+| Mis propias notas de investigación sobre diseño de interacción y movimiento | mías | la base de `motion-system.md` y `design-process.md`: la escala de duraciones, la curva elegida según la propiedad animada, FLIP, la sincronía del motor de scroll, los tiempos de validación de formularios y el dimensionado de alcance y objetivos |
 | Un conjunto de skills de desarrollo de apps que me pasaron | de terceros, **leído pero no reutilizado** | **los huecos que dejó al descubierto**: dimensionamiento de mercado, obligaciones legales en el momento de publicar y diseño del primer arranque no existían aquí. Solo se tomó conocimiento estándar del campo (TAM/SAM/SOM, disparadores de protección de datos, permisos en contexto); cada archivo se escribió desde cero |
 
 **Sobre esa última fila.** Leer el conjunto de skills de otra persona es una buena forma de descubrir qué te falta, y una mala forma de rellenarlo. Lo que salió a la luz fueron tres huecos reales, hoy cubiertos por [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.es.md) y [`first-run.md`](./skills/superforge-ui/references/first-run.md) — y ninguno se parece a su equivalente, porque las decisiones de diseño fueron en sentido contrario: **nada de texto legal congelado**, ningún catálogo de funciones de plataforma que caduca en un año, y ninguna plantilla de código en una suite que transporta proceso, no andamiaje.

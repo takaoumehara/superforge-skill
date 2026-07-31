@@ -70,7 +70,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。モデルの平均値からではなく実在の参照から方向性を取る。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。作業を分けて複数のAIに配り、それぞれに合うモデルを割り当てる | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
@@ -218,6 +218,8 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | どんな機能も定量化し、論理→感情の順で語るビジネスピッチに変える |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | デザインの方向性をどこから取るか——6層の抽出、参照と模倣の線引き、他ツールで作った画面をシステムに変える手順 |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 時間、動かすプロパティで選ぶ緩急、FLIP、スクロール同期、reduced-motion のランタイム停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 売るためのページの設計——セクション順、ファーストビュー、モバイルとデスクトップの違い |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 入った直後の30秒——説明せず最初の成果まで運ぶ、権限は使う瞬間に求める、あとで自分でテストできる形で完了を記録する |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 製品の振る舞いがどの義務を発火させたか、どこでも概ね通用する4つの土台、そして弁護士が必須になる線 |
@@ -234,7 +236,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 ## 由来とクレジット
 
-このリポジトリのスキルは、7つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードも文章も、1バイトも含んでいません。
+このリポジトリのスキルは、8つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードも文章も、1バイトも含んでいません。
 
 | 素材 | 出所 | ここから受け取ったもの |
 |---|---|---|
@@ -244,6 +246,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 役割を分けたエージェント編成の型 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | スキルを小さく分けて配布する形 |
 | Gem_Ren_Pack | 自作 | 設計・評価まわりのフレームワーク |
+| 自分で調べたインタラクション設計・モーションの調査ノート | 自作 | `motion-system.md` と `design-process.md` の土台——時間スケール、動かすプロパティで選ぶ緩急、FLIP、スクロールエンジンの同期、フォーム検証のタイミング、到達性とタッチ標的 |
 | 譲り受けたアプリ開発系スキル一式 | 第三者・**読んだが流用していない** | **見つかった穴のほう**。市場サイジング、出荷時の法務義務、初回起動設計が、ここには揃って無かった。取ったのは分野の一般知識だけ（TAM/SAM/SOM、データ保護法の発火条件、権限の文脈的要求）で、ファイルはすべてゼロから書いている |
 
 **最後の1行について。** 他人のスキル集を読むのは、自分に何が足りないかを知る良い方法で、その穴を埋める悪い方法です。見つかったのは3つの本物の穴で、いま [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.ja.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) が埋めています。どれも元とは似ていません。設計判断が逆方向に出たからです——**凍結された法律文面を置かない**、1年で古くなるプラットフォーム機能カタログを持たない、そして手順を運ぶスイートにコード雛形を入れない。

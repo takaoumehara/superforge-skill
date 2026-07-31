@@ -62,6 +62,8 @@ treat any absence as "do it inline".
 ### `superforge-ui` — interface
 | Step | Delegate to |
 |---|---|
+| Where the visual direction comes from (references, or a design made elsewhere) | inline — `superforge-ui/references/design-sourcing.md` — run this **before** any other UI step |
+| Motion timing, easing, render pipeline, scroll sync | inline — `superforge-ui/references/motion-system.md` — no external skill needed |
 | Overall frontend quality and craft | `impeccable`, `frontend-design`, `taste-skill` |
 | Design system generation | `design-system-builder`, `design-system`, `moodboard-design-system` |
 | Typography, spacing, colour, polish | `typeset`, `arrange`, `colorize`, `polish`, `normalize` |

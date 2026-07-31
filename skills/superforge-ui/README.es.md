@@ -85,6 +85,11 @@ Al terminar, abre `docs/design.html` en el navegador: deberías ver cada token y
 
 ---
 
+### 🧬 Diseño que parte de evidencia, no del promedio del modelo
+Pídele a cualquier modelo que «lo haga bonito» y devuelve **el promedio de todo lo que ha visto**: el hero centrado, las tres tarjetas de features, el degradado. Nada está mal por separado; nada fue *elegido*. Un modelo más potente devuelve un promedio mejor ejecutado, no uno distinto.
+
+Por eso la skill empieza buscando la dirección fuera de sí misma: sitios que admiras, o pantallas ya hechas en Claude Design, Google Stitch, Figma o v0. Después extrae el **sistema** en seis capas —estructura y ritmo de secciones, la razón del espaciado, la razón de la escala tipográfica, los *roles* del color en vez de los hex, el carácter del movimiento, el tratamiento de la imagen— y nunca el contenido. **Tres referencias ganan a una**: una produce imitación, tres te obligan a encontrar el principio que comparten. Las fuentes y las divergencias deliberadas quedan escritas en `docs/design.md`.
+
 ### 🚪 Los treinta segundos que nadie diseña
 Una landing page convence a un desconocido. Una pantalla de producto sirve a quien vuelve. **Entre las dos está el momento que decide si alguna de las dos inversiones se recupera**, y normalmente se le entrega un carrusel que nadie lee. El objetivo del primer arranque no es explicar el producto: es **llevar a la persona a un resultado real con el menor número de decisiones por medio**. Y si el producto puede darlo sin explicación, la explicación es fricción disfrazada de amabilidad.
 
@@ -94,4 +99,4 @@ Los permisos son la trampa concreta: un diálogo mostrado antes de que la person
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los pasos de diseño, los cuatro estados de datos y la lista de calidad están en [references/design-process.md](references/design-process.md), la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md), el diseño de landing pages de venta en [references/landing-page.md](references/landing-page.md), y los primeros treinta segundos tras decidirse — primer arranque, permisos, activación — en [references/first-run.md](references/first-run.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); cómo sacar la dirección de las referencias está en [references/design-sourcing.md](references/design-sourcing.md), los tiempos de movimiento y el pipeline de render en [references/motion-system.md](references/motion-system.md), y los pasos de diseño, los cuatro estados de datos y la lista de calidad en [references/design-process.md](references/design-process.md), la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md), el diseño de landing pages de venta en [references/landing-page.md](references/landing-page.md), y los primeros treinta segundos tras decidirse — primer arranque, permisos, activación — en [references/first-run.md](references/first-run.md). Visión general de la suite: [superforge-skill](../../README.es.md).

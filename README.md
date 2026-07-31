@@ -70,7 +70,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design that starts from a real reference instead of the model's own average, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work across agents, each on a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
@@ -219,6 +219,8 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | turning any feature into a quantified, logic-then-emotion business pitch |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | where the direction comes from — six extraction layers, reference vs. imitation, turning a design made elsewhere into a system |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | durations, easing chosen by the property being animated, FLIP, scroll sync, runtime reduced-motion |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | designing a page built to sell — section order, the hero, mobile vs. desktop |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | the first thirty seconds — reaching an outcome instead of explaining, permissions at the point of use, marking completion so you can still test it |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | which obligations the product's own behaviour fired, the universal four-part baseline, and where a lawyer becomes mandatory |
@@ -235,7 +237,7 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 
 ## Credits & prior art
 
-The skills here were distilled from seven sources and **rewritten in my own words**. No third-party code or text is included.
+The skills here were distilled from eight sources and **rewritten in my own words**. No third-party code or text is included.
 
 | Source | Origin | What it contributed |
 |---|---|---|
@@ -245,6 +247,7 @@ The skills here were distilled from seven sources and **rewritten in my own word
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | role-separated agent structures |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | packaging skills small and distributable |
 | Gem_Ren_Pack | mine | design and evaluation frameworks |
+| My own interaction-design and motion research notes | mine | the timing scale, easing chosen by animated property, FLIP, scroll-engine synchronisation, form-validation timing, and reach/target sizing behind `motion-system.md` and `design-process.md` |
 | An app-development skill set I was sent | third party, reviewed not reused | **the gaps it exposed** — market sizing, release-time legal obligations, and first-run design were all missing here. Nothing was copied: only standard field knowledge (TAM/SAM/SOM, data-protection triggers, permission priming) was taken, and every file was written from scratch |
 
 **On that last row.** Reading someone else's skill set is a good way to find out what yours is missing, and a bad way to fill the gap. What it surfaced were three real holes, now filled by [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.md), and [`first-run.md`](./skills/superforge-ui/references/first-run.md) — none of which resemble their counterparts, because the design decisions went the other way: no frozen legal boilerplate, no platform-specific feature catalogue that expires in a year, and no code templates in a suite that carries process rather than scaffolding.

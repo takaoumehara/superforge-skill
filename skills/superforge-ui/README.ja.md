@@ -85,6 +85,11 @@ cd superforge-skill
 
 ---
 
+### 🧬 モデルの平均値ではなく、実在の根拠から始めるデザイン
+どのモデルも「いい感じにして」と言われると、**見てきたもの全部の平均**を返します。中央寄せのヒーロー、3枚の機能カード、グラデーションの塊。個々に間違いはないのに、**何ひとつ選ばれていない**。モデルを上位にしても、うまく作られた平均が返ってくるだけです。
+
+だからこのスキルは、方向性を自分の外から取ってくるところから始めます。あなたが憧れるサイト、あるいは Claude Design・Google Stitch・Figma・v0 で既に作った画面。そこから**6つの層でシステムだけを抽出**します——セクションの構造と尺、余白の比、タイポの比、色は「役割」であってHEXではなく、モーションの性格、画像の処理。**中身は取りません。** そして**参照は3件以上**：1件だと模倣になり、3件あると共通する原理を探さざるを得なくなる。出典と、そこから意図的に外した点が `docs/design.md` に残るので、後から説明できます。
+
 ### 🚪 誰も設計しない30秒
 ランディングページは見知らぬ人を説得します。プロダクト画面は戻ってきた人を助けます。**その間にあるのが、どちらの投資が報われるかを決める瞬間**で、たいていの場合そこには誰も読まないカルーセルが置かれています。初回起動の目的は製品を説明することではなく、**最小の判断回数で、ユーザーを1つの本物の成果まで運ぶこと**です。説明なしで成果が出せるなら、その説明は親切の衣を着た摩擦にすぎません。
 
@@ -94,4 +99,4 @@ cd superforge-skill
 
 ## 📄 ライセンス
 
-MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md)、売るためのランディングページ設計は [references/landing-page.md](references/landing-page.md)、入った直後の30秒（初回起動・権限要求・アクティベーション）は [references/first-run.md](references/first-run.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。
+MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、参照から方向性を取る手順は [references/design-sourcing.md](references/design-sourcing.md)、モーションの時間と描画パイプラインは [references/motion-system.md](references/motion-system.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md)、売るためのランディングページ設計は [references/landing-page.md](references/landing-page.md)、入った直後の30秒（初回起動・権限要求・アクティベーション）は [references/first-run.md](references/first-run.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。

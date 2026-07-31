@@ -85,6 +85,11 @@ cd superforge-skill
 
 ---
 
+### 🧬 모델의 평균이 아니라 실제 근거에서 시작하는 디자인
+어떤 모델이든 "예쁘게 해줘"라고 하면 **본 것 전부의 평균**을 돌려줍니다. 가운데 정렬 히어로, 기능 카드 세 장, 그러데이션 덩어리. 하나하나는 틀리지 않았는데 **무엇도 선택되지 않았습니다**. 더 센 모델을 써도 더 잘 만들어진 평균이 나올 뿐입니다.
+
+그래서 이 스킬은 방향을 자기 바깥에서 가져오는 것으로 시작합니다. 당신이 좋아하는 사이트, 혹은 Claude Design·Google Stitch·Figma·v0로 이미 만든 화면. 거기서 **여섯 층으로 시스템만 추출**합니다 — 섹션 구조와 리듬, 여백의 비, 타이포 스케일의 비, HEX가 아니라 색의 **역할**, 모션의 성격, 이미지 처리. **내용은 가져오지 않습니다.** 그리고 **레퍼런스는 셋 이상**: 하나면 모방이 되고, 셋이면 공통된 원리를 찾을 수밖에 없습니다. 출처와 의도적으로 벗어난 지점이 `docs/design.md`에 남습니다.
+
 ### 🚪 아무도 설계하지 않는 30초
 랜딩 페이지는 낯선 사람을 설득하고, 제품 화면은 돌아온 사람을 돕습니다. **그 사이에 있는 것이 두 투자 중 어느 쪽이라도 회수될지를 결정하는 순간**이고, 보통 그 자리에는 아무도 읽지 않는 캐러셀이 놓여 있습니다. 첫 실행의 목표는 제품을 설명하는 것이 아니라 **가장 적은 판단으로 사용자를 하나의 진짜 결과까지 데려가는 것**입니다. 설명 없이도 결과를 낼 수 있다면, 그 설명은 친절의 옷을 입은 마찰일 뿐입니다.
 
@@ -94,4 +99,4 @@ cd superforge-skill
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 설계 단계와 네 가지 데이터 상태, 품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에, 판매용 랜딩 페이지 설계는 [references/landing-page.md](references/landing-page.md)에, 마음을 정한 직후의 30초(첫 실행·권한 요청·활성화)는 [references/first-run.md](references/first-run.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 레퍼런스에서 방향을 가져오는 절차는 [references/design-sourcing.md](references/design-sourcing.md)에, 모션 타이밍과 렌더 파이프라인은 [references/motion-system.md](references/motion-system.md)에, 설계 단계와 네 가지 데이터 상태·품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에, 판매용 랜딩 페이지 설계는 [references/landing-page.md](references/landing-page.md)에, 마음을 정한 직후의 30초(첫 실행·권한 요청·활성화)는 [references/first-run.md](references/first-run.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

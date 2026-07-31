@@ -3,17 +3,24 @@ name: superforge-ui
 description: >
   Design and build interfaces across Web, iOS (SwiftUI), and Android (Jetpack
   Compose), covering layout, visual hierarchy, typography, responsive
-  behaviour, state specification, and micro-interactions. Follows a five-phase
+  behaviour, state specification, and micro-interactions. Opens by sourcing the
+  visual direction from references or from a design made in another tool, and
+  extracting the system behind it — structure, space, type, colour role, motion
+  character, imagery — because a model designing from its own priors returns the
+  average of everything it has seen. Follows a five-phase
   design process, Apple HIG, and Material 3. Use when the user says "design",
   "UI", "UX", "layout", "screen", "component", "make it look better",
   "animation", "spacing", "typography", "onboarding", "welcome screen",
   "first launch", "permission prompt", "デザイン", "画面", "見た目",
   "レイアウト", "アニメーション", "余白", "使いにくい", "オンボーディング",
-  "初回起動", "チュートリアル画面", "権限の許可", or runs /superforge-ui.
+  "初回起動", "チュートリアル画面", "権限の許可", "AIっぽいデザイン",
+  "参考サイト", "インスピレーション", "デザインシステムに落とす",
+  "moodboard", "reference site", "make it not look AI-generated",
+  "turn this design into a system", or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.2"
+  version: "3.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -26,10 +33,29 @@ Use this skill when designing or implementing user interfaces across Web, iOS (S
 
 ---
 
+## 0. Source the direction before designing anything
+
+A model asked to "make it look good" returns **the average of everything it has
+seen**, and averages look like averages — that is the entire explanation for the
+recognisable "AI interface" look. A stronger model produces a better-executed
+average, not a different one.
+
+So before any token is chosen, settle where the direction comes from: references
+the user admires, an existing design arriving from another tool (Claude Design,
+Google Stitch, Figma, v0), or — declared honestly — nothing. Then extract the
+**system** behind it in six layers (structure, space, type, colour, motion,
+imagery), never the content, and record the sources and the deliberate
+divergences → **`references/design-sourcing.md`**.
+
+Three references beat one: one produces imitation, three force you to find the
+principle they share.
+
+---
+
 ## 1. Five-Phase Design Process
 
 1. **UNDERSTAND**: Surface target user context, map assumptions, and reframe requirements.
-2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies.
+2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies — **from the extracted direction in §0**, not from scratch.
 3. **DESIGN**: Construct complete screens, typography grids, color assignments, and content states.
 4. **EVALUATE**: Run accessibility audits (WCAG 2.2 AA), contrast checks, and simulated persona testing. Hand the accessibility half to **`superforge-a11y`** — it owns the criterion ledger and writes `docs/accessibility.md`. Do not restate the criteria here.
 5. **PREPARE**: Output clean production components, design tokens, and implementation specs.
@@ -61,10 +87,21 @@ No UI component is complete until all 7 component states are explicitly engineer
 
 ## 4. Web Motion & Micro-Interactions
 
-- **Spring Physics over Linear**: Use custom cubic-bezier curves (`cubic-bezier(0.16, 1, 0.3, 1)` for decelerated entrances).
-- **GPU Acceleration**: Animate ONLY `transform` and `opacity`. Prevent layout thrashing and CLS.
+- **Motion communicates or it is cut.** Every animation serves feedback, status,
+  feedforward, or transition. If it serves none, delete it — decoration is a cost
+  every user pays on every visit.
+- **GPU Acceleration**: Animate ONLY `transform` and `opacity`. Where layout
+  genuinely must change, use **FLIP** rather than animating width/height/top/left.
+- **Easing follows the property, not taste**: `ease-out` entering, `ease-in`
+  exiting, **`linear` for opacity, colour, and rotation**, no easing at all
+  during an active drag.
 - **View Transitions**: Use native `@view-transition` or morphing animations between page views.
-- **Micro-Interactions**: Tactile button presses, smooth input border glows, spring toast slide-ins.
+- **Reduced motion is a runtime check**, not only a media query — stop JS loops,
+  scroll engines, and autoplaying media, and confirm the page still tells its story.
+
+Durations, the easing token set, the compositor pipeline, scroll-engine
+synchronisation, native-platform equivalents, and the eight-question interaction
+score → **`references/motion-system.md`**.
 
 ---
 
@@ -81,9 +118,18 @@ No UI component is complete until all 7 component states are explicitly engineer
 
 ## Deeper references
 
+- **`references/design-sourcing.md`** — where the visual direction comes from:
+  the six extraction layers, the line between reference and imitation, turning a
+  design made in another tool into a system, and what to do when there is no
+  source at all. Read it **first**, before the process below.
 - **`references/design-process.md`** — the six design steps in order, the four
-  mandatory data states, and the full quality checklist. Read it before
+  mandatory data states, reach and target sizing, form-validation timing, the
+  interruption hierarchy, and the full quality checklist. Read it before
   designing screens.
+- **`references/motion-system.md`** — durations by interaction class, easing
+  chosen by the property being animated, the render pipeline and FLIP,
+  scroll-driven motion, runtime reduced-motion handling, and the eight-question
+  score for any interaction.
 - **`references/design-system-output.md`** — the `docs/design.md` +
   `docs/design.html` two-artifact spec. Read it before touching tokens.
 - **`references/landing-page.md`** — the conversion-specific layer for sales

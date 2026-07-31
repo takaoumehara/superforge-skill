@@ -70,7 +70,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计——方向来自真实参考而不是模型自己的平均值；也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：把活儿拆开分给多个 agent，各配合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
@@ -219,6 +219,8 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 把任何功能变成量化的、先数字后情感的商业话术 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | 设计方向从哪里来——六层提取、参考与抄袭的界线、把别处做好的设计变成系统 |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 时长、按动画属性选缓动、FLIP、滚动同步、reduced-motion 的运行时停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 卖货页面的设计——版块顺序、首屏、移动端和桌面端的区别 |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 进来后的头三十秒——不解释，直接抵达第一个成果；权限在用到时才要；完成标记要让你事后还能测 |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 产品行为触发了哪些义务、四条到处大体通用的基线，以及必须请律师的那条线 |
@@ -235,7 +237,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 ## 来源与致谢
 
-这里的技能是从七份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码或文本。
+这里的技能是从八份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码或文本。
 
 | 材料 | 出处 | 提供了什么 |
 |---|---|---|
@@ -245,6 +247,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 按角色分工的 agent 编排范式 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | 把技能拆小、便于分发的形态 |
 | Gem_Ren_Pack | 本人 | 设计与评估相关的框架 |
+| 我自己整理的交互设计与动效研究笔记 | 本人 | `motion-system.md` 与 `design-process.md` 的底子——时长分级、按动画属性选缓动、FLIP、滚动引擎同步、表单校验时机、可达性与点击目标 |
 | 别人给我的一套应用开发技能 | 第三方，**读过但未沿用** | **它暴露出来的缺口**。市场测算、发布时的法律义务、首次启动设计，这里原本一样都没有。只取了行业通识（TAM/SAM/SOM、数据保护法的触发条件、权限的情境化请求），每个文件都是从零写的 |
 
 **关于最后一行。** 读别人的技能集，是发现自己缺什么的好办法，却是填补缺口的坏办法。它暴露出三个真实的缺口，现在由 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.zh-CN.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) 填上。它们和原件都不像，因为设计判断走了相反的方向——**不放冻结的法律文本**、不收录一年就过期的平台功能目录、也不在一套承载流程的技能里塞代码模板。
