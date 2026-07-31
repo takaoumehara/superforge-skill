@@ -15,15 +15,16 @@ conclusion that exists only in the conversation is lost at the next
 |---|---|---|
 | `docs/brief.md` | `superforge` (intake) | every skill |
 | `docs/product-idea.md` | `superforge-brain` | `superforge-biz`, `superforge-brand`, `superforge-ui`, `superforge-dev` |
-| `docs/product-idea.html` | `superforge-brain` (full sweep only) | humans only — every generated idea, killed ones included, plus the Impact×Effort and User×Company Impact maps |
-| `docs/business-model.md` | `superforge-biz` | `superforge-ui` (paywall placement), `superforge-dev` |
+| `docs/product-idea.html` | `superforge-brain` (full sweep only) | humans only — every generated idea, killed ones included, plus the Impact×Effort, User×Company Impact, and 独創×事業 quadrant maps |
+| `docs/business-model.md` | `superforge-biz` | `superforge-ui` (paywall placement), `superforge-dev`, `superforge-ship` |
 | `docs/brand.md` | `superforge-brand` | `superforge-ui` |
 | `docs/design.md` | `superforge-ui` | `superforge-dev`, `superforge-verify` |
 | `docs/design.html` | `superforge-ui` | humans only — the rendered style guide |
 | `docs/plan.md` | `superforge-dev` | `superforge-dev` (progress), `superforge-test`, `superforge-verify` |
-| `docs/accessibility.md` | `superforge-a11y` | `superforge-ui` (token fixes), `superforge-verify` (the gate) |
+| `docs/accessibility.md` | `superforge-a11y` | `superforge-ui` (token fixes), `superforge-verify` (the gate), `superforge-ship` (legal exposure) |
 | `docs/critique.md` | `superforge-roast` | whoever is fixing the findings |
 | `docs/verification.md` | `superforge-verify` | you, before shipping |
+| `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
 | `.handoff/*.md` | `superforge-handoff` | the next session, any tool |
 
 ## Reading

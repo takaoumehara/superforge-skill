@@ -60,9 +60,9 @@ Por debajo de 640px: objetivos táctiles de 44px o más, sin desbordamiento hori
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las doce skills (una sola vez)
+### 🖥️ Instala las trece skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -79,6 +79,11 @@ Todas las opciones, la instalación de una sola skill y la ruta de subida a clau
 ```
 
 Usa los comandos de build y de pruebas del propio proyecto, así que esos deben funcionar antes. El resultado queda en `docs/verification.md`.
+
+---
+
+### 🚢 Pasar aquí no es permiso para publicar
+«Funciona» y «podemos publicarlo» son veredictos distintos y con pruebas distintas. Un producto puede superar todas las comprobaciones de esta skill y seguir bloqueado por un SDK de analítica que transmite datos no declarados, por la falta de una vía de borrado dentro del producto, o por no tener forma de revertir. Esa segunda puerta es [`superforge-ship`](../superforge-ship/README.es.md): ejecuta primero esta y luego aquella.
 
 ---
 

@@ -6,12 +6,14 @@ description: >
   behaviour, state specification, and micro-interactions. Follows a five-phase
   design process, Apple HIG, and Material 3. Use when the user says "design",
   "UI", "UX", "layout", "screen", "component", "make it look better",
-  "animation", "spacing", "typography", "デザイン", "画面", "見た目",
-  "レイアウト", "アニメーション", "余白", "使いにくい", or runs /superforge-ui.
+  "animation", "spacing", "typography", "onboarding", "welcome screen",
+  "first launch", "permission prompt", "デザイン", "画面", "見た目",
+  "レイアウト", "アニメーション", "余白", "使いにくい", "オンボーディング",
+  "初回起動", "チュートリアル画面", "権限の許可", or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "2.2"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -88,6 +90,13 @@ No UI component is complete until all 7 component states are explicitly engineer
   and marketing pages: section order as an argument, the hero specifically,
   and why mobile and desktop are different pages rather than one page scaled.
   Read it before designing anything meant to sell rather than to be used.
+- **`references/first-run.md`** — the gap between those two: the first thirty
+  seconds after someone commits. Getting to a first real outcome instead of
+  explaining the product, why first run means something different on web than
+  on a phone, requesting permissions at the point of use rather than in a queue
+  (a denial there is often permanent), and marking completion in a way you can
+  still test afterwards. Read it before building any welcome screen, intro
+  carousel, or setup wizard.
 
 ## Artifact
 
@@ -109,4 +118,6 @@ add it to `docs/design.md` and record it under `New patterns needed`.
 (deeper a11y specialists) · `ios`, `swift`, `liquid-glass`,
 `macos`, `watchos` (native) · `landing-page-creator`, `keynote-slide-page`
 (sales pages — see `references/landing-page.md` first) · `dataviz` ·
-`japanese-text`.
+`japanese-text` · `onboarding-generator` (native intro-screen scaffolding —
+see `references/first-run.md` first, and decide whether intro screens are the
+right answer before generating any).

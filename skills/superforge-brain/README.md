@@ -32,11 +32,12 @@ flowchart TD
     B --> C[🚫 Ban the obvious three]
     C --> D[(📋 Cell ledger<br/>element × 8 techniques × sub-methods)]
     D --> E[✍️ Every cell:<br/>impossible form → derive value backwards]
-    E --> F[⚔️ Kill only by code<br/>G / C / P + salvage]
-    F --> G[⚖️ Judge in a separate context<br/>the rationale is withheld]
+    E --> F[⚔️ Kill only by G / P<br/>prior art → 4 win paths → salvage]
+    F --> F2[♻️ Revisit the banned three<br/>the obvious answer gets one fair hearing]
+    F2 --> G[⚖️ Judge two axes, never one total<br/>Hero / Workhorse / Lab / Discard]
     G --> H[🌐 Market check<br/>after judgment only]
     H --> I[(📄 docs/product-idea.md)]
-    H --> J[(🗺️ docs/product-idea.html — every cell, killed ones included, plus two 2×2 maps)]
+    H --> J[(🗺️ docs/product-idea.html — every cell, killed ones included, plus three 2×2 maps)]
 ```
 
 Nothing is pruned mid-sweep. Deduplication and scoring happen after generation, never during. The method itself is a choice stated up front, not an assumption.
@@ -51,11 +52,18 @@ Element × technique × sub-method is one row in a ledger, and status moves one 
 ### 🔒 Nothing comes in from outside the box (Closed World)
 Ideas are assembled only from elements already inside the subject and its immediate boundary. The moment you import something external it stops being non-obvious and becomes an addition anyone could have made. That constraint is what produces a genuinely new arrangement instead of a competitor's feature bolted on.
 
-### ⚖️ Killing needs a reason, and so does keeping
-A cell dies on one of three codes only — **G** (swap the subject and it still reads fine, so it was never about this system), **C** (already ordinary), **P** (physically impossible). "Feels weak" is not a kill reason. Then a **salvage pass** re-reads the killed rows, because a wrongly killed idea never appears in the report — making it the one failure you can never catch by looking at the output.
+### ⚖️ "It already exists" is not a reason to kill anything
+A cell dies on two codes only — **G** (swap the subject and it still reads fine, so it was never about this system) and **P** (physically impossible). Both are checkable without knowing the market, which is the point: a kill that requires market knowledge is the same poison this engine delays until §8, administered earlier and less visibly.
+
+An idea that already ships somewhere gets tagged, not killed, and then run through four win paths — **delta** (one small change makes it a different experience), **geography** (it exists in one market and not another), **timing** (it was impossible before and is possible now), and **execution** (nobody is doing it well, and you can name the specific flaw). Only an idea that fails all four is killed. Then a **salvage pass** re-reads the killed rows, because a wrongly killed idea never appears in the report — making it the one failure you can never catch by looking at the output.
+
+### 🏪 The supermarket problem, fixed
+Scored the old way, "open a supermarket in this town" gets Novelty 1, Wow 1, User Impact 9, Company Impact 8 — total 19, below the cut, deleted. Every town needs one. It reliably makes money. The engine was measuring *distance from the obvious* and calling the result *worth*.
+
+Now the four scores become two axes that are never added together — **Originality** (Novelty + Wow) and **Viability** (User + Company Impact) — and the verdict is a quadrant: **Hero** (unseen and wanted), **Workhorse** (ordinary and reliably needed), **Lab** (brilliant, unfundable today, shelved with the condition that brings it back), **Discard** (the only legitimate one). And because the obvious answer is usually obvious *for a reason*, the banned three get **one revisit** after the sweep, through the same four win paths.
 
 ### 🗺️ You see what got cut, not only what survived
-`docs/product-idea.html` shows **every generated idea**, killed ones included, each with its kill code and one-line reason — no more being handed only the final three names. Two 2×2 maps plot the survivors spatially: Impact × Effort (with the low-hanging-fruit quadrant named) and User Impact × Company Impact, so priority is visible before you read a single card.
+`docs/product-idea.html` shows **every generated idea**, killed ones included, each with its kill code and one-line reason — no more being handed only the final three names. An idea killed as prior art shows all four win paths struck through, so you can see that four ways to win were attempted before it was dropped. Three 2×2 maps plot the results spatially: Originality × Viability (the four quadrants, labelled in the plot area itself), Impact × Effort (with the low-hanging-fruit quadrant named), and User Impact × Company Impact.
 
 ### 🔀 BreakBias is a choice, not the only option
 Ask once, up front: the full tracked sweep, or a classic method — SCAMPER, Six Thinking Hats, Crazy 8s, How Might We, brainwriting, reverse brainstorming. The heavy engine is for when the idea needs to hold up under scrutiny; a classic method is for a fast, low-stakes first pass. Full menu in `references/classic-methods.md`.
@@ -71,7 +79,10 @@ Ask once, up front: the full tracked sweep, or a classic method — SCAMPER, Six
 | The obvious answer | Proposed again every time | Banned up front; novelty scored as distance from it |
 | When you look at the market | First — and the thinking shrinks | After judgment, so it cannot skew novelty |
 | What you get to see | The final three names | Every idea generated, what was killed, and why |
-| How you prioritise the survivors | Read every card and guess | Two 2×2 maps — Impact × Effort, User × Company Impact |
+| How you prioritise the survivors | Read every card and guess | Three 2×2 maps — Originality × Viability quadrants, Impact × Effort, User × Company Impact |
+| An ordinary idea with real demand | Killed as "already exists" | Tagged, tested against four win paths, kept as a **Workhorse** |
+| A brilliant idea that makes no money | Discarded with everything else | Shelved as **Lab**, with the condition that brings it back |
+| The three obvious answers | Banned and never seen again | Banned from generation, revisited once before judging |
 | Which method runs | BreakBias, assumed | A choice, stated up front — full sweep or a classic method |
 | What remains | A chat log | `docs/product-idea.md` + `docs/product-idea.html` with the ban list and the coverage count |
 
@@ -79,7 +90,7 @@ Ask once, up front: the full tracked sweep, or a classic method — SCAMPER, Six
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
@@ -116,7 +127,7 @@ Those are inherited. Here is what BreakBias adds.
 | Bias | not handled explicitly | **named on every element** (functional / structural / relational) |
 | Clichés | — | **three banned up front**, and novelty is scored as distance from them |
 | Exhaustiveness | depends on human stamina | **a cell ledger a machine verifies** — any `todo` left means unfinished |
-| Selection | — | **G / C / P kill codes** plus a salvage pass for wrongful kills |
+| Selection | — | **G / P kill codes only**, four win paths for prior art, a salvage pass, and a revisit of the banned three |
 | Scoring | — | **a judge in a separate context**, never shown the rationale |
 | Market | out of scope | **red / gray / white plus an entry verdict, after judgment only** |
 
@@ -128,4 +139,4 @@ Implementation and real run logs: [takaoumehara/breakbias-studio](https://github
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The skill body is in [SKILL.md](SKILL.md); the sub-methods, kill tests, judge protocol, market rubric, and direction filter are in [references/ideation-tools.md](references/ideation-tools.md); the classic-method menu (SCAMPER, Six Hats, Crazy 8s, and more) is in [references/classic-methods.md](references/classic-methods.md); the `docs/product-idea.html` spec — every idea visualised, plus the Impact×Effort and User×Company Impact maps — is in [references/idea-map-output.md](references/idea-map-output.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The skill body is in [SKILL.md](SKILL.md); the sub-methods, kill tests, judge protocol, market rubric, and direction filter are in [references/ideation-tools.md](references/ideation-tools.md); the quadrants, win paths, and ban-list revisit are in [references/value-classification.md](references/value-classification.md); checking the result against real people is in [references/talk-to-users.md](references/talk-to-users.md); the classic-method menu (SCAMPER, Six Hats, Crazy 8s, and more) is in [references/classic-methods.md](references/classic-methods.md); the `docs/product-idea.html` spec — every idea visualised, plus the quadrant, Impact×Effort, and User×Company Impact maps — is in [references/idea-map-output.md](references/idea-map-output.md). Suite overview: [superforge-skill](../../README.md).

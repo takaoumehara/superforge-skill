@@ -10,7 +10,7 @@
 
 A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-superforge is twelve of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+superforge is thirteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
 
 > You: "I want to build an app for the café down the street."
 > Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
@@ -18,7 +18,7 @@ superforge is twelve of them. The one in the middle, `superforge`, works like **
 
 The front desk does exactly three things.
 
-1. **Picks who takes the job** — one of twelve, across think / build / prove / ship
+1. **Picks who takes the job** — one of thirteen, across think / build / prove / ship
 2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
 3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
 
@@ -54,23 +54,23 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ---
 
-## The twelve skills
+## The thirteen skills
 
-`superforge` is the front desk; the other eleven do the work. You can also call any of them directly, like `/superforge-ui`.
+`superforge` is the front desk; the other twelve do the work. You can also call any of them directly, like `/superforge-ui`.
 
 ### 1. Think — decide what to make
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea that is not the obvious one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
-| [`superforge-biz`](./skills/superforge-biz/README.md) | you need a price, a paywall, a way to get customers, and a pitch that quantifies the value | `docs/business-model.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea worth building — the non-obvious one **and** the ordinary-but-needed one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, and a pitch that quantifies the value | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
 
 ### 2. Build — make it real
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design, plus landing pages built to sell, with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work across agents, each on a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
@@ -87,6 +87,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.md) | you want the flaws named before your users find them | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached | `docs/verification.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.md) | it works — but are you allowed to release it? legal obligations, store rejections, measurement you cannot add later | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | before clearing a session or switching tools | `.handoff/` |
 
 ---
@@ -97,7 +98,7 @@ You need `git` and an AI tool that loads skills, such as Claude Code.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all twelve.
+Clone once and run the installer. It finds every skills directory on your machine and links all thirteen.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -199,7 +200,7 @@ It stops for four things only — irreversible deletion, spending money, missing
 
 Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Why twelve skills do not slow the AI down
+### Why thirteen skills do not slow the AI down
 
 The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
 
@@ -209,13 +210,19 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | when to hand a step to another skill you already have installed |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | the sub-methods that make each technique exhaustive, the kill tests, the judge protocol, the market rubric |
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | the lighter alternative to a full sweep — SCAMPER, Six Hats, Crazy 8s, How Might We, and more |
-| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | the `product-idea.html` spec — every idea visualised, killed ones included, plus the two priority maps |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, and the ethical line on each |
-| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | channel-market fit, lead magnets, fit×intent qualification, CAC/LTV math |
+| [`superforge-brain/references/value-classification.md`](./skills/superforge-brain/references/value-classification.md) | why a single score deletes working businesses — the Hero / Workhorse / Lab / Discard quadrants, the four win paths, the ban-list revisit |
+| [`superforge-brain/references/talk-to-users.md`](./skills/superforge-brain/references/talk-to-users.md) | asking about what people already did, not what they would do — and why a Hero and a Workhorse need opposite interviews |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | the `product-idea.html` spec — every idea visualised, killed ones included, plus the three priority maps |
+| [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | the GO/NO-GO gate — TAM computed both ways, confidence tiers, how many customers this actually needs |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, the symptom index, and the ethical line on each |
+| [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | channel-market fit, lead magnets, fit×intent qualification, CAC/LTV math, minimum viable scale per tactic |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | turning any feature into a quantified, logic-then-emotion business pitch |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | designing a page built to sell — section order, the hero, mobile vs. desktop |
+| [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | the first thirty seconds — reaching an outcome instead of explaining, permissions at the point of use, marking completion so you can still test it |
+| [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | which obligations the product's own behaviour fired, the universal four-part baseline, and where a lawyer becomes mandatory |
+| [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | the measurement that cannot be added later, what each number may decide, and the first four weeks |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | heuristic evaluation, a11y audit, cognitive load, persona simulation |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | all 86 WCAG 2.2 criteria, with what to look at for each |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | the seven passes, their acceptance bars, and the evidence each must leave |
@@ -228,7 +235,7 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 
 ## Credits & prior art
 
-The skills here were distilled from six sources and **rewritten in my own words**. No third-party code is included.
+The skills here were distilled from seven sources and **rewritten in my own words**. No third-party code or text is included.
 
 | Source | Origin | What it contributed |
 |---|---|---|
@@ -238,6 +245,9 @@ The skills here were distilled from six sources and **rewritten in my own words*
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | role-separated agent structures |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | packaging skills small and distributable |
 | Gem_Ren_Pack | mine | design and evaluation frameworks |
+| An app-development skill set I was sent | third party, reviewed not reused | **the gaps it exposed** — market sizing, release-time legal obligations, and first-run design were all missing here. Nothing was copied: only standard field knowledge (TAM/SAM/SOM, data-protection triggers, permission priming) was taken, and every file was written from scratch |
+
+**On that last row.** Reading someone else's skill set is a good way to find out what yours is missing, and a bad way to fill the gap. What it surfaced were three real holes, now filled by [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.md), and [`first-run.md`](./skills/superforge-ui/references/first-run.md) — none of which resemble their counterparts, because the design decisions went the other way: no frozen legal boilerplate, no platform-specific feature catalogue that expires in a year, and no code templates in a suite that carries process rather than scaffolding.
 
 **On the BreakBias engine in `superforge-brain`** — its floor is the two SIT (Systematic Inventive Thinking) constraints: Closed World (never import an element from outside the box) and Function Follows Form (build the impossible shape first, derive the value backwards). BreakBias adds to that:
 

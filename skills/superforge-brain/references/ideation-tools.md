@@ -9,6 +9,10 @@ carries four things the procedure needs and does not contain:
 3. the filter that runs **after** the sweep, to decide which surviving concept is worth building
 4. the kill-code tests, the judge protocol, and the market rubric
 
+What survives, what is only tagged, and how the judge's four scores become two
+axes and a quadrant lives in **`value-classification.md`** — read it alongside
+§4 here, not instead of it.
+
 Use the thinking, not the label. Never present a framework name as output.
 
 ---
@@ -146,16 +150,28 @@ reason, a cliché survives because it was written well, or the whole sweep
 collapses toward the safe answer because someone mentioned the competition too
 early.
 
-## 4.1 The three kill tests
+## 4.1 The two kill tests, and the one that is not a kill
 
-Survival is the default. A cell dies only when one of these returns true, and
-the code goes in the ledger so the decision can be re-examined.
+Survival is the default. A cell dies outright only when one of these returns
+true, and the code goes in the ledger so the decision can be re-examined.
 
 | Code | Test | How to apply it |
 |---|---|---|
 | **G — generic** | Swap the subject for an unrelated one. Does the idea still read as sensible? | 「カフェ」を「歯科医院」に置き換えても同じ文が成立するなら、それはこのシステムの話ではない |
-| **C — commonly exists** | Does this already ship somewhere in this or an adjacent market? | 「既にある」ではなく「既にありふれている」が基準。珍しい先行例は殺す理由にならない |
 | **P — physically impossible** | Does it contradict reality in a way no reinterpretation can rescue? | 再解釈で成立するなら殺さない。SITの「ありえない形」は殺す対象ではない |
+
+Both are checkable **inside the closed world, with no market knowledge**. That
+is not a coincidence — it is the entry condition. §4.4 exists because market
+knowledge applied early collapses a sweep, and a kill code that requires
+knowing the market is that same poison administered earlier and less visibly.
+
+**「既にありふれている」は、この2つに含まれません。** It is a tag
+(`prior_art`), and a tagged cell goes to the win-path test in
+`value-classification.md` §3 — 差分 / 地理 / 時機 / 実行. Only a tagged cell that
+fails all four is killed, with code **C**, now meaning *"no win path could be
+named"* rather than *"it exists."* Recording which code let it through matters
+as much as the survival: `w:exec` and `w:geo` lead to completely different
+products from the same idea.
 
 Anything else — feels weak, sounds risky, would be hard to build — is **not a
 kill reason**. Those are scoring inputs, and scoring happens later.
@@ -168,6 +184,14 @@ and the kill code. Ask a single question: *is this code actually true?*
 A wrongful kill is invisible in the final report — the idea simply never
 appears — which makes it the one failure mode that never gets caught by
 looking at the output. Budget one pass for it every run.
+
+Then run the **ban-list revisit** (`value-classification.md` §4): the three
+obvious ideas outlawed before generation get the win-path test once, and any
+that passes enters the judge pool tagged `revisited`. This is the largest
+single source of recovered value in the whole procedure, because the banned
+three are banned for being obvious, and obvious usually means *frequently
+needed*. Report the outcome for all three — silence here reads as "we never
+looked," which is exactly what used to happen.
 
 ## 4.3 The judge protocol
 
@@ -192,11 +216,37 @@ Anchors, so scores mean the same thing across runs:
 | 7–8 | 前提が1つ壊れている。競合が真似るには方針転換が要る |
 | 9–10 | そのカテゴリの定義が変わる。既存プレイヤーの強みが負債になる |
 
+The business axes need anchors too, and they need them **more** than Novelty
+does — an unanchored judge quietly scores familiar ideas low on User Impact as
+well, which collapses the Workhorse quadrant back into Discard and undoes the
+whole point of splitting the axes.
+
+| Score | User Impact means |
+|---|---|
+| 1–3 | 「あれば便利かも」。今の代替手段で誰も困っていない |
+| 4–6 | 具体的な不満を1つ解消する。ただし我慢できる程度の不満 |
+| 7–8 | 定期的に発生する痛みが消える。既に金か時間を払って回避している |
+| 9–10 | それが無いと成立しない。無い地域・無い状況の人は本当に困っている |
+
+| Score | Company Impact means |
+|---|---|
+| 1–3 | 収益経路が想像できない |
+| 4–6 | 課金はできるが、単価か頻度のどちらかが弱い |
+| 7–8 | 明確な支払い意思がある。既存の類似支出を置き換えられる |
+| 9–10 | 需要が構造的に途切れない。景気や流行と独立して発生する |
+
+**A supermarket scores 9 and 8 here, and 1 and 1 on Novelty and Wow.** Both
+readings are correct. That is precisely why they must not be summed.
+
+Then compute the two axes and read the quadrant — `value-classification.md`
+§1–§2. The judge outputs both sums and the quadrant name, never a single total.
+
 ## 4.4 The market rubric — after judgment, never before
 
-Run only on `Keep` and above. Doing this earlier is the single most reliable
-way to destroy a sweep: once a model knows a space is crowded, it stops
-proposing anything in that space, including the thing that would have won.
+Run on **Hero** and **Workhorse** (optional for Lab, skipped for Discard).
+Doing this earlier is the single most reliable way to destroy a sweep: once a
+model knows a space is crowded, it stops proposing anything in that space,
+including the thing that would have won.
 
 | Status | Meaning | What it implies |
 |---|---|---|
@@ -206,6 +256,13 @@ proposing anything in that space, including the thing that would have won.
 
 `white` は歓迎する結果ではありません。**「誰もやっていない」の大半は「誰も欲しがっていない」です。**
 white を出したら、なぜ誰も来ていないのかを一文で説明できるまで先へ進まないこと。
+
+Conversely, **`red` on a Workhorse is a good sign, not a bad one.** A crowded
+market is direct evidence that people pay for this. The question changes rather
+than closing: the win-path code recorded in §4.1 must still hold with the
+incumbents named. `w:exec` against a named competitor whose actual flaw you can
+point at survives a red market easily; `w:exec` meaning "we'd do it better"
+does not survive it at all.
 
 Then the entry verdict:
 
@@ -239,16 +296,30 @@ Write `docs/product-idea.md`:
 ## The banned obvious three
 <列挙して禁止した凡庸案。後から誰かが再提案しないように残す>
 
+## Ban-list revisit
+| 禁止した案 | 勝ち筋テスト | 結果 |
+<3案すべてを載せる。落ちたものも、落ちた理由付きで>
+
 ## Sweep coverage
 Domain: A / B · Resolution: quick / standard / exhaustive
 要素 <n> × 技法 8 × サブ手法 = <total> セル
-generated <n> · killed G<n> C<n> P<n> · salvaged <n> · judged <n>
+generated <n> · killed G<n> P<n> C<n> · prior_art tagged <n> (delta<n> geo<n> timing<n> exec<n> / failed all four <n>) · salvaged <n> · revisited <n> · judged <n>
 <未踏破のセルがあるなら、その数と理由をここに書く。書かないより残す>
 
-## Hero concepts from the sweep
-| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | Total | 判定 |
+## Judged concepts
+| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | 独創軸 | 事業軸 | 象限 | 勝ち筋 |
 
-## Market (judged Keep or above only)
+## Hero concepts
+<一行 / 壊したバイアス / 体験ストーリー / 事業モデル / MVP / 検証計画 / リスク / 次の一歩>
+
+## Workhorse candidates — ありふれているが、必要とされる
+| コンセプト | 勝ち筋コード | 変える一点（差分・空白）を一文で | 事業軸 |
+
+## Lab shelf — 面白いが、今は金にならない
+| コンセプト | 独創軸 | 戻ってくる条件 |
+<条件を書けない案はここに置かず、Discard にする>
+
+## Market (Hero と Workhorse は必須)
 | コンセプト | red/gray/white | 既存プレイヤー | entry verdict | 支払い仮説 |
 
 ## Direction filter

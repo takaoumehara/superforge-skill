@@ -60,9 +60,9 @@ flowchart TD
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열두 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열두 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -79,6 +79,11 @@ cd superforge-skill
 ```
 
 프로젝트 자체의 빌드·테스트 명령을 사용하므로 그 명령들이 먼저 동작해야 합니다. 결과는 `docs/verification.md`에 남습니다.
+
+---
+
+### 🚢 여기를 통과한 것은 출시 허가가 아닙니다
+「돌아간다」와 「출시해도 된다」는 서로 다른 판정이고 필요한 증거도 다릅니다. 이 스킬의 검사를 모두 통과해도, 분석 SDK가 고지되지 않은 데이터를 전송하고 있거나, 제품 안에 삭제 경로가 없거나, 롤백 수단이 없다면 출시는 막힙니다. 그 두 번째 관문이 [`superforge-ship`](../superforge-ship/README.ko.md)입니다. 이걸 먼저 돌리고, 그다음 저걸.
 
 ---
 

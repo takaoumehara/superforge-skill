@@ -65,7 +65,7 @@ SwiftUI には Apple HIG（Dynamic Type、SF Symbols、`.presentationDetents`、
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、12個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -85,6 +85,13 @@ cd superforge-skill
 
 ---
 
+### 🚪 誰も設計しない30秒
+ランディングページは見知らぬ人を説得します。プロダクト画面は戻ってきた人を助けます。**その間にあるのが、どちらの投資が報われるかを決める瞬間**で、たいていの場合そこには誰も読まないカルーセルが置かれています。初回起動の目的は製品を説明することではなく、**最小の判断回数で、ユーザーを1つの本物の成果まで運ぶこと**です。説明なしで成果が出せるなら、その説明は親切の衣を着た摩擦にすぎません。
+
+特に罠なのが権限です。理由を理解する前に出た許可ダイアログは「拒否」を意味し、モバイルではその拒否が**恒久的**になることがあります。ユーザーがその機能をやろうとした直後に、**自前の前置き画面**を挟んでから聞くこと——自分の画面は何度でも出せますが、OSのダイアログは二度と出せないからです。
+
+---
+
 ## 📄 ライセンス
 
-MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md)、売るためのランディングページ設計は [references/landing-page.md](references/landing-page.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。
+MIT — [LICENSE](../../LICENSE) を参照してください。スキル本体は [SKILL.md](SKILL.md)、設計ステップと4つのデータ状態、品質チェックリストは [references/design-process.md](references/design-process.md)、2つの成果物の仕様は [references/design-system-output.md](references/design-system-output.md)、売るためのランディングページ設計は [references/landing-page.md](references/landing-page.md)、入った直後の30秒（初回起動・権限要求・アクティベーション）は [references/first-run.md](references/first-run.md) にあります。スイート全体の説明は [superforge-skill](../../README.ja.md) へ。

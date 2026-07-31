@@ -65,7 +65,7 @@ UXと摩擦——どこで迷い、どこで離脱するか。デザインと作
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、12個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

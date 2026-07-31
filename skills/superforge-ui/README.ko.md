@@ -63,9 +63,9 @@ SwiftUI에는 Apple HIG(Dynamic Type, SF Symbols, `.presentationDetents`, 햅틱
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열두 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열두 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -85,6 +85,13 @@ cd superforge-skill
 
 ---
 
+### 🚪 아무도 설계하지 않는 30초
+랜딩 페이지는 낯선 사람을 설득하고, 제품 화면은 돌아온 사람을 돕습니다. **그 사이에 있는 것이 두 투자 중 어느 쪽이라도 회수될지를 결정하는 순간**이고, 보통 그 자리에는 아무도 읽지 않는 캐러셀이 놓여 있습니다. 첫 실행의 목표는 제품을 설명하는 것이 아니라 **가장 적은 판단으로 사용자를 하나의 진짜 결과까지 데려가는 것**입니다. 설명 없이도 결과를 낼 수 있다면, 그 설명은 친절의 옷을 입은 마찰일 뿐입니다.
+
+특히 함정은 권한입니다. 이유를 이해하기 전에 뜬 허가 대화상자는 「거부」를 뜻하고, 모바일에서 그 거부는 종종 **영구적**입니다. 사용자가 그 기능을 막 시도한 직후에, **내 쪽의 사전 안내 화면**을 한 장 거쳐 묻는 것 — 내 화면은 다시 띄울 수 있지만 OS의 대화상자는 그럴 수 없기 때문입니다.
+
+---
+
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 설계 단계와 네 가지 데이터 상태, 품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에, 판매용 랜딩 페이지 설계는 [references/landing-page.md](references/landing-page.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 설계 단계와 네 가지 데이터 상태, 품질 체크리스트는 [references/design-process.md](references/design-process.md)에, 두 산출물의 명세는 [references/design-system-output.md](references/design-system-output.md)에, 판매용 랜딩 페이지 설계는 [references/landing-page.md](references/landing-page.md)에, 마음을 정한 직후의 30초(첫 실행·권한 요청·활성화)는 [references/first-run.md](references/first-run.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

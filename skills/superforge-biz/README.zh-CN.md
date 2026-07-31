@@ -22,7 +22,9 @@
 
 ```mermaid
 flowchart TD
-    I[💡 产品创意] --> A[🏷️ 选定收入原型]
+    I[💡 产品创意] --> Z{{🚦 GO / NO-GO —— 这个市场值不值得进}}
+    Z -->|NO-GO / WAIT| ZS[写下代码和条件，就此打住]
+    Z -->|GO| A[🏷️ 选定收入原型]
     A --> B[🚪 付费墙放在惊喜时刻]
     B --> C[📈 价值指标与增长闭环]
     C --> D[🎯 获客：渠道契合 · 引流磁石 · CAC/LTV]
@@ -38,6 +40,11 @@ flowchart TD
 
 ## ✨ 三大亮点
 
+### 🚦 定价页之前，先过一道闸
+在这一切之前先问一句：这个市场撑得起这门生意吗？TAM **必须双向计算**——自上而下和自下而上。单向算出来的数字「错了也看不出来」，而**两者的差距本身就是发现**。每个输入都带可信度分级（实测／引用／推导／假设），建立在假设之上的结论只能标为假说，不能当成结论汇报。
+
+真正定生死的是这道式子：`所需年收入 ÷ (价格 × 留存率) = 需要多少客户`。接着只问一件事——**你现实中够得到那么多人吗？** 一个百亿美元的市场毫无意义，如果计划需要一万个客户，而你唯一的渠道只能触达五十个。输出是代码而不是说辞：`GO` / `GO/NARROW` / `NO-GO/TOO-SMALL` / `NO-GO/NO-PATH` / `NO-GO/LOCKED` / `WAIT`，其中 `WAIT` 必须附上一句能推翻它的条件。
+
 ### 🏷️ 四种原型里，带着理由选一种
 功能门槛式 freemium、分层订阅、按用量计费、B2B 企业授权。产品会被逐一对照这四种评估，最终指定一个主驱动，并写下选它的理由。
 
@@ -49,6 +56,9 @@ flowchart TD
 
 ### 💬 把「很棒的自动化」变成数字，再变成一个瞬间
 任何价值主张都能归到四个杠杆之一——省时间、免成本、抢回营收、降风险——每个都有一条把功能换算成**客户自己的数字**的公式，且要在报价之前说出口。「每周省2小时」单独看是规格书；配上「周五傍晚不用再加班了」这个具体瞬间，才变成购买的理由。
+
+### 📏 规模不够的打法，直说规模不够
+每月两百次会话还做 A/B 测试，不是效果差——是**等上几周也拿不到任何能解读的结果**。只有 12 个流失用户就做召回、转化率还没摸清就投广告，都是一样。每个打法都标了最低可行规模，以及低于它时该做什么。「你现在这个体量，这招不管用」是建议的一部分，不是不给建议。
 
 ### 🎯 不只是让老客户增长，更是够到第一批客户
 渠道契合度（B2B 企业客户和自助式消费者应用需要完全不同的渠道）、能真正转化而不是被无视的引流磁石、按"匹配度×意向度"筛选让获客数不再是虚荣指标，以及在渠道悄悄亏钱之前发现问题的 CAC/LTV 粗算。
@@ -71,9 +81,9 @@ flowchart TD
 
 ## 🚀 安装与使用
 
-### 🖥️ 一次装好全部 12 个技能（只需一次）
+### 🖥️ 一次装好全部 13 个技能（只需一次）
 
-克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 12 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 13 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -95,4 +105,4 @@ cd superforge-skill
 
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；锚定、损失厌恶、默认选项以及各自的伦理边界，都在 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)；渠道契合、引流磁石、筛选和 CAC/LTV 算法在 [references/customer-acquisition.md](references/customer-acquisition.md)；四个价值杠杆和「先数字后情感」的话术公式在 [references/value-pitch.md](references/value-pitch.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；GO/NO-GO 闸门、双向 TAM 计算、数字可信度分级与成熟度判定在 [references/market-sizing.md](references/market-sizing.md)；锚定、损失厌恶、默认选项以及各自的伦理边界，都在 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)；渠道契合、引流磁石、筛选和 CAC/LTV 算法在 [references/customer-acquisition.md](references/customer-acquisition.md)；四个价值杠杆和「先数字后情感」的话术公式在 [references/value-pitch.md](references/value-pitch.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

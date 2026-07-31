@@ -63,9 +63,9 @@ Una landing page se juzga con otra métrica que una pantalla de producto: un des
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las doce skills (una sola vez)
+### 🖥️ Instala las trece skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -85,6 +85,13 @@ Al terminar, abre `docs/design.html` en el navegador: deberías ver cada token y
 
 ---
 
+### 🚪 Los treinta segundos que nadie diseña
+Una landing page convence a un desconocido. Una pantalla de producto sirve a quien vuelve. **Entre las dos está el momento que decide si alguna de las dos inversiones se recupera**, y normalmente se le entrega un carrusel que nadie lee. El objetivo del primer arranque no es explicar el producto: es **llevar a la persona a un resultado real con el menor número de decisiones por medio**. Y si el producto puede darlo sin explicación, la explicación es fricción disfrazada de amabilidad.
+
+Los permisos son la trampa concreta: un diálogo mostrado antes de que la persona entienda por qué es un permiso denegado, y en móvil esa negativa suele ser **permanente**. Pregunta justo después de que haya intentado hacer aquello que lo necesita, detrás de tu propia pantalla previa — porque la tuya puede volver a mostrarse y la del sistema no.
+
+---
+
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los pasos de diseño, los cuatro estados de datos y la lista de calidad están en [references/design-process.md](references/design-process.md), la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md), y el diseño de landing pages de venta en [references/landing-page.md](references/landing-page.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); los pasos de diseño, los cuatro estados de datos y la lista de calidad están en [references/design-process.md](references/design-process.md), la especificación de los dos artefactos en [references/design-system-output.md](references/design-system-output.md), el diseño de landing pages de venta en [references/landing-page.md](references/landing-page.md), y los primeros treinta segundos tras decidirse — primer arranque, permisos, activación — en [references/first-run.md](references/first-run.md). Visión general de la suite: [superforge-skill](../../README.es.md).

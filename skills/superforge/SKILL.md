@@ -59,6 +59,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 |---|---|
 | 作りたいものが言語化できていない | `/superforge-brain` |
 | アイデアはあるが売れるか不明・リード獲得やビジネス視点の説明が弱い | `/superforge-brain` → `/superforge-biz` |
+| 市場規模を知りたい・そもそも作る価値があるか | `/superforge-biz`（§0 の GO/NO-GO ゲート） |
 | ブランド・世界観・画像/動画が要る | `/superforge-brand` |
 | 何を作るかは決まっている | `/superforge-ui` → `/superforge-dev` |
 | 実装を回したい・複数エージェントで進めたい | `/superforge-dev` |
@@ -67,6 +68,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | アクセシビリティ・WCAG・読み上げ・コントラスト | `/superforge-a11y` |
 | 出す前に叩いてほしい | `/superforge-roast` |
 | 本当に動くか確認したい | `/superforge-verify` |
+| 出していいのか確認したい（法務・審査・計測） | `/superforge-ship` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
 
 Announce the route and the tier in one line, then start. Ask for approval of

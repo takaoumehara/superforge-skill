@@ -27,15 +27,19 @@ treat any absence as "do it inline".
 | Structured divergence when SIT alone is not enough | `brainstorming` |
 | Idea discovery from the user's existing work or expertise | `idea-generator` |
 | Pressure-testing an idea from many angles | `validate-thinking`, `roast` |
-| Market and competitor reality check | `market-research`, `competitive-analysis` |
+| Deciding what may be killed and what only looks unoriginal | inline — `superforge-brain/references/value-classification.md` — no external skill needed |
+| Checking the idea against real people rather than more reasoning | inline — `superforge-brain/references/talk-to-users.md` — no external skill needed |
+| Market and competitor reality check | `superforge-biz` §0 first (sizing and GO/NO-GO); then `market-research`, `competitive-analysis` |
 | Naming | `product-name` |
 | Physical/camera/sensor/movement products | `embodied-product-director` |
 
 ### `superforge-biz` — money
 | Step | Delegate to |
 |---|---|
-| Lead generation, channel selection, CAC/LTV | inline — `superforge-biz/references/customer-acquisition.md` — no external skill needed |
+| Market sizing, TAM/SAM/SOM, GO/NO-GO | inline — `superforge-biz/references/market-sizing.md` — no external skill needed |
+| Lead generation, channel selection, CAC/LTV, minimum viable scale per tactic | inline — `superforge-biz/references/customer-acquisition.md` — no external skill needed |
 | Quantifying a feature's ROI as a pitch | inline — `superforge-biz/references/value-pitch.md` — no external skill needed |
+| Choosing a persuasion mechanism from the symptom | inline — `superforge-biz/references/behavioral-frameworks.md` — no external skill needed |
 | Pricing and monetization models | `monetization`, `indie-business` |
 | Paywall screens and offers | `paywall-generator`, `subscription-offers`, `offer-codes-setup` |
 | Subscription lifecycle, win-back, referral | `subscription-lifecycle`, `win-back-offers`, `referral-system` |
@@ -43,7 +47,7 @@ treat any absence as "do it inline".
 | Persuasion and conversion psychology | `marketing-psychology` |
 | Sales motion for B2B | `sales` and the `sales-*` family |
 | App Store surfaces | `app-store`, `product-page-optimization`, `apple-search-ads`, `keyword-optimizer` |
-| Legal and privacy prerequisites | `legal`, `privacy-policy`, `privacy-manifests` |
+| Legal and privacy prerequisites | **`superforge-ship`** first (which obligations fired); then `legal`, `privacy-policy`, `privacy-manifests` for the drafting |
 
 ### `superforge-brand` — identity and media
 | Step | Delegate to |
@@ -68,6 +72,7 @@ treat any absence as "do it inline".
 | Accessibility | **`superforge-a11y`** first; then `accessibility-generator`, `audit` |
 | Native iOS/macOS/watchOS | `ios`, `swift`, `liquid-glass`, `ipad-patterns`, `macos`, `watchos`, `navigation-patterns`, `toolbars`, `widgets` |
 | Landing and case-study pages | `superforge-ui/references/landing-page.md` first; then `landing-page-creator`, `keynote-slide-page` |
+| First run, welcome screens, permission prompts | `superforge-ui/references/first-run.md` first — decide whether intro screens are the right answer at all; then `onboarding-generator` for native scaffolding |
 | Data visualisation | `dataviz`, `charts-3d` |
 | Japanese typesetting | `japanese-text` |
 
@@ -123,6 +128,24 @@ criteria — one ledger, one set of numbers, one report at `docs/accessibility.m
 | Evidence-before-claims discipline | `verification-before-completion` |
 | Technical audit sweep | `audit`, `optimize` |
 | Running the actual app | `run` |
+
+### `superforge-ship` — the release gate
+| Step | Delegate to |
+|---|---|
+| Which legal obligations the product triggered | inline — `superforge-ship/references/legal-triggers.md` — no external skill needed |
+| Drafting the actual policy or terms, once the facts are established | `legal`, `privacy-policy`, `privacy-manifests` |
+| Accessibility as a release blocker | **`superforge-a11y`** — read `docs/accessibility.md`, never restate criteria |
+| Does it work at all (run this first) | **`superforge-verify`** |
+| Threat surface before release | `security`, `harden`, `security-review` |
+| Store listing craft | `app-store`, `product-page-optimization`, `screenshot-planner` |
+| Instrumentation and monitoring | `error-monitoring`, `logging-setup`, `ci-cd-setup` |
+| What to measure and the post-launch loop | inline — `superforge-ship/references/launch-metrics.md` — no external skill needed |
+
+`superforge-verify` and `superforge-ship` are deliberately separate gates and
+must not be merged: one asks **does it work**, the other asks **may we release
+it**. A product passes the first and fails the second regularly — undisclosed
+data collection, a missing deletion path, no way to roll back. Run verify
+first; ship assumes it passed.
 
 ### `superforge-handoff` — continuity
 | Step | Delegate to |

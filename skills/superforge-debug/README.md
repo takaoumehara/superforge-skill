@@ -60,7 +60,7 @@ No swallowed exceptions, no bypassed assertions, no dummy fallback values that m
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
