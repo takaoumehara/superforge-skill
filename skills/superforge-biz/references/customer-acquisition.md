@@ -113,7 +113,32 @@ the common failure of scaling a channel that was never actually profitable.
 
 ---
 
-## 6. The first-10-customers playbook
+## 6. Minimum viable scale — do not recommend a tactic that cannot produce a signal
+
+The most common way marketing advice wastes someone's time is not by being
+wrong. It is by being right at a scale they do not have. A tactic below its
+minimum volume does not underperform — it produces **no interpretable result at
+all**, which is worse, because weeks are spent waiting for a number that was
+never going to arrive.
+
+Check the threshold before recommending anything.
+
+| 施策 | 最低規模の目安 | 下回るとどうなるか | 代わりにやること |
+|---|---|---|---|
+| **A/Bテスト** | 週 1,000 セッション程度 | 有意差が出ないまま数ヶ月が過ぎ、結論は「わからない」 | 5人に使わせて黙って見る。定性の方が速く、小規模では正確 |
+| **セグメント別ランディングページ** | 月 5,000 訪問程度 | ただでさえ薄いトラフィックが分割され、どちらも評価できなくなる | 1枚を磨く。分けるのは、1枚が勝ってから |
+| **有料広告** | 月 30 件程度の転換（CACが測れる下限） | 学習が成立しないまま予算だけ消える | 手動チャネルで転換率を先に作る。広告は増幅装置であって発火装置ではない |
+| **メール配信キャンペーン** | 200 名程度のリスト | 反応率のばらつきが大きすぎて、施策の良し悪しが判定できない | 1通ずつ個別に書く。この規模では返信率が桁で違う |
+| **ウィンバック / 復帰施策** | 解約者 100 名程度 | 実装コストが回収できない | 名指しで個別に連絡する。理由も同時に聞ける |
+| **リファラルプログラム** | 満足している既存顧客が一定数 | 紹介する人がいないので、機能が使われないまま残る | 一人ずつ「同じことで困っている人はいますか」と聞く |
+
+**規模に関係なく、いつでも効くもの**：個別アウトリーチ、対象が集まっている場所への参加、既存顧客への聞き取り、問い合わせへの応答速度、ランディングページの質、価格の見直し。小さいうちは、ここに全部の時間を入れてよい。
+
+**言いにくいことを言うのも助言のうち。** 「今の規模ではその施策は効きません、代わりにこれを」と正直に言う方が、実装させて数ヶ月後に何も分からなかったと報告するより、ずっと価値が高い。規模の閾値を確認せずに施策名を並べるのは、助言ではなくカタログの読み上げです。
+
+---
+
+## 7. The first-10-customers playbook
 
 Before there is a case study, a review, or a repeatable channel, scalable
 tactics mostly don't work yet — there's no proof to make them credible.
@@ -136,7 +161,7 @@ learning, not customers — the message has nothing real to prove yet.
 
 ---
 
-## 7. Common failure modes
+## 8. Common failure modes
 
 1. **Channel chosen by popularity, not fit** — see §1. "Everyone does content
    marketing" is not a reason if the buyer is a handful of enterprise
@@ -149,7 +174,9 @@ learning, not customers — the message has nothing real to prove yet.
    feels like progress and isn't.
 5. **A slow response path undermining every channel at once.** See §4 — fix
    this before spending more to fill a leaky funnel.
-6. **Skipping the manual phase.** See §6 — trying to look "professional" with
+6. **Running a tactic below its minimum scale.** See §6 — the result is not a
+   weak signal, it is no signal, and it costs the same in time.
+7. **Skipping the manual phase.** See §7 — trying to look "professional" with
    a paid campaign before there's proof to make it convert.
 
 ---

@@ -22,7 +22,9 @@ Esta skill toma esas decisiones para software. Elige un arquetipo de monetizaci�
 
 ```mermaid
 flowchart TD
-    I[💡 Idea de producto] --> A[🏷️ Elegir el arquetipo de ingresos]
+    I[💡 Idea de producto] --> Z{{🚦 GO / NO-GO — ¿merece la pena entrar en este mercado?}}
+    Z -->|NO-GO / WAIT| ZS[Parar, con el código y la condición por escrito]
+    Z -->|GO| A[🏷️ Elegir el arquetipo de ingresos]
     A --> B[🚪 Paywall en el momento de máximo valor]
     B --> C[📈 Métrica de valor y bucles de crecimiento]
     C --> D[🎯 Adquisición: encaje de canal, imán de leads, CAC/LTV]
@@ -38,6 +40,11 @@ El arquetipo se deduce de la forma del producto, nunca al revés.
 
 ## ✨ 3 puntos clave
 
+### 🚦 Una puerta antes de la página de precios
+Antes de todo esto, una pregunta: ¿este mercado sostiene el negocio siquiera? El TAM se calcula **siempre en las dos direcciones**, de arriba abajo y de abajo arriba, porque un número calculado en un solo sentido no puede verse equivocado, y **la diferencia entre ambos es el hallazgo**. Cada dato lleva su nivel de confianza (medido / publicado / derivado / supuesto), y una conclusión apoyada en un supuesto se etiqueta como hipótesis en vez de presentarse como resultado.
+
+Y luego el cálculo que de verdad decide: `ingresos necesarios ÷ (precio × retención) = clientes necesarios`, seguido de la única pregunta que importa: **¿puedes llegar realmente a esa cantidad de gente?** Un mercado de 10.000 millones da igual si tu plan necesita 10.000 clientes y tu único canal alcanza a 50. Termina en un código, nunca en prosa: `GO` / `GO/NARROW` / `NO-GO/TOO-SMALL` / `NO-GO/NO-PATH` / `NO-GO/LOCKED` / `WAIT` — y un `WAIT` lleva la frase que lo cambiaría.
+
 ### 🏷️ Cuatro arquetipos, uno elegido con motivo
 Freemium con funciones bloqueadas, suscripción por niveles, cobro por uso o licencia B2B enterprise. El producto se evalúa contra los cuatro y uno se nombra motor principal, con el motivo escrito.
 
@@ -49,6 +56,9 @@ El anclaje, la aversión a la pérdida y las opciones por defecto funcionan, y c
 
 ### 💬 «Buena automatización» se convierte en un número, y luego en un momento
 Todo argumento de valor se reduce a una de cuatro palancas — tiempo ahorrado, coste evitado, ingresos recuperados, riesgo reducido — cada una con una fórmula que convierte la función en *el número del propio cliente*, antes de mostrar el precio. «2 horas menos a la semana» por sí solo es una ficha técnica; junto con «ya no tiene que quedarse hasta tarde los viernes» se convierte en un motivo para comprar.
+
+### 📏 Tácticas para las que eres demasiado pequeño, dichas como tal
+Un test A/B con 200 sesiones al mes no rinde poco: **no devuelve ningún resultado interpretable**, tras semanas de espera. Igual con campañas de recuperación con 12 bajas, o con publicidad de pago antes de conocer la tasa de conversión. Cada táctica lleva su escala mínima viable y qué hacer por debajo de ella, porque «a tu escala esto no funciona» forma parte del consejo, no es una forma de no darlo.
 
 ### 🎯 Llegar a los primeros clientes, no solo hacer crecer a los que ya hay
 Encaje canal-mercado (una venta B2B enterprise y una app de consumo autoservicio necesitan canales completamente distintos), qué hace que un imán de leads convierta en vez de ser ignorado, la cualificación por ajuste × intención para que el número de leads deje de ser una métrica de vanidad, y las cuentas rápidas de CAC/LTV que detectan un canal que pierde dinero antes de escalarlo.
@@ -71,9 +81,9 @@ Encaje canal-mercado (una venta B2B enterprise y una app de consumo autoservicio
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las doce skills (una sola vez)
+### 🖥️ Instala las trece skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -95,4 +105,4 @@ Si existen `docs/product-idea.md` y `docs/brief.md`, los lee antes de empezar.
 
 ## 📄 Licencia
 
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); el anclaje, la aversión a la pérdida, las opciones por defecto y su línea ética están en [references/behavioral-frameworks.md](references/behavioral-frameworks.md); el encaje canal-mercado, los imanes de leads, la cualificación y las cuentas de CAC/LTV están en [references/customer-acquisition.md](references/customer-acquisition.md); las cuatro palancas de valor y la fórmula del pitch lógica-luego-emoción están en [references/value-pitch.md](references/value-pitch.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md); la puerta GO/NO-GO, el cálculo del TAM en ambas direcciones, los niveles de confianza y las etapas de madurez están en [references/market-sizing.md](references/market-sizing.md); el anclaje, la aversión a la pérdida, las opciones por defecto y su línea ética están en [references/behavioral-frameworks.md](references/behavioral-frameworks.md); el encaje canal-mercado, los imanes de leads, la cualificación y las cuentas de CAC/LTV están en [references/customer-acquisition.md](references/customer-acquisition.md); las cuatro palancas de valor y la fórmula del pitch lógica-luego-emoción están en [references/value-pitch.md](references/value-pitch.md). Visión general de la suite: [superforge-skill](../../README.es.md).

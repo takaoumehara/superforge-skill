@@ -1,22 +1,27 @@
 ---
 name: superforge-biz
 description: >
-  Architect business models, pricing tiers, paywall placement, subscription
-  flows, customer acquisition, and Go-To-Market plans. Covers monetization
-  archetype selection, price anchoring, trial-to-paid conversion triggers,
-  growth loops, channel-market fit and lead generation, and quantifying any
-  feature's business value (time saved, cost avoided, revenue captured, risk
-  reduced) as a logic-and-emotion pitch instead of a vague adjective. Use
-  when the user says "pricing", "monetization", "paywall", "subscription",
-  "free trial", "business model", "revenue", "GTM", "how do we make money",
-  "lead generation", "customer acquisition", "marketing", "ROI", "value
-  proposition", "価格", "値付け", "課金", "マネタイズ", "サブスク",
-  "ペイウォール", "ビジネスモデル", "どう収益化する", "リード獲得",
-  "顧客獲得", "マーケティング", "ビジネス視点", or runs /superforge-biz.
+  Decide whether a market is worth entering, then architect the business model
+  on top of it — pricing tiers, paywall placement, subscription flows, customer
+  acquisition, and Go-To-Market. Opens with a GO/NO-GO gate: TAM/SAM/SOM
+  computed in both directions, confidence tiers on every input, and the reverse
+  calculation that asks how many customers this needs and whether you can reach
+  that many. Then monetization archetype selection, price anchoring,
+  trial-to-paid triggers, growth loops, channel-market fit, minimum viable
+  scale per tactic, and quantifying any feature's business value (time saved,
+  cost avoided, revenue captured, risk reduced) as a logic-and-emotion pitch
+  instead of a vague adjective. Use when the user says "pricing",
+  "monetization", "paywall", "subscription", "free trial", "business model",
+  "revenue", "GTM", "how do we make money", "market size", "TAM", "is this
+  worth building", "lead generation", "customer acquisition", "marketing",
+  "ROI", "value proposition", "価格", "値付け", "課金", "マネタイズ",
+  "サブスク", "ペイウォール", "ビジネスモデル", "どう収益化する", "市場規模",
+  "儲かるのか", "作る価値があるか", "リード獲得", "顧客獲得", "マーケティング",
+  "ビジネス視点", or runs /superforge-biz.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.1"
+  version: "3.0"
 compatibility: >
   Standalone.
   Reads docs/product-idea.md and docs/brief.md when present, writes docs/business-model.md.
@@ -25,6 +30,37 @@ compatibility: >
 # Superforge Biz — Business Architecture & Monetization Engine
 
 Use this skill whenever defining monetization models, pricing tiers, paywall placements, or business growth loops. This engine turns product ideas into sustainable, high-margin software businesses.
+
+---
+
+## 0. The gate — is this market worth entering at all
+
+Everything below assumes the answer is yes. Check it first, because a perfect
+pricing model for a market that cannot support one person is a wasted month.
+
+Three questions, in this order:
+
+1. **How many customers does this actually need?**
+   `必要な年間売上 ÷ (価格 × 継続率)`. Run this before any market-size figure —
+   a large TAM reliably stops everyone, models included, from asking whether a
+   path to those customers exists.
+2. **Is the market big enough, computed both ways?** Top-down and bottom-up.
+   The gap between them is the finding; if they differ by an order of
+   magnitude, one assumption is wrong and you need to know which.
+3. **Can you get in, and does getting in protect you?** Every barrier is a cost
+   before revenue and a moat after it. A market with no barriers is a warning,
+   not an opportunity.
+
+End with a verdict code, never with prose: `GO` / `GO/NARROW` / `NO-GO/TOO-SMALL`
+/ `NO-GO/NO-PATH` / `NO-GO/LOCKED` / `WAIT`. A `WAIT` carries the one-sentence
+condition that would change it, and that sentence is the same one
+`superforge-brain` stores on its Lab shelf.
+
+Full method — the two-directional math, the A/B/C/D confidence tiers on every
+input, maturity staging, and which mature markets remain enterable →
+**`references/market-sizing.md`**. Run it after `superforge-brain`'s market
+pass, never before: sizing a market before the ideas exist collapses the idea
+space, which is the exact failure that skill's §8 is built to prevent.
 
 ---
 
@@ -55,6 +91,14 @@ Structure the unit economics framework:
 - **Growth Loops**: Build product-led viral loops (e.g., shared links, branded exports, collaborative invites).
 - **Go-To-Market (GTM) Blueprint**: Identify primary launch channels, launch positioning, landing page messaging, and conversion funnel milestones.
 
+**Check every tactic against its minimum viable scale before recommending it.**
+A/B testing at 200 sessions a month, win-back campaigns with 12 churned users,
+or paid acquisition before the conversion rate is known do not underperform —
+they return no interpretable signal at all, while costing the same weeks. The
+thresholds, and what to do instead below each one, are in
+`references/customer-acquisition.md` §6. Saying 「その規模ではこれは効きません」
+is part of the advice, not a failure to give it.
+
 ---
 
 ## 4. Customer Acquisition — before there's a loop to grow
@@ -82,13 +126,22 @@ numbers before the pitch is written → **`references/value-pitch.md`**.
 
 ## Deeper reference
 
+**`references/market-sizing.md`** — the GO/NO-GO gate: two-directional TAM math
+and what their disagreement reveals, A/B/C/D confidence tiers on every input,
+the reverse calculation (how many customers this actually needs, and whether
+you can reach that many), maturity staging, entry barriers read as both cost
+and moat, and the six verdict codes.
+
 The mechanisms behind pricing, anchoring, trials, defaults, and paywall
 placement — and the ethical line on each — are in
-**`references/behavioral-frameworks.md`**.
+**`references/behavioral-frameworks.md`**. It also carries the three-part
+diagnosis of why nobody acted (理由 / 容易さ / 合図), the symptom index for
+picking a mechanism from what is actually going wrong, and the list of widely
+recommended tactics this suite deliberately does not use.
 
 **`references/customer-acquisition.md`** — channel-market fit, lead magnets,
-fit×intent qualification, CAC/LTV sanity math, and the first-10-customers
-playbook.
+fit×intent qualification, CAC/LTV sanity math, minimum viable scale per tactic,
+and the first-10-customers playbook.
 
 **`references/value-pitch.md`** — the four value levers and their formulas,
 the logic-then-emotion pitch structure, the credibility checklist, and the
@@ -98,9 +151,17 @@ discovery questions that fill in the numbers before the pitch is written.
 
 Write `docs/business-model.md`. Read `docs/product-idea.md` first if it
 exists; the monetization archetype follows from the product shape, not the
-other way round. Include an `## Acquisition plan` section (from §4) and a
-`## Value pitch` section (from §5) — a business model with a price but no
-way to reach or convince a customer is only half the artifact.
+other way round. It must open with a `## Market` section carrying the §0
+verdict code (from `references/market-sizing.md`) — a pricing model written
+above an unstated NO-GO is the most expensive document in the repository. Then
+include an `## Acquisition plan` section (from §4) and a `## Value pitch`
+section (from §5): a business model with a price but no way to reach or
+convince a customer is only half the artifact.
+
+If `superforge-brain` ran, its quadrant travels with the idea. A **Workhorse**
+arriving here needs §0 pointed at the win-path code rather than at novelty; a
+`WAIT` verdict here goes back to that skill's Lab shelf with its condition
+attached, rather than being reported as a dead end.
 
 ## Delegate when a sharper skill is installed
 

@@ -26,7 +26,7 @@ flowchart TD
     R --> T[🎚️ Model tier A / B / C / D]
     R --> S1[💡 brain · biz · brand]
     R --> S2[🎨 ui · dev · test]
-    R --> S3[🔥 roast · verify · handoff]
+    R --> S3[🔥 a11y · roast · verify · ship · handoff]
     S1 --> D[(🗂️ docs/)]
     S2 --> D
     S3 --> D
@@ -39,7 +39,7 @@ One request in; a routed specialist, a chosen model tier, and a file in `docs/` 
 ## ✨ Features
 
 ### 🧭 Routes instead of asking
-Ten specialists cover idea, business, brand, UI, build, test, debug, critique, verification, and handoff. The route and the tier are announced in a single line, then work starts. Approval is requested only when two genuinely different paths are both plausible.
+Twelve specialists cover idea, business, brand, UI, build, test, debug, accessibility, critique, verification, release readiness, and handoff. The route and the tier are announced in a single line, then work starts. Approval is requested only when two genuinely different paths are both plausible.
 
 ### 🎚️ A model tier per subtask, decided before dispatch
 Judgment goes to Opus 5, volume to Sonnet 5, routine to Haiku 4.5, unattended long runs to Fable 5, and bulk text that needs no repository access to the local `gemini` CLI. Nothing stays on the session default just to be safe.
@@ -62,7 +62,7 @@ Each skill writes its artifact under `docs/` before reporting back, so `/clear`,
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

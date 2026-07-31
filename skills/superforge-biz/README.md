@@ -22,7 +22,9 @@ This skill makes those decisions for software. It picks a monetization archetype
 
 ```mermaid
 flowchart TD
-    I[💡 Product idea] --> A[🏷️ Pick the revenue archetype]
+    I[💡 Product idea] --> Z{{🚦 GO / NO-GO — is this market worth entering?}}
+    Z -->|NO-GO / WAIT| ZS[Stop, with the code and the condition written down]
+    Z -->|GO| A[🏷️ Pick the revenue archetype]
     A --> B[🚪 Place the paywall at peak delight]
     B --> C[📈 Value metric and growth loops]
     C --> D[🎯 Acquisition: channel-market fit, lead magnet, CAC/LTV]
@@ -38,6 +40,11 @@ The archetype follows from the shape of the product, never the other way round.
 
 ## ✨ Features
 
+### 🚦 A gate before the pricing page
+Before any of this, one question: does this market support the business at all? TAM computed **in both directions** — top-down and bottom-up — because a single number cannot visibly be wrong, and the gap between the two is the finding. Every input carries a confidence tier (measured / reported / derived / assumed), and a conclusion resting on an assumption is labelled a hypothesis rather than reported as a result.
+
+Then the calculation that actually decides: `required revenue ÷ (price × retention) = customers needed`, followed by the only question that matters — **can you realistically reach that many people?** A $10B market is irrelevant if your plan needs 10,000 customers and your only channel reaches 50. It ends in a code, never in prose: `GO` / `GO/NARROW` / `NO-GO/TOO-SMALL` / `NO-GO/NO-PATH` / `NO-GO/LOCKED` / `WAIT` — and a `WAIT` carries the one sentence that would change it.
+
 ### 🏷️ Four archetypes, one chosen on purpose
 Freemium with feature gates, tiered subscription, usage-based metering, or B2B enterprise licensing. The product is evaluated against all four and one is named the primary driver, with the reason written down.
 
@@ -49,6 +56,9 @@ Anchoring, loss aversion, and defaults work — and each one has a point past wh
 
 ### 💬 "Good automation" becomes a number, then a moment
 Every value claim reduces to one of four levers — time saved, cost avoided, revenue captured, risk reduced — each with a formula that turns the feature into *the customer's own number* before the price is shown. The number comes first, then the one specific person or moment it changes: "週2時間の削減" on its own is a spec; paired with "金曜の夕方に残業しなくて良くなる" it's a reason to buy.
+
+### 📏 Tactics you are too small to run, named as such
+An A/B test at 200 sessions a month does not underperform — it returns **no interpretable result at all**, after weeks of waiting. Same for win-back campaigns with 12 churned users, or paid acquisition before the conversion rate is known. Every tactic carries its minimum viable scale and what to do below it, because 「その規模ではこれは効きません」 is part of the advice, not a failure to give it.
 
 ### 🎯 Getting to the first customers, not just growing the existing ones
 Channel-market fit (a B2B enterprise sale and a self-serve consumer app need entirely different channels), what makes a lead magnet convert instead of being ignored, fit×intent qualification so a lead count stops being a vanity metric, and the back-of-envelope CAC/LTV math that catches a channel quietly losing money before it scales.
@@ -71,7 +81,7 @@ Channel-market fit (a B2B enterprise sale and a self-serve consumer app need ent
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
@@ -95,4 +105,4 @@ It reads `docs/product-idea.md` and `docs/brief.md` first when they exist.
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); anchoring, loss aversion, defaults, and the ethical line on each are in [references/behavioral-frameworks.md](references/behavioral-frameworks.md); channel-market fit, lead magnets, qualification, and CAC/LTV math are in [references/customer-acquisition.md](references/customer-acquisition.md); the four value levers and the logic-then-emotion pitch formula are in [references/value-pitch.md](references/value-pitch.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the GO/NO-GO gate, two-directional TAM math, confidence tiers, and maturity staging are in [references/market-sizing.md](references/market-sizing.md); anchoring, loss aversion, defaults, and the ethical line on each are in [references/behavioral-frameworks.md](references/behavioral-frameworks.md); channel-market fit, lead magnets, qualification, and CAC/LTV math are in [references/customer-acquisition.md](references/customer-acquisition.md); the four value levers and the logic-then-emotion pitch formula are in [references/value-pitch.md](references/value-pitch.md). Suite overview: [superforge-skill](../../README.md).

@@ -22,7 +22,9 @@
 
 ```mermaid
 flowchart TD
-    I[💡 제품 아이디어] --> A[🏷️ 수익 원형 선택]
+    I[💡 제품 아이디어] --> Z{{🚦 GO / NO-GO — 이 시장에 들어갈 가치가 있는가}}
+    Z -->|NO-GO / WAIT| ZS[코드와 조건을 적고 멈춘다]
+    Z -->|GO| A[🏷️ 수익 원형 선택]
     A --> B[🚪 감동의 순간에 페이월 배치]
     B --> C[📈 가치 지표와 성장 루프]
     C --> D[🎯 획득: 채널 적합도 · 리드 마그넷 · CAC/LTV]
@@ -38,6 +40,11 @@ flowchart TD
 
 ## ✨ 3가지 강점
 
+### 🚦 가격표 앞에 관문 하나
+그 전에 하나. 이 시장이 애초에 이 사업을 지탱하는가? TAM은 **반드시 양방향으로** 계산합니다 — 톱다운과 보텀업. 한 방향으로만 낸 숫자는 「틀려도 눈에 보이지 않기」 때문이고, **둘의 차이 자체가 발견**입니다. 모든 입력에 신뢰 등급(실측／보도／도출／가정)을 붙이고, 가정 위에 선 결론은 결과가 아니라 가설로 표시합니다.
+
+그리고 실제로 판단을 가르는 건 이 식입니다: `필요한 연매출 ÷ (가격 × 유지율) = 필요한 고객 수`. 이어서 묻는 건 하나뿐 — **그 인원에 현실적으로 닿을 수 있는가**. 10조 원 시장도, 계획이 1만 명을 요구하는데 유일한 채널이 50명에게만 닿는다면 무의미합니다. 결과는 서술문이 아니라 코드입니다: `GO` / `GO/NARROW` / `NO-GO/TOO-SMALL` / `NO-GO/NO-PATH` / `NO-GO/LOCKED` / `WAIT`. `WAIT`에는 그것을 뒤집을 조건이 한 문장 붙습니다.
+
 ### 🏷️ 네 가지 원형 중 이유를 적고 하나를 고릅니다
 기능 잠금형 프리미엄, 계층형 구독, 사용량 과금, B2B 엔터프라이즈 라이선스. 제품을 네 가지 모두에 대어 평가한 뒤 주된 동력 하나를 이유와 함께 명시합니다.
 
@@ -49,6 +56,9 @@ flowchart TD
 
 ### 💬 "좋은 자동화"를 숫자로, 그다음 순간으로 바꿉니다
 모든 가치 주장은 네 가지 레버 — 시간 절감, 비용 회피, 매출 회수, 리스크 감소 — 중 하나로 환원되고, 각각에는 기능을 **고객 자신의 숫자**로 바꾸는 공식이 있습니다. 가격을 보여주기 전에 숫자가 먼저입니다. "주 2시간 절감"만으로는 스펙 시트지만, "금요일 저녁에 야근하지 않아도 된다"는 구체적인 순간과 짝을 이루면 비로소 살 이유가 됩니다.
+
+### 📏 「그 규모에선 안 먹히는 전술」을 솔직히 그렇게 말합니다
+월 200세션에서의 A/B 테스트는 성적이 나쁜 게 아닙니다. **해석 가능한 결과가 하나도 안 나온 채** 몇 주가 흘러갑니다. 이탈자 12명 대상 윈백도, 전환율을 모르는 상태의 유료 광고도 마찬가지입니다. 모든 전술에 최소 가용 규모와, 그 아래에서 대신 할 일이 붙어 있습니다. 「지금 규모에선 이건 안 먹힙니다」라고 말하는 것은 조언의 포기가 아니라 조언의 일부이기 때문입니다.
 
 ### 🎯 기존 고객만 키우는 게 아니라 첫 고객에게 닿습니다
 채널 적합도(B2B 엔터프라이즈 영업과 셀프서브 소비자 앱은 완전히 다른 채널이 필요합니다), 무시당하지 않고 전환되는 리드 마그넷을 만드는 법, 리드 수가 허영 지표가 되지 않도록 적합도×의도로 선별하기, 그리고 채널이 조용히 손해를 보기 전에 잡아내는 CAC/LTV 개략 계산.
@@ -71,9 +81,9 @@ flowchart TD
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열두 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열두 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -95,4 +105,4 @@ cd superforge-skill
 
 ## 📄 라이선스
 
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 앵커링·손실 회피·기본값과 각각의 윤리적 선은 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)에, 채널 적합도·리드 마그넷·선별·CAC/LTV 계산은 [references/customer-acquisition.md](references/customer-acquisition.md)에, 네 가지 가치 레버와 논리→감정 피치 공식은 [references/value-pitch.md](references/value-pitch.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
+MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, GO/NO-GO 관문·양방향 TAM 계산·수치 신뢰 등급·성숙도 판정은 [references/market-sizing.md](references/market-sizing.md)에, 앵커링·손실 회피·기본값과 각각의 윤리적 선은 [references/behavioral-frameworks.md](references/behavioral-frameworks.md)에, 채널 적합도·리드 마그넷·선별·CAC/LTV 계산은 [references/customer-acquisition.md](references/customer-acquisition.md)에, 네 가지 가치 레버와 논리→감정 피치 공식은 [references/value-pitch.md](references/value-pitch.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.

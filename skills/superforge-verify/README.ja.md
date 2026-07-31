@@ -62,7 +62,7 @@ flowchart TD
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、12個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -79,6 +79,11 @@ cd superforge-skill
 ```
 
 プロジェクト自身のビルド・テストコマンドを使うため、それらが動く状態である必要があります。結果は `docs/verification.md` に残ります。
+
+---
+
+### 🚢 ここを通ったことは、出荷の許可ではありません
+「動く」と「出していい」は、別の判定であり、必要な証拠も違います。このスキルの検査を全部通っても、解析SDKが開示していないデータを送信していれば、製品内に削除経路が無ければ、ロールバック手段が無ければ、リリースは止まります。その2枚目のゲートが [`superforge-ship`](../superforge-ship/README.ja.md) です。まずこちらを走らせ、それから向こうへ。
 
 ---
 

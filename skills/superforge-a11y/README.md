@@ -73,7 +73,7 @@ EN 301 549 and the EU Accessibility Act, ADA Title II with its extended 2027/202
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

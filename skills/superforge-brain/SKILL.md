@@ -7,18 +7,24 @@ description: >
   across five lenses, name the hidden bias on every element, ban the obvious
   three, then push every element through eight transformation techniques and
   their sub-methods as a tracked cell ledger, so no combination is silently
-  skipped. Survivors are killed by explicit codes, judged in a separate
-  context, and only then checked against the market — with every generated
-  idea, not just survivors, visualised in docs/product-idea.html alongside
-  an Impact×Effort and a User×Company Impact map. Use when the user says
-  "brainstorm", "ideas", "come up with", "what could we build", "reframe
-  this", "concept", "something more original", "アイデア", "発想",
-  "ブレスト", "企画", "コンセプト", "ありきたりじゃないもの", "何が作れる",
-  "BreakBias", "SIT", "虱潰しで考えて", or runs /superforge-brain.
+  skipped. Nothing dies for being unoriginal: an idea that already exists
+  survives if it can name a delta, a geographic gap, a timing shift, or an
+  execution flaw, and judgment splits into an originality axis and a viability
+  axis so an ordinary-but-needed business and a brilliant-but-unfundable one
+  are told apart instead of both being discarded. Every generated idea, not
+  just the winners, is visualised in docs/product-idea.html with an
+  Impact×Effort map, a User×Company Impact map, and the four-quadrant
+  Hero/Workhorse/Lab/Discard map. Use when the user says "brainstorm",
+  "ideas", "come up with", "what could we build", "reframe this", "concept",
+  "something more original", "is it worth building even though it exists",
+  "アイデア", "発想", "ブレスト", "企画", "コンセプト",
+  "ありきたりじゃないもの", "ありきたりだけど需要はある", "既にあるけど作る価値",
+  "何が作れる", "BreakBias", "SIT", "虱潰しで考えて", or runs
+  /superforge-brain.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.1"
+  version: "4.0"
 compatibility: >
   Standalone.
   Reads docs/brief.md when present and writes docs/product-idea.md plus,
@@ -55,7 +61,9 @@ separate context, and a market gate placed after judgment.
 2. **Form first** — construct the impossible state, **withhold judgment**, and
    derive the value backwards. Never reason forward from a benefit.
 3. **Ban the obvious three** — list the three answers any model reaches for
-   first and outlaw them *before* generating. They go into the artifact.
+   first and outlaw them *before* generating. They go into the artifact. The
+   ban applies to **generation only**: §6 revisits all three once the sweep is
+   done, because the most obvious answer to a problem is often the right one.
 4. **No pruning mid-sweep** — deduplication, killing, and scoring happen after
    generation, never during.
 5. **Never skip a cell** — no ellipsis, no "and so on". A cell you did not run
@@ -134,11 +142,17 @@ Break Potential of low / med / high. That list becomes the rows of the ledger.
 `element × technique × sub-method = one cell`, each with an ID and a status.
 
 ```
-cell_id, element_id, technique, sub_method, status, kill_code
+cell_id, element_id, technique, sub_method, status, kill_code, prior_art, win_path
 ```
 
 Statuses move one direction only:
-`todo → generated → survived | killed:<G|C|P> → developed → judged`.
+`todo → generated → survived | killed:<G|P|C> → developed → judged`.
+
+`prior_art` is a flag, not a verdict — a cell that already exists somewhere is
+tagged during generation and resolved after it (§6). `win_path` records which
+of the four win-path codes let a tagged cell through. Neither may be filled in
+mid-sweep.
+
 The run is complete when no cell is left at `todo` or `generated`. Report
 progress as *n / total cells terminal* — never as a feeling of completeness.
 
@@ -167,19 +181,37 @@ moving on — TRIZ trade-off dissolution, inverted sabotage, or Jobs To Be Done
 
 ---
 
-## 6. Kill, with a reason code
+## 6. Kill — only two codes, and 既出 is not one of them
 
-Default is survival. Kill only on a named code, and record it in the ledger:
+Default is survival. Only two things may kill a cell outright, because only
+these two can be checked **without market knowledge** — and §8 exists precisely
+because market knowledge introduced early collapses a sweep:
 
 - **G — generic**: swapping the subject for any other subject leaves the idea
   intact. It was never about this system.
-- **C — commonly exists**: already ordinary in this or an adjacent market.
 - **P — physically impossible**: contradicts reality and cannot be
   reinterpreted into something that holds.
+
+**「既にある」は殺す理由ではありません。** A cell whose idea already ships
+somewhere is tagged `prior_art` and then run through the **win-path test** —
+差分 `w:delta` / 地理 `w:geo` / 時機 `w:timing` / 実行 `w:exec`. Passing any one
+of them means it survives, and the code that passed becomes the brief for what
+to build. Only a tagged cell that passes **none** of the four is killed, with
+code **C**, which now means *"we looked for a way to win in four directions and
+found none"* rather than *"this exists."*
 
 Then run a **salvage pass** over the killed rows: a cell killed for the wrong
 reason returns to `survived`. Wrongful kills are the expensive failure here,
 because nobody ever sees what was discarded.
+
+Finally, **revisit the banned three** (§0 rule 3) exactly once, running the same
+win-path test on each. They were banned from *generation*, which was correct;
+they were never meant to be banned from *consideration*. This step is what
+recovers the ordinary-but-needed idea — the supermarket every town needs — that
+the old procedure deleted without ever showing anyone.
+
+The win-path tests, the C redefinition, and the revisit protocol →
+**`references/value-classification.md`** §3–§4.
 
 ---
 
@@ -195,14 +227,27 @@ polished cliché scores low by construction.
 
 `Novelty` · `Wow Factor` · `User Impact` · `Company Impact`
 
-| Total | Verdict |
-|---|---|
-| < 30 | Discard |
-| 30–33 | Keep |
-| 34–36 | Expand |
-| 37–40 | **Hero Concept** |
+**Then stop before adding them up.** Novelty and business value are different
+questions, and one total answers neither. Sum them into two axes and read the
+quadrant:
 
-Output a table: `| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | Total | 判定 |`
+- **独創軸 = Novelty + Wow** (2–20) — has anyone seen this?
+- **事業軸 = User Impact + Company Impact** (2–20) — would anyone care and pay?
+
+| | 事業軸 ≤ 11 | 事業軸 ≥ 12 |
+|---|---|---|
+| **独創軸 ≥ 12** | **Lab** — 面白いが今は金にならない。**捨てず**に棚に置き、戻る条件を1文で書く | **Hero** — 見たこともなく、かつ需要がある |
+| **独創軸 ≤ 11** | **Discard** — 唯一の正当な廃棄 | **Workhorse** — ありふれているが確実に必要とされる。勝負は独創性ではなく勝ち筋コード |
+
+A Workhorse scoring 3 on Novelty is **not** a weak Hero. It is a correctly
+scored ordinary business, and ordinary businesses are most of the businesses
+that work. Never raise a Workhorse's novelty to make it look better — that is
+how a working idea becomes a clever one nobody wants.
+
+Output a table: `| コンセプト | 要素 | 技法 | 壊したバイアス | N | W | U | C | 独創軸 | 事業軸 | 象限 | 勝ち筋 |`
+
+Quadrant definitions, the Lab re-entry condition, and what each quadrant does
+next → **`references/value-classification.md`** §1–§2.
 
 ---
 
@@ -211,10 +256,16 @@ Output a table: `| コンセプト | 要素 | 技法 | 壊したバイアス | N
 Never before. Market knowledge is the strongest source of premature collapse:
 knowing a space is crowded makes a model stop proposing anything in it.
 
-For `Keep` and above: **red** (crowded) / **gray** (adjacent incumbents) /
-**white** (nobody there). Then an entry verdict — `wedge` / `open` / `avoid` /
-`watch` — with named incumbents and a willingness-to-pay hypothesis.
-Detail in `references/ideation-tools.md` §4.
+Required for **Hero** and **Workhorse**, optional for **Lab**, skipped for
+Discard: **red** (crowded) / **gray** (adjacent incumbents) / **white** (nobody
+there). Then an entry verdict — `wedge` / `open` / `avoid` / `watch` — with
+named incumbents and a willingness-to-pay hypothesis. Detail in
+`references/ideation-tools.md` §4.
+
+A Workhorse is expected to come back **red**, and that is not a failure — a
+crowded market is proof the demand is real. For a Workhorse the market pass
+answers a different question than for a Hero: not "is there room" but "does the
+win-path code from §6 still hold once the incumbents are named."
 
 ---
 
@@ -224,19 +275,33 @@ Detail in `references/ideation-tools.md` §4.
 - **Name the biases that broke repeatedly** — that repetition marks where the
   real opportunity is
 - **Hero Concepts (top 3–5)**: 一行 / 壊したバイアス / 体験ストーリー / 事業モデル / MVP / 検証計画 / リスク / 次の一歩
+- **Workhorse candidates**: 勝ち筋コードと、それが名指しした「変える一点」。ここでは体験ストーリーより**実行計画**が本体
+- **Lab shelf**: 独創軸だけが高かった案と、それぞれの「戻ってくる条件」
 - **Experiment roadmap**: 1日 / 1週間 / 30日で試すことと、その成功指標
 
-Then run the direction filter in `references/ideation-tools.md` §3 to decide
-which Hero Concept is worth building. Concept quality and build-worthiness are
-different questions and must be scored separately.
+Then run the direction filter in `references/ideation-tools.md` §3 on Heroes
+and Workhorses together. Concept quality and build-worthiness are different
+questions and must be scored separately — and a Workhorse frequently beats a
+Hero on that filter, because `Pull` and `Reach` are exactly where an ordinary,
+well-understood need is strongest.
+
+**Then leave the room.** Everything up to this point was generated and graded
+by the same system, which means a 900-cell sweep is not truer than an 80-cell
+one — only more thorough about the same assumptions. Take the top candidates to
+real people before committing, using questions about what they have already
+done rather than what they would do →
+**`references/talk-to-users.md`**. A Hero and a Workhorse need opposite
+interviews, and asking a Workhorse the Hero questions is how a perfectly good
+ordinary business gets talked out of existence.
 
 **Build `docs/product-idea.html` alongside the markdown** — every generated
 cell, not only survivors, with kill codes and reasons left visible; an
-Impact × Effort map with the low-hanging-fruit quadrant named; and a User
-Impact × Company Impact map from the judge's own axes. Full spec in
-`references/idea-map-output.md`. This is what lets someone who was not in the
-room see what was cut and why, instead of being handed only the last three
-names standing.
+Impact × Effort map with the low-hanging-fruit quadrant named; a User
+Impact × Company Impact map from the judge's own axes; and the
+独創軸 × 事業軸 quadrant map that separates Hero / Workhorse / Lab / Discard.
+Full spec in `references/idea-map-output.md`. This is what lets someone who was
+not in the room see what was cut, what was kept for a different reason, and
+why — instead of being handed only the last three names standing.
 
 ---
 
@@ -253,10 +318,16 @@ names standing.
 - 台帳に `todo` / `generated` の残りは無いか。飛ばしたセルを「無かったこと」にしていないか
 - 各セルで「ありえない形」を先に握り、メリットを逆算したか（形が先か）
 - Closed World を守ったか。箱の外から要素を足していないか
-- 平凡3案を禁止してから発想したか
-- kill にはすべて G / C / P の理由が付いているか。救済パスを走らせたか
-- 審判は生成過程を見ずに採点したか。市場判定は審判の後だったか
-- `docs/product-idea.html` は殺したセルも含めて全件見えるか。勝者だけになっていないか
+- 平凡3案を禁止してから発想したか。そして**スイープ後に一度だけ再訪したか**
+- kill は G と P だけになっているか。「既にある」を理由に殺していないか
+- `prior_art` の付いたセルすべてに、勝ち筋テスト（delta / geo / timing / exec）を走らせたか。C は4つとも落ちた場合にだけ付いているか
+- 救済パスを走らせたか
+- 審判は生成過程を見ずに採点したか。4軸を**1つの合計にせず**、独創軸と事業軸に分けたか
+- Workhorse を「独創性が低い」という理由で捨てていないか
+- Lab の各案に「戻ってくる条件」が1文で書かれているか。書けないものを棚に残していないか
+- 市場判定は審判の後だったか
+- `docs/product-idea.html` は殺したセルも含めて全件見えるか。勝者だけになっていないか。4象限のマップが出ているか
+- 実在の人に確認したか。していないなら「していない」と成果物に書いたか。お世辞と証拠を区別できる形で質問を残したか
 
 ---
 
@@ -274,15 +345,27 @@ SCAMPER, Six Thinking Hats, Crazy 8s, How Might We, brainwriting, reverse
 brainstorming, and random input, with what each is for and weak at. Read it at
 §1, before assuming the sweep is the only option.
 
+**`references/value-classification.md`** — why a single score deletes working
+businesses, the 独創軸 × 事業軸 quadrants (Hero / Workhorse / Lab / Discard),
+the four win-path codes that let an existing idea through, and the ban-list
+revisit. Read it at §6, before killing anything.
+
+**`references/talk-to-users.md`** — the sweep runs entirely inside your own
+head. This is how to check it against real people without the questions
+producing flattery instead of information. Run it on Hero and Workhorse
+candidates before committing to one.
+
 **`references/idea-map-output.md`** — the `docs/product-idea.html` spec: the
-all-ideas board that keeps killed cells visible, and the two 2×2 maps.
+all-ideas board that keeps killed cells visible, and the three 2×2 maps.
 
 ## Artifact
 
 Write `docs/product-idea.md` before reporting back — including the banned
-obvious three and the final ledger counts, so nobody re-proposes a banned idea
-and nobody mistakes a partial sweep for a complete one. Read `docs/brief.md`
-first if it exists and confirm its premise rather than re-asking.
+obvious three **with their revisit outcome**, the Lab shelf with each entry's
+re-entry condition, and the final ledger counts, so nobody re-proposes a banned
+idea, nobody loses an idea that was only early, and nobody mistakes a partial
+sweep for a complete one. Read `docs/brief.md` first if it exists and confirm
+its premise rather than re-asking.
 
 For a BreakBias sweep, also write `docs/product-idea.html` — see
 `references/idea-map-output.md`. Not required after a classic-method session,

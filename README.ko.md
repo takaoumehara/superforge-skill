@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · **한국어**
 
-**만들고 싶은 것을 한 문장으로 말하면, 열두 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
+**만들고 싶은 것을 한 문장으로 말하면, 열세 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 "스킬"이란 **Claude Code 같은 AI 도구에 나중에 추가할 수 있는 작업 설명서**입니다. 폴더 하나를 놓아 두면 AI가 그 절차대로 움직입니다.
 
-superforge는 그런 설명서 열두 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
+superforge는 그런 설명서 열세 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
 
 > 당신: "동네 카페용 앱을 만들고 싶어요."
 > 안내 데스크: "먼저 아이디어를 다듬죠. `superforge-brain`에 넘기겠습니다. 판단이 필요한 일이라 Opus 5로 돌립니다."
@@ -18,7 +18,7 @@ superforge는 그런 설명서 열두 장입니다. 한가운데 있는 `superfo
 
 안내 데스크가 하는 일은 딱 세 가지입니다.
 
-1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열두 개 중에서
+1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열세 개 중에서
 2. **어떤 모델을 쓸지 정합니다** — 똑똑한 모델은 비싸니, 값싼 작업에 비싼 모델을 붙이지 않습니다
 3. **결과가 반드시 파일로 남게 합니다** — 대화를 지워도 사라지지 않도록
 
@@ -54,23 +54,23 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ---
 
-## 열두 개의 스킬
+## 열세 개의 스킬
 
-한가운데의 `superforge`가 안내 데스크이고 나머지 열한 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
+한가운데의 `superforge`가 안내 데스크이고 나머지 열두 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
 
 ### 1. 생각한다 — 무엇을 만들지 정하기
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 뻔하지 않은 아이디어가 필요할 때 (**BreakBias 엔진**, 또는 더 가벼운 정통 기법 중 선택) | `docs/product-idea.md` (전수 스윕이면 `.html` 지도도) |
-| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 가격, 페이월 위치, 고객을 얻는 방법, 가치를 숫자로 말하는 법 | `docs/business-model.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 만들 가치가 있는 아이디어가 필요할 때 — 뻔하지 않은 것**과** 뻔하지만 진짜로 필요한 것 둘 다 (**BreakBias 엔진**, 또는 더 가벼운 정통 기법 중 선택) | `docs/product-idea.md` (전수 스윕이면 `.html` 지도도) |
+| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 애초에 이 시장에 들어갈 가치가 있는지. 그다음 가격, 페이월 위치, 고객을 얻는 방법, 가치를 숫자로 말하는 법 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ko.md) | 이름·색·톤과, 소재를 만들어 낼 프롬프트까지 | `docs/brand.md` |
 
 ### 2. 만든다 — 실제로 만들기
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 화면 설계, 그리고 팔기 위한 랜딩 페이지도. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 화면 설계, 팔기 위한 랜딩 페이지, 그리고 마음을 정한 직후의 30초(첫 실행)까지. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 작업을 나눠 여러 에이전트에 배분하고 각자 맞는 모델에 태움 | `docs/plan.md` |
 
 ### 3. 확인한다 — 망가진 데가 없는지 보기
@@ -87,6 +87,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ko.md) | 사용자가 찾기 전에 결함을 듣고 싶을 때 | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.ko.md) | "다 됐습니다"에 증거를 붙여야 할 때 | `docs/verification.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.ko.md) | 돌아가는 건 알겠고 — 출시해도 되는가? 법적 의무, 심사에서 거절되는 진짜 이유, 나중에 못 채우는 계측 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ko.md) | 세션을 지우기 전, 도구를 바꾸기 전 | `.handoff/` |
 
 ---
@@ -97,7 +98,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ### 한 번에 전부 (권장)
 
-한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열두 개를 링크합니다.
+한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 링크합니다.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -199,7 +200,7 @@ HTML은 `design.md`의 값을 **읽어서** 그립니다. 손으로 옮겨 그�
 
 전체 프로토콜 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 열두 개를 넣어도 AI가 무거워지지 않는 이유
+### 열세 개를 넣어도 AI가 무거워지지 않는 이유
 
 AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명뿐**입니다. 본문은 필요할 때 불러오고, 더 깊은 내용은 `references/`에 나눠 두었다가 필요할 때만 읽습니다.
 
@@ -209,13 +210,19 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 이미 설치된 다른 스킬에 어느 단계를 맡길지 |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 각 기법을 빠짐없이 만드는 하위 방법, 폐기 판정, 심사 프로토콜, 시장 루브릭 |
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 전수 스윕 대신 쓰는 가벼운 기법 — SCAMPER, 여섯 모자, Crazy 8s, How Might We 등 |
-| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 명세 — 폐기안 포함 전 아이디어 시각화와 두 개의 우선순위 지도 |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 앵커링·손실 회피·기본값과 각각의 윤리적 선 |
+| [`superforge-brain/references/value-classification.md`](./skills/superforge-brain/references/value-classification.md) | 점수 하나가 굴러가는 사업을 지워 버리는 이유 — Hero / Workhorse / Lab / Discard 사분면, 기존 아이디어의 네 가지 승부 경로, 금지 목록 재검토 |
+| [`superforge-brain/references/talk-to-users.md`](./skills/superforge-brain/references/talk-to-users.md) | 「쓰시겠어요」가 아니라 「지난번엔 어떻게 하셨어요」를 묻기 — Hero와 Workhorse는 물어야 할 것이 정반대 |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 명세 — 폐기안 포함 전 아이디어 시각화와 세 개의 우선순위 지도 |
+| [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO 관문 — TAM을 양방향으로 계산하기, 수치별 신뢰 등급, 애초에 고객이 몇 명 필요한가 |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 앵커링·손실 회피·기본값, 증상으로 찾는 색인, 그리고 각각의 윤리적 선 |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 채널 적합도, 리드 마그넷, 적합도×의도 선별, CAC/LTV 계산 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 어떤 기능이든 정량화해 논리→감정 순서의 비즈니스 피치로 바꾸기 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 팔기 위한 페이지 설계 — 섹션 순서, 히어로 영역, 모바일과 데스크톱의 차이 |
+| [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 들어온 직후의 30초 — 설명하지 말고 첫 결과까지, 권한은 쓰는 순간에, 나중에도 테스트할 수 있는 완료 기록 |
+| [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 제품의 동작이 어떤 의무를 발동시켰는가, 어디서나 대체로 통하는 네 가지 기본, 그리고 변호사가 필수가 되는 선 |
+| [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 나중에 못 채우는 계측, 각 숫자가 결정해도 되는 것, 그리고 첫 4주 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 휴리스틱 평가, 접근성 감사, 인지 부하, 가상 페르소나 테스트 |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2의 86개 기준 전체와, 기준마다 실제로 무엇을 볼지 |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 일곱 검사의 절차, 합격선, 각 검사가 남겨야 할 근거 |
@@ -228,7 +235,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 
 ## 출처와 감사
 
-여기 있는 스킬들은 여섯 가지 자료를 읽고 **제 언어로 다시 쓴 것**입니다. 제3자의 코드는 한 바이트도 들어 있지 않습니다.
+여기 있는 스킬들은 일곱 가지 자료를 읽고 **제 언어로 다시 쓴 것**입니다. 제3자의 코드도 문장도 한 바이트도 들어 있지 않습니다.
 
 | 자료 | 출처 | 받아 온 것 |
 |---|---|---|
@@ -238,6 +245,9 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 역할을 나눈 에이전트 편성 방식 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | 스킬을 작게 나눠 배포하는 형태 |
 | Gem_Ren_Pack | 본인 | 설계·평가 관련 프레임워크 |
+| 건네받은 앱 개발 스킬 모음 | 제3자, **읽었지만 가져다 쓰지 않음** | **드러난 구멍 쪽**. 시장 규모 산정, 출시 시점의 법적 의무, 첫 실행 설계가 여기엔 하나도 없었다. 가져온 것은 분야의 일반 지식뿐(TAM/SAM/SOM, 데이터 보호법의 발동 조건, 맥락에 맞춘 권한 요청)이고, 모든 파일은 처음부터 새로 썼다 |
+
+**마지막 줄에 대하여.** 남의 스킬 모음을 읽는 것은 내게 무엇이 없는지 알아내는 좋은 방법이고, 그 구멍을 메우는 나쁜 방법입니다. 드러난 것은 세 개의 진짜 구멍이었고, 지금은 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.ko.md), [`first-run.md`](./skills/superforge-ui/references/first-run.md)가 메우고 있습니다. 어느 것도 원본과 닮지 않았습니다. 설계 판단이 반대 방향으로 갔기 때문입니다 — **얼어붙은 법률 문구를 두지 않는다**, 1년이면 낡는 플랫폼 기능 카탈로그를 담지 않는다, 그리고 절차를 나르는 스위트에 코드 템플릿을 넣지 않는다.
 
 **`superforge-brain`의 BreakBias 엔진에 대하여** — 토대는 SIT(Systematic Inventive Thinking)의 두 원칙, Closed World(상자 밖에서 요소를 가져오지 않는다)와 Function Follows Form(먼저 불가능한 형태를 만들고 가치를 거꾸로 도출한다)입니다. BreakBias는 여기에 다음을 더했습니다.
 

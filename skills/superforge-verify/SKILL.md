@@ -59,4 +59,10 @@ to prevent.
 
 `verification-before-completion` (evidence discipline) · `superforge-a11y`
 (the accessibility gate) · `audit`, `optimize` (technical sweep) · `run`
-(launching the actual app).
+(launching the actual app) · **`superforge-ship`** (the separate question of
+whether it may be released — undisclosed data collection, a missing deletion
+path, or no rollback will stop a launch that passes every check here).
+
+**Passing this skill is not permission to ship.** "It works" and "we are
+allowed to release it" are different verdicts with different evidence. Hand the
+second one to `superforge-ship`.

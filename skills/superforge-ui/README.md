@@ -63,7 +63,7 @@ A landing page is judged by a different metric than a product screen — a stran
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
@@ -85,6 +85,13 @@ When the run finishes, open `docs/design.html` in a browser: every token and sta
 
 ---
 
+### 🚪 The thirty seconds nobody designs
+A landing page convinces a stranger. A product screen serves a returning user. **Between them is the moment that decides whether either investment pays off**, and it is usually handed a carousel nobody reads. The goal of first run is not to explain the product — it is to get the user to one real outcome with the fewest decisions in between, and if the product can deliver that without explanation, the explanation is friction wearing the costume of helpfulness.
+
+Permissions are the specific trap: a prompt shown before the user understands why is a permission denied, and on mobile that denial is often **permanent**. Ask at the moment the user just tried to do the thing that needs it, behind your own preamble screen — because your screen can be shown again and the system's cannot.
+
+---
+
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the design steps, the four data states, and the quality checklist are in [references/design-process.md](references/design-process.md), the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md), and sales/landing page design is in [references/landing-page.md](references/landing-page.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the design steps, the four data states, and the quality checklist are in [references/design-process.md](references/design-process.md), the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md), sales/landing page design is in [references/landing-page.md](references/landing-page.md), and the first thirty seconds after someone commits — first run, permission prompts, activation — is in [references/first-run.md](references/first-run.md). Suite overview: [superforge-skill](../../README.md).

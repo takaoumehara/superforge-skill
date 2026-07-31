@@ -26,7 +26,7 @@ flowchart TD
     R --> T[🎚️ Nivel de modelo A / B / C / D]
     R --> S1[💡 brain · biz · brand]
     R --> S2[🎨 ui · dev · test]
-    R --> S3[🔥 roast · verify · handoff]
+    R --> S3[🔥 a11y · roast · verify · ship · handoff]
     S1 --> D[(🗂️ docs/)]
     S2 --> D
     S3 --> D
@@ -39,7 +39,7 @@ Entra una petición; sale una skill especialista, un nivel de modelo elegido y u
 ## ✨ 3 puntos clave
 
 ### 🧭 Deriva en vez de preguntar
-Diez especialistas cubren idea, negocio, marca, UI, implementación, pruebas, depuración, crítica, verificación y traspaso. El destino y el nivel se anuncian en una línea y el trabajo empieza. Solo se pide confirmación cuando dos caminos genuinamente distintos son igual de razonables.
+Doce especialistas cubren idea, negocio, marca, UI, implementación, pruebas, depuración, accesibilidad, crítica, verificación, preparación para publicar y traspaso. El destino y el nivel se anuncian en una línea y el trabajo empieza. Solo se pide confirmación cuando dos caminos genuinamente distintos son igual de razonables.
 
 ### 🎚️ Un nivel por subtarea, decidido antes de lanzar agentes
 El juicio va a Opus 5, el volumen a Sonnet 5, la rutina a Haiku 4.5, las ejecuciones largas sin supervisión a Fable 5, y el texto masivo que no toca el repositorio a la CLI local `gemini`. Nada se queda en el modelo por defecto de la sesión «por si acaso».
@@ -62,9 +62,9 @@ Cada skill escribe su artefacto en `docs/` antes de informar, así que `/clear`,
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las doce skills (una sola vez)
+### 🖥️ Instala las trece skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las doce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

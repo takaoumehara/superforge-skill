@@ -2,7 +2,7 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる12個のスキル集です。**
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる13個のスキル集です。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「スキル」とは、Claude Code のような **AIツールに後から足せる"やり方の説明書"** のことです。フォルダを1つ置くだけで、AIがその手順どおりに動くようになります。
 
-superforge は、その説明書を11枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
+superforge は、その説明書を13枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
 
 > あなた：「近所のカフェ向けのアプリを作りたい」
 > 受付：「まずアイデアを固めますね。`superforge-brain` に渡します。判断が要る作業なので Opus 5 を使います」
@@ -18,7 +18,7 @@ superforge は、その説明書を11枚まとめたものです。中心にい�
 
 受付係がやることは3つだけです。
 
-1. **どの担当に渡すか決める**（考える／作る／試す／出す、の11人から選ぶ）
+1. **どの担当に渡すか決める**（考える／作る／試す／出す、の12人から選ぶ）
 2. **どのAIモデルを使うか決める**（賢いモデルは高い。安い作業に高いモデルを使わない）
 3. **結果を必ずファイルに残させる**（会話を消しても、決めたことが消えないように）
 
@@ -54,23 +54,23 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ---
 
-## 12個のスキル
+## 13個のスキル
 
-まん中の `superforge` が受付で、残りの11個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
+まん中の `superforge` が受付で、残りの12個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
 
 ### 1. 考える — 何を作るか決める
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.ja.md) | ありきたりじゃないアイデアが欲しい（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
-| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか | `docs/business-model.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.ja.md) | 作る価値のあるアイデアが欲しい。ありきたりじゃない案**も**、ありきたりだけど必要とされる案**も**（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
 
 ### 2. 作る — 形にする
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。売るためのランディングページも。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。作業を分けて複数のAIに配り、それぞれに合うモデルを割り当てる | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
@@ -87,6 +87,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出す前に、忖度なしでダメ出ししてほしい | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、本当に動くか証拠つきで確認したい | `docs/verification.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.ja.md) | 動くのはわかった。では出していいのか。法務の義務・審査で落ちる理由・後から取れない計測 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | セッションを消す前・別のツールに乗り換える前に引き継ぎたい | `.handoff/` |
 
 ---
@@ -97,7 +98,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、12個をまとめてリンクします。
+一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -198,7 +199,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### なぜ12個入れてもAIが重くならないのか
+### なぜ13個入れてもAIが重くならないのか
 
 常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
 
@@ -208,13 +209,19 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | すでに入っている別のスキルに、どの工程を任せるか |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 各技法を虱潰しにするサブ手法と、どの案を実際に作るか決める判定 |
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 徹底スイープの代わりに使う軽い手法——SCAMPER、シックスハット、Crazy 8s、How Might We ほか |
-| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` の仕様——殺した案も含む全アイデアの可視化と、2種の優先度マップ |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値と、それぞれの倫理的な線引き |
+| [`superforge-brain/references/value-classification.md`](./skills/superforge-brain/references/value-classification.md) | 1つの点数が成立する事業を消してしまう理由——Hero / Workhorse / Lab / Discard の4象限、既出案の4つの勝ち筋、禁止案の再訪 |
+| [`superforge-brain/references/talk-to-users.md`](./skills/superforge-brain/references/talk-to-users.md) | 「使いますか」ではなく「前回どうしましたか」を聞く。Hero と Workhorse では聞くことが正反対になる |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` の仕様——殺した案も含む全アイデアの可視化と、3種の優先度マップ |
+| [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO ゲート——TAMを両方向から計算する、数値ごとの確度、そもそも何人の顧客が必要なのか |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値、症状から引く索引、そしてそれぞれの倫理的な線引き |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | チャネル適合・リードマグネット・適合度×熱意の選別・CAC/LTV計算 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | どんな機能も定量化し、論理→感情の順で語るビジネスピッチに変える |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 売るためのページの設計——セクション順、ファーストビュー、モバイルとデスクトップの違い |
+| [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 入った直後の30秒——説明せず最初の成果まで運ぶ、権限は使う瞬間に求める、あとで自分でテストできる形で完了を記録する |
+| [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 製品の振る舞いがどの義務を発火させたか、どこでも概ね通用する4つの土台、そして弁護士が必須になる線 |
+| [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 後から取れない計測、各指標が決めてよいこと、最初の4週間の回し方 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | ヒューリスティック評価、a11y監査、認知負荷、ペルソナ模擬テスト |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2 の全86達成基準と、各基準で実際に何を見るか |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 7つの検査の手順、合格ライン、残すべき根拠 |
@@ -227,7 +234,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 ## 由来とクレジット
 
-このリポジトリのスキルは、6つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードは1バイトも含んでいません。
+このリポジトリのスキルは、7つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードも文章も、1バイトも含んでいません。
 
 | 素材 | 出所 | ここから受け取ったもの |
 |---|---|---|
@@ -237,6 +244,9 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 役割を分けたエージェント編成の型 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | スキルを小さく分けて配布する形 |
 | Gem_Ren_Pack | 自作 | 設計・評価まわりのフレームワーク |
+| 譲り受けたアプリ開発系スキル一式 | 第三者・**読んだが流用していない** | **見つかった穴のほう**。市場サイジング、出荷時の法務義務、初回起動設計が、ここには揃って無かった。取ったのは分野の一般知識だけ（TAM/SAM/SOM、データ保護法の発火条件、権限の文脈的要求）で、ファイルはすべてゼロから書いている |
+
+**最後の1行について。** 他人のスキル集を読むのは、自分に何が足りないかを知る良い方法で、その穴を埋める悪い方法です。見つかったのは3つの本物の穴で、いま [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.ja.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) が埋めています。どれも元とは似ていません。設計判断が逆方向に出たからです——**凍結された法律文面を置かない**、1年で古くなるプラットフォーム機能カタログを持たない、そして手順を運ぶスイートにコード雛形を入れない。
 
 **`superforge-brain` の BreakBias エンジンについて** — 土台は SIT（Systematic Inventive Thinking）の2原則、Closed World（箱の外から要素を足さない）と Function Follows Form（ありえない形を先に作り、価値を後から逆算する）です。BreakBias はそこに独自の要素を足しています。
 

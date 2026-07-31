@@ -60,9 +60,9 @@ flowchart TD
 
 ## 🚀 安装与使用
 
-### 🖥️ 一次装好全部 12 个技能（只需一次）
+### 🖥️ 一次装好全部 13 个技能（只需一次）
 
-克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 12 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 13 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -79,6 +79,11 @@ cd superforge-skill
 ```
 
 它会用项目自己的构建和测试命令，所以这些命令得先能跑通。结果会落在 `docs/verification.md`。
+
+---
+
+### 🚢 过了这一关，不等于可以发布
+「能跑」和「可以发布」是两个判断，需要的证据也不同。哪怕本技能的检查全部通过，只要分析 SDK 在传输未披露的数据、产品内没有删除入口、或者没有回滚手段，发布照样会被拦住。那第二道闸门是 [`superforge-ship`](../superforge-ship/README.zh-CN.md)。先跑这个，再跑那个。
 
 ---
 

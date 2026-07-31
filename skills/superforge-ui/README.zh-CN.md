@@ -63,9 +63,9 @@ SwiftUI 走 Apple HIG（Dynamic Type、SF Symbols、`.presentationDetents`、触
 
 ## 🚀 安装与使用
 
-### 🖥️ 一次装好全部 12 个技能（只需一次）
+### 🖥️ 一次装好全部 13 个技能（只需一次）
 
-克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 12 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+克隆仓库并运行安装脚本。它会找出本机所有技能目录，把 13 个技能一次性链接进去（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -85,6 +85,13 @@ cd superforge-skill
 
 ---
 
+### 🚪 没人设计的那三十秒
+落地页负责说服陌生人，产品界面负责服务回访用户。**夹在中间的，才是决定这两笔投入能不能回本的时刻**——而它通常只被塞了一个没人看的轮播。首次启动的目标不是解释产品，而是**用最少的决策把用户送到一个真实的成果**。如果产品不解释也能给出成果，那段解释就只是披着好意外衣的摩擦。
+
+权限尤其是陷阱：在用户还不明白为什么之前弹出的授权框，等于一次拒绝，而在移动端这次拒绝往往是**永久的**。要在用户刚刚尝试用到那个功能之后再问，并且先垫一张**你自己的说明页**——因为你的页面可以再出一次，系统的不能。
+
+---
+
 ## 📄 许可证
 
-MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)，卖货型落地页设计在 [references/landing-page.md](references/landing-page.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。
+MIT — 见 [LICENSE](../../LICENSE)。技能正文在 [SKILL.md](SKILL.md)；设计步骤、四种数据状态和质量清单在 [references/design-process.md](references/design-process.md)，两份产物的规格在 [references/design-system-output.md](references/design-system-output.md)，卖货型落地页设计在 [references/landing-page.md](references/landing-page.md)，用户下定决心之后的头三十秒（首次启动、权限请求、激活）在 [references/first-run.md](references/first-run.md)。整套说明见 [superforge-skill](../../README.zh-CN.md)。

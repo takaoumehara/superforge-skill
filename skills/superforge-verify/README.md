@@ -60,7 +60,7 @@ Under 640px: tap targets at 44px or more, no horizontal overflow, menus that res
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all twelve skills (once)
+### 🖥️ Install all thirteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
@@ -79,6 +79,11 @@ Full options, single-skill installs, and the claude.ai upload route are in the [
 ```
 
 It runs the project's own build and test commands, so those need to work first. The result lands in `docs/verification.md`.
+
+---
+
+### 🚢 Passing here is not permission to ship
+"It works" and "we are allowed to release it" are different verdicts with different evidence. A product can clear every check in this skill and still be blocked by an analytics SDK transmitting undisclosed data, a missing in-product deletion path, or no way to roll back. That second gate is [`superforge-ship`](../superforge-ship/README.md) — run this one first, then that one.
 
 ---
 

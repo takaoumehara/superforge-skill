@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**用一句话说出你想做什么，十二个技能就按正确的顺序，从想点子一直带到上线前的检查。**
+**用一句话说出你想做什么，十三个技能就按正确的顺序，从想点子一直带到上线前的检查。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「技能」就是**可以加进 Claude Code 这类 AI 工具的一份操作说明**。放进去一个文件夹，AI 就照着那套步骤干活。
 
-superforge 是这样的十二份。站在正中间的 `superforge` 扮演**工坊前台**。
+superforge 是这样的十三份。站在正中间的 `superforge` 扮演**工坊前台**。
 
 > 你：「我想给街角那家咖啡馆做个 App。」
 > 前台：「先把点子理清楚，交给 `superforge-brain`。这活儿需要判断力，用 Opus 5。」
@@ -18,7 +18,7 @@ superforge 是这样的十二份。站在正中间的 `superforge` 扮演**工�
 
 前台只做三件事。
 
-1. **决定交给谁**：想 / 做 / 验 / 出，十二个里挑一个
+1. **决定交给谁**：想 / 做 / 验 / 出，十三个里挑一个
 2. **决定用哪个模型**：聪明的模型贵，便宜的活儿不该用贵模型
 3. **确保结果落成文件**：这样清掉对话，东西也不会跟着没
 
@@ -54,23 +54,23 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ---
 
-## 十二个技能
+## 十三个技能
 
-正中间的 `superforge` 是前台，其余十个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
+正中间的 `superforge` 是前台，其余十二个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
 ### 1. 想 —— 决定做什么
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要不落俗套的点子（**BreakBias 引擎**，也可以选更轻的经典方法） | `docs/product-idea.md`（彻底扫描时还有 `.html` 地图） |
-| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 定价、付费墙位置、怎么获客、把价值讲成数字 | `docs/business-model.md` |
+| [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要值得做的点子——不落俗套的**和**平凡但被真正需要的（**BreakBias 引擎**，也可以选更轻的经典方法） | `docs/product-idea.md`（彻底扫描时还有 `.html` 地图） |
+| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 这个市场究竟值不值得进；然后是定价、付费墙位置、怎么获客、把价值讲成数字 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.zh-CN.md) | 名字、配色、语气，外加生成素材的提示词 | `docs/brand.md` |
 
 ### 2. 做 —— 把它做出来
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，也包括卖货型落地页，附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：把活儿拆开分给多个 agent，各配合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
@@ -87,6 +87,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.zh-CN.md) | 想在用户发现之前，先听到毛病 | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.zh-CN.md) | 「做完了」需要带证据 | `docs/verification.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.zh-CN.md) | 能跑了——但可以发布吗？法律义务、审核被拒的真正原因、事后补不回来的度量 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.zh-CN.md) | 清掉会话或换工具之前 | `.handoff/` |
 
 ---
@@ -97,7 +98,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ### 一次全装好（推荐）
 
-克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十二个一次性链接进去。
+克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十三个一次性链接进去。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -199,7 +200,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 完整协议 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 为什么装十二个也不会拖慢 AI
+### 为什么装十三个也不会拖慢 AI
 
 常驻在 AI 上下文里的只有**每个技能那一行描述**。正文按需加载，更深的材料放在 `references/` 里，用到才读。
 
@@ -209,13 +210,19 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge/references/wiring.md`](./skills/superforge/references/wiring.md) | 什么时候把某一步交给你已装好的其他技能 |
 | [`superforge-brain/references/ideation-tools.md`](./skills/superforge-brain/references/ideation-tools.md) | 让每种技法穷尽的子方法、kill 判定、审判协议、市场评估表 |
 | [`superforge-brain/references/classic-methods.md`](./skills/superforge-brain/references/classic-methods.md) | 代替彻底扫描的轻量方法——SCAMPER、六顶思考帽、Crazy 8s、How Might We 等 |
-| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 的规格——含淘汰项的全部点子可视化，加两张优先级地图 |
-| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 锚定、损失厌恶、默认选项，以及各自的伦理边界 |
+| [`superforge-brain/references/value-classification.md`](./skills/superforge-brain/references/value-classification.md) | 单一分数为什么会删掉能赚钱的生意——Hero / Workhorse / Lab / Discard 四象限、既有点子的四条取胜路径、禁用清单的复审 |
+| [`superforge-brain/references/talk-to-users.md`](./skills/superforge-brain/references/talk-to-users.md) | 问「上次你是怎么做的」而不是「你会用吗」；Hero 和 Workhorse 要问的问题正好相反 |
+| [`superforge-brain/references/idea-map-output.md`](./skills/superforge-brain/references/idea-map-output.md) | `product-idea.html` 的规格——含淘汰项的全部点子可视化，加三张优先级地图 |
+| [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO 闸门——TAM 双向计算、每个数字的可信度分级、到底需要多少客户 |
+| [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 锚定、损失厌恶、默认选项、按症状查的索引，以及各自的伦理边界 |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 渠道契合、引流磁石、匹配度×意向度筛选、CAC/LTV 算法 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 把任何功能变成量化的、先数字后情感的商业话术 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 卖货页面的设计——版块顺序、首屏、移动端和桌面端的区别 |
+| [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 进来后的头三十秒——不解释，直接抵达第一个成果；权限在用到时才要；完成标记要让你事后还能测 |
+| [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 产品行为触发了哪些义务、四条到处大体通用的基线，以及必须请律师的那条线 |
+| [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 事后补不回来的度量、每个数字能决定什么，以及最初四周怎么走 |
 | [`superforge-roast/references/evaluation-methods.md`](./skills/superforge-roast/references/evaluation-methods.md) | 启发式评估、无障碍审计、认知负荷、模拟人物测试 |
 | [`superforge-a11y/references/wcag22-ledger.md`](./skills/superforge-a11y/references/wcag22-ledger.md) | WCAG 2.2 全部 86 条准则，以及每条实际该看什么 |
 | [`superforge-a11y/references/audit-protocol.md`](./skills/superforge-a11y/references/audit-protocol.md) | 七道检查的步骤、合格线，以及各自要留下的证据 |
@@ -228,7 +235,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 ## 来源与致谢
 
-这里的技能是从六份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码。
+这里的技能是从七份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码或文本。
 
 | 材料 | 出处 | 提供了什么 |
 |---|---|---|
@@ -238,6 +245,9 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 按角色分工的 agent 编排范式 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | 把技能拆小、便于分发的形态 |
 | Gem_Ren_Pack | 本人 | 设计与评估相关的框架 |
+| 别人给我的一套应用开发技能 | 第三方，**读过但未沿用** | **它暴露出来的缺口**。市场测算、发布时的法律义务、首次启动设计，这里原本一样都没有。只取了行业通识（TAM/SAM/SOM、数据保护法的触发条件、权限的情境化请求），每个文件都是从零写的 |
+
+**关于最后一行。** 读别人的技能集，是发现自己缺什么的好办法，却是填补缺口的坏办法。它暴露出三个真实的缺口，现在由 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.zh-CN.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) 填上。它们和原件都不像，因为设计判断走了相反的方向——**不放冻结的法律文本**、不收录一年就过期的平台功能目录、也不在一套承载流程的技能里塞代码模板。
 
 **关于 `superforge-brain` 里的 BreakBias 引擎** —— 它的地基是 SIT（Systematic Inventive Thinking）的两条约束：Closed World（不从盒子外面拿东西）和 Function Follows Form（先造出不可能的形态，价值再倒推）。BreakBias 在此之上加了：
 
