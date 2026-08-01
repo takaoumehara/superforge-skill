@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · **Español** · [한국어](./README.ko.md)
 
-**Di en una frase qué quieres construir. Once skills lo llevan desde la idea hasta la revisión previa al lanzamiento, en el orden correcto.**
+**Di en una frase qué quieres construir. Catorce skills lo llevan desde la idea hasta la revisión previa al lanzamiento, en el orden correcto.**
 
 ---
 
@@ -56,7 +56,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 ## Las catorce skills
 
-`superforge` es la recepción; las otras doce hacen el trabajo. También puedes llamarlas directamente, como `/superforge-ui`.
+`superforge` es la recepción; las otras trece hacen el trabajo. También puedes llamarlas directamente, como `/superforge-ui`.
 
 ### 1. Pensar — decidir qué hacer
 

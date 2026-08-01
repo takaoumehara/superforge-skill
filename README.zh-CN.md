@@ -56,7 +56,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ## 十四个技能
 
-正中间的 `superforge` 是前台，其余十二个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
+正中间的 `superforge` 是前台，其余十三个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
 ### 1. 想 —— 决定做什么
 
