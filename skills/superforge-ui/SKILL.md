@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "6.0"
+  version: "7.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -174,6 +174,28 @@ into dark mode) → **`references/build-floor.md`**.
 
 ---
 
+## 4d. Shaders, 3D, and anything GPU-drawn
+
+Reach for the **cheapest tier that achieves the effect** — CSS before SVG before
+a minimal WebGL wrapper before a full 3D engine — because most effects people
+reach for 3D to achieve sit two tiers below it. Then pay for it honestly: weight
+and time-to-first-frame come out of §4b's budget, and **the frame rate has to be
+measured on a mid-range phone**, which is the one number that cannot be reasoned
+to.
+
+Two costs decide whether it survives real use, and neither is bytes: **a running
+GPU loop drains and heats a phone** (so stop it off-screen and on a hidden tab),
+and **a canvas is a blank rectangle to a screen reader**. `prefers-reduced-motion`
+does not reach a JavaScript render loop — the loop must check it itself.
+
+Cost tiers, what to decide before opening a tool, the fallback rule, and why the
+surface's mode usually settles it → **`references/heavy-visuals.md`**.
+
+**This file names no libraries on purpose.** Which renderer leads changes yearly;
+the decision does not.
+
+---
+
 ## 5. Platform Native Specifications
 
 ### iOS Native (SwiftUI / UIKit):
@@ -225,6 +247,11 @@ into dark mode) → **`references/build-floor.md`**.
   (Inter as a display face, purple-on-white, three equal cards, evenly
   distributed palettes, scattered scroll fades), atmosphere as a layer, and why
   minimal is not less work.
+
+- **`references/heavy-visuals.md`** — shaders, 3D and GPU-drawn animation: the
+  cost tiers, battery and heat, the first frame, the floor device, the screen
+  reader and reduced-motion obligations, and the frequency rule that rules this
+  out of any surface used many times a day.
 
 - **`references/performance-budget.md`** — three numbers set with the design and
   measured by `superforge-verify`, where the weight actually comes from,

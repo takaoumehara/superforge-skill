@@ -164,6 +164,52 @@ failure this file exists to prevent.
 
 ---
 
+## 4b. Pre-extracted design systems, and the trap in them
+
+Collections now exist of ready-made `DESIGN.md` files — one per well-known
+brand, each holding a palette with roles, a type hierarchy, component styling,
+a spacing scale, an elevation system, and a do/don't list. Dozens of brands,
+free, drop-in. It is the same artifact §2's protocol produces, already made.
+
+**They are genuinely useful for two things, and dangerous for a third.**
+
+**Use them as worked examples.** Reading three of them teaches the extraction
+protocol faster than any description of it, because you see what a finished
+system looks like when someone has already done the layers properly.
+
+**Use them as a format check.** If your `docs/design.md` covers less than one of
+these does, the gap is real and worth closing.
+
+**Do not drop one in and build against it.** That fails §3's test on purpose —
+the entire proposition is "make my product look like that company's product,"
+and someone who knows the source will name it immediately.
+
+Two specific hazards, both easy to miss:
+
+- **An MIT licence on the document is not permission to use the design.** The
+  markdown file is freely reusable; the visual identity it describes belongs to
+  whoever built it. These collections say so themselves, in the form of a
+  disclaimer rather than a grant. **Distinctive trade dress can be protected**,
+  and deliberately resembling a well-known product *in its own sector* is where
+  that becomes a real exposure rather than a theoretical one. A fintech
+  dashboard built from a payments company's file is the worst version of this.
+- **Shared files converge.** A collection used by everyone becomes the next
+  default look — a handful of recognisable house styles instead of one generic
+  one. The tool that promises to escape the machine-made average manufactures a
+  smaller set of averages.
+
+**The safe and genuinely strong use is §4's rule applied to them:** take three
+files from **unrelated sectors**, find the principle they share, and build from
+that principle. Three systems from three industries cannot be recognised as any
+one of them, and the abstraction step is where the design work actually
+happens. One file, copied, is imitation with extra steps.
+
+If one is used at all, name it in the Design DNA block by source, so the
+question — which arrives after launch, if the product gets attention — has an
+answer already written down.
+
+---
+
 ## 5. Route B — a design that already exists, turned into a system
 
 Screens arriving from Claude Design, Google Stitch, Figma, v0, or a human

@@ -302,6 +302,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 参考が一つも無いときにどうするか——名前のついた10の方向性、押す軸は1本だけ、そして「機械が作った」と読まれる具体的なデフォルト一覧 |
 | [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | デザインの決定より前に来る2つの問い——この画面での成功とは何か（そしてそのモードが何を犠牲にしてよいか）、そしてこれは改良か、作り直しか、断片か |
 | [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 意図ではなく完成物に対する検査。そしてデフォルトを「なぜ現れたか」で分類——ライブラリが吐くもの、稼いでいない感じの近道、誰も選んでいない値 |
+| [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | シェーダー・3D・GPU描画——コストの段階、電池と発熱、下限の実機、スクリーンリーダーと reduced-motion の義務、そしてなぜこれがローンチページ向きで、日常的に使う道具の中にはまず向かないのか。ライブラリ名は意図的に載せていません |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | どのエージェントにどのモデルを割り当てたかを、使う前に表で出し、使った後に記録する——このスイートが約束している階層分けを、主張ではなく見えるものにする |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 後から測るのではなく、デザインと一緒に決める3つの数字。重さがどこから来るか。体感速度はデザインの問題 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字は伸びる、そして最初に壊れるのはボタン。文を断片から組み立ててはいけない理由、ロケール依存の書式、そして多言語にするかどうか自体の判断 |

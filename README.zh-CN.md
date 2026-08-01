@@ -302,6 +302,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 一个参考都没有时怎么办——十个有名字的方向、只推一根轴，以及那些一看就是「机器做的」的具体默认值 |
 | [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | 任何设计决定之前的两个问题——在这个界面上「成功」是什么样（以及那个模式可以牺牲什么），以及这是改良、重做，还是一个片段 |
 | [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 对成品而非对意图的检查。以及按「为什么会出现」给默认值分组——库自带的、没挣来的感觉的近路、没人选过的数值 |
+| [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | 着色器、3D、GPU 绘制——成本档位、电量与发热、底线机型、屏幕阅读器与 reduced-motion 的义务，以及为什么这些适合放在发布页、几乎不适合放进每天用的工具里。故意不写库名 |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 每个 agent 分到哪个模型，花钱之前先列表、跑完之后再记录——让这套东西承诺的分级变成看得见的，而不是一句声明 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 不是事后测，而是和设计一起定的三个数字。重量到底从哪来。体感速度是设计问题 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字会变长，最先坏的是按钮。为什么句子绝不能拼接、依赖 locale 的格式，以及要不要做多语言这件事本身 |
