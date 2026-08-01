@@ -20,7 +20,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "9.0"
+  version: "10.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -192,6 +192,12 @@ could be liquid that moves away from you" — never in the language of the
 technology, and **carry the price in the same breath** (§4d). A proposal
 without a cost is a sales pitch.
 
+**Then say what to actually install.** A sensation with no route to a tool
+leaves a designer exactly where they started. Names live in one dated file,
+`references/toolchain.md`, mapped from each sensation — and it also reads the
+other way, because some capabilities only became askable once the technology
+existed.
+
 **Propose from a menu, not from memory.** `references/effect-vocabulary.md`
 holds what is actually possible — matter that flows, swarms that assemble,
 things that grow differently on every load, space you move through, and sound
@@ -293,6 +299,13 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   (Inter as a display face, purple-on-white, three equal cards, evenly
   distributed palettes, scattered scroll fades), atmosphere as a layer, and why
   minimal is not less work.
+
+- **`references/toolchain.md`** — the bridge from a sensation to something you
+  can install, dated and reviewed as one file so the rest of this skill stays
+  durable. Also the reverse direction: reading what recently became possible and
+  asking what it makes askable, with two guards against solutions looking for
+  problems. Stops at the browser and the app bundle — installations and sensors
+  belong to an interactive-experience skill.
 
 - **`references/effect-vocabulary.md`** — the menu the proposal step needs:
   around thirty effects across graphics, sound and native surfaces, each named

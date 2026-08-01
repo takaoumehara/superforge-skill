@@ -4,11 +4,11 @@ Shaders, WebGL, WebGPU, 3D scenes, and GPU-drawn animation can produce work
 nothing else can. They also carry costs that are invisible on the machine the
 work is made on and obvious on the device it is used on.
 
-**This file deliberately does not catalogue libraries.** Names, version support,
-and which renderer is ahead this year all move; a list of them inside a skill is
-wrong within a year and confidently wrong the year after. What does not move is
-the decision — whether the effect earns its cost, and which tier of cost is
-appropriate. Look up the current tool when you have decided the tier.
+**This file holds the decision, not the tools.** Whether the effect earns its
+cost and which tier is appropriate does not change; which renderer leads this
+year does. The names are not absent from the suite — they live in one dated
+file, **`references/toolchain.md`**, which maps each sensation to what you
+actually install. Decide the tier here, then go there.
 
 ---
 

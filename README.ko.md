@@ -305,6 +305,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | 셰이더·3D·GPU 렌더링 — 비용 단계, 배터리와 발열, 하한 실기기, 스크린 리더와 reduced-motion 의무, 그리고 왜 이것이 런칭 페이지용이고 매일 쓰는 도구 안에는 거의 맞지 않는가. 라이브러리 이름은 일부러 넣지 않았습니다 |
 | [`superforge-ui/references/sound.md`](./skills/superforge-ui/references/sound.md) | 가장 덜 쓰이는 표현 축이자, 잘못 쓰면 가장 미움받는 축 — 사용자가 일으키지 않은 소리는 내지 않고, 소리로만 전달되는 정보는 만들지 않으며, 생성음을 음계에 제약하면 「뭔가 이상하다」가 「설계되었다」로 바뀐다 |
 | [`superforge-ui/references/effect-vocabulary.md`](./skills/superforge-ui/references/effect-vocabulary.md) | 제안하려면 있어야 하는 메뉴판 — 그래픽·소리·네이티브에 걸친 약 서른 가지 효과를, 어떤 라이브러리인지가 아니라 **어떻게 느껴지는지**로 적어 두었다(그래서 낡지 않는다). 메뉴판이 없으면 「멋지게 해 줘」는 그라데이션을 돌려준다 |
+| [`superforge-ui/references/toolchain.md`](./skills/superforge-ui/references/toolchain.md) | 감각에서 「실제로 설치할 것」으로 건너가는 다리 — **라이브러리 이름이 적힌 유일한, 날짜가 붙은 파일**. 그래서 나머지 파일은 낡지 않고, 다시 확인할 곳은 한 군데뿐이다. 반대 방향으로도 읽는다: 최근 무엇이 가능해졌고, 그래서 무엇을 부탁할 수 있게 되었는가 |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 어느 에이전트에 어느 모델을 배정했는지 쓰기 전에 표로 내고 쓴 뒤에 기록한다 — 이 스위트가 약속하는 등급 배분을 주장이 아니라 보이는 것으로 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 나중에 재는 게 아니라 디자인과 함께 정하는 세 개의 숫자. 무게가 어디서 오는가. 체감 속도는 디자인의 문제 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 글자는 늘어나고, 먼저 깨지는 건 버튼이다. 문장을 조각으로 조립하면 안 되는 이유, 로케일 의존 서식, 그리고 다국어로 갈지 말지의 판단 자체 |

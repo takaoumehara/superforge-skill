@@ -10,12 +10,16 @@ the table.
 So this file is the table. It exists to be read **before offering options to
 someone who does not know what is possible.**
 
-**Everything here is named by what it feels like, never by what it is called.**
-That is not politeness — it is what keeps the file from going stale. Which
-library leads changes every year; "shapes that merge and separate like liquid"
-has been true for decades and will still be true when every name in the industry
-has changed. Pick the sensation, decide the tier
-(`references/heavy-visuals.md` §2), and look up the current tool then.
+**Everything here is named by what it feels like, never by what it is called** —
+which keeps this file from going stale, because "shapes that merge and separate
+like liquid" outlives every product name in the industry.
+
+**That is only half a design, and the other half is `references/toolchain.md`.**
+A menu with no way to order from it leaves the person who chose the liquid
+exactly where they started, and a designer is not obliged to already know which
+library draws it. So the names do exist — **in one dated file**, mapped from
+these sensations, with an instruction to check whether they are still current.
+One place to maintain; everything else stays durable.
 
 ---
 
