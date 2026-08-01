@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "5.0"
+  version: "6.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -29,6 +29,29 @@ compatibility: >
 # Superforge UI — Interface Design, Motion & Native Engineering Engine
 
 Use this skill when designing or implementing user interfaces across Web, iOS (SwiftUI), and Android (Jetpack Compose). This engine guarantees high aesthetic value, typography perfection, state specification, and micro-interaction polish.
+
+---
+
+## 0a. Name the job before sourcing anything
+
+Two questions decide whether the rest of this process solves the right problem,
+and both get answered implicitly if they are not answered out loud.
+
+**What does success look like on *this surface*?** Persuade (they decide and
+act) · Operate (they finish a task) · Read (they understand) · Experience (they
+are inside the work). **Pick it from the surface, not from the company** — a
+developer tool's landing page is Persuade, a fashion house's documentation is
+Read. Each mode also names what it may legitimately sacrifice, and a mode that
+gives up nothing is a wish rather than a mode.
+
+**Preserving or replacing?** Refinement keeps the identity, the behaviour, and
+everything outside the stated scope. Redesign keeps product truth and function
+but treats the old look as *evidence*, not as something to improve.
+**Never split the difference** — polish spent on a look already decided against
+is the most wasted work in this process.
+
+Both, plus the rule that a pinned brief outranks every default in this suite →
+**`references/surface-and-scope.md`**.
 
 ---
 
@@ -134,6 +157,23 @@ three-way decision about whether to be multilingual at all →
 
 ---
 
+## 4c. The floor, checked on the built result
+
+Before editing UI — after the direction is settled, not during planning — the
+things that are true of good work in any direction: measured contrast, 65–75ch
+measure, more space above a heading than below, elevation declared once, inner
+radius = outer − padding, `tabular-nums` on changing numbers, every state
+present with real copy at every breakpoint.
+
+And the defaults that appear when a decision was skipped, grouped by **why**
+they appeared: what the component library ships (cards as structure, eyebrows
+everywhere, section numbers), shortcuts for a feeling not earned (gradient text,
+glass as decoration, monospace as costume), and values nobody chose (solid hex
+borders, opacity as a disabled state, pure grey, brand colour carried unchanged
+into dark mode) → **`references/build-floor.md`**.
+
+---
+
 ## 5. Platform Native Specifications
 
 ### iOS Native (SwiftUI / UIKit):
@@ -171,6 +211,15 @@ three-way decision about whether to be multilingual at all →
   the render-with-reveal-disabled check that catches the "it looks blank"
   failure. Carries **no visual language** on purpose — the look comes from
   `design-sourcing.md`.
+- **`references/surface-and-scope.md`** — the four modes and what each is
+  allowed to sacrifice, refinement versus redesign and the never-split-the-
+  difference rule, why a missing design file is not a greenfield, and why a
+  pinned brief outranks your taste.
+
+- **`references/build-floor.md`** — the checks on the built result and the
+  refuse-list grouped by cause, plus the honest reconciliation of the expressive
+  animation palette against the performance budget.
+
 - **`references/aesthetic-direction.md`** — the Route C answer: ten named
   directions, the one-axis rule, the specific defaults that read as machine-made
   (Inter as a display face, purple-on-white, three equal cards, evenly

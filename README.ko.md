@@ -244,6 +244,8 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 원인 파악보다 먼저 봉쇄 — 교체 순서, 남아 있지 않을 수도 있는 로그로 영향 범위를 재구성하기, 그리고 정직한 고지 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 권한 검사가 매번 타는 소유 관계, 지금은 싸고 나중은 비싼 결정들, 인덱스 누락 / N+1 / 상한 없는 읽기, 덧붙이는 방식의 마이그레이션, 그리고 「삭제」가 무엇을 뜻해야 하는가 |
 | [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 참고가 하나도 없을 때 무엇을 할 것인가 — 이름 붙은 열 개의 방향, 미는 축은 하나뿐, 그리고 「기계가 만든 것」으로 읽히는 구체적인 기본값들 |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | 어떤 디자인 결정보다 먼저 오는 두 질문 — 이 화면에서 성공이란 무엇인가(그리고 그 모드가 무엇을 포기해도 되는가), 그리고 이것은 개선인가 재설계인가 조각인가 |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 의도가 아니라 완성물에 대한 검사. 그리고 기본값을 「왜 나타났는가」로 분류 — 라이브러리가 뱉는 것, 벌지 않은 느낌의 지름길, 아무도 고르지 않은 값 |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 어느 에이전트에 어느 모델을 배정했는지 쓰기 전에 표로 내고 쓴 뒤에 기록한다 — 이 스위트가 약속하는 등급 배분을 주장이 아니라 보이는 것으로 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 나중에 재는 게 아니라 디자인과 함께 정하는 세 개의 숫자. 무게가 어디서 오는가. 체감 속도는 디자인의 문제 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 글자는 늘어나고, 먼저 깨지는 건 버튼이다. 문장을 조각으로 조립하면 안 되는 이유, 로케일 의존 서식, 그리고 다국어로 갈지 말지의 판단 자체 |
@@ -279,6 +281,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | Gem_Ren_Pack | 본인 | 설계·평가 관련 프레임워크 |
 | 직접 조사한 인터랙션 설계·모션 연구 노트 | 본인 | `motion-system.md`와 `design-process.md`의 토대 — 지속시간 스케일, 애니메이션되는 속성으로 고르는 이징, FLIP, 스크롤 엔진 동기화, 폼 검증 타이밍, 도달성과 터치 타깃 |
 | 건네받은 앱 개발 스킬 모음 | 제3자, **읽었지만 가져다 쓰지 않음** | **드러난 구멍 쪽**. 시장 규모 산정, 출시 시점의 법적 의무, 첫 실행 설계가 여기엔 하나도 없었다. 가져온 것은 분야의 일반 지식뿐(TAM/SAM/SOM, 데이터 보호법의 발동 조건, 맥락에 맞춘 권한 요청)이고, 모든 파일은 처음부터 새로 썼다 |
+| 받은 세 개의 디자인 스킬 모음(`impeccable`, `emil-design-engineering`, `animation-patterns`) | 제3자, **읽었지만 가져다 쓰지 않음** | **이 스위트에 없던 세 개념**. 전부 처음부터 다시 쓰고 확장했다 — 네 개의 서피스 모드와 「개선인가 재설계인가」의 경계(`surface-and-scope.md`. 무엇을 포기해도 되는지의 열과 「조각」인 경우를 추가), 의도가 아니라 완성물에 대해 재는 품질의 바닥(`build-floor.md`. 기본값이 **왜** 나타나는지로 다시 묶었다 — 이 분류는 두 출처 어디에도 없다), 그리고 애니메이션을 넣을지 말지를 빈도로 정하는 규칙 |
 
 **마지막 줄에 대하여.** 남의 스킬 모음을 읽는 것은 내게 무엇이 없는지 알아내는 좋은 방법이고, 그 구멍을 메우는 나쁜 방법입니다. 드러난 것은 세 개의 진짜 구멍이었고, 지금은 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.ko.md), [`first-run.md`](./skills/superforge-ui/references/first-run.md)가 메우고 있습니다. 어느 것도 원본과 닮지 않았습니다. 설계 판단이 반대 방향으로 갔기 때문입니다 — **얼어붙은 법률 문구를 두지 않는다**, 1년이면 낡는 플랫폼 기능 카탈로그를 담지 않는다, 그리고 절차를 나르는 스위트에 코드 템플릿을 넣지 않는다.
 

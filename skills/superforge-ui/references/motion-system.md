@@ -28,6 +28,19 @@ The test to apply out loud: **"what does the user learn from this movement?"**
 
 ---
 
+
+**Frequency decides whether to animate at all.** Something a user touches a
+hundred times a day should not animate — the delay is paid every time and the
+delight is gone after week one. Something they meet once can be special. This
+is the check a beautiful component most often fails, and it is answered by
+looking at usage, not at the component.
+
+| How often | Motion |
+|---|---|
+| Many times a day | None, or so short it is not perceived as waiting |
+| Occasionally | Standard |
+| Once, or rarely | This is where a signature moment belongs |
+
 ## 2. The structure of one interaction
 
 Every interactive moment has four parts. Specifying only the first and third is

@@ -243,6 +243,8 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 原因究明より先に封じ込め——鍵の差し替え順、残っていないかもしれないログから影響範囲を組み直す、そして正直な告知 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 権限チェックが毎回たどる所有関係、今なら安く後なら高い決定、インデックス漏れ / N+1 / 上限のない読み出し、加算的な移行、そして「削除」が何を意味しなければならないか |
 | [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 参考が一つも無いときにどうするか——名前のついた10の方向性、押す軸は1本だけ、そして「機械が作った」と読まれる具体的なデフォルト一覧 |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | デザインの決定より前に来る2つの問い——この画面での成功とは何か（そしてそのモードが何を犠牲にしてよいか）、そしてこれは改良か、作り直しか、断片か |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 意図ではなく完成物に対する検査。そしてデフォルトを「なぜ現れたか」で分類——ライブラリが吐くもの、稼いでいない感じの近道、誰も選んでいない値 |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | どのエージェントにどのモデルを割り当てたかを、使う前に表で出し、使った後に記録する——このスイートが約束している階層分けを、主張ではなく見えるものにする |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 後から測るのではなく、デザインと一緒に決める3つの数字。重さがどこから来るか。体感速度はデザインの問題 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字は伸びる、そして最初に壊れるのはボタン。文を断片から組み立ててはいけない理由、ロケール依存の書式、そして多言語にするかどうか自体の判断 |
@@ -278,6 +280,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | Gem_Ren_Pack | 自作 | 設計・評価まわりのフレームワーク |
 | 自分で調べたインタラクション設計・モーションの調査ノート | 自作 | `motion-system.md` と `design-process.md` の土台——時間スケール、動かすプロパティで選ぶ緩急、FLIP、スクロールエンジンの同期、フォーム検証のタイミング、到達性とタッチ標的 |
 | 譲り受けたアプリ開発系スキル一式 | 第三者・**読んだが流用していない** | **見つかった穴のほう**。市場サイジング、出荷時の法務義務、初回起動設計が、ここには揃って無かった。取ったのは分野の一般知識だけ（TAM/SAM/SOM、データ保護法の発火条件、権限の文脈的要求）で、ファイルはすべてゼロから書いている |
+| 送られてきた3つのデザインスキル集（`impeccable`, `emil-design-engineering`, `animation-patterns`） | 第三者・**読んだが流用していない** | **このスイートに欠けていた3つの概念**。いずれもゼロから書き直し、さらに拡張した——4つのサーフェスモードと「改良か作り直しか」の線引き（`surface-and-scope.md`。犠牲にしてよいものの列と、断片の場合を追加）、意図ではなく完成物に対して測る品質の床（`build-floor.md`。デフォルトが**なぜ**現れるかで分類し直した——この分類はどちらの出典にも無い）、そしてアニメーションするかどうかを頻度で決める規則 |
 
 **最後の1行について。** 他人のスキル集を読むのは、自分に何が足りないかを知る良い方法で、その穴を埋める悪い方法です。見つかったのは3つの本物の穴で、いま [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.ja.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) が埋めています。どれも元とは似ていません。設計判断が逆方向に出たからです——**凍結された法律文面を置かない**、1年で古くなるプラットフォーム機能カタログを持たない、そして手順を運ぶスイートにコード雛形を入れない。
 

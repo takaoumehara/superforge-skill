@@ -244,6 +244,8 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 先止血，再查因——轮换顺序、从可能压根没留的日志里重建影响范围、以及一封诚实的通知 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 每次鉴权都要走的归属链、现在便宜以后昂贵的那些决定、缺索引 / N+1 / 无上限读取、增量式迁移，以及「删除」必须意味着什么 |
 | [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 一个参考都没有时怎么办——十个有名字的方向、只推一根轴，以及那些一看就是「机器做的」的具体默认值 |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | 任何设计决定之前的两个问题——在这个界面上「成功」是什么样（以及那个模式可以牺牲什么），以及这是改良、重做，还是一个片段 |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 对成品而非对意图的检查。以及按「为什么会出现」给默认值分组——库自带的、没挣来的感觉的近路、没人选过的数值 |
 | [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 每个 agent 分到哪个模型，花钱之前先列表、跑完之后再记录——让这套东西承诺的分级变成看得见的，而不是一句声明 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 不是事后测，而是和设计一起定的三个数字。重量到底从哪来。体感速度是设计问题 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字会变长，最先坏的是按钮。为什么句子绝不能拼接、依赖 locale 的格式，以及要不要做多语言这件事本身 |
@@ -279,6 +281,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | Gem_Ren_Pack | 本人 | 设计与评估相关的框架 |
 | 我自己整理的交互设计与动效研究笔记 | 本人 | `motion-system.md` 与 `design-process.md` 的底子——时长分级、按动画属性选缓动、FLIP、滚动引擎同步、表单校验时机、可达性与点击目标 |
 | 别人给我的一套应用开发技能 | 第三方，**读过但未沿用** | **它暴露出来的缺口**。市场测算、发布时的法律义务、首次启动设计，这里原本一样都没有。只取了行业通识（TAM/SAM/SOM、数据保护法的触发条件、权限的情境化请求），每个文件都是从零写的 |
+| 别人发我的三套设计技能（`impeccable`、`emil-design-engineering`、`animation-patterns`） | 第三方，**读过但未沿用** | **这套东西缺的三个概念**，全部从零重写并扩展：四种界面模式与「改良还是重做」的分界（`surface-and-scope.md`，加了「可以牺牲什么」这一列和「片段」这种情况）、对成品而不是对意图去测的质量底线（`build-floor.md`，按默认值**为什么**出现来重新分组——这个分法两个来源都没有）、以及用使用频率来决定要不要做动画 |
 
 **关于最后一行。** 读别人的技能集，是发现自己缺什么的好办法，却是填补缺口的坏办法。它暴露出三个真实的缺口，现在由 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.zh-CN.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) 填上。它们和原件都不像，因为设计判断走了相反的方向——**不放冻结的法律文本**、不收录一年就过期的平台功能目录、也不在一套承载流程的技能里塞代码模板。
 
