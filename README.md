@@ -2,7 +2,7 @@
 
 **English** · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**Say what you want to build, in one sentence. Twelve skills take it from idea to pre-launch check, in the right order.**
+**Say what you want to build, in one sentence. Fourteen skills take it from idea to pre-launch check, in the right order.**
 
 ---
 
@@ -56,7 +56,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ## The fourteen skills
 
-`superforge` is the front desk; the other twelve do the work. You can also call any of them directly, like `/superforge-ui`.
+`superforge` is the front desk; the other thirteen do the work. You can also call any of them directly, like `/superforge-ui`.
 
 ### 1. Think — decide what to make
 
