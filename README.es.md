@@ -243,10 +243,25 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | las siete pasadas en detalle — dónde se filtran de verdad las claves, la prueba de dos cuentas que encuentra los peores fallos en una hora, dónde aterriza la inyección, riesgo de dependencias y de build, y el barrido de superficie expuesta |
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | contener antes de diagnosticar — el orden de rotación, reconstruir el alcance desde registros que quizá no guardaste, y el aviso honesto |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | la cadena de pertenencia que lee cada comprobación de permisos, las decisiones baratas ahora y caras después, índices ausentes / N+1 / lecturas sin límite, migraciones aditivas, y qué tiene que significar «borrado» |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | qué hacer cuando no hay ninguna referencia — diez direcciones con nombre, empujar exactamente un eje, y los defectos concretos que se leen como hechos por una máquina |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | qué modelo se asigna a cada agente, impreso antes de gastar nada y registrado después — para que el escalonado que promete esta suite se vea en vez de afirmarse |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | tres números decididos con el diseño en vez de medidos después, de dónde viene realmente el peso, y la velocidad percibida como problema de diseño |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | el texto se alarga y lo primero que se rompe son los botones, por qué una frase nunca se ensambla por trozos, formatos según locale, y decidir si ser multilingüe siquiera |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | ¿te enterarás? ¿puedes arreglarlo? ¿puedes recuperarlo? ¿cuánto cuesta? — una alerta que valga la pena, un rollback probado, una copia restaurada, y el umbral de la factura desbocada |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | lo que cuesta de verdad el medio generado, la receta que hace que la duodécima imagen encaje con la primera, y las preguntas de uso comercial y de imagen resueltas antes de publicar |
+
+---
+
+## Herramientas que las skills ejecutan de verdad
+
+Dos piezas de trabajo determinista que un modelo no debería hacer razonando. Ambas son de solo lectura y salen con código distinto de cero, así que sirven de puerta en CI.
+
+| Script | Qué hace |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | Ratios de contraste WCAG desde un archivo de tokens. La luminancia relativa es una transformada gamma por tramos, y un error pequeño cruza la línea de aprobado sin parecer un error. No adivina con colores con alfa: o los compones, o reporta UNKNOWN |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | La pasada 1 de la revisión de seguridad en los seis sitios donde se esconde una credencial — **incluido el historial de git**, donde una clave borrada en un commit posterior sigue viva. Nunca imprime un secreto usable |
+
+Cuatro skills llevan además `evals/evals.json`: prompts que deben y no deben activarlas, más aserciones sobre el **artefacto** — no solo «¿se activó la skill?» sino «¿salió `docs/design.md` con su bloque de Design DNA y su presupuesto?».
 
 ---
 

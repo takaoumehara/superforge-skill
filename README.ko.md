@@ -243,10 +243,25 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 일곱 개 패스의 내용 — 키가 실제로 새는 자리, 한 시간이면 최악의 버그가 나오는 두 계정 테스트, 인젝션이 닿는 곳, 의존성과 빌드 시점의 위험, 바깥에서 보이는 면 청소 |
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 원인 파악보다 먼저 봉쇄 — 교체 순서, 남아 있지 않을 수도 있는 로그로 영향 범위를 재구성하기, 그리고 정직한 고지 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 권한 검사가 매번 타는 소유 관계, 지금은 싸고 나중은 비싼 결정들, 인덱스 누락 / N+1 / 상한 없는 읽기, 덧붙이는 방식의 마이그레이션, 그리고 「삭제」가 무엇을 뜻해야 하는가 |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 참고가 하나도 없을 때 무엇을 할 것인가 — 이름 붙은 열 개의 방향, 미는 축은 하나뿐, 그리고 「기계가 만든 것」으로 읽히는 구체적인 기본값들 |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 어느 에이전트에 어느 모델을 배정했는지 쓰기 전에 표로 내고 쓴 뒤에 기록한다 — 이 스위트가 약속하는 등급 배분을 주장이 아니라 보이는 것으로 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 나중에 재는 게 아니라 디자인과 함께 정하는 세 개의 숫자. 무게가 어디서 오는가. 체감 속도는 디자인의 문제 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 글자는 늘어나고, 먼저 깨지는 건 버튼이다. 문장을 조각으로 조립하면 안 되는 이유, 로케일 의존 서식, 그리고 다국어로 갈지 말지의 판단 자체 |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 알아챌 수 있는가 / 고칠 수 있는가 / 되찾을 수 있는가 / 얼마가 드는가 — 남길 가치가 있는 알림 하나, 실제로 해 본 롤백, 실제로 복원해 본 백업, 폭주 청구서의 임계값 |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 생성 미디어의 실제 비용, 열두 번째가 첫 번째와 맞아떨어지게 하는 레시피, 그리고 내보내기 전에 끝내 두는 상업적 이용과 초상 문제 |
+
+---
+
+## 스킬이 실제로 돌리는 도구
+
+모델이 추론으로 해서는 안 되는 결정적 계산 두 가지. 둘 다 읽기 전용이고, 실패 시 0이 아닌 값으로 끝나므로 CI 게이트로 쓸 수 있습니다.
+
+| 스크립트 | 하는 일 |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | 토큰 파일에서 WCAG 대비를 계산. 상대 휘도는 구간별 감마 변환이라 조금만 어긋나도 합격선을 넘나드는데, 보기에는 전혀 틀려 보이지 않습니다. 알파가 있는 색은 추측하지 않고, 합성하지 않으면 UNKNOWN으로 보고합니다 |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | 보안 리뷰 1번 패스를 여섯 군데 전부에 대해 실행. **git 히스토리 포함** — 나중 커밋에서 지운 키는 거기 그대로 살아 있습니다. 쓸 수 있는 형태의 비밀은 절대 출력하지 않습니다 |
+
+네 개의 스킬에는 `evals/evals.json`도 들어 있습니다. 발동해야 할/하지 말아야 할 프롬프트에 더해 **산출물에 대한** 어서션 — 「스킬이 떴는가」가 아니라 「`docs/design.md`에 Design DNA와 예산이 실제로 적혔는가」를 봅니다.
 
 ---
 

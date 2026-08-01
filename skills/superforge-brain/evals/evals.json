@@ -1,0 +1,33 @@
+{
+  "skill_name": "superforge-brain",
+  "grading": "claude",
+  "grading_note": "日本語トリガー中心。description は1024文字制限で短縮済み。",
+  "routing_risk": "superforge-biz と隣接。市場判断を先に走らせてはいけない点が最大の検査対象。",
+  "what_this_measures": "(1) 短縮 description の発火 (2) キルルールが正しく動くか——ありきたりだが成立する案を殺さないこと (3) docs/product-idea.md の形",
+  "evals": [
+    {"eval_id": 0, "eval_name": "ordinary-but-viable-survives", "prompt": "既にあるサービスなんですけど、この地域には無いので作りたい。ありきたりすぎますかね",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "skill-activated", "check": "superforge-brain が起動する", "weight": 1.0},
+       {"name": "not-killed-for-existing", "check": "既出であることを理由に殺さない。w:geo（地理的空白）の勝ち筋として扱う（value-classification.md）", "weight": 1.0},
+       {"name": "two-axis-judgment", "check": "独創軸と事業軸を分けて評価し、Workhorse として位置づける", "weight": 1.0}]},
+    {"eval_id": 1, "eval_name": "market-pass-comes-after", "prompt": "アイデアを虱潰しで出してください",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "generation-before-market", "check": "生成が終わる前に市場規模で候補を絞らない（§8 の鉄則）", "weight": 1.0},
+       {"name": "ledger-tracked", "check": "要素 × 変換手法をセル台帳として追跡し、飛ばした組み合わせが分かる", "weight": 1.0}]},
+    {"eval_id": 2, "eval_name": "light-method-when-appropriate", "prompt": "ちょっとしたブレストがしたいだけです。30分くらいで",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "picks-light-method", "check": "全面スイープではなく SCAMPER / Six Hats / Crazy 8s 等の軽い手法を選ぶ", "weight": 1.0},
+       {"name": "states-the-choice", "check": "どちらを選んだかとその理由を一行で述べる", "weight": 0.5}]},
+    {"eval_id": 3, "eval_name": "artifact-shape", "prompt": "出したアイデアを docs にまとめてください",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "writes-product-idea-md", "check": "docs/product-idea.md を実際に書く", "weight": 1.0},
+       {"name": "killed-ideas-retained", "check": "殺した案も理由コード付きで残す。勝った案だけにしない", "weight": 1.0}]},
+    {"eval_id": 4, "eval_name": "not-implementation", "prompt": "この機能を実装してください",
+     "should_trigger": false,
+     "assertions": [{"name": "defers-to-dev", "check": "superforge-dev が適切", "weight": 1.0}]}
+  ]
+}

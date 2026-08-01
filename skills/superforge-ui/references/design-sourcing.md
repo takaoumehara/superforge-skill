@@ -205,15 +205,23 @@ in order:
 2. **If the codebase exists, extract from it.** An existing product has an
    implicit system. Extract it as in §5 and make it explicit — that is a real
    improvement even without any reference.
-3. **Fall back to a defensible default and say so plainly**: a restrained
-   system, generous spacing, one accent used rarely, a single type family with
-   real weight contrast. Then state in the artifact: *"No reference was
-   supplied; this direction is a conservative default and will read as generic
-   until one is."*
+3. **Choose a direction deliberately, and say that no reference was supplied.**
 
-That last sentence matters. **An unsourced design presented as a considered one
-is the failure mode**; an unsourced design labelled as such invites the user to
-fix the actual problem.
+Step 3 used to read "fall back to a restrained default — generous spacing, one
+accent used rarely." That advice was wrong, and it was wrong in this file's own
+terms. **A restrained system with generous spacing and one quiet accent is
+precisely what a model produces when it has no direction at all**, so choosing
+it deliberately lands on the same page as choosing nothing. The safe fallback
+and the honest fallback are not the same thing.
+
+The honest one: commit to a named direction, push exactly one axis, keep the
+rest quiet, and label the source honestly in the artifact →
+**`references/aesthetic-direction.md`**.
+
+**An unsourced design presented as a considered one is still the failure mode.**
+Labelling it invites the user to fix the actual problem — which is that steps 1
+and 2 beat step 3 every time, and five minutes of links would have made this
+file's whole extraction protocol available instead.
 
 ---
 

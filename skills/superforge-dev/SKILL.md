@@ -18,7 +18,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.0"
+  version: "5.0"
 compatibility: >
   Standalone.
   Reads and writes docs/plan.md. The schema section informs superforge-secure and superforge-ship.
@@ -92,6 +92,14 @@ Before dispatching, evaluate and **explicitly notify the user** of the recommend
 
 ## 3. Dispatch Protocol
 
+0. **Print the plan before spending anything.** A table with one row per task —
+   model, effort, *why that tier*, and the files it may write — plus the wave
+   order and the agent count broken down by model. This is the only way the
+   user can see whether the tiering this suite promises is actually happening,
+   and it is the human-in-the-loop point. **Print it and continue; do not ask
+   for approval** — the point is that stopping is possible, not required. Then
+   record what actually ran, including retries and any tier that changed
+   mid-run → **`references/dispatch-ledger.md`**.
 1. **Explicit Versioning**: When dispatching `Fable 5` for long runs, ensure library versions (e.g. Next.js 15, Tailwind v4) are explicitly declared in the prompt or `CLAUDE.md`.
 2. **Self-Contained Subagent Context**: Provide complete file paths, acceptance criteria, and background context to every subagent.
 3. **Verification Gateway**: Run tests and verify diffs before accepting subagent output.
@@ -110,6 +118,11 @@ the subtask-failure table, and when splitting costs more than it saves.
 the ownership chain that authorization depends on, the choices that are cheap
 now and expensive later, missing indexes / N+1 / unbounded reads, additive
 migrations with a tested rollback, and what "deleted" has to mean.
+
+**`references/dispatch-ledger.md`** — the before-table and the after-record:
+model and reason per task, what each agent may write, the wave order, the agent
+count by model, and the rule against silently upgrading a tier mid-run. Also
+what may honestly be said about cost, and what may not.
 
 **`references/autonomous-run.md`** — preconditions for an unattended run, the
 build/review/prove/repair loop, what to decide alone versus what must stop the

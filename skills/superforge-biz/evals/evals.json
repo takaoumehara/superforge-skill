@@ -1,0 +1,38 @@
+{
+  "skill_name": "superforge-biz",
+  "grading": "claude",
+  "grading_note": "日本語トリガーを含むため Claude 判定でのみ使うこと。description は1024文字制限に合わせて短縮されており、このセットはその短縮でトリガーが落ちていないかを測る。",
+  "routing_risk": "superforge-brain（アイデア段階）と superforge-ship（法務）に隣接する。",
+  "what_this_measures": "(1) 短縮した description でも発火するか (2) §0 の GO/NO-GO ゲートが実際に先に走るか (3) docs/business-model.md が規定の節を持つか",
+  "evals": [
+    {"eval_id": 0, "eval_name": "gate-runs-first", "prompt": "このアプリの価格をいくらにすべきか決めたいです",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "skill-activated", "check": "superforge-biz が起動する", "weight": 1.0},
+       {"name": "gate-before-pricing", "check": "価格表を出す前に §0 の GO/NO-GO を通す。少なくとも「何人の顧客が必要か」の逆算を先に行う", "weight": 1.0},
+       {"name": "verdict-code", "check": "GO / GO-NARROW / NO-GO / WAIT のいずれかの判定コードで終える。散文で濁さない", "weight": 1.0}]},
+    {"eval_id": 1, "eval_name": "market-size-both-ways", "prompt": "市場規模を知りたいです。作る価値ありますか",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "two-directions", "check": "トップダウンとボトムアップの両方で計算し、その差自体を所見として扱う", "weight": 1.0},
+       {"name": "confidence-tiers", "check": "各入力に A/B/C/D の確度を付ける", "weight": 1.0}]},
+    {"eval_id": 2, "eval_name": "service-business-ceiling", "prompt": "受託で月100万円を目指したいのですが、どう値付けすればいいですか",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "computes-ceiling", "check": "稼働可能時間 × 単価 × 稼働率 で天井を計算し、目標がその下にあるか確認する（service-business.md §1）", "weight": 1.0},
+       {"name": "billable-fraction", "check": "稼働可能時間を労働時間と同一視せず、請求可能率（50〜70%）を落とす", "weight": 1.0},
+       {"name": "scope-has-end", "check": "スコープに「終わりの条件」を含めるよう促す（§2）", "weight": 0.5}]},
+    {"eval_id": 3, "eval_name": "outreach-legality", "prompt": "リストを買って営業メールを一斉送信しようと思います",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "recipient-jurisdiction", "check": "送信者ではなく受信者の所在地でルールが決まると述べる（customer-acquisition.md §8）", "weight": 1.0},
+       {"name": "purchased-list-warning", "check": "購入リストが同意先行の法域では違法であり、送信ドメインの評判を焼くと指摘する", "weight": 1.0},
+       {"name": "not-legal-advice", "check": "具体的なキャンペーンの適法性判断は弁護士に渡すと明示する", "weight": 0.5}]},
+    {"eval_id": 4, "eval_name": "not-brainstorming", "prompt": "何か新しいアイデアを一緒に考えてほしいです",
+     "should_trigger": false,
+     "assertions": [{"name": "defers-to-brain", "check": "superforge-brain が適切。市場サイジングを先に走らせない", "weight": 1.0}]},
+    {"eval_id": 5, "eval_name": "not-privacy-policy", "prompt": "プライバシーポリシーを書いてください",
+     "should_trigger": false,
+     "assertions": [{"name": "defers-to-ship", "check": "superforge-ship に渡す", "weight": 1.0}]}
+  ]
+}

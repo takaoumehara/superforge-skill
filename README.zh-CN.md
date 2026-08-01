@@ -243,10 +243,25 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 七道检查的细节——密钥真正泄漏的地方、一小时能挖出最严重 bug 的双账号测试、注入的落点、依赖与构建期风险、对外暴露面的清扫 |
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 先止血，再查因——轮换顺序、从可能压根没留的日志里重建影响范围、以及一封诚实的通知 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 每次鉴权都要走的归属链、现在便宜以后昂贵的那些决定、缺索引 / N+1 / 无上限读取、增量式迁移，以及「删除」必须意味着什么 |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 一个参考都没有时怎么办——十个有名字的方向、只推一根轴，以及那些一看就是「机器做的」的具体默认值 |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 每个 agent 分到哪个模型，花钱之前先列表、跑完之后再记录——让这套东西承诺的分级变成看得见的，而不是一句声明 |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 不是事后测，而是和设计一起定的三个数字。重量到底从哪来。体感速度是设计问题 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字会变长，最先坏的是按钮。为什么句子绝不能拼接、依赖 locale 的格式，以及要不要做多语言这件事本身 |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 能不能发现 / 能不能修 / 能不能找回 / 要花多少——一条值得留的告警、演练过的回滚、真正恢复过的备份、失控账单的阈值 |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成媒体的真实成本、让第十二张和第一张对得上的配方，以及在发布前就答完的商用授权与肖像问题 |
+
+---
+
+## 技能真正会去跑的工具
+
+两件不该靠推理去做的确定性计算。都是只读，失败时返回非零，可以拿来卡 CI。
+
+| 脚本 | 做什么 |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | 从 token 文件算 WCAG 对比度。相对亮度是分段 gamma 变换，差一点就跨过合格线，而看上去一点都不像错。带 alpha 的颜色不猜，不合成就报 UNKNOWN |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | 把安全评审的第 1 道跑遍全部六个地方，**包括 git 历史**——后来那次提交删掉的密钥，还在那儿。绝不打印可用的密钥 |
+
+四个技能还带了 `evals/evals.json`：该触发和不该触发的提示词，外加对**产物**的断言——不只是「技能有没有起来」，而是「`docs/design.md` 里到底有没有 Design DNA 和预算」。
 
 ---
 

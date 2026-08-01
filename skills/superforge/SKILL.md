@@ -44,6 +44,13 @@ that nothing gets lost between them.
 Never leave every dispatched agent on the session default. That waste is the
 reason this suite exists.
 
+**And show the assignment, so it can be checked.** Before any fan-out, print one
+row per task — model, effort, why that tier, and the files it may write — with
+the agent count broken down by model. A tiering nobody can see is a claim, not a
+saving. Format, and the after-the-fact record →
+**`skills/superforge-dev/references/dispatch-ledger.md`**. For single-agent work
+one line is enough: 「Opus 5 のまま、サブエージェントなしで進めます」.
+
 ## 2. Intake
 
 For work that opens a new product or feature area, run intake first and write

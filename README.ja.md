@@ -242,10 +242,25 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 7つのパスの中身——鍵が実際に漏れる場所、1時間で最悪のバグが出る二アカウント試験、注入の着地点、依存とビルド時のリスク、外から見える面の掃除 |
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 原因究明より先に封じ込め——鍵の差し替え順、残っていないかもしれないログから影響範囲を組み直す、そして正直な告知 |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 権限チェックが毎回たどる所有関係、今なら安く後なら高い決定、インデックス漏れ / N+1 / 上限のない読み出し、加算的な移行、そして「削除」が何を意味しなければならないか |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 参考が一つも無いときにどうするか——名前のついた10の方向性、押す軸は1本だけ、そして「機械が作った」と読まれる具体的なデフォルト一覧 |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | どのエージェントにどのモデルを割り当てたかを、使う前に表で出し、使った後に記録する——このスイートが約束している階層分けを、主張ではなく見えるものにする |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 後から測るのではなく、デザインと一緒に決める3つの数字。重さがどこから来るか。体感速度はデザインの問題 |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字は伸びる、そして最初に壊れるのはボタン。文を断片から組み立ててはいけない理由、ロケール依存の書式、そして多言語にするかどうか自体の判断 |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 気づけるか / 直せるか / 戻せるか / いくらかかるか——持つ価値のあるアラート1本、一度試したロールバック、一度復元したバックアップ、暴走請求の閾値 |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成メディアの実際の費用、12枚目が1枚目と揃うためのレシピ、そして出す前に答えておく商用利用と肖像の問い |
+
+---
+
+## スキルが実際に走らせるツール
+
+モデルが推論でやるべきでない決定的な計算が2つ。どちらも読むだけで、失敗時に非ゼロで終わるのでCIのゲートにできます。
+
+| スクリプト | 何をするか |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | トークンファイルからWCAGのコントラスト比を計算。相対輝度は区分的なガンマ変換で、少しずれるだけで合否の境界を跨ぐのに、見た目には間違いに見えません。アルファ付きの色は推測せず、合成しない限り UNKNOWN と報告します |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | セキュリティレビューのパス1を6箇所すべてに対して実行。**git履歴を含みます**——後のコミットで消した鍵は、そこにまだ生きています。使える形の秘密は絶対に表示しません |
+
+4つのスキルには `evals/evals.json` も入っています。発火すべき／すべきでないプロンプトに加えて、**成果物に対する**アサーション——「スキルが起動したか」だけでなく「`docs/design.md` に Design DNA と予算が実際に書かれたか」を見ます。
 
 ---
 

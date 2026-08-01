@@ -16,11 +16,12 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "1.0"
+  version: "1.1"
 compatibility: >
   Standalone.
   Reads docs/plan.md, docs/design.md, and docs/ship-readiness.md when present.
   Writes docs/security.md, which superforge-ship reads as a precondition.
+  scripts/scan-secrets.sh needs bash and git (ripgrep optional).
   Every pass degrades to a documented reasoning check when no runtime is available.
 ---
 
@@ -93,6 +94,19 @@ not assessed — never silently skipped.
 
 Each pass, what to actually look at per platform, and the specific checks that
 find real bugs → **`references/attack-surface.md`**.
+
+**Pass 1 is scriptable, and should be scripted.** Six places is exactly the
+count people stop checking under time pressure:
+
+```bash
+scripts/scan-secrets.sh                 # tree, git history, bundle, env, CI, tracked files
+scripts/scan-secrets.sh --bundle dist   # point it at a real build
+scripts/scan-secrets.sh --no-history    # faster, skips the check people skip
+```
+
+It reads only, never prints a usable secret (matches truncate to four
+characters), and exits 1 on findings so it can gate CI. **A clean run is not
+"no secrets"** — it means these patterns did not match here, and it says so.
 
 **Passes 1 and 3 are where the findings are.** If time is short, run those two
 properly rather than all seven shallowly, and say in the report that you did.

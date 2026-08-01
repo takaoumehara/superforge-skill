@@ -1,0 +1,38 @@
+{
+  "skill_name": "superforge-secure",
+  "grading": "claude",
+  "routing_risk": "superforge-ship（法務・出荷ゲート）と superforge-verify（動作確認）に隣接。",
+  "what_this_measures": "(1) 新スキルの description が発火するか (2)「安全です」と決して言わないか (3) パス3（認可）を実際に走らせるか (4) 事故対応の順序が正しいか",
+  "evals": [
+    {"eval_id": 0, "eval_name": "never-says-secure", "prompt": "このアプリ、セキュリティ的に安全か見てもらえますか",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "skill-activated", "check": "superforge-secure が起動する", "weight": 1.0},
+       {"name": "no-secure-claim", "check": "「安全です」と主張しない。SECURE-REVIEWED / FINDINGS-OPEN / NOT-ASSESSED のいずれかで返す", "weight": 1.0},
+       {"name": "attacker-model-stated", "check": "攻撃者像を明示する。既定は「ログインした普通のユーザー」", "weight": 1.0}]},
+    {"eval_id": 1, "eval_name": "authorization-pass-runs", "prompt": "APIのセキュリティレビューをお願いします",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "two-account-test", "check": "二アカウント試験を提案する。リソース種別ごとに実施すると述べる（attack-surface.md パス3）", "weight": 1.0},
+       {"name": "per-endpoint", "check": "サンプルではなくエンドポイントごとに認可を検査する", "weight": 1.0},
+       {"name": "not-just-npm-audit", "check": "依存スキャンだけで済ませない。それは開始点だと述べる", "weight": 1.0}]},
+    {"eval_id": 2, "eval_name": "leaked-key-order", "prompt": "APIキーをGitHubにpushしてしまいました。もう消しました",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "history-not-fixed-by-delete", "check": "ファイルを消しても履歴・クローン・フォークからは消えないと述べる", "weight": 1.0},
+       {"name": "rotation-order", "check": "新しい鍵を先に発行→全箇所に配布→そのあと旧鍵を失効、の順序を示す（when-it-happens.md §1）", "weight": 1.0},
+       {"name": "assume-compromised", "check": "露出した瞬間に侵害されたと仮定する。「1時間だけ」を緩和策としない", "weight": 1.0}]},
+    {"eval_id": 3, "eval_name": "escalates-when-required", "prompt": "ユーザーの健康データが漏れたかもしれません",
+     "should_trigger": true,
+     "assertions": [
+       {"name": "contain-first", "check": "原因究明より先に封じ込め（セッション失効・鍵の差し替え）を指示する", "weight": 1.0},
+       {"name": "preserve-evidence", "check": "デバッグの前にログとDBのスナップショットを保全させる", "weight": 1.0},
+       {"name": "hands-to-lawyer", "check": "個人データが絡む時点で、影響を受ける法域の弁護士に渡すと明示する", "weight": 1.0}]},
+    {"eval_id": 4, "eval_name": "not-does-it-work", "prompt": "テストが全部通ったか確認してください",
+     "should_trigger": false,
+     "assertions": [{"name": "defers-to-verify", "check": "superforge-verify が適切", "weight": 1.0}]},
+    {"eval_id": 5, "eval_name": "not-release-permission", "prompt": "App Storeの審査に出していいか判断してください",
+     "should_trigger": false,
+     "assertions": [{"name": "defers-to-ship", "check": "superforge-ship が適切。ただし docs/security.md はその前提条件", "weight": 1.0}]}
+  ]
+}

@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.0"
+  version: "5.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -45,6 +45,12 @@ Google Stitch, Figma, v0), or — declared honestly — nothing. Then extract th
 **system** behind it in six layers (structure, space, type, colour, motion,
 imagery), never the content, and record the sources and the deliberate
 divergences → **`references/design-sourcing.md`**.
+
+**When there is genuinely nothing to work from**, do not fall back to a
+restrained default — that is what a model produces with no direction at all, so
+choosing it lands on the same page as choosing nothing. Commit to a named
+direction, push exactly one axis, keep the rest quiet, and label the source
+honestly → **`references/aesthetic-direction.md`**.
 
 Three references beat one: one produces imitation, three force you to find the
 principle they share.
@@ -165,6 +171,12 @@ three-way decision about whether to be multilingual at all →
   the render-with-reveal-disabled check that catches the "it looks blank"
   failure. Carries **no visual language** on purpose — the look comes from
   `design-sourcing.md`.
+- **`references/aesthetic-direction.md`** — the Route C answer: ten named
+  directions, the one-axis rule, the specific defaults that read as machine-made
+  (Inter as a display face, purple-on-white, three equal cards, evenly
+  distributed palettes, scattered scroll fades), atmosphere as a layer, and why
+  minimal is not less work.
+
 - **`references/performance-budget.md`** — three numbers set with the design and
   measured by `superforge-verify`, where the weight actually comes from,
   perceived speed as a design problem, animation cost, and native budgets.

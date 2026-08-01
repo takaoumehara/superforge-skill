@@ -243,10 +243,25 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | the seven passes in detail — where secrets actually leak, the two-account test that finds the worst bugs in an hour, injection sinks, dependency and build-time risk, the exposure sweep |
 | [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | contain before diagnosing — the rotation order, reconstructing blast radius from logs you may not have kept, and the honest notice |
 | [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | the ownership chain every authorization check reads, the choices that are cheap now and expensive later, missing indexes / N+1 / unbounded reads, additive migrations, and what "deleted" has to mean |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | what to do when there is no reference at all — ten named directions, push exactly one axis, and the specific defaults that read as machine-made |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | the model assigned to each agent, printed before anything is spent and recorded after — so the tiering this suite promises is visible instead of claimed |
 | [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | three numbers set with the design instead of measured after it, where the weight actually comes from, and perceived speed as a design problem |
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | text expansion and the layouts it breaks first, why a sentence must never be assembled from fragments, locale-aware formats, and deciding whether to be multilingual at all |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | will you find out, can you fix it, can you get it back, what does it cost — one alert worth having, a tested rollback, a restored backup, and the runaway-bill threshold |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | what generated media actually costs, the recipe that makes the twelfth image match the first, and the commercial-use and likeness questions answered before it ships |
+
+---
+
+## Tools the skills actually run
+
+Two pieces of deterministic work that a model should not do by reasoning — both read-only, both exit non-zero on failure so they can gate CI:
+
+| Script | What it does |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | WCAG contrast ratios from a token file. Relative luminance is a piecewise gamma transform, and a small error moves a ratio across a pass/fail line without looking wrong. Refuses to guess on colours with alpha — composite first or it reports UNKNOWN |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | Pass 1 of the security review across all six places a credential hides — **including git history**, where a key deleted in a later commit still lives. Never prints a usable secret |
+
+Four skills also carry `evals/evals.json`: prompts that should and should not trigger them, plus assertions on the **artifact** — not just "did the skill fire" but "did `docs/design.md` come out with a Design DNA block and a budget".
 
 ---
 
