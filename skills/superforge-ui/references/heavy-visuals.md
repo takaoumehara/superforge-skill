@@ -60,6 +60,11 @@ cannot maintain:
 > スマホでは電池を食うので画面外で止めます。** 静止画のままにする手もあって、
 > その場合は文字組みだけで見せることになります。どちらにしますか。」
 
+**Read `references/effect-vocabulary.md` before offering.** The rule above is
+useless without a menu — a model with no vocabulary proposes from its own
+priors, which is the average of everything it has seen, and "add something
+impressive" then returns a gradient and a fade.
+
 **Two or three, then the recommendation** (`aesthetic-direction.md` §1b). Give
 the still option a real defence — often it is the right answer, and offering it
 sincerely is what makes the ambitious option a choice rather than a push.

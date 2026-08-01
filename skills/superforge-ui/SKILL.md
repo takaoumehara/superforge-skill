@@ -20,7 +20,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "8.0"
+  version: "9.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -192,6 +192,13 @@ could be liquid that moves away from you" — never in the language of the
 technology, and **carry the price in the same breath** (§4d). A proposal
 without a cost is a sales pitch.
 
+**Propose from a menu, not from memory.** `references/effect-vocabulary.md`
+holds what is actually possible — matter that flows, swarms that assemble,
+things that grow differently on every load, space you move through, and sound
+computed rather than played — each named by how it feels, tiered by cost, and
+kept free of library names so it does not expire. Without it, "make it
+impressive" returns a gradient.
+
 ---
 
 ## 4d. Shaders, 3D, and anything GPU-drawn
@@ -286,6 +293,11 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   (Inter as a display face, purple-on-white, three equal cards, evenly
   distributed palettes, scattered scroll fades), atmosphere as a layer, and why
   minimal is not less work.
+
+- **`references/effect-vocabulary.md`** — the menu the proposal step needs:
+  around thirty effects across graphics, sound and native surfaces, each named
+  by sensation rather than by library, with its rough cost and the surfaces it
+  suits. Includes the instruction to propose nothing when nothing fits.
 
 - **`references/sound.md`** — the three uses in order of how often they are
   right, the six non-negotiable rules, why timing rather than file size is the

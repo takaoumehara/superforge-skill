@@ -35,6 +35,11 @@ itself**, and **sound as the only signal for anything.**
 
 ---
 
+**What to actually offer**, described by how it sounds rather than by what it is
+called → **`references/effect-vocabulary.md`** §6.
+
+---
+
 ## 2. The rules, and none of them are negotiable
 
 **Never make a sound the visitor did not cause.** No audio on page load, ever.
