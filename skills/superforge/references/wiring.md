@@ -40,6 +40,8 @@ treat any absence as "do it inline".
 | Lead generation, channel selection, CAC/LTV, minimum viable scale per tactic | inline — `superforge-biz/references/customer-acquisition.md` — no external skill needed |
 | Quantifying a feature's ROI as a pitch | inline — `superforge-biz/references/value-pitch.md` — no external skill needed |
 | Choosing a persuasion mechanism from the symptom | inline — `superforge-biz/references/behavioral-frameworks.md` — no external skill needed |
+| 受託・エージェンシー・顧問料 — the ceiling, scope, concentration | inline — `superforge-biz/references/service-business.md` — no external skill needed |
+| Whether an outreach campaign is lawful where the recipient is | inline — `superforge-biz/references/customer-acquisition.md` §8 identifies the obligations; then `legal` for a specific campaign |
 | Pricing and monetization models | `monetization`, `indie-business` |
 | Paywall screens and offers | `paywall-generator`, `subscription-offers`, `offer-codes-setup` |
 | Subscription lifecycle, win-back, referral | `subscription-lifecycle`, `win-back-offers`, `referral-system` |
@@ -83,6 +85,7 @@ treat any absence as "do it inline".
 ### `superforge-dev` — building
 | Step | Delegate to |
 |---|---|
+| Splitting the work, and deciding what may run in parallel | inline — `superforge-dev/references/decomposition.md` — run this **before** choosing topology or tier |
 | Plan writing before code | `writing-plans`, `prd-generator`, `architecture-spec` |
 | Parallel dispatch mechanics | `dispatching-parallel-agents`, `subagent-driven-development` |
 | Plan execution | `executing-plans` |
@@ -94,6 +97,7 @@ treat any absence as "do it inline".
 ### `superforge-test` — tests
 | Step | Delegate to |
 |---|---|
+| Deciding what earns a test, granularity, mocking boundary, brittle tests | inline — `superforge-test/references/what-to-test.md` — decide this **before** writing any test |
 | Red-green-refactor discipline | `test-driven-development`, `tdd-feature`, `tdd-bug-fix` |
 | Refactor safety net | `tdd-refactor-guard`, `characterization-test-generator` |
 | Scaffolding and fixtures | `test-generator`, `test-data-factory`, `integration-test-scaffold`, `snapshot-test-setup` |
@@ -103,7 +107,8 @@ treat any absence as "do it inline".
 | Step | Delegate to |
 |---|---|
 | Root-cause process | `systematic-debugging` |
-| Failure memory | `failforward` |
+| Failure memory | inline — `docs/failforward.md` is the memory (`superforge-debug/references/failforward.md` for the format); the `failforward` CLI is an optional index over it |
+| A bug that will not reproduce, or "it used to work" | inline — `superforge-debug/references/failforward.md` §2–§3 |
 | Platform-specific | `swiftui-debugging`, `profiling`, `concurrency-patterns` |
 
 ### `superforge-a11y` — accessibility
@@ -129,6 +134,7 @@ criteria — one ledger, one set of numbers, one report at `docs/accessibility.m
 ### `superforge-verify` — verification
 | Step | Delegate to |
 |---|---|
+| Grading the evidence, and what a report may not contain | inline — `superforge-verify/references/evidence.md` — no external skill needed |
 | Evidence-before-claims discipline | `verification-before-completion` |
 | Technical audit sweep | `audit`, `optimize` |
 | Running the actual app | `run` |

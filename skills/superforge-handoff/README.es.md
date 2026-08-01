@@ -37,7 +37,7 @@ La cápsula apunta a `docs/`, no lo duplica. Por eso se queda lo bastante corta 
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 📦 Corta porque señala en vez de repetir
 La cápsula guarda el objetivo, el estado verificado, los procesos y puertos en marcha, los siguientes pasos inmediatos y qué archivos leer primero. Todo lo demás se queda en los artefactos de `docs/` que ya escribieron las otras skills.

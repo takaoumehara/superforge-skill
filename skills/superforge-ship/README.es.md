@@ -39,7 +39,7 @@ flowchart TD
 
 ---
 
-## ✨ Características
+## ✨ Puntos clave
 
 ### ⚖️ La jurisdicción sigue a tus usuarios, no a tu dirección
 Este es el hecho que hace universal esta puerta. Alguien en Nueva York, en Tokio o en cualquier otro sitio afronta el mismo conjunto de obligaciones, determinado por **dónde están las personas que usan el producto** y **qué datos se tocan**. «No estamos en Europa» nunca ha sido una respuesta a una pregunta sobre el RGPD: basta con un usuario en la UE.

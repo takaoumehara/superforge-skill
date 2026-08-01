@@ -36,7 +36,10 @@ Nada se acepta por la palabra del subagente: primero se ejecutan las pruebas y s
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### 🧱 Una división en la que el paralelo es demostrablemente seguro
+Ni la topología ni el nivel de modelo rescatan una mala división, y es ahí donde de verdad fallan las ejecuciones desatendidas. Cada tarea nombra un resultado, una línea de prueba y **los archivos que va a escribir** — porque la regla es: *dos tareas pueden ir en paralelo solo si esos conjuntos de archivos no se cruzan.* No «seguramente va bien»: listados, y disjuntos. Los cimientos compartidos van solos y primero.
 
 ### 🎚️ Un nivel por subtarea, en cuatro familias de modelos
 Criterio a Opus 5, ejecuciones largas sin supervisión a Fable 5, implementación de volumen a Sonnet 5 y tareas rutinarias cerradas a Haiku 4.5, con el nivel equivalente nombrado también para los entornos Gemini, Codex y Kimi. El nivel de esfuerzo se fija junto al modelo, no se deja por defecto.

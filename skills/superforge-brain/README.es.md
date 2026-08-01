@@ -44,7 +44,7 @@ Durante el barrido no se poda nada. La deduplicación y la puntuación llegan de
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 📋 «Lo hemos visto todo» se convierte en un número
 Elemento × técnica × submétodo es una fila del registro, y el estado avanza en un solo sentido: `todo → generada → sobrevive/descartada → desarrollada → juzgada`. Terminado significa *cero filas en `todo`*. Una celda saltada no puede convertirse discretamente en una celda que nunca existió.

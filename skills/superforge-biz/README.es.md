@@ -38,7 +38,10 @@ El arquetipo se deduce de la forma del producto, nunca al revés.
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### ⏳ Cuando lo que vendes es capacidad, el techo es aritmética
+El techo de un producto es el mercado; el de un servicio es horas disponibles × tarifa × ocupación, y es más bajo de lo que parece. El verdadero entregable es la frase que define el alcance — artefactos, número de revisiones, exclusiones **y una condición de fin**, porque un proyecto sin final definido no termina. El mayor motor de pérdidas no es cobrar poco, sino el scope creep; y un cliente que supera el 50% de los ingresos no es un cliente, es un empleador.
 
 ### 🚦 Una puerta antes de la página de precios
 Antes de todo esto, una pregunta: ¿este mercado sostiene el negocio siquiera? El TAM se calcula **siempre en las dos direcciones**, de arriba abajo y de abajo arriba, porque un número calculado en un solo sentido no puede verse equivocado, y **la diferencia entre ambos es el hallazgo**. Cada dato lleva su nivel de confianza (medido / publicado / derivado / supuesto), y una conclusión apoyada en un supuesto se etiqueta como hipótesis en vez de presentarse como resultado.

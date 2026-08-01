@@ -34,7 +34,13 @@ La consulta va antes que las hipótesis. El registro va después de la verificac
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### 🗂️ La memoria es un archivo del repositorio, no una herramienta que quizá no tengas
+`docs/failforward.md`, versionado, solo se añade, y se lee antes de formular cualquier hipótesis. Lo que paga no es el arreglo: es **`Looked like`, la primera sospecha equivocada**, porque esa se repite. Cuatro informes de «consulta lenta» que resultaron ser un índice ausente te dicen dónde mirar la próxima vez, y ninguna memoria individual guarda eso de forma fiable.
+
+### 🔍 Los bugs con los que el protocolo no puede ni empezar
+«Reproducir y aislar» da por hecho que existe una reproducción, y los caros son justo aquellos en los que no. Acota qué significa «a veces» — zona horaria y locale se ven exactamente como azar desde una sola máquina. Iguala el entorno de una variable en una. Instrumenta y espera en lugar de adivinar. Y para «antes funcionaba», deja de razonar sobre el código y bisecta.
 
 ### 🧠 Primero la memoria, luego las hipótesis
 Se consulta la base de fallos antes que nada, y una lección recuperada que encaje se aplica de inmediato y se marca como útil. El esfuerzo de depuración se reserva para los problemas que aún no has resuelto una vez.

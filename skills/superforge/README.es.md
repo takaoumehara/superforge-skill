@@ -36,7 +36,7 @@ Entra una petición; sale una skill especialista, un nivel de modelo elegido y u
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🧭 Deriva en vez de preguntar
 Doce especialistas cubren idea, negocio, marca, UI, implementación, pruebas, depuración, accesibilidad, crítica, verificación, preparación para publicar y traspaso. El destino y el nivel se anuncian en una línea y el trabajo empieza. Solo se pide confirmación cuando dos caminos genuinamente distintos son igual de razonables.

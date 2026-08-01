@@ -63,7 +63,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ko.md) | 만들 가치가 있는 아이디어가 필요할 때 — 뻔하지 않은 것**과** 뻔하지만 진짜로 필요한 것 둘 다 (**BreakBias 엔진**, 또는 더 가벼운 정통 기법 중 선택) | `docs/product-idea.md` (전수 스윕이면 `.html` 지도도) |
-| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 애초에 이 시장에 들어갈 가치가 있는지. 그다음 가격, 페이월 위치, 고객을 얻는 방법, 가치를 숫자로 말하는 법 | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ko.md) | 애초에 이 시장에 들어갈 가치가 있는지. 그다음 가격, 페이월 위치, 고객을 얻는 방법, 가치를 숫자로 말하는 법, 그리고 제품이 아니라 시간을 파는 경우의 산수 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ko.md) | 이름·색·톤과, 소재를 만들어 낼 프롬프트까지 | `docs/brand.md` |
 
 ### 2. 만든다 — 실제로 만들기
@@ -71,14 +71,14 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 모델 자신의 평균이 아니라 실제 레퍼런스에서 방향을 가져오는 화면 설계. 팔기 위한 랜딩 페이지, 마음을 정한 직후의 30초(첫 실행)까지. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 작업을 나눠 여러 에이전트에 배분하고 각자 맞는 모델에 태움 | `docs/plan.md` |
+| [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 병렬로 깨지지 않게 나눈 뒤 각자 맞는 모델에 배분 | `docs/plan.md` |
 
 ### 3. 확인한다 — 망가진 데가 없는지 보기
 
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.ko.md) | 테스트를 먼저 쓰고 진행할 때 (Web / iOS / Android) | 테스트 자체 |
-| [`superforge-debug`](./skills/superforge-debug/README.ko.md) | 버그가 났고, 임시방편이 아니라 원인을 잡고 싶을 때 | 근본 원인을 해당 문서에 덧붙임 |
+| [`superforge-test`](./skills/superforge-test/README.ko.md) | 무엇이 테스트할 값어치가 있는지 정한 뒤, 테스트를 먼저 (Web / iOS / Android) | 테스트 자체 |
+| [`superforge-debug`](./skills/superforge-debug/README.ko.md) | 버그가 났고, 임시방편이 아니라 원인을 잡고 싶을 때 — 재현되지 않는 것까지 | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ko.md) | 접근성을 제대로 검사할 때 — 스캐너 하나가 아니라 일곱 개 검사로 | `docs/accessibility.md` |
 
 ### 4. 내보낸다 — 내보낼 준비하기
@@ -86,7 +86,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ko.md) | 사용자가 찾기 전에 결함을 듣고 싶을 때 | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.ko.md) | "다 됐습니다"에 증거를 붙여야 할 때 | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.ko.md) | "다 됐습니다"에 등급이 붙은 증거와 「확인하지 않은 것」을 함께 붙여야 할 때 | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.ko.md) | 돌아가는 건 알겠고 — 출시해도 되는가? 법적 의무, 심사에서 거절되는 진짜 이유, 나중에 못 채우는 계측 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ko.md) | 세션을 지우기 전, 도구를 바꾸기 전 | `.handoff/` |
 
@@ -216,6 +216,7 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO 관문 — TAM을 양방향으로 계산하기, 수치별 신뢰 등급, 애초에 고객이 몇 명 필요한가 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 앵커링·손실 회피·기본값, 증상으로 찾는 색인, 그리고 각각의 윤리적 선 |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 채널 적합도, 리드 마그넷, 적합도×의도 선별, CAC/LTV 계산 |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | 제품이 아니라 시간을 파는 경우 — 산술로 정해지는 매출 상한, 범위가 곧 산출물, 범위 확장은 삼키지 말고 값을 매기기, 자문료, 고객 집중도 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 어떤 기능이든 정량화해 논리→감정 순서의 비즈니스 피치로 바꾸기 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 설계 단계, 네 가지 데이터 상태, 품질 체크리스트 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 명세 |
@@ -233,7 +234,11 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 각 도구가 잡는 것과 확실히 놓치는 것, 그리고 CI 연결 |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, Compose semantics, Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 유럽 접근성법 / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, 적합 선언 |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | 병렬로 깨지지 않게 나누는 법 — 작업 하나에 결과 하나와 증명 명령, 건드릴 파일 목록 규칙, 절대 병렬로 두면 안 되는 조합, 실패하면 먼저 되돌리기 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 무인 실행의 전제, 루프를 도는 방식, 혼자 정해도 되는 범위 |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 무엇이 테스트할 값어치가 있고 무엇이 없는가. 단위/통합/E2E 비용 사다리, 목의 경계, 취약한 테스트의 증상, 테스트가 없는 코드에 넣는 순서 |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 증거의 네 등급과, 보고서에 「단언」이 섞이면 안 되는 이유. 「됐다」와 「어쩌다 됐다」의 차이, 악의 없이 증거가 위조되는 일곱 가지 |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 실패의 기억을 어디에 두는가, 값을 하는 건 `Looked like` 한 줄. 재현되지 않을 때의 절차, 「전에는 됐다」의 이분 탐색, 멈출 때 |
 
 ---
 

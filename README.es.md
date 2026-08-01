@@ -63,7 +63,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.es.md) | quieres una idea que merezca construirse — la no obvia **y** la corriente pero necesaria (**motor BreakBias**, o un método clásico más ligero, a elegir) | `docs/product-idea.md` (+ mapa `.html` en un barrido completo) |
-| [`superforge-biz`](./skills/superforge-biz/README.es.md) | si merece la pena entrar en este mercado; y después precio, paywall, cómo conseguir clientes y un pitch que cuantifique el valor | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.es.md) | si merece la pena entrar en este mercado; y después precio, paywall, cómo conseguir clientes, un pitch que cuantifique el valor, y la aritmética de vender capacidad en vez de un producto | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.es.md) | nombre, color, tono, y los prompts que generan los recursos | `docs/brand.md` |
 
 ### 2. Construir — hacerlo real
@@ -71,14 +71,14 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz que parte de una referencia real en vez del promedio del propio modelo, landing pages hechas para vender, y los primeros treinta segundos tras decidirse, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.es.md) | implementación: repartir el trabajo entre agentes, cada uno en su modelo | `docs/plan.md` |
+| [`superforge-dev`](./skills/superforge-dev/README.es.md) | implementación: dividir el trabajo para que el paralelo no rompa, y repartirlo entre modelos adecuados | `docs/plan.md` |
 
 ### 3. Probar — comprobar que nada falla
 
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.es.md) | escribir la prueba antes que el código (Web / iOS / Android) | las pruebas |
-| [`superforge-debug`](./skills/superforge-debug/README.es.md) | apareció un bug y quieres la causa, no un parche encima | la causa raíz, añadida al documento correspondiente |
+| [`superforge-test`](./skills/superforge-test/README.es.md) | decidir qué merece una prueba, y escribirla antes que el código (Web / iOS / Android) | las pruebas |
+| [`superforge-debug`](./skills/superforge-debug/README.es.md) | apareció un bug y quieres la causa, no un parche encima — incluidos los que no se reproducen | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.es.md) | accesibilidad comprobada en serio: siete pasadas, no un escáner | `docs/accessibility.md` |
 
 ### 4. Publicar — dejarlo listo para salir
@@ -86,7 +86,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.es.md) | quieres oír los fallos antes de que los encuentren tus usuarios | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.es.md) | «está listo» necesita pruebas adjuntas | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.es.md) | «está listo» necesita pruebas adjuntas, graduadas, y honestidad sobre lo que no se comprobó | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.es.md) | funciona — pero ¿podéis publicarlo? obligaciones legales, rechazos de tienda, medición que no se puede añadir después | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.es.md) | antes de borrar una sesión o cambiar de herramienta | `.handoff/` |
 
@@ -216,6 +216,7 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | la puerta GO/NO-GO — el TAM calculado en ambas direcciones, niveles de confianza, cuántos clientes hacen falta de verdad |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anclaje, aversión a la pérdida, opciones por defecto, el índice por síntoma y su línea ética |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | encaje canal-mercado, imanes de leads, cualificación por ajuste×intención, matemática de CAC/LTV |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | cuando lo que se vende es capacidad — el techo de ingresos que sale de la aritmética, el alcance como el verdadero entregable, el scope creep con precio en vez de absorbido, retainers, concentración de clientes |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | convertir cualquier función en un pitch de negocio cuantificado, lógica y luego emoción |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | los pasos de diseño, los cuatro estados de datos, la lista de calidad |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | la especificación de `design.md` + `design.html` |
@@ -233,7 +234,11 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | qué detecta cada herramienta, qué se le escapa con certeza, y el enganche a CI |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, semantics de Compose, Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | EAA / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, declaraciones de conformidad |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | cómo dividir para que el paralelo no rompa — un resultado y una línea de prueba por tarea, la regla de la lista de archivos, lo que nunca puede ir en paralelo, revertir antes de reintentar |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | condiciones previas, el bucle, qué se puede decidir en solitario |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | qué merece una prueba y qué no, la escalera de coste unitario/integración/E2E, el límite del mocking, síntomas de una prueba frágil, cómo añadir pruebas a código que no tiene |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | los cuatro grados de prueba y por qué un informe no puede contener una afirmación sin respaldo, «funcionó» frente a «funcionó de casualidad», las siete formas de falsear evidencia sin querer |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | dónde vive la memoria de fallos y por qué la línea `Looked like` es la que paga, qué hacer cuando no se reproduce, bisecar «antes funcionaba», cuándo parar |
 
 ---
 

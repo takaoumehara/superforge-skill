@@ -63,7 +63,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要值得做的点子——不落俗套的**和**平凡但被真正需要的（**BreakBias 引擎**，也可以选更轻的经典方法） | `docs/product-idea.md`（彻底扫描时还有 `.html` 地图） |
-| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 这个市场究竟值不值得进；然后是定价、付费墙位置、怎么获客、把价值讲成数字 | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 这个市场究竟值不值得进；然后是定价、付费墙位置、怎么获客、把价值讲成数字，以及卖产能而非产品时的那笔账 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.zh-CN.md) | 名字、配色、语气，外加生成素材的提示词 | `docs/brand.md` |
 
 ### 2. 做 —— 把它做出来
@@ -71,14 +71,14 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计——方向来自真实参考而不是模型自己的平均值；也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：把活儿拆开分给多个 agent，各配合适的模型 | `docs/plan.md` |
+| [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：先拆得让并行不会出事，再把每块分给合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先写测试再动手（Web / iOS / Android） | 测试本身 |
-| [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁 | 根因追加到对应文档 |
+| [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先定什么值得测，再先写测试（Web / iOS / Android） | 测试本身 |
+| [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁，包括复现不了的那些 | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.zh-CN.md) | 认真做无障碍检查——七道检查，不是一个扫描器 | `docs/accessibility.md` |
 
 ### 4. 出 —— 准备见人
@@ -86,7 +86,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.zh-CN.md) | 想在用户发现之前，先听到毛病 | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.zh-CN.md) | 「做完了」需要带证据 | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.zh-CN.md) | 「做完了」需要带上分级的证据，以及诚实写下没查什么 | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.zh-CN.md) | 能跑了——但可以发布吗？法律义务、审核被拒的真正原因、事后补不回来的度量 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.zh-CN.md) | 清掉会话或换工具之前 | `.handoff/` |
 
@@ -216,6 +216,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO 闸门——TAM 双向计算、每个数字的可信度分级、到底需要多少客户 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 锚定、损失厌恶、默认选项、按症状查的索引，以及各自的伦理边界 |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 渠道契合、引流磁石、匹配度×意向度筛选、CAC/LTV 算法 |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | 当卖的是产能而非产品 — 由工时算出的收入天花板、范围就是交付物、范围蔓延要标价而不是自己吞、顾问费、客户集中度 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 把任何功能变成量化的、先数字后情感的商业话术 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
@@ -233,7 +234,11 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各工具能查到什么、确定查不到什么，以及 CI 接法 |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧盟无障碍法案 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、合规声明 |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | 怎样拆分才能安全并行 — 每个任务一个结果加一条验证命令、列出会写入的文件、绝不可并行的组合、失败先回滚再重试 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 无人值守的前提、循环方式、可以自行拍板的范围 |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 什么值得测、什么不值得。单元/集成/E2E 的成本阶梯、mock 的边界、脆弱测试的症状、给没有测试的代码补测试 |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 证据的四个等级，以及报告里为何不能出现「断言」。「能用」和「碰巧能用」的区别，七种无意间造假的证据 |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失败记忆放在哪里，真正有价值的是 `Looked like` 那一行。复现不了时怎么办、用二分查找定位「以前是好的」、何时该停 |
 
 ---
 

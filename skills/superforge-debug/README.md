@@ -36,6 +36,12 @@ Recall comes before hypotheses. Recording comes after verification, not instead 
 
 ## ✨ Features
 
+### 🗂️ The memory is a file in the repository, not a tool you might not have
+`docs/failforward.md`, committed, append-only, read before forming any hypothesis. The field that pays is not the fix — it is **`Looked like`, the wrong first guess**, because those repeat. Four "slow query" reports that turned out to be a missing index tell you where to look next, and no individual's memory holds that reliably.
+
+### 🔍 The bugs the protocol cannot start on
+"Reproduce and isolate" assumes a reproduction exists, and the expensive bugs are the ones where it does not. Narrow what "sometimes" means — timezone and locale look exactly like randomness from one machine. Match the environment one variable at a time. Instrument and wait rather than guess. And for "it used to work", stop reasoning about the code and bisect.
+
 ### 🧠 Memory before hypotheses
 The failure database is queried first, and a recalled lesson that matches is applied immediately and marked as useful. Debugging effort goes to problems you have not already solved once.
 

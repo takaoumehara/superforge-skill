@@ -36,6 +36,9 @@ Every arrow is a gate. Failing one sends the work back, not forward.
 
 ## ✨ Features
 
+### 🏅 Evidence is graded, and an assertion is never enough
+Reproducible, observed, derived, asserted. A conclusion must name the command or capture it rests on, and **a verification report may not contain a single assertion.** The quiet failure this catches is a conclusion written in the confident tone of a measurement: "mobile layout verified" is not evidence — "screenshot at 375px, attached" is. And `## 確認していないこと` is a required section.
+
 ### 🚦 A gate, not a checklist you can skim past
 Zero test failures, zero TypeScript, Swift, or Kotlin compilation errors, zero linter warnings. Not "mostly passing" — the numbers are read from the output, not estimated from a glance at the diff.
 

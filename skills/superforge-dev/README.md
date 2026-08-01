@@ -38,6 +38,9 @@ Nothing is accepted from a subagent on its own word: tests run and diffs are rea
 
 ## ✨ Features
 
+### 🧱 A split where parallel is provably safe
+Topology and model tier cannot rescue a bad split, and a bad split is where unattended runs actually fail. Every task names one outcome, a proof line, and **the files it will write** — because the rule is *two tasks may run in parallel only if those file sets do not intersect.* Not "probably fine": listed, and disjoint. Shared foundations run alone and first.
+
 ### 🎚️ A tier per subtask, across four model families
 Judgment to Opus 5, unattended long runs to Fable 5, volume implementation to Sonnet 5, routine closed tasks to Haiku 4.5 — with the equivalent tier named for Gemini, Codex, and Kimi environments too. Effort level is set alongside the model, not left at the default.
 

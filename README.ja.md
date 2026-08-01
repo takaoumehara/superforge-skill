@@ -63,7 +63,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ja.md) | 作る価値のあるアイデアが欲しい。ありきたりじゃない案**も**、ありきたりだけど必要とされる案**も**（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
-| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか。プロダクトではなく稼働を売る場合の算数も | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
 
 ### 2. 作る — 形にする
@@ -71,14 +71,14 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。モデルの平均値からではなく実在の参照から方向性を取る。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。作業を分けて複数のAIに配り、それぞれに合うモデルを割り当てる | `docs/plan.md` |
+| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。並列で壊れないように作業を分け、それぞれに合うモデルへ配る | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.ja.md) | テストを先に書いて進めたい（Web / iOS / Android） | テスト本体 |
-| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい | 原因を該当ドキュメントに追記 |
+| [`superforge-test`](./skills/superforge-test/README.ja.md) | 何をテストする価値があるかを決めてから、テストを先に書く（Web / iOS / Android） | テスト本体 |
+| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい。再現しないバグも含めて | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ja.md) | アクセシビリティをきちんと検査したい。ツール1本ではなく7つの検査で | `docs/accessibility.md` |
 
 ### 4. 出す — 世に出す準備をする
@@ -86,7 +86,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出す前に、忖度なしでダメ出ししてほしい | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、本当に動くか証拠つきで確認したい | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、等級つきの証拠と「確認していないこと」を添えて確認したい | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.ja.md) | 動くのはわかった。では出していいのか。法務の義務・審査で落ちる理由・後から取れない計測 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | セッションを消す前・別のツールに乗り換える前に引き継ぎたい | `.handoff/` |
 
@@ -215,6 +215,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO ゲート——TAMを両方向から計算する、数値ごとの確度、そもそも何人の顧客が必要なのか |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値、症状から引く索引、そしてそれぞれの倫理的な線引き |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | チャネル適合・リードマグネット・適合度×熱意の選別・CAC/LTV計算 |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | 受託・エージェンシーの型 — 稼働時間で決まる売上の天井、スコープこそが成果物、スコープクリープは飲まずに値段をつける、顧問料、顧客集中 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | どんな機能も定量化し、論理→感情の順で語るビジネスピッチに変える |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
@@ -232,7 +233,11 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各ツールが拾えるもの・拾えないことが確定しているもの、CI への組み込み |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧州アクセシビリティ法 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、適合宣言 |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | 並列で壊れない分け方 — 1タスク1成果と証明コマンド、触るファイルを列挙する規則、絶対に並列にしてはいけない組み合わせ、失敗時はまず戻す |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、ループの回し方、独断で決めてよい範囲 |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 何をテストする価値があり、何にはないか。単体/結合/E2Eのコスト階段、モックの境界、壊れやすいテストの症状、テストが無いコードへの入れ方 |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 証拠の4等級と、報告書に「断言」を混ぜてはいけない理由。「動いた」と「たまたま動いた」の違い、悪意なく証拠が偽装される7つの型 |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失敗の記憶をどこに置くか、効くのは `Looked like` の行。再現しないときの手順、「前は動いた」の二分探索、やめどきの判断 |
 
 ---
 

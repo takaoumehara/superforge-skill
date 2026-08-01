@@ -3,15 +3,18 @@ name: superforge-dev
 description: >
   Build multi-component features by decomposing the work and dispatching
   subagents, assigning a model tier per subtask across Claude 5, Gemini 3.6,
-  Codex, and Kimi. Proposes Subagents versus Agent Teams topology by task
+  Codex, and Kimi. Splits work into tasks that each have one outcome, a proof
+  line, and a listed set of files — so parallel safety is decidable rather than
+  hoped for — and proposes Subagents versus Agent Teams topology by task
   complexity and token cost. Use when the user says "implement", "build this
   feature", "execute the plan", "in parallel", "dispatch agents", "subagents",
-  "which model should", "実装して", "作って", "並列で", "サブエージェント",
-  "プランを実行", "どのモデルで", or runs /superforge-dev.
+  "split this up", "which model should", "実装して", "作って", "並列で",
+  "サブエージェント", "タスクに分けて", "プランを実行", "どのモデルで",
+  or runs /superforge-dev.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "3.0"
 compatibility: >
   Standalone.
   Reads and writes docs/plan.md.
@@ -21,6 +24,30 @@ compatibility: >
 # Superforge Dev — Multi-Agent Building & Model Tiering Engine
 
 Use this skill when implementing multi-component features, executing complex build plans, or dispatching subagents. It ensures optimal model tiering and agent topology selection.
+
+---
+
+## 0. Split the work before choosing anything else
+
+Topology and model tier are decisions about *how* to run tasks. They cannot
+rescue a bad split, and a bad split is where unattended runs actually fail —
+agents that conflict, duplicate, or wait.
+
+A task is well-formed only when it has **one outcome, a proof line, a listed set
+of files it will touch, and no question left to ask.** The file list is not
+bookkeeping; it is what makes the next rule decidable:
+
+> **Two tasks may run in parallel only if the set of files they write does not
+> intersect.** Not "probably do not conflict" — listed, and disjoint.
+
+Shared foundations — schema, shared types, design tokens, the route table, a
+dependency upgrade, any rename — run **alone and first**, then fan out. Most
+failed parallel runs are one of those done concurrently with its dependants.
+
+The never-parallel table, how to find the dependencies a file list cannot show,
+how much context to hand each agent (both too little and too much fail, in
+different ways), what to do when a subtask fails — **revert before retry** — and
+when not to split at all → **`references/decomposition.md`**.
 
 ---
 
@@ -61,16 +88,26 @@ Before dispatching, evaluate and **explicitly notify the user** of the recommend
 
 ## Deeper reference
 
+**`references/decomposition.md`** — the unit of a task and the two smells that
+say it is not one yet, the parallel-safety rule and the never-parallel table,
+finding the dependencies a file list cannot show (signatures, fixtures,
+migration order), what to hand each agent and the boundary to state explicitly,
+the subtask-failure table, and when splitting costs more than it saves.
+
 **`references/autonomous-run.md`** — preconditions for an unattended run, the
 build/review/prove/repair loop, what to decide alone versus what must stop the
 run, and the morning report format. Read it before any long or overnight run.
 
+Split first, then run: `decomposition.md` produces the task list that
+`autonomous-run.md` executes.
+
 ## Artifact
 
 Write and maintain `docs/plan.md`: checkbox tasks, each with a **proof line**
-naming the command or observation that shows it is done. Tick the box and
-append to the progress log after every task, then write the file. A run that
-dies at task 7 must resume at task 8 from disk alone.
+naming the command or observation that shows it is done, **the files it may
+write**, and the wave it belongs to. Tick the box and append to the progress log
+after every task, then write the file. A run that dies at task 7 must resume at
+task 8 from disk alone.
 
 ## Running to the end
 

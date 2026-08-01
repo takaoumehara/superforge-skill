@@ -33,7 +33,7 @@ Las decisiones de color y tipografía pasan a `superforge-ui`, que las convierte
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🎭 Tres adjetivos ante los que responde todo lo demás
 La personalidad visual se fija en exactamente tres palabras, y cada decisión posterior — paleta, pareja tipográfica, tono de voz — tiene que poder defenderse frente a ellas. Con tres adjetivos se puede discutir; con un mood board no.

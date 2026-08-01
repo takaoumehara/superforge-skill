@@ -37,7 +37,7 @@ Los hallazgos se agrupan por causa y no por pantalla, porque cinco síntomas de 
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🚫 El cumplido está prohibido, no solo desaconsejado
 Ni elogio de apertura, ni cláusula que suavice, ni conformidad cortés con una decisión que no aguanta un examen. La amabilidad que un modelo trae de fábrica es justo lo que vuelve inútil su opinión antes de un lanzamiento.

@@ -63,7 +63,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea worth building — the non-obvious one **and** the ordinary-but-needed one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
-| [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, and a pitch that quantifies the value | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, a pitch that quantifies the value, and the arithmetic of a business that sells capacity rather than a product | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
 
 ### 2. Build — make it real
@@ -71,14 +71,14 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.md) | interface design that starts from a real reference instead of the model's own average, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work across agents, each on a fitting model | `docs/plan.md` |
+| [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work so parallel is safe, then dispatch each piece to a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.md) | write the test first (Web / iOS / Android) | the tests |
-| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it | root cause appended to the relevant doc |
+| [`superforge-test`](./skills/superforge-test/README.md) | decide what earns a test, then write it first (Web / iOS / Android) | the tests |
+| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it — including the ones that will not reproduce | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.md) | accessibility, checked properly — seven passes, not one scanner | `docs/accessibility.md` |
 
 ### 4. Ship — get it out the door
@@ -86,7 +86,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.md) | you want the flaws named before your users find them | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached, graded, and honest about what was not checked | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.md) | it works — but are you allowed to release it? legal obligations, store rejections, measurement you cannot add later | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | before clearing a session or switching tools | `.handoff/` |
 
@@ -216,6 +216,7 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | the GO/NO-GO gate — TAM computed both ways, confidence tiers, how many customers this actually needs |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, the symptom index, and the ethical line on each |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | channel-market fit, lead magnets, fit×intent qualification, CAC/LTV math, minimum viable scale per tactic |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | when the business sells capacity — the arithmetic revenue ceiling, scope as the real deliverable, scope creep priced rather than absorbed, retainers, client concentration |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | turning any feature into a quantified, logic-then-emotion business pitch |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
@@ -233,7 +234,11 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | what each tool catches, what it provably misses, and the CI wiring |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, Compose semantics, Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | EAA / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, conformance claims |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | splitting work so parallel is safe — one outcome and a proof line per task, the file-list rule, what may never run in parallel, revert before retry |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the loop, what may be decided alone |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | what earns a test and what does not, the unit/integration/E2E cost ladder, the mocking boundary, brittle-test symptoms, adding tests to code that has none |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | the four grades of proof and why a report may not contain an assertion, "it worked" vs "it happened to work", the seven ways evidence gets faked unintentionally |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | where the failure memory lives and why `Looked like` is the field that pays, what to do when it will not reproduce, bisecting "it used to work", when to stop |
 
 ---
 

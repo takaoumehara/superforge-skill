@@ -52,6 +52,7 @@ the file's own header block:
 | accessibility.md | draft | 2026-07-29 | 3 criteria not assessed |
 | verification.md | — | — | **not run yet** |
 | ship-readiness.md | — | — | **not run yet** |
+| failforward.md | 6 entries | 2026-07-31 | 1 mitigation, cause still unknown |
 ```
 
 Three rules that make this worth writing:
@@ -65,6 +66,10 @@ Three rules that make this worth writing:
 - **Carry every `## Open questions` section forward.** Those are exactly the
   decisions an unattended run is allowed to make with a logged default —
   losing them means the next session either re-asks or re-decides silently.
+- **`failforward.md` is the one row that is a count, not a status.** Note the
+  number of entries and, specifically, any mitigation shipped without a root
+  cause — an open failure the next session would otherwise rediscover the hard
+  way.
 
 The capsule **points at** these files rather than restating them. That is what
 keeps it under 80 lines while losing nothing.

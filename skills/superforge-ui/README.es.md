@@ -34,7 +34,7 @@ Si editas uno de los artefactos, el otro se regenera en el mismo turno. Nunca se
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🎛️ Siete estados antes de dar un componente por terminado
 Default, hover, focus, active, disabled, loading y error se especifican uno a uno, incluidos el anillo de foco de teclado y la salida desde el estado de error. «En reposo se ve bien» no es un componente terminado.

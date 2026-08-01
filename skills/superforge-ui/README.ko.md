@@ -34,7 +34,7 @@ flowchart TD
 
 ---
 
-## ✨ 3가지 강점
+## ✨ 강점
 
 ### 🎛️ 일곱 가지 상태가 갖춰져야 컴포넌트가 끝납니다
 Default, hover, focus, active, disabled, loading, error를 하나씩 명세합니다. 키보드 포커스 링과 오류 상태에서 빠져나오는 경로까지 포함합니다. "가만히 있을 때 보기 좋다"는 완성이 아닙니다.

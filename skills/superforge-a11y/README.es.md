@@ -39,7 +39,7 @@ Cada comprobación existe porque las anteriores, por su propia estructura, no pu
 
 ---
 
-## ✨ Cinco puntos fuertes
+## ✨ Puntos clave
 
 ### 🚫 De un escáner no sale una declaración de conformidad
 Si alguna comprobación no se ejecutó, la skill no declara conformidad. «Sin evaluar» es un resultado honesto y aparece en el informe tal cual. Lo que nunca hará es deducir el verde de la ausencia de errores — que es exactamente por donde una declaración de accesibilidad se convierte en un problema legal.

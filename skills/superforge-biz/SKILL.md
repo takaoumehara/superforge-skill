@@ -2,26 +2,23 @@
 name: superforge-biz
 description: >
   Decide whether a market is worth entering, then architect the business model
-  on top of it — pricing tiers, paywall placement, subscription flows, customer
-  acquisition, and Go-To-Market. Opens with a GO/NO-GO gate: TAM/SAM/SOM
-  computed in both directions, confidence tiers on every input, and the reverse
-  calculation that asks how many customers this needs and whether you can reach
-  that many. Then monetization archetype selection, price anchoring,
-  trial-to-paid triggers, growth loops, channel-market fit, minimum viable
-  scale per tactic, and quantifying any feature's business value (time saved,
-  cost avoided, revenue captured, risk reduced) as a logic-and-emotion pitch
-  instead of a vague adjective. Use when the user says "pricing",
-  "monetization", "paywall", "subscription", "free trial", "business model",
-  "revenue", "GTM", "how do we make money", "market size", "TAM", "is this
-  worth building", "lead generation", "customer acquisition", "marketing",
-  "ROI", "value proposition", "価格", "値付け", "課金", "マネタイズ",
-  "サブスク", "ペイウォール", "ビジネスモデル", "どう収益化する", "市場規模",
-  "儲かるのか", "作る価値があるか", "リード獲得", "顧客獲得", "マーケティング",
-  "ビジネス視点", or runs /superforge-biz.
+  on top of it. Opens with a GO/NO-GO gate: TAM/SAM/SOM computed both ways,
+  confidence tiers on every input, and the reverse calculation that asks how
+  many customers this needs and whether you can reach that many. Then
+  monetization archetype, price anchoring, paywall placement, growth loops,
+  channel-market fit, minimum viable scale per tactic, and quantifying value
+  (time saved, cost avoided, revenue captured) as a pitch instead of an
+  adjective. Also covers selling capacity rather than a product — the revenue
+  ceiling, scope as the deliverable, retainers, client concentration — and the
+  legality of outreach. Use when the user says "pricing", "monetization",
+  "paywall", "subscription", "business model", "revenue", "GTM", "market size",
+  "TAM", "worth building", "customer acquisition", "agency", "retainer", "cold
+  email", "価格", "課金", "マネタイズ", "ビジネスモデル", "市場規模",
+  "儲かるのか", "顧客獲得", "受託", "見積もり", or runs /superforge-biz.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "4.0"
 compatibility: >
   Standalone.
   Reads docs/product-idea.md and docs/brief.md when present, writes docs/business-model.md.
@@ -112,6 +109,24 @@ the channel-market-fit matrix, and the first-10-customers playbook (when
 there's no case study yet to make a scalable channel credible) →
 **`references/customer-acquisition.md`**.
 
+## 4b. When the business sells capacity, not a product
+
+§1–§3 assume a product: build once, sell many times. A service business — 受託,
+an agency, a retainer, consulting — inverts that, and it is the most common way
+an indie maker funds a product. Its revenue ceiling is **arithmetic**
+(稼働可能時間 × 単価 × 稼働率), not a market, and it is lower than it feels.
+Compute it before advising a revenue target the equation forbids.
+
+Three things decide whether it works, and none of them are in §1–§3: **the scope
+sentence is the product** (artifacts, revision count, exclusions, and an end
+condition — a project with no defined end does not end); **scope creep, not
+underpricing, is the largest loss driver**, and the fix is to price every
+out-of-scope request out loud rather than absorb it; and **one client above 50%
+of revenue is an employer, not a customer.** Full model, including project
+versus retainer, the three conditions that must all hold before pricing on
+outcome instead of time, and the bridge from a service ceiling to a product →
+**`references/service-business.md`**.
+
 ## 5. The Value Pitch — quantify it, or it's an adjective
 
 "良いオートメーションがあります" is a spec sheet, not a pitch. Every value claim
@@ -141,7 +156,14 @@ recommended tactics this suite deliberately does not use.
 
 **`references/customer-acquisition.md`** — channel-market fit, lead magnets,
 fit×intent qualification, CAC/LTV sanity math, minimum viable scale per tactic,
-and the first-10-customers playbook.
+the first-10-customers playbook, and the legality of outreach (§8 — the rule
+follows the recipient's location, and scraped lists cost the sending domain
+more than they ever return).
+
+**`references/service-business.md`** — the revenue ceiling and the only four
+levers that raise it, scope as the actual deliverable, scope creep priced
+rather than absorbed, project versus retainer, client concentration thresholds,
+and when pricing may move off time.
 
 **`references/value-pitch.md`** — the four value levers and their formulas,
 the logic-then-emotion pitch structure, the credibility checklist, and the
@@ -156,7 +178,9 @@ verdict code (from `references/market-sizing.md`) — a pricing model written
 above an unstated NO-GO is the most expensive document in the repository. Then
 include an `## Acquisition plan` section (from §4) and a `## Value pitch`
 section (from §5): a business model with a price but no way to reach or
-convince a customer is only half the artifact.
+convince a customer is only half the artifact. When the business sells capacity
+rather than a product, add a `## Service model` section (from §4b) carrying the
+ceiling, the scope shape, and the concentration number.
 
 If `superforge-brain` ran, its quadrant travels with the idea. A **Workhorse**
 arriving here needs §0 pointed at the win-path code rather than at novelty; a

@@ -34,7 +34,7 @@ flowchart TD
 
 ---
 
-## ✨ 三大亮点
+## ✨ 亮点
 
 ### 🎛️ 七个状态齐了，组件才算做完
 Default、Hover、Focus、Active、Disabled、Loading、Error 逐一写清楚，包括键盘焦点环和从错误状态返回的路径。"静止时看着不错"不等于组件完成。

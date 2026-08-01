@@ -3,15 +3,18 @@ name: superforge-verify
 description: >
   Gate that blocks any completion claim until there is empirical runtime
   evidence — the test suite actually run, both mobile and desktop viewports
-  checked, and native iOS or Android simulator runs confirmed. Use before
-  saying a task is done, fixed, or shipped. Use when the user says "is it
-  done", "did it work", "verify", "double check", "are you sure", "before we
-  ship", "確認して", "検証して", "本当に動く", "終わった", "動作確認",
-  or runs /superforge-verify.
+  checked, and native iOS or Android simulator runs confirmed. Grades every
+  piece of evidence (reproducible / observed / derived / asserted) and forbids
+  a report that rests on assertion, separates "it worked" from "it happened to
+  work" by re-running cold, and names the seven ways evidence gets faked without
+  anyone intending to. Use before saying a task is done, fixed, or shipped. Use
+  when the user says "is it done", "did it work", "verify", "double check",
+  "are you sure", "before we ship", "proof", "確認して", "検証して", "本当に動く",
+  "終わった", "動作確認", "証拠", or runs /superforge-verify.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "3.0"
 compatibility: >
   Standalone.
   Requires the project's own build and test commands.
@@ -21,6 +24,29 @@ compatibility: >
 # Superforge Verify — Pre-Completion Verification Gateway
 
 NEVER claim a task is resolved, a bug is fixed, or a feature is complete without gathering empirical runtime proof of success.
+
+---
+
+## 0. Know which grade of evidence you are holding
+
+"Paste the real output" is the right rule and only half a rule, because it does
+not say what makes a piece of evidence good. Evidence that looks convincing
+while proving nothing is this skill's own failure mode, one level up.
+
+| Grade | What it is |
+|---|---|
+| **A — reproducible** | A command anyone can re-run, with its output pasted and the command line above it |
+| **B — observed** | Something captured once: a screenshot at a stated viewport, a log with timestamps |
+| **C — derived** | A conclusion drawn from an A or a B — and it **must name which one** |
+| **D — asserted** | Someone says so |
+
+> **A verification report may not contain a single D.**
+
+The quiet failure to watch for is **a C written in the confident tone of an A**.
+"Mobile layout verified" is a conclusion; "screenshot at 375px, attached" is
+evidence. What makes each grade valid, and the "it worked" versus "it happened
+to work" table (cold start is the check most often skipped and the one that
+catches the most) → **`references/evidence.md`**.
 
 ---
 
@@ -48,12 +74,29 @@ Run the three-persona flow check — 初回・急いでいる / 慣れた常用�
 懐疑的・慎重 — and report the point where each would abandon. Method detail is
 in **`skills/superforge-roast/references/evaluation-methods.md`**.
 
+---
+
+## Deeper reference
+
+**`references/evidence.md`** — the four grades and what makes each valid, the
+"it worked" versus "it happened to work" table, the seven ways evidence gets
+faked unintentionally (a green screenshot of the wrong build, a suite that
+passed because the test was skipped, a check that cannot fail, verifying the fix
+but not the bug), the extra verification owed by anything carrying someone
+else's name on it, and the report template.
+
+---
+
 ## Artifact
 
-Write `docs/verification.md`: every check, the exact command run, and its
-real output. Paste the output rather than describing it. A verification
+Write `docs/verification.md`: every check, **its grade**, the exact command run,
+and its real output. Paste the output rather than describing it. A verification
 report without evidence is an assertion, which is the thing this skill exists
 to prevent.
+
+**`## 確認していないこと` is a mandatory section** and may not be empty without a
+stated reason. A verification claiming to have checked everything has almost
+certainly not enumerated what "everything" was.
 
 It is read by **`superforge-ship`**, which treats it as a precondition — a
 missing `docs/verification.md` is a `BLOCK` there — and by
