@@ -71,7 +71,7 @@ treat any absence as "do it inline".
 | Shaders, 3D, WebGL/WebGPU, GPU-drawn effects — whether at all, and at what tier | inline — `superforge-ui/references/heavy-visuals.md`; look the current library up once the tier is decided. Implementation technique, once the tier is chosen: any installed `shader-dev`-style skill |
 | Showing several directions before committing to one | inline — `superforge-ui/references/aesthetic-direction.md` §1b |
 | Which library to actually install for a chosen effect | inline — `superforge-ui/references/toolchain.md` (dated; verify before quoting) |
-| Installations, projection, sensors, DMX/OSC/NDI, show control | **`interactive-experience-collective`** — different discipline, different tools, different economics. `superforge-ui` stops at the browser and the app bundle |
+| Sensors, projection onto surfaces, show control, DMX/OSC/NDI, permanent installations | **`interactive-experience-collective`** — the boundary is **product versus work**, not web versus installation. A browser is a normal medium for a work; a product is something people use to get something done. Different disciplines with opposite defaults (that skill's sound starts on entry; `superforge-ui`'s never starts on its own) |
 | Proposing an effect the user does not know exists | inline — `superforge-ui/references/effect-vocabulary.md` for the menu, `heavy-visuals.md` §1b for how to phrase and cost it |
 | Sound — interface feedback, generated tone, sonic identity | inline — `superforge-ui/references/sound.md`; the sonic identity itself is `superforge-brand` |
 | A ready-made DESIGN.md from a brand collection | inline — `superforge-ui/references/design-sourcing.md` §4b — read as an example, never dropped in and built against |

@@ -1,3 +1,5 @@
+<!-- volatile: 2026-08 — library and product names, their relative standing, byte-weight bands, and which graphics API is broadly available. Verify by search before quoting any of them. -->
+
 # Toolchain — the bridge from a sensation to something you can actually install
 
 `references/effect-vocabulary.md` deliberately contains no product names, so it
@@ -16,9 +18,14 @@ skill stays durable. It is the same arrangement `superforge-ship/references/
 legal-triggers.md` uses for regimes that change, and the same one
 `superforge-dev` uses for model names.
 
-**Last reviewed: 2026-08. Verify before relying on any name below.** If more
-than a year has passed, treat the categories as correct and every specific name
-as a starting point for a search, not an answer.
+**The `volatile:` comment at the top of this file names exactly which kinds of
+claim decay** — product names, relative standing, weight bands, API
+availability. **Before quoting any of them in an answer, search to confirm the
+current state.** The older the date, the less optional that is. If you quote
+without checking, say so: 「この時点の目安です」.
+
+Everything outside that list — the categories, the cost ordering, the reasoning
+— does not decay and can be used as written.
 
 ---
 
@@ -97,18 +104,28 @@ for problems:**
 
 ---
 
-## 4. Installations, projection, sensors, physical space
+## 4. Where this file's authority ends
 
-**None of the above applies.** Screens in a room, multi-projector setups,
-sensor-driven work, show control, and anything with DMX, OSC or NDI in it is a
-different discipline with different tools and a different economics.
+The boundary is **not** web versus installation. A browser is a perfectly normal
+medium for an artwork, and an installation can be a web page on a screen in a
+room. The line is what the thing is *for*:
 
-If an `interactive-experience-collective`-style skill is installed, **that is
-where this goes** — it already carries stack selection, protocol tables, GPU
-budgets per output surface, and the operations layer that permanent
-installations need. Hand over rather than improvising a worse version here.
+| | This file | An interactive-experience skill |
+|---|---|---|
+| The thing is | A **product** — someone uses it to get something done, decide something, or understand something | A **work** — the visitor is inside it, and the experience is the point |
+| Success looks like | They achieved their goal, and the craft supported that | They felt something, and stayed |
+| So an effect must | Earn its place against the task | Carry the piece |
+| Sound, for example | **Never starts on its own** (`references/sound.md`) | Often fills the space from the moment you enter — the opposite default |
 
-This file stops at the browser and the app bundle.
+**That last row is the clearest proof these are different disciplines rather
+than different scales**, and it is why the rules here should not be carried
+across in either direction.
+
+**Hand over** for: sensor-driven work, projection onto physical surfaces, show
+control, multi-machine synchronisation, anything carrying DMX / OSC / NDI,
+permanent installations and their operations, and per-output-surface GPU
+budgeting. A skill built for that already holds stack selection, protocol
+tables and the economics — improvising a worse version here helps nobody.
 
 ---
 
