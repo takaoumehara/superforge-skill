@@ -162,6 +162,25 @@ Imprime la asignación — tarea, modelo y por qué — antes de gastar nada.
 Donde sí compensa: cualquier tarea lo bastante grande como para dividirse. Cinco subagentes en los cinco niveles correctos en vez de cinco en el más caro — para eso existe todo esto.
 
 ---
+## Te pregunta el idioma una sola vez
+
+Las skills están escritas en inglés. Tú no tienes por qué estarlo.
+
+En la primera ejecución dentro de un proyecto hace una única pregunta — **con su suposición ya rellenada a partir de lo que acabas de escribir** — y después no vuelve a preguntar:
+
+```
+Conversación: español   ← deducido de cómo escribiste
+Archivos en docs/: español
+
+[1] ambos en inglés   [2] hablar en español, escribir archivos en inglés   [3] otro idioma
+```
+
+**Están separados a propósito.** Quien trabaja en español pero comparte el repositorio con gente de fuera suele querer respuestas en español y archivos en inglés, y a casi nadie se le ocurre pedirlo.
+
+La respuesta vive en `docs/superforge.md`, sobrevive a `/clear`, viaja en la cápsula de traspaso y cambia en cuanto lo digas. Si ignoras la pregunta y planteas tu tarea directamente, toma la suposición y se pone a trabajar.
+
+---
+
 ## ¿No sabes por dónde empezar?
 
 Di **`/superforge help`** (o «cómo se usa esto»). Imprime un resumen corto y un menú numerado, y ahí se detiene — una sección cada vez, no un muro de texto:

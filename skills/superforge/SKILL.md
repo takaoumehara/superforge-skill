@@ -12,8 +12,10 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "4.0"
 compatibility: >
+  Asks the conversation and artifact language once on first run, then writes
+  docs/superforge.md and never asks again.
   Standalone. Reads and writes docs/ in the project root when present.
   Delegates to installed superforge-* skills and to other installed skills when
   available; falls back to doing the work inline when they are absent.
@@ -26,6 +28,51 @@ compatibility: >
 Routes the work, assigns the model tier, keeps the artifacts. The specialist
 skills own their craft; this skill owns the order of operations and the fact
 that nothing gets lost between them.
+
+---
+
+## 0. First run — ask once, then never again
+
+**This suite is written in English. The person using it may not be.**
+
+On the **first** invocation in a project, before anything else: check whether
+`docs/superforge.md` exists. If it does, read the language settings and follow
+them silently — never ask again.
+
+If it does not exist, and the request is substantial enough to be worth a
+setting (skip this entirely for a one-off question or a two-line fix), ask
+**one** question with your inference already filled in:
+
+```markdown
+初回だけ確認させてください。（このスキル一式は英語で書かれています）
+
+**話す言葉**: 日本語 ← あなたの書き方から推測しました
+**docs/ に残すファイルの言葉**: 日本語
+
+そのままでよければ「はい」。変えるなら番号で:
+  [1] 両方とも英語で
+  [2] 会話は日本語、ファイルは英語（海外のチームと共有する場合）
+  [3] 別の言語 — 言語名を書いてください
+
+以後は聞きません。`docs/superforge.md` に保存し、変えたくなったら
+「言語を変えて」と言ってください。
+```
+
+Four rules that keep this from being an annoyance:
+
+- **Infer first, then confirm.** The language the user just wrote in is the
+  answer nine times out of ten. Asking an open question whose answer is already
+  on screen reads as not paying attention.
+- **Ask it in the inferred language**, not in English. A question in English is
+  itself a wrong answer to "what language do you want".
+- **Offer the split.** Conversation and artifacts are genuinely different
+  choices — a Japanese maker with an international repository often wants
+  Japanese replies and English files, and no one thinks to ask for that.
+- **Never ask twice, and never block.** If the user ignores the question and
+  states their task, take the inference, record it, and get on with the work.
+
+Write the answer to `docs/superforge.md` and treat it as binding for every
+superforge skill afterwards.
 
 ---
 
@@ -119,6 +166,25 @@ the route only when the user's state is genuinely ambiguous between two very
 different paths.
 
 ## 4. Artifacts
+
+**This skill's own file is `docs/superforge.md`** — the language settings from
+§0, plus anything else the user has pinned across the whole project. It is the
+first file every other skill should honour and the last one to argue with.
+
+```markdown
+# superforge — project settings
+
+> Written by: superforge · Last updated: <YYYY-MM-DD>
+
+## Language
+会話: 日本語
+docs/ のファイル: English
+（違う場合のみ理由を1行）
+
+## Pinned by the user
+<a font, a palette, an era, a constraint — anything that outranks every
+default in this suite. See superforge-ui/references/surface-and-scope.md §4>
+```
 
 Every skill leaves a file in `docs/`. A conclusion that exists only in the
 conversation is lost at the next `/clear` → **`references/artifacts.md`**.

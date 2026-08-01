@@ -46,6 +46,7 @@ the file's own header block:
 ## docs/
 | File | Status | Last updated | Open questions |
 |---|---|---|---|
+| superforge.md | agreed | 2026-07-29 | — （会話=日本語 / ファイル=英語） |
 | product-idea.md | agreed | 2026-07-30 | none |
 | business-model.md | draft | 2026-07-31 | pricing tier 3 undecided |
 | design.md + design.html | agreed | 2026-07-31 | — |
@@ -56,8 +57,11 @@ the file's own header block:
 | failforward.md | 6 entries | 2026-07-31 | 1 mitigation, cause still unknown |
 ```
 
-Three rules that make this worth writing:
+Five rules that make this worth writing:
 
+- **`superforge.md` goes first, and its language settings travel with it.**
+  A resumed session that starts replying in the wrong language has lost
+  something the user set explicitly, and will be corrected manually every time.
 - **A file that does not exist gets a row saying so.** "verification.md — not
   run yet" is the single most useful line in the capsule, because it tells the
   next session what has *not* been proven. A missing row reads as "handled."

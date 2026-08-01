@@ -13,6 +13,7 @@ conclusion that exists only in the conversation is lost at the next
 
 | File | Written by | Read by |
 |---|---|---|
+| `docs/superforge.md` | `superforge` (first run) | **every skill, before writing anything** — carries the conversation language, the artifact language, and any project-wide preference the user pinned |
 | `docs/brief.md` | `superforge` (intake) | every skill |
 | `docs/product-idea.md` | `superforge-brain` | `superforge-biz`, `superforge-brand`, `superforge-ui`, `superforge-dev` |
 | `docs/product-idea.html` | `superforge-brain` (full sweep only) | humans only — every generated idea, killed ones included, plus the Impact×Effort, User×Company Impact, and 独創×事業 quadrant maps |
@@ -33,6 +34,11 @@ conclusion that exists only in the conversation is lost at the next
 ## Reading
 
 Before asking the user anything, check `docs/` for what is already decided.
+
+**Read `docs/superforge.md` first.** It says which language to reply in and
+which language to write files in, and those may differ. A skill that writes an
+artifact in the wrong language has not finished, it has produced work the user
+will have to redo.
 
 - If an upstream file exists, **read it and pre-fill your questions from it.**
   Confirm rather than interrogate: "brief.md によると対象は X、制約は Y。この前提で進めます。違えば言ってください。"

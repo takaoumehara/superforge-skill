@@ -162,6 +162,25 @@ Print the assignment — task, model, and why — before spending anything.
 Where it does pay: any task big enough to be split up. Five subagents on the right five tiers instead of five on the most expensive one is the whole point.
 
 ---
+## It asks for your language once
+
+The skills are written in English. You do not have to be.
+
+On the very first run in a project it asks a single question — with its guess already filled in from what you just typed — and then never asks again:
+
+```
+Conversation: 日本語   ← inferred from how you wrote
+Files in docs/: 日本語
+
+[1] both in English   [2] talk in 日本語, write files in English   [3] another language
+```
+
+**Those two are separate on purpose.** A maker working in Japanese whose repository is shared with people elsewhere usually wants Japanese replies and English files, and nobody thinks to ask for that.
+
+The answer lives in `docs/superforge.md`, survives `/clear`, travels in the handoff capsule, and changes whenever you say so. If you ignore the question and just state your task, it takes the guess and gets on with the work.
+
+---
+
 ## Not sure where to start?
 
 Say **`/superforge help`** (or just "how do I use this"). It prints a short overview and a numbered menu, then waits — one section at a time, not a wall of text:

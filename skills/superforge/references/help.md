@@ -4,6 +4,12 @@ Printed when the user asks for help, or runs `/superforge help`. **Print §1
 always. Then print only the section they picked** — the whole file at once is a
 wall nobody reads.
 
+**The blocks below are written in Japanese as a worked example, not as a
+template to copy verbatim.** Render them in whatever `docs/superforge.md` says
+the conversation language is (`SKILL.md` §0), or in the language the user just
+wrote in if that file does not exist yet. A help screen delivered in the wrong
+language is the first thing this suite would get wrong about a new user.
+
 ---
 
 ## 1. Always print this first
@@ -30,6 +36,10 @@ wall nobody reads.
   [3] できないこと — 先に知っておくべき限界
   [4] よくある勘違い
   [5] 深く使う — 成果物・自走・引き継ぎ
+
+**言語**: このスキル一式は英語で書かれていますが、返事もファイルも
+あなたの言語で出せます。初回に一度だけ聞きます。あとから変えるときは
+「言語を変えて」と言ってください（`docs/superforge.md` に保存されています）。
 ```
 
 Then stop and wait. Do not print more than one section per turn unless asked
@@ -156,6 +166,11 @@ come from the number of agents. It comes from where the tokens get processed.**
 
 **「docs/ は作業ログ」**
 違います。決定と、その理由です。会話を消しても残り、次のセッションが読みます。
+
+**「英語で書かれているから、英語で使うしかない」**
+違います。スキルの中身が英語なだけで、返事もファイルもあなたの言語で出ます。
+しかも**会話とファイルで別々に選べます**——日本語で相談しながら、海外の
+チームと共有するファイルは英語で、という指定ができます。初回に一度聞くだけです。
 ```
 
 ---
