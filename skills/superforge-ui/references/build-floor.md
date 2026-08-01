@@ -1,153 +1,162 @@
-# The Build Floor — checks on the result, not on the intention
+# The Build Floor — measured on what shipped, not on what was intended
 
-Load this **after the direction is settled and immediately before editing UI**,
-not while planning. It does not choose anything. It is the set of things that
-are true of good work regardless of direction, and the set of defaults that
-appear when a decision was skipped.
+Open this once the direction is settled and you are about to touch UI code. It
+is deliberately not a planning document: it decides nothing, and reading it
+early only produces a page that is defensible and dull.
 
-Two rules about the whole file:
+Two things govern the whole file.
 
-- **Every item is a check on the built result.** "We use a type scale" is an
-  intention; a computed line-length of 118 characters is the result. Read the
-  computed values, at real breakpoints, with the real copy.
-- **The brief outranks all of it** (`references/surface-and-scope.md` §4). A
-  user who asked for gradient text gets gradient text. What this file forbids is
-  reaching for one of these *when the axis was free* — which is not a style
-  violation, it is evidence that you were not deciding.
+**Everything here is read off the finished screen.** "We have a type scale" is a
+statement of intent. A computed line length of 118 characters is a fact. Where
+an item can be measured, measure it — at real breakpoints, with the copy that
+will actually ship.
+
+**A brief beats every line below** (`references/surface-and-scope.md` §4). If
+the user asked for gradient headlines, they get gradient headlines. What §2
+catches is reaching for one of these *while the choice was still open*, which is
+not a matter of style — it is the fingerprint of a decision that never happened.
 
 ---
 
-## 1. Verify — measurable properties of the finished screen
+## 1. Properties you can read off the result
 
-| | The floor |
+| | Where the floor sits |
 |---|---|
-| **Contrast** | Body and placeholder ≥ 4.5:1, large text and UI boundaries ≥ 3:1. **Measure it** — `superforge-a11y/scripts/contrast.py`. On a coloured surface, tint secondary text from that hue or from the foreground; never drop to grey |
-| **Line length** | Body measure 65–75 characters. Full-container width is the most common single readability failure |
-| **Type scale** | Obvious steps in size *and* weight. Display capped around 6rem. Tracking floor −0.04em, and −0.02 to −0.03em usually reads better |
-| **Spacing rhythm** | Tight within a group, generous between groups. **More space above a heading than below it** — the heading belongs to what follows |
-| **Nested radii** | Inner radius = outer radius − padding. Matching them leaves a visible wrong-looking gap |
-| **Elevation** | Declare it **once**: a border *or* a shadow. A 1px border under a wide soft shadow is the ghost card. Shadows need an offset and a soft blur; a zero-offset coloured halo is decoration |
-| **States** | Hover, focus, active, disabled, loading, error, empty — all present, with real content and working controls |
-| **No layout shift** | Reserved dimensions, `tabular-nums` on any number that changes, and **never a font-weight change on hover or selection** |
-| **Copy** | The product's own language. Controls name their action; errors name the problem *and* the recovery |
-| **Coverage** | Every requirement in the brief present, and findable in seconds |
+| **Contrast** | 4.5:1 for body and placeholders, 3:1 for large text and for the edges of controls. Compute it — `superforge-a11y/scripts/contrast.py`. Secondary text sitting on a coloured panel takes its tint from that panel's hue or from the foreground; dropping to neutral grey is what makes it look pasted on |
+| **Measure** | 65–75 characters per line of body copy. Text running the full width of its container is the most frequent readability defect there is, and the easiest to miss on a wide monitor |
+| **Type** | Steps in the scale that are obvious in both size and weight. Keep display sizes under roughly 6rem. Negative tracking bottoms out around −0.04em, and −0.02 to −0.03em is usually the better-looking end of that range |
+| **Rhythm** | Space is tighter inside a group than between groups. Give a heading more room above it than below — it introduces what comes next, so it should sit closer to it |
+| **Nested corners** | The inner radius is the outer radius minus the padding. Reuse the same value on both and a visibly wrong crescent appears in each corner |
+| **Elevation** | Pick one mechanism per element: a border, or a shadow. Both at once — a hairline outline sitting under a wide soft glow — is the tell of a card nobody decided about. Shadows need an offset as well as blur; an evenly spread coloured halo is ornament, not depth |
+| **States** | Hover, focus, active, disabled, loading, error, empty. All of them, with content that is real and controls that respond |
+| **Stability** | Nothing may move when something updates. Reserve the box, put `tabular-nums` on any figure that changes, and never let a hover or a selection swap the font weight |
+| **Words** | Written in the product's vocabulary. A control says what it will do; an error says what went wrong *and* what to do next |
+| **Completeness** | Everything the brief asked for is present, and findable in a few seconds without scrolling to hunt |
 
-**Run the real copy at every breakpoint and fix what overflows.** Lorem ipsum
-hides exactly the failures this list is for, and so does English-only copy
-(`references/internationalization.md` §1).
+Placeholder text conceals precisely the failures this table exists to catch, and
+so does testing in one language only
+(`references/internationalization.md` §1). **Load the real strings, walk every
+breakpoint, and repair whatever overflows.**
 
 ---
 
-## 2. Refuse — grouped by why the default appeared
+## 2. Patterns that mean nobody chose
 
-Neither the list nor the individual items matter as much as the cause. Each
-group has a different tell and a different fix.
+The individual items matter less than the three reasons they show up. Each
+reason has its own tell, and its own repair.
 
-### ① It is what the component library ships
+### ① The component library decided for you
 
-The page looks assembled rather than designed, because it was.
+The symptom is a page that reads as assembled rather than authored.
 
-- **Same-size cards of icon + heading + text as the page structure.** The card
-  is the lazy container. **Nested cards are always wrong**
-- **The hero-metric template** — big number, small label, supporting stats, accent
-- **A tracked uppercase eyebrow over every section.** One named kicker is a
-  system; an eyebrow everywhere is grammar you did not choose
-- **Section numbers (01 / 02 / 03)** unless the sequence itself is information
-  the reader needs
-- **A modal for a task needing neither interruption nor protected focus**
-- **Three equal columns** where one item matters more than the others
+- **A grid of equally sized cards — icon, heading, paragraph — carrying the
+  page's structure.** The card is what you reach for when the structure has not
+  been worked out. A card inside a card is never the answer to anything
+- **The metrics banner**: an oversized figure, a small caption beneath it, three
+  supporting statistics, an accent colour
+- **A spaced-out uppercase label above every single section.** Used once, as a
+  named device, it is a system. Used everywhere it is punctuation you inherited
+  rather than chose
+- **Numbered sections** where the order carries no meaning the reader needs
+- **A dialog for something that interrupts nothing and protects no focus**
+- **Three columns of equal weight** when one of the three is more important
 
-*Fix: rewrite the element, do not soften it.* A card with less shadow is still
-a card doing structural work it should not be doing.
+The repair is structural. Softening one of these — a lighter shadow on the card,
+a smaller number in the banner — leaves it doing the same job badly.
 
-### ② It is a shortcut for a feeling you did not earn
+### ② Borrowing a quality the page has not earned
 
-Each of these signals a quality the page has not actually demonstrated.
+Each of these announces a property the work has not actually demonstrated.
 
-- **Gradient text.** Emphasis comes from weight or size
-- **Glass and blur as decoration** rather than as a specific effect with a reason
-- **Monospace as a costume for "technical"** rather than for code, data, or measurement
-- **Sparklines, progress rings, and soft-shadowed rounded rectangles standing in
-  for content** that does not exist yet
-- **A coloured `border-left` above 1px** on cards, list items, callouts, alerts
-- **Generic blob-and-character illustration.** Real illustration or none —
-  sketch-style SVG scenes and `feTurbulence` grain read as amateur
-- **Backgrounds textured from nowhere.** `repeating-linear-gradient` stripes and
-  grid overlays need an actual canvas, map, blueprint, or instrument beneath them
+- **Gradients applied to type.** Emphasis is carried by weight and size
+- **Frosted panels and blur used as surface treatment** rather than to solve a
+  specific problem of depth or focus
+- **Monospaced type as shorthand for "engineering"**, in places that hold no
+  code, no data, and nothing measured
+- **Miniature charts, ring gauges, and softly shadowed rounded blocks** filling
+  space where the real content has not been written yet
+- **A thick coloured rule down the left edge** of cards, alerts, and list rows
+- **Stock character-and-blob illustration.** Commission it properly or leave it
+  out; sketch-effect SVG and generated grain filters read as a placeholder
+- **Texture with no source.** Diagonal stripe fills and grid overlays need
+  something underneath them that justifies a grid — a plan, a chart, a map, an
+  instrument face
 
-### ③ It is a value nobody chose
+### ③ A value that was never actually selected
 
-The most invisible group, and the one that separates competent from crafted.
+The quietest group, and the one that separates work that is competent from work
+that is considered.
 
-| Default | Why it looks wrong | Instead |
+| Left at the default | What goes wrong | What to do instead |
 |---|---|---|
-| `#e0e0e0` solid border in light mode | Looks pasted on | `rgba(0,0,0,0.08)` — alpha recedes into whatever is behind it |
-| `#2a2a2a` solid border in dark mode | Sits dead | `rgba(255,255,255,0.1)` — alpha lifts |
-| One large drop shadow | Reads as a sticker | Two or three stacked at different blur and opacity — that is what physical depth looks like |
-| Hover state as a hardcoded darker hex | Shifts hue unpredictably | `color-mix(in oklch, var(--c) 85%, black)` |
-| Lightness compared in HSL | HSL lightness is not perceptual — blue and yellow at 50% are visibly different | Compare in OKLCH |
-| A light tint made by lowering opacity | Goes grey and lifeless | Reduce chroma in OKLCH instead |
-| Brand colour carried straight into dark mode | Vibrates off the screen | Desaturate 20–30% |
-| Pure `#808080` as neutral | Reads as a placeholder | A neutral with a slight hue bias, chosen to sit with the palette |
-| Disabled as 40% opacity | Passes contrast on one background and fails on another | A named muted token, so it is predictable |
-| Raw hex through the codebase | Breaks the moment anything changes | Semantic tokens (`--color-border-subtle`) |
-| Success green on a product whose brand is green | Nobody can tell a primary action from a confirmation | A distinct confirmation colour |
-| Light or dark chosen by category | The category is not the user | Choose from the use scene — who, where, under what ambient light |
+| A solid light-grey hairline (`#e0e0e0`) | Sits on top of the surface instead of in it | Black at low alpha — it takes on whatever is behind it |
+| A solid dark hairline in dark mode | Disappears into the panel | White at low alpha, so the edge catches light |
+| A single wide drop shadow | Reads as a sticker on glass | Two or three shadows at different blur and opacity — real depth is layered |
+| A darker hex chosen by eye for hover | The hue drifts, usually toward purple or brown | Mix in the same colour space you authored in: `color-mix(in oklch, …)` |
+| Comparing lightness in HSL | HSL's lightness is not perceptual — 50% blue and 50% yellow are visibly unequal | Compare in OKLCH, where equal numbers look equal |
+| A pale tint made by reducing opacity | Drains toward grey and goes flat | Lower the chroma instead and keep the lightness |
+| The brand colour used unchanged in dark mode | Buzzes against the dark surface | Take 20–30% of the saturation out for the dark theme |
+| `#808080` as the neutral | Looks like a value waiting to be replaced | Bias the neutral slightly toward the palette's hue |
+| Disabled rendered as 40% opacity | Contrast passes on one background and fails on another | A named muted token, so the result is the same everywhere |
+| Hex values written inline | Every future change becomes a search-and-replace | Semantic tokens such as `--color-border-subtle` |
+| Green for success on a green-branded product | The primary action and the confirmation look identical | Reserve a separate colour for confirmation |
+| Light or dark chosen because of the category | The category does not use the product | Choose from the situation: who, where, and in what light |
 
-Three more that are typographic rather than chromatic:
+Three more, on the typographic side:
 
-- **Italic for UI emphasis.** Italic is for citation and linguistic stress; bold
-  is for interface emphasis
-- **Underline on anything that is not a link.** It is a click affordance, and
-  using it decoratively trains people to try
-- **Eight font weights loaded, three used.** Page weight and render delay for
-  nothing (`references/performance-budget.md` §2)
-
----
-
-## 3. Motion, at the floor
-
-`references/motion-system.md` owns the system. Three things belong here because
-they are checks on the result:
-
-- **One authored moment, not scattered effects** — and not one identical
-  entrance repeated on every section, which is scattered effects with a theme
-- **Ease out from an already-visible default.** Content that starts invisible
-  and waits for a scroll trigger is broken for anyone who lands mid-page
-- **Frequency decides whether to animate at all.** Something a user touches a
-  hundred times a day should not animate; something they meet once can be
-  special. This is the check most likely to be failed by a beautiful component
-
-**On the palette of animatable properties**, this file and
-`references/performance-budget.md` §4 say different things, and both are right
-in their own scope. `transform` and `opacity` are always safe. `filter`,
-`backdrop-filter`, `clip-path`, `mask`, and `box-shadow` are legitimately part
-of the expressive palette **and** are expensive — so they are allowed on the
-condition that you **measure the frame rate on a mid-range phone**, not on
-your laptop. Unmeasured, treat the budget's rule as the default.
+- **Italics used for interface emphasis.** Italic marks citation and stress in
+  prose; interfaces emphasise with weight
+- **Underlines on text that is not a link.** It is a click affordance, and using
+  it decoratively teaches people to try
+- **A font family loaded in eight weights and used in three.** Bytes and render
+  delay bought for nothing (`references/performance-budget.md` §2)
 
 ---
 
-## 4. What this file is not
+## 3. Motion, as a floor rather than a system
 
-It is the floor, never the ceiling, and it never picks the direction. With every
-check green the page can still be dull — that is what
-`references/aesthetic-direction.md` is for.
+The system is `references/motion-system.md`. Three items live here because they
+are observable in the finished build:
 
-**And when torn between refined and committed, commit.** A safe page that passes
-every check here is the exact output the whole design pipeline exists to avoid.
+- **One deliberate moment, not a scattering.** The same entrance animation
+  attached to every section is still a scattering, only harder to notice
+- **Ease out of a resting state that is already visible.** A section that begins
+  invisible and waits for a scroll event is broken for anyone arriving at a
+  deep link
+- **How often it happens decides whether it animates.** Anything a person hits
+  many times a day should not — they pay the delay every time, and the pleasure
+  is gone inside a week. Something encountered once can afford to be memorable
+
+**On which properties may animate**, this file and
+`references/performance-budget.md` §4 appear to disagree, and the disagreement
+is real rather than sloppy. `transform` and `opacity` are unconditionally safe.
+`filter`, `backdrop-filter`, `clip-path`, `mask` and `box-shadow` are genuinely
+expressive **and** genuinely expensive. The resolution is a condition, not a
+compromise: use them if you have watched the frame rate on a mid-range phone.
+Until that measurement exists, the budget's stricter rule stands.
+
+---
+
+## 4. The ceiling is elsewhere
+
+Nothing above chooses a direction, and a page can satisfy every row here and
+still be forgettable. That is what `references/aesthetic-direction.md` is for.
+
+**When the choice is between safe and committed, commit.** A screen that clears
+this entire list and takes no position is exactly the output the rest of this
+skill exists to prevent.
 
 ---
 
 ## Before calling the build done
 
-- [ ] Contrast measured with the script, not estimated
-- [ ] Real copy at every breakpoint; nothing overflows or wraps badly
-- [ ] Line length inside 65–75ch; spacing tighter within groups than between
-- [ ] Elevation declared once; nested radii computed, not matched
-- [ ] Every state present, including empty and error, with working controls
-- [ ] Nothing shifts on hover, selection, or when a number changes
-- [ ] Nothing from §2 is present without the brief having asked for it
-- [ ] Colour decisions are tokens, and were chosen rather than defaulted
-- [ ] One authored motion moment; nothing frequent animates
-- [ ] If an expensive property animates, the frame rate was measured on a phone
+- [ ] Contrast computed by the script, not judged by eye
+- [ ] Real strings at every breakpoint; nothing overflows, clips, or wraps badly
+- [ ] Measure between 65 and 75 characters; groups tighter inside than between
+- [ ] One elevation mechanism per element; nested radii calculated
+- [ ] All eight states present, with real content and working controls
+- [ ] Nothing shifts on hover, on selection, or when a number changes
+- [ ] Nothing from §2 present that the brief did not ask for
+- [ ] Colour lives in tokens, and each value was chosen rather than inherited
+- [ ] One deliberate motion moment; nothing frequent animates
+- [ ] Any expensive animated property has a frame rate measured on a phone

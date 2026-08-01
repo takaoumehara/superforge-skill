@@ -25,12 +25,12 @@ product**, and different surfaces of the same product want opposite things.
 | **Read** | They understand something | Structure that survives skimming, then a reading experience worth staying in | Conversion mechanics, interaction |
 | **Experience** | They are inside the work itself | The artifact leading from the first viewport; the interface receding | Wayfinding conventions, information density |
 
-**Pick the mode from the surface, not from the company.** A developer tool's
-landing page is Persuade. A fashion house's documentation is Read. A docs
-*index* is Read, not Persuade, even though it is trying to get you further in.
-Getting this backwards produces the two most common category failures: a
-dashboard designed like a landing page, and a landing page designed like a
-dashboard.
+**Take the mode from the surface in front of you, not from what the company
+sells.** The marketing page of a developer tool is Persuade. The reference
+manual of a fashion house is Read. The contents page of a manual is still Read
+— it wants you further in, but it earns that by being navigable, not by
+selling. Reverse this and you get the two failures every category produces: an
+application built like a brochure, and a brochure built like an application.
 
 **One product will hold several modes, and they may look different on purpose.**
 Shared tokens, different density, different amount of motion, different tone.

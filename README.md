@@ -143,7 +143,7 @@ zip -r superforge-ui.zip .
 
 ### Make it always-on (recommended)
 
-Skills only fire when the AI judges them relevant to the request. To be sure the model assignment is never skipped, add one line to your tool's **global** instructions file — the one that applies to every project.
+Skills fire on their own when the AI judges them relevant — you do not have to type their names. The one thing worth pinning down is the model assignment, because it applies to every project regardless of which skill is running. Add this to your tool's **global** instructions file:
 
 | Tool | File |
 |---|---|
@@ -152,10 +152,26 @@ Skills only fire when the AI judges them relevant to the request. To be sure the
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `superforge` skill to
-assign the right model per subtask instead of defaulting every agent to the
-same model.
+Before dispatching subagents, consult the `superforge` skill to assign the
+right model per subtask instead of defaulting every agent to the same model.
+Print the assignment — task, model, and why — before spending anything.
 ```
+
+**What this does not do, and it is the most common misreading.** It does not make small requests run on a cheaper model. Tiering applies to **subagents the AI spawns**, not to the session you are typing into — and a one-line typo fix is cheapest handled directly, because spawning a separate agent for it costs *more* than doing it inline. To change what your own session runs on, use your tool's model setting (`/model` in Claude Code), which no instructions file can override.
+
+Where it does pay: any task big enough to be split up. Five subagents on the right five tiers instead of five on the most expensive one is the whole point.
+
+---
+## What it will not do
+
+Stated up front, because the gap between what a tool promises and what it does is where trust goes.
+
+- **It does not make your own session cheaper.** Model tiering applies to subagents. Your session runs on whatever you set in your tool.
+- **It does not write code by itself.** These are instructions the AI reads. The AI still does the work, and it can still be wrong.
+- **It is not legal advice.** `superforge-ship` names which obligations fired and where a lawyer becomes mandatory. It never drafts the policy.
+- **It never says a product is secure.** `superforge-secure` reports what was checked and what was not — that is a different, and honest, claim.
+- **It does not replace talking to users.** `superforge-brain` tells you how to ask; it cannot know the answer.
+- **Its verdicts are only as good as its inputs.** Every market number carries a confidence tier for exactly this reason.
 
 ---
 

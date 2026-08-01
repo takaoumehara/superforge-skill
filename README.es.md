@@ -143,7 +143,7 @@ zip -r superforge-ui.zip .
 
 ### Dejarlo siempre activo (recomendado)
 
-Las skills solo se disparan cuando la AI las considera relevantes para la petición. Para asegurarte de que la asignación de modelo nunca se salta, añade una línea al archivo de instrucciones **global** de tu herramienta, el que aplica a todos los proyectos.
+Las skills se activan **solas** cuando la IA las juzga relevantes; no hace falta escribir su nombre. Lo que sí conviene fijar es la asignación de modelo, porque aplica en todos los proyectos y con cualquier skill en marcha. Añádelo al archivo de instrucciones **global** de tu herramienta:
 
 | Herramienta | Archivo |
 |---|---|
@@ -152,10 +152,26 @@ Las skills solo se disparan cuando la AI las considera relevantes para la petici
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `superforge` skill to
-assign the right model per subtask instead of defaulting every agent to the
-same model.
+Antes de lanzar subagentes, consulta la skill `superforge` para asignar el
+modelo adecuado a cada subtarea en vez de dejarlos todos en el mismo.
+Imprime la asignación — tarea, modelo y por qué — antes de gastar nada.
 ```
+
+**Lo que esto no hace, y es la lectura equivocada más frecuente.** No hace que las peticiones pequeñas corran en un modelo barato. El escalonado aplica a los **subagentes que la IA lanza**, no a la sesión en la que estás escribiendo — y una corrección de una línea sale más barata hecha directamente, porque lanzar un agente aparte cuesta *más* que hacerlo en el sitio. Para cambiar el modelo de tu propia sesión usa el ajuste de la herramienta (`/model` en Claude Code); ningún archivo de instrucciones lo sobreescribe.
+
+Donde sí compensa: cualquier tarea lo bastante grande como para dividirse. Cinco subagentes en los cinco niveles correctos en vez de cinco en el más caro — para eso existe todo esto.
+
+---
+## Lo que no va a hacer
+
+Dicho por delante, porque la distancia entre lo que una herramienta promete y lo que hace es justo donde se pierde la confianza.
+
+- **No abarata tu propia sesión.** El escalonado aplica a subagentes. Tu sesión corre en el modelo que hayas configurado.
+- **No escribe el código por sí sola.** Esto son instrucciones que la IA lee. El trabajo lo sigue haciendo la IA, y la IA se puede equivocar.
+- **No es asesoría legal.** `superforge-ship` nombra qué obligaciones se activaron y dónde un abogado pasa a ser obligatorio. Nunca redacta la política.
+- **Nunca dice que un producto es seguro.** `superforge-secure` informa de qué se comprobó y qué no — que es una afirmación distinta, y honesta.
+- **No sustituye a hablar con usuarios.** `superforge-brain` te dice cómo preguntar; no puede saber la respuesta.
+- **Sus veredictos valen lo que valgan sus datos.** Por eso cada cifra de mercado lleva su nivel de confianza.
 
 ---
 
