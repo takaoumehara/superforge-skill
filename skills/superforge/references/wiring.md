@@ -54,6 +54,7 @@ treat any absence as "do it inline".
 |---|---|
 | Brand discovery and positioning | `brand-discover`, `content-strategy` |
 | Copy, taglines, marketing prose | `copywriting`, `japanese-copywriting` |
+| Writing up shipped work credibly (case study, portfolio, proposal) | inline — `superforge-brand/references/case-study.md` — no external skill needed |
 | Diagrams and explanatory figures | `zukai` |
 | App icon, screenshots, store assets | `app-icon-generator`, `screenshot-planner`, `app-store-assets`, `screenshot-automation` |
 | Social and share surfaces | `social-content`, `social-export`, `share-card` |
@@ -73,7 +74,8 @@ treat any absence as "do it inline".
 | Spec writing | `ux-spec`, `implementation-spec` |
 | Accessibility | **`superforge-a11y`** first; then `accessibility-generator`, `audit` |
 | Native iOS/macOS/watchOS | `ios`, `swift`, `liquid-glass`, `ipad-patterns`, `macos`, `watchos`, `navigation-patterns`, `toolbars`, `widgets` |
-| Landing and case-study pages | `superforge-ui/references/landing-page.md` first; then `landing-page-creator`, `keynote-slide-page` |
+| Landing / sales pages | `superforge-ui/references/landing-page.md` first; then `landing-page-creator` |
+| Case-study, portfolio, project-detail pages (built to be skimmed) | `superforge-ui/references/slide-page.md` for the structure; `superforge-brand/references/case-study.md` for the writing; then any installed slide-page skill for a specific visual language |
 | First run, welcome screens, permission prompts | `superforge-ui/references/first-run.md` first — decide whether intro screens are the right answer at all; then `onboarding-generator` for native scaffolding |
 | Data visualisation | `dataviz`, `charts-3d` |
 | Japanese typesetting | `japanese-text` |

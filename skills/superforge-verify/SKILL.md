@@ -55,6 +55,13 @@ real output. Paste the output rather than describing it. A verification
 report without evidence is an assertion, which is the thing this skill exists
 to prevent.
 
+It is read by **`superforge-ship`**, which treats it as a precondition — a
+missing `docs/verification.md` is a `BLOCK` there — and by
+**`superforge-handoff`**, which carries its status forward so the next session
+knows what has and has not been proven. Record failures as plainly as passes:
+a check that failed and was left failing is exactly what the next reader needs
+to see.
+
 ## Delegate when a sharper skill is installed
 
 `verification-before-completion` (evidence discipline) · `superforge-a11y`

@@ -175,8 +175,14 @@ A release you cannot reverse is a bet, not a launch.
 
 ## 6. Running the gate
 
-1. Read `docs/business-model.md`, `docs/accessibility.md`, `docs/design.md` if
-   they exist. Do not re-ask what is already written down.
+1. Read `docs/verification.md`, `docs/business-model.md`,
+   `docs/accessibility.md`, and `docs/design.md` if they exist. Do not re-ask
+   what is already written down.
+
+   **`docs/verification.md` is a precondition, not a reference.** This gate
+   assumes the thing works; if that file is missing, `superforge-verify` has
+   not run and there is nothing to decide about releasing yet — return `BLOCK`
+   with that as the blocker rather than assessing the rest.
 2. Determine what data the product actually touches — **from the code and its
    dependencies, not from memory.** Third-party SDKs are the usual source of a
    disclosure that turns out to be false.

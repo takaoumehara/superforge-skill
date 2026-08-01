@@ -221,6 +221,8 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | デザインの方向性をどこから取るか——6層の抽出、参照と模倣の線引き、他ツールで作った画面をシステムに変える手順 |
 | [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 時間、動かすプロパティで選ぶ緩急、FLIP、スクロール同期、reduced-motion のランタイム停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 売るためのページの設計——セクション順、ファーストビュー、モバイルとデスクトップの違い |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | 作ったものを信じてもらえる形で書く——読者で層を分け、信用は「決定とその代償」で作り、判断が要った場面を残す |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | 流し読みに耐える長いページ——1画面に2層・1つの主張、形は内容の役割で選ぶ。意匠は一切持たない |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 入った直後の30秒——説明せず最初の成果まで運ぶ、権限は使う瞬間に求める、あとで自分でテストできる形で完了を記録する |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 製品の振る舞いがどの義務を発火させたか、どこでも概ね通用する4つの土台、そして弁護士が必須になる線 |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 後から取れない計測、各指標が決めてよいこと、最初の4週間の回し方 |

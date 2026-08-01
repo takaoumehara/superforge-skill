@@ -22,10 +22,11 @@ conclusion that exists only in the conversation is lost at the next
 | `docs/design.html` | `superforge-ui` | humans only — the rendered style guide |
 | `docs/plan.md` | `superforge-dev` | `superforge-dev` (progress), `superforge-test`, `superforge-verify` |
 | `docs/accessibility.md` | `superforge-a11y` | `superforge-ui` (token fixes), `superforge-verify` (the gate), `superforge-ship` (legal exposure) |
-| `docs/critique.md` | `superforge-roast` | whoever is fixing the findings |
-| `docs/verification.md` | `superforge-verify` | you, before shipping |
-| `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
-| `.handoff/*.md` | `superforge-handoff` | the next session, any tool |
+| `docs/case-study-*.md` | `superforge-brand` | `superforge-ui` (the landing page's evidence section), `superforge-biz` (the numbers) |
+| `docs/critique.md` | `superforge-roast` | `superforge-ui` / `superforge-dev` / `superforge-a11y` / `superforge-biz` / `superforge-ship`, by finding — each one is routed, not left in the file |
+| `docs/verification.md` | `superforge-verify` | `superforge-ship` (a precondition — missing means BLOCK), `superforge-handoff` |
+| `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision, and `superforge-handoff` — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
+| `.handoff/*.md` | `superforge-handoff` | the next session, any tool. **Reads every file above** and carries each one's Status, last-updated, and open questions forward — including the ones that were never written |
 
 ## Reading
 

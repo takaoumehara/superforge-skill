@@ -136,6 +136,12 @@ score → **`references/motion-system.md`**.
   and marketing pages: section order as an argument, the hero specifically,
   and why mobile and desktop are different pages rather than one page scaled.
   Read it before designing anything meant to sell rather than to be used.
+- **`references/slide-page.md`** — the other kind of long page: one that must
+  survive being skimmed (case study, portfolio, project detail). Two layers per
+  screen, one idea per screen, shape chosen by what the content is doing, and
+  the render-with-reveal-disabled check that catches the "it looks blank"
+  failure. Carries **no visual language** on purpose — the look comes from
+  `design-sourcing.md`.
 - **`references/first-run.md`** — the gap between those two: the first thirty
   seconds after someone commits. Getting to a first real outcome instead of
   explaining the product, why first run means something different on web than

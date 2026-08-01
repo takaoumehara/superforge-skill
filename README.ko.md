@@ -222,6 +222,8 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | 디자인 방향은 어디서 오는가 — 여섯 층의 추출, 참조와 모방의 경계, 다른 도구로 만든 화면을 시스템으로 바꾸기 |
 | [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 지속시간, 움직이는 속성에 따라 고르는 이징, FLIP, 스크롤 동기화, reduced-motion 런타임 정지 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 팔기 위한 페이지 설계 — 섹션 순서, 히어로 영역, 모바일과 데스크톱의 차이 |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | 만든 것을 믿게 쓰기 — 독자별로 층을 나누고, 신뢰는 「결정과 그 대가」로 만들고, 판단이 필요했던 순간을 남긴다 |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | 훑어보기를 견디는 긴 페이지 — 화면당 두 층·하나의 주장, 형태는 내용의 역할로 고른다. 자체 시각 언어는 없음 |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 들어온 직후의 30초 — 설명하지 말고 첫 결과까지, 권한은 쓰는 순간에, 나중에도 테스트할 수 있는 완료 기록 |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 제품의 동작이 어떤 의무를 발동시켰는가, 어디서나 대체로 통하는 네 가지 기본, 그리고 변호사가 필수가 되는 선 |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 나중에 못 채우는 계측, 각 숫자가 결정해도 되는 것, 그리고 첫 4주 |

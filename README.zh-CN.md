@@ -222,6 +222,8 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | 设计方向从哪里来——六层提取、参考与抄袭的界线、把别处做好的设计变成系统 |
 | [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 时长、按动画属性选缓动、FLIP、滚动同步、reduced-motion 的运行时停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 卖货页面的设计——版块顺序、首屏、移动端和桌面端的区别 |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | 把做过的事写成别人会信的东西——按读者分层，可信度靠「决定和它的代价」，再写下需要你判断的那一刻 |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | 经得起快速浏览的长页面——每屏两层、一个观点，形态按内容的作用来选；本身不带任何视觉语言 |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 进来后的头三十秒——不解释，直接抵达第一个成果；权限在用到时才要；完成标记要让你事后还能测 |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 产品行为触发了哪些义务、四条到处大体通用的基线，以及必须请律师的那条线 |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 事后补不回来的度量、每个数字能决定什么，以及最初四周怎么走 |

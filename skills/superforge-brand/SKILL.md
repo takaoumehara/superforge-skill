@@ -63,12 +63,30 @@ When creating motion concepts or AI video generation scripts:
 
 ---
 
+## 4. Writing up work that already shipped
+
+Four places in this suite demand a case study — the landing page's evidence
+section, the first-10-customers testimonial trade, the switch point where a
+scalable channel becomes credible, and the value pitch's numbers — and none of
+them said how to produce one. Layer it by reader rather than by chronology,
+build the credibility in the **decisions** (each with the alternative and the
+cost), and document **where your judgment was needed** — the moment a polished
+answer was wrong and you knew why. Everyone can generate polish now; knowing
+when it is wrong is the scarce part → **`references/case-study.md`**.
+
+---
+
 ## Artifact
 
 Write `docs/brand.md`: the three adjectives, the colour architecture with
 intent, the type matrix, tone of voice, and the generation prompts produced.
 Hand the colour and type decisions to `superforge-ui`, which turns them into
 tokens in `docs/design.md` — do not define tokens here.
+
+For shipped work, also write `docs/case-study-<name>.md` (see
+`references/case-study.md`). Its numbers fold back into
+`docs/business-model.md` under `## Value pitch`, and its evidence feeds the
+landing page's proof section — the same write-up serves all three.
 
 ## Delegate when a sharper skill is installed
 
