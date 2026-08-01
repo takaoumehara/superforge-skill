@@ -6,22 +6,24 @@ description: >
   own data handling has triggered and where a lawyer becomes mandatory, what
   will actually get it rejected from the App Store or Google Play, the
   measurement that must exist before launch because it cannot be recovered
-  afterwards, the ability to stop a bad release, and the post-launch loop that
-  turns the first weeks into decisions instead of anxiety. Ends in a single
-  verdict — SHIP / BLOCK / RISK-ACCEPTED — never in prose. Use when the user
-  says "ship it", "release", "launch", "submit to the App Store", "app review",
-  "rejected", "privacy policy", "terms of service", "GDPR", "CCPA", "compliance",
-  "can we release this", "出荷", "リリース", "公開", "ローンチ", "審査",
+  afterwards, the ability to stop a bad release, and whether you will find out
+  when it breaks — monitoring, a tested rollback, and a backup someone has
+  actually restored. Ends in a single verdict — SHIP / BLOCK / RISK-ACCEPTED —
+  never in prose. Use when the user says "ship it", "release", "launch",
+  "submit to the App Store", "app review", "rejected", "privacy policy", "terms
+  of service", "GDPR", "compliance", "can we release this", "monitoring",
+  "backup", "rollback", "出荷", "リリース", "公開", "ローンチ", "審査",
   "リジェクト", "プライバシーポリシー", "利用規約", "個人情報", "特商法",
-  "出せる状態か", "出す前に確認", or runs /superforge-ship.
+  "監視", "バックアップ", "障害対応", "出せる状態か", or runs /superforge-ship.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "1.0"
+  version: "2.0"
 compatibility: >
   Standalone.
-  Reads docs/business-model.md, docs/accessibility.md, and docs/design.md when
-  present, writes docs/ship-readiness.md.
+  Reads docs/verification.md and docs/security.md as preconditions, plus
+  docs/business-model.md, docs/accessibility.md, and docs/design.md when
+  present. Writes docs/ship-readiness.md.
   Not a substitute for legal advice — it identifies which obligations exist and
   where professional counsel becomes mandatory. It does not draft legal text.
 ---
@@ -149,6 +151,10 @@ Instrument before release:
 What to measure, what each number is allowed to decide, and the post-launch
 loop that turns week one into decisions → **`references/launch-metrics.md`**.
 
+Keeping it running afterwards — the alert that is worth having, the deploy path,
+the backup restore drill, the incident order, and the runaway-bill alert →
+**`references/operations.md`**.
+
 **Instrumenting is itself a data-collection decision.** Anything added here
 loops back to §1 — analytics that identify individuals changes what must be
 disclosed. Run the two together, not in sequence.
@@ -173,15 +179,54 @@ A release you cannot reverse is a bet, not a launch.
 
 ---
 
+## 5b. Security — the review, not the feeling
+
+A release gate that never asks whether a logged-in user can read someone else's
+data is not a gate. **`docs/security.md` is a precondition here, on the same
+footing as `docs/verification.md`**: missing means `BLOCK`, and an unresolved
+Critical finding means `BLOCK` regardless of everything else on this page.
+
+Do not restate the checks — run **`superforge-secure`** and read its verdict.
+One ledger, one set of findings. The verdict codes are `SECURE-REVIEWED` /
+`FINDINGS-OPEN` / `NOT-ASSESSED`; the word "secure" is never a claim.
+
+---
+
+## 5c. Operations — will you find out, and can you get it back
+
+The three questions below are the ones that turn a launch into something
+survivable, and all three are cheap before launch and impossible after:
+
+- **Detection.** If it goes down at 3am, how do you learn about it other than a
+  user writing in? One alert on a URL that touches the database.
+- **Reversibility with a tested rollback** — §5's path, actually run once.
+- **A backup that has been restored.** An untested backup is a belief about a
+  file, not a backup.
+
+**These three are `BLOCK` conditions for any product holding user data.**
+Monitoring, alerting that you will act on, the deploy path, backups and their
+restore drill, incident order, and cost control including the runaway-bill
+alert → **`references/operations.md`**.
+
+---
+
 ## 6. Running the gate
 
-1. Read `docs/business-model.md`, `docs/accessibility.md`, `docs/design.md` if
-   they exist. Do not re-ask what is already written down.
+1. Read `docs/verification.md`, `docs/security.md`, `docs/business-model.md`,
+   `docs/accessibility.md`, and `docs/design.md` if they exist. Do not re-ask
+   what is already written down.
+
+   **`docs/verification.md` and `docs/security.md` are preconditions, not
+   references.** This gate assumes the thing works and that someone has looked
+   at whether a user can reach another user's data. If either file is missing,
+   `superforge-verify` or `superforge-secure` has not run and there is nothing
+   to decide about releasing yet — return `BLOCK` with that as the blocker
+   rather than assessing the rest.
 2. Determine what data the product actually touches — **from the code and its
    dependencies, not from memory.** Third-party SDKs are the usual source of a
    disclosure that turns out to be false.
 3. Run §1 triggers, §2 platform gates, §3 accessibility, §4 instrumentation,
-   §5 reversibility.
+   §5 reversibility, §5b security, §5c operations.
 4. Write `docs/ship-readiness.md` with one verdict code and, for every
    unresolved item, the specific thing that clears it.
 5. If anything is `RISK-ACCEPTED`, the date and the owner go in writing.
@@ -210,11 +255,17 @@ A release you cannot reverse is a bet, not a launch.
 ## Accessibility
 docs/accessibility.md: 有 / 無 · 最終更新 · 未対応の重大項目 <n>
 
+## Security
+docs/security.md: 有 / 無 · 判定 <SECURE-REVIEWED / FINDINGS-OPEN / NOT-ASSESSED> · 未解決 Critical <n>
+
 ## Instrumentation before launch
 | 指標 | 実装済み | この数字が決めてよいこと |
 
 ## Reversibility
 ロールバック手段 · キルスイッチ · 連絡経路 · 最初の48時間を見る人
+
+## Operations
+検知（アラート1本と行き先） · ロールバックを試した日 · 復元を試した日と実測時間 · 請求アラートの閾値
 
 ## Risks accepted
 | 内容 | 起こりうる損害 | 決めた人 | いつ直すか |

@@ -2,18 +2,25 @@
 name: superforge-ui
 description: >
   Design and build interfaces across Web, iOS (SwiftUI), and Android (Jetpack
-  Compose), covering layout, visual hierarchy, typography, responsive
-  behaviour, state specification, and micro-interactions. Follows a five-phase
-  design process, Apple HIG, and Material 3. Use when the user says "design",
-  "UI", "UX", "layout", "screen", "component", "make it look better",
-  "animation", "spacing", "typography", "onboarding", "welcome screen",
-  "first launch", "permission prompt", "デザイン", "画面", "見た目",
-  "レイアウト", "アニメーション", "余白", "使いにくい", "オンボーディング",
-  "初回起動", "チュートリアル画面", "権限の許可", or runs /superforge-ui.
+  Compose), covering layout, visual hierarchy, typography, responsive behaviour,
+  state specification, and micro-interactions. Opens by sourcing the visual
+  direction from references or from a design made in another tool, and
+  extracting the system behind it — structure, space, type, colour role, motion
+  character, imagery — because a model designing from its own priors returns the
+  average of everything it has seen. Follows a five-phase design process, Apple
+  HIG, and Material 3. Use when the user says "design", "UI", "UX", "layout",
+  "screen", "component", "make it look better", "animation", "typography",
+  "onboarding", "first launch", "permission prompt", "デザイン", "画面",
+  "見た目", "レイアウト", "アニメーション", "余白", "使いにくい",
+  "オンボーディング", "初回起動", "権限の許可", "AIっぽいデザイン",
+  "参考サイト", "インスピレーション", "デザインシステムに落とす", "moodboard",
+  "reference site", "遅い", "パフォーマンス", "多言語", "3D", "shader",
+  "sound", "音", "方向性を見せて",
+  or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.2"
+  version: "10.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -26,10 +33,58 @@ Use this skill when designing or implementing user interfaces across Web, iOS (S
 
 ---
 
+## 0a. Name the job before sourcing anything
+
+Two questions decide whether the rest of this process solves the right problem,
+and both get answered implicitly if they are not answered out loud.
+
+**What does success look like on *this surface*?** Persuade (they decide and
+act) · Operate (they finish a task) · Read (they understand) · Experience (they
+are inside the work). **Pick it from the surface, not from the company** — a
+developer tool's landing page is Persuade, a fashion house's documentation is
+Read. Each mode also names what it may legitimately sacrifice, and a mode that
+gives up nothing is a wish rather than a mode.
+
+**Preserving or replacing?** Refinement keeps the identity, the behaviour, and
+everything outside the stated scope. Redesign keeps product truth and function
+but treats the old look as *evidence*, not as something to improve.
+**Never split the difference** — polish spent on a look already decided against
+is the most wasted work in this process.
+
+Both, plus the rule that a pinned brief outranks every default in this suite →
+**`references/surface-and-scope.md`**.
+
+---
+
+## 0. Source the direction before designing anything
+
+A model asked to "make it look good" returns **the average of everything it has
+seen**, and averages look like averages — that is the entire explanation for the
+recognisable "AI interface" look. A stronger model produces a better-executed
+average, not a different one.
+
+So before any token is chosen, settle where the direction comes from: references
+the user admires, an existing design arriving from another tool (Claude Design,
+Google Stitch, Figma, v0), or — declared honestly — nothing. Then extract the
+**system** behind it in six layers (structure, space, type, colour, motion,
+imagery), never the content, and record the sources and the deliberate
+divergences → **`references/design-sourcing.md`**.
+
+**When there is genuinely nothing to work from**, do not fall back to a
+restrained default — that is what a model produces with no direction at all, so
+choosing it lands on the same page as choosing nothing. Commit to a named
+direction, push exactly one axis, keep the rest quiet, and label the source
+honestly → **`references/aesthetic-direction.md`**.
+
+Three references beat one: one produces imitation, three force you to find the
+principle they share.
+
+---
+
 ## 1. Five-Phase Design Process
 
 1. **UNDERSTAND**: Surface target user context, map assumptions, and reframe requirements.
-2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies.
+2. **IDEATE**: Explore layout structures, navigation patterns, and component hierarchies — **from the extracted direction in §0**, not from scratch.
 3. **DESIGN**: Construct complete screens, typography grids, color assignments, and content states.
 4. **EVALUATE**: Run accessibility audits (WCAG 2.2 AA), contrast checks, and simulated persona testing. Hand the accessibility half to **`superforge-a11y`** — it owns the criterion ledger and writes `docs/accessibility.md`. Do not restate the criteria here.
 5. **PREPARE**: Output clean production components, design tokens, and implementation specs.
@@ -61,10 +116,135 @@ No UI component is complete until all 7 component states are explicitly engineer
 
 ## 4. Web Motion & Micro-Interactions
 
-- **Spring Physics over Linear**: Use custom cubic-bezier curves (`cubic-bezier(0.16, 1, 0.3, 1)` for decelerated entrances).
-- **GPU Acceleration**: Animate ONLY `transform` and `opacity`. Prevent layout thrashing and CLS.
+- **Motion communicates or it is cut.** Every animation serves feedback, status,
+  feedforward, or transition. If it serves none, delete it — decoration is a cost
+  every user pays on every visit.
+- **GPU Acceleration**: Animate ONLY `transform` and `opacity`. Where layout
+  genuinely must change, use **FLIP** rather than animating width/height/top/left.
+- **Easing follows the property, not taste**: `ease-out` entering, `ease-in`
+  exiting, **`linear` for opacity, colour, and rotation**, no easing at all
+  during an active drag.
 - **View Transitions**: Use native `@view-transition` or morphing animations between page views.
-- **Micro-Interactions**: Tactile button presses, smooth input border glows, spring toast slide-ins.
+- **Reduced motion is a runtime check**, not only a media query — stop JS loops,
+  scroll engines, and autoplaying media, and confirm the page still tells its story.
+
+Durations, the easing token set, the compositor pipeline, scroll-engine
+synchronisation, native-platform equivalents, and the eight-question interaction
+score → **`references/motion-system.md`**.
+
+---
+
+## 4b. Performance and language are layout decisions, not later problems
+
+Both of these are treated as engineering problems discovered at the end, and
+both are decided here, in this file, at the moment a layout is agreed.
+
+**Performance.** The hero video, four webfont weights, the icon library
+imported whole, an animation on a layout-triggering property — by the time
+anyone profiles, components are built on top of those and the fix is a redesign.
+Set three numbers into `docs/design.md` alongside the tokens: time to something
+useful, time to visible response, and weight of the first screen — each with a
+consequence for exceeding it. Sources of weight in order, perceived speed
+(which is free and entirely design), and native budgets →
+**`references/performance-budget.md`**.
+
+**A second language.** German runs 30–40% longer than English, and short strings
+expand the most — so buttons break first. **Never size a container to its
+current text**, never bake text into an image, never assemble a sentence from
+fragments. Doing this now costs almost nothing; retrofitting it is a rebuild.
+Text expansion, RTL, locale-aware formats, string extraction, and the honest
+three-way decision about whether to be multilingual at all →
+**`references/internationalization.md`**.
+
+---
+
+## 4c. The floor, checked on the built result
+
+Before editing UI — after the direction is settled, not during planning — the
+things that are true of good work in any direction: measured contrast, 65–75ch
+measure, more space above a heading than below, elevation declared once, inner
+radius = outer − padding, `tabular-nums` on changing numbers, every state
+present with real copy at every breakpoint.
+
+And the defaults that appear when a decision was skipped, grouped by **why**
+they appeared: what the component library ships (cards as structure, eyebrows
+everywhere, section numbers), shortcuts for a feeling not earned (gradient text,
+glass as decoration, monospace as costume), and values nobody chose (solid hex
+borders, opacity as a disabled state, pure grey, brand colour carried unchanged
+into dark mode) → **`references/build-floor.md`**.
+
+---
+
+## 4c. Show three directions, and propose the one they did not ask for
+
+Committing to one direction is right for **building** and wrong for
+**deciding**. Put **three named positions** in front of the user first — three
+*positions*, not three intensities of the same idea — each with its concept, the
+axis it pushes, what it gives up, and its cost. **Always name a recommendation**;
+three options with no recommendation hands the decision back to someone who
+asked precisely because they did not want to make it alone. Then build the
+chosen one completely and **never average them** (`references/aesthetic-direction.md` §1b).
+
+And on Experience and Persuade surfaces, **propose something they did not ask
+for.** People cannot request a fluid that reacts to the cursor if they do not
+know it can exist. Propose it in the language of sensation — "the background
+could be liquid that moves away from you" — never in the language of the
+technology, and **carry the price in the same breath** (§4d). A proposal
+without a cost is a sales pitch.
+
+**Then say what to actually install.** A sensation with no route to a tool
+leaves a designer exactly where they started. Names live in one dated file,
+`references/toolchain.md`, mapped from each sensation — and it also reads the
+other way, because some capabilities only became askable once the technology
+existed.
+
+**Propose from a menu, not from memory.** `references/effect-vocabulary.md`
+holds what is actually possible — matter that flows, swarms that assemble,
+things that grow differently on every load, space you move through, and sound
+computed rather than played — each named by how it feels, tiered by cost, and
+kept free of library names so it does not expire. Without it, "make it
+impressive" returns a gradient.
+
+---
+
+## 4d. Shaders, 3D, and anything GPU-drawn
+
+Reach for the **cheapest tier that achieves the effect** — CSS before SVG before
+a minimal WebGL wrapper before a full 3D engine — because most effects people
+reach for 3D to achieve sit two tiers below it. Then pay for it honestly: weight
+and time-to-first-frame come out of §4b's budget, and **the frame rate has to be
+measured on a mid-range phone**, which is the one number that cannot be reasoned
+to.
+
+Two costs decide whether it survives real use, and neither is bytes: **a running
+GPU loop drains and heats a phone** (so stop it off-screen and on a hidden tab),
+and **a canvas is a blank rectangle to a screen reader**. `prefers-reduced-motion`
+does not reach a JavaScript render loop — the loop must check it itself.
+
+Cost tiers, what to decide before opening a tool, the fallback rule, and why the
+surface's mode usually settles it → **`references/heavy-visuals.md`**.
+
+**This file names no libraries on purpose.** Which renderer leads changes yearly;
+the decision does not.
+
+---
+
+## 4e. Sound
+
+The least-used expressive axis, and therefore the one with the most
+distinctiveness still available — and the one with the sharpest downside, since
+a visual mistake is ignored and an audio mistake closes the tab.
+
+**Nothing may make a sound the visitor did not cause. No audio on page load,
+ever.** Anything a sound conveys must also be visible. The mute control lives on
+the surface, is keyboard-reachable, and is remembered. Interface sounds stay
+short, quiet, and pitch-varied on repeat — the same sample twenty times becomes
+a mosquito. Nothing attaches to scroll or hover.
+
+The highest-value use is the cheapest: a short confirmation of an action the
+user took, so someone looking at their keyboard still knows it worked. The most
+striking is generated tone rather than played file — a formula ships instead of
+a recording, and it never repeats identically → **`references/sound.md`**.
 
 ---
 
@@ -81,15 +261,76 @@ No UI component is complete until all 7 component states are explicitly engineer
 
 ## Deeper references
 
+- **`references/design-sourcing.md`** — where the visual direction comes from:
+  the six extraction layers, the line between reference and imitation, turning a
+  design made in another tool into a system, and what to do when there is no
+  source at all. Read it **first**, before the process below.
 - **`references/design-process.md`** — the six design steps in order, the four
-  mandatory data states, and the full quality checklist. Read it before
+  mandatory data states, reach and target sizing, form-validation timing, the
+  interruption hierarchy, and the full quality checklist. Read it before
   designing screens.
+- **`references/motion-system.md`** — durations by interaction class, easing
+  chosen by the property being animated, the render pipeline and FLIP,
+  scroll-driven motion, runtime reduced-motion handling, and the eight-question
+  score for any interaction.
 - **`references/design-system-output.md`** — the `docs/design.md` +
   `docs/design.html` two-artifact spec. Read it before touching tokens.
 - **`references/landing-page.md`** — the conversion-specific layer for sales
   and marketing pages: section order as an argument, the hero specifically,
   and why mobile and desktop are different pages rather than one page scaled.
   Read it before designing anything meant to sell rather than to be used.
+- **`references/slide-page.md`** — the other kind of long page: one that must
+  survive being skimmed (case study, portfolio, project detail). Two layers per
+  screen, one idea per screen, shape chosen by what the content is doing, and
+  the render-with-reveal-disabled check that catches the "it looks blank"
+  failure. Carries **no visual language** on purpose — the look comes from
+  `design-sourcing.md`.
+- **`references/surface-and-scope.md`** — the four modes and what each is
+  allowed to sacrifice, refinement versus redesign and the never-split-the-
+  difference rule, why a missing design file is not a greenfield, and why a
+  pinned brief outranks your taste.
+
+- **`references/build-floor.md`** — the checks on the built result and the
+  refuse-list grouped by cause, plus the honest reconciliation of the expressive
+  animation palette against the performance budget.
+
+- **`references/aesthetic-direction.md`** — the Route C answer: ten named
+  directions, the one-axis rule, the specific defaults that read as machine-made
+  (Inter as a display face, purple-on-white, three equal cards, evenly
+  distributed palettes, scattered scroll fades), atmosphere as a layer, and why
+  minimal is not less work.
+
+- **`references/toolchain.md`** — the bridge from a sensation to something you
+  can install, dated and reviewed as one file so the rest of this skill stays
+  durable. Also the reverse direction: reading what recently became possible and
+  asking what it makes askable, with two guards against solutions looking for
+  problems. Stops at the browser and the app bundle — installations and sensors
+  belong to an interactive-experience skill.
+
+- **`references/effect-vocabulary.md`** — the menu the proposal step needs:
+  around thirty effects across graphics, sound and native surfaces, each named
+  by sensation rather than by library, with its rough cost and the surfaces it
+  suits. Includes the instruction to propose nothing when nothing fits.
+
+- **`references/sound.md`** — the three uses in order of how often they are
+  right, the six non-negotiable rules, why timing rather than file size is the
+  real constraint, and constraining generated tones to a scale so "something is
+  off" becomes "this feels considered".
+
+- **`references/heavy-visuals.md`** — shaders, 3D and GPU-drawn animation: the
+  cost tiers, battery and heat, the first frame, the floor device, the screen
+  reader and reduced-motion obligations, and the frequency rule that rules this
+  out of any surface used many times a day.
+
+- **`references/performance-budget.md`** — three numbers set with the design and
+  measured by `superforge-verify`, where the weight actually comes from,
+  perceived speed as a design problem, animation cost, and native budgets.
+
+- **`references/internationalization.md`** — text expansion and the layouts it
+  breaks, RTL and logical properties, why a sentence must never be assembled
+  from fragments, locale-aware formats, keyed string extraction, and deciding
+  whether to be multilingual at all.
+
 - **`references/first-run.md`** — the gap between those two: the first thirty
   seconds after someone commits. Getting to a first real outcome instead of
   explaining the product, why first run means something different on web than

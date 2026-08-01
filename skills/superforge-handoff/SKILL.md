@@ -32,8 +32,52 @@ Use this skill whenever switching AI models, before clearing long chat threads, 
    - Project & Passphrase (`<repo>: <catchy phrase>`)
    - Objective & Verified State
    - Running Processes & Active Ports
+   - **The `docs/` ledger** — see below. This is the part that carries the
+     decisions; without it the capsule carries the conversation instead
    - Immediate Next Steps
    - Files to Read First
+
+### The `docs/` ledger — do not skip this
+
+**List every file in `docs/`, not a summary of them.** One row each, read from
+the file's own header block:
+
+```markdown
+## docs/
+| File | Status | Last updated | Open questions |
+|---|---|---|---|
+| superforge.md | agreed | 2026-07-29 | — （会話=日本語 / ファイル=英語） |
+| product-idea.md | agreed | 2026-07-30 | none |
+| business-model.md | draft | 2026-07-31 | pricing tier 3 undecided |
+| design.md + design.html | agreed | 2026-07-31 | — |
+| accessibility.md | draft | 2026-07-29 | 3 criteria not assessed |
+| verification.md | — | — | **not run yet** |
+| security.md | FINDINGS-OPEN | 2026-07-31 | 1 High 未対応 |
+| ship-readiness.md | — | — | **not run yet** |
+| failforward.md | 6 entries | 2026-07-31 | 1 mitigation, cause still unknown |
+```
+
+Five rules that make this worth writing:
+
+- **`superforge.md` goes first, and its language settings travel with it.**
+  A resumed session that starts replying in the wrong language has lost
+  something the user set explicitly, and will be corrected manually every time.
+- **A file that does not exist gets a row saying so.** "verification.md — not
+  run yet" is the single most useful line in the capsule, because it tells the
+  next session what has *not* been proven. A missing row reads as "handled."
+- **Copy the `Status` and `Last updated` from each file's own header**, not from
+  memory. A capsule that claims `agreed` for something still marked `draft` is
+  worse than no capsule.
+- **Carry every `## Open questions` section forward.** Those are exactly the
+  decisions an unattended run is allowed to make with a logged default —
+  losing them means the next session either re-asks or re-decides silently.
+- **`failforward.md` is the one row that is a count, not a status.** Note the
+  number of entries and, specifically, any mitigation shipped without a root
+  cause — an open failure the next session would otherwise rediscover the hard
+  way.
+
+The capsule **points at** these files rather than restating them. That is what
+keeps it under 80 lines while losing nothing.
 
 4. Output the copy-paste-ready **Chat Resume Prompt**:
 
@@ -64,6 +108,11 @@ The capsule in `.handoff/` is the artifact. Before writing it, make sure every
 skill that ran this session has already written its own `docs/` file — the
 capsule points at those files rather than restating them, which is what keeps
 it under 80 lines.
+
+**A capsule written without reading `docs/` is a summary of the conversation,
+which is the one thing the conversation already was.** The value of this skill
+is entirely in the ledger: what was decided, where it is written down, what is
+still open, and what was never run.
 
 ## Delegate when a sharper skill is installed
 

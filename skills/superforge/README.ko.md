@@ -36,7 +36,7 @@ flowchart TD
 
 ---
 
-## ✨ 3가지 강점
+## ✨ 강점
 
 ### 🧭 되묻지 않고 배분합니다
 아이디어, 비즈니스, 브랜드, UI, 구현, 테스트, 디버깅, 접근성, 비평, 검증, 출시 판정, 인수인계까지 열두 개의 전문 스킬이 담당합니다. 목적지와 등급을 한 줄로 알린 뒤 바로 시작하고, 전혀 다른 두 경로가 모두 타당할 때만 확인을 요청합니다.
@@ -62,9 +62,9 @@ flowchart TD
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열네 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

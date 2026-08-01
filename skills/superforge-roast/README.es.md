@@ -37,7 +37,7 @@ Los hallazgos se agrupan por causa y no por pantalla, porque cinco síntomas de 
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🚫 El cumplido está prohibido, no solo desaconsejado
 Ni elogio de apertura, ni cláusula que suavice, ni conformidad cortés con una decisión que no aguanta un examen. La amabilidad que un modelo trae de fábrica es justo lo que vuelve inútil su opinión antes de un lanzamiento.
@@ -63,9 +63,9 @@ La salida son dos bloques: **THE ROAST** nombra lo que está flojo y **THE FORGE
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

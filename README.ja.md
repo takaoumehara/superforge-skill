@@ -2,7 +2,7 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる13個のスキル集です。**
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる14個のスキル集です。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「スキル」とは、Claude Code のような **AIツールに後から足せる"やり方の説明書"** のことです。フォルダを1つ置くだけで、AIがその手順どおりに動くようになります。
 
-superforge は、その説明書を13枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
+superforge は、その説明書を14枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
 
 > あなた：「近所のカフェ向けのアプリを作りたい」
 > 受付：「まずアイデアを固めますね。`superforge-brain` に渡します。判断が要る作業なので Opus 5 を使います」
@@ -54,7 +54,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ---
 
-## 13個のスキル
+## 14個のスキル
 
 まん中の `superforge` が受付で、残りの12個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
 
@@ -63,30 +63,31 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ja.md) | 作る価値のあるアイデアが欲しい。ありきたりじゃない案**も**、ありきたりだけど必要とされる案**も**（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
-| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか。プロダクトではなく稼働を売る場合の算数も | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
 
 ### 2. 作る — 形にする
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。作業を分けて複数のAIに配り、それぞれに合うモデルを割り当てる | `docs/plan.md` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。モデルの平均値からではなく実在の参照から方向性を取る。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。並列で壊れないように作業を分け、それぞれに合うモデルへ配る | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.ja.md) | テストを先に書いて進めたい（Web / iOS / Android） | テスト本体 |
-| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい | 原因を該当ドキュメントに追記 |
+| [`superforge-test`](./skills/superforge-test/README.ja.md) | 何をテストする価値があるかを決めてから、テストを先に書く（Web / iOS / Android） | テスト本体 |
+| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい。再現しないバグも含めて | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ja.md) | アクセシビリティをきちんと検査したい。ツール1本ではなく7つの検査で | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.ja.md) | ログインした他人が、あなたのユーザーのデータを読めてしまわないか。7つのパスを、攻撃者が何を得るかで並べる。鍵が漏れた後の手順も | `docs/security.md` |
 
 ### 4. 出す — 世に出す準備をする
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出す前に、忖度なしでダメ出ししてほしい | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、本当に動くか証拠つきで確認したい | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、等級つきの証拠と「確認していないこと」を添えて確認したい | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.ja.md) | 動くのはわかった。では出していいのか。法務の義務・審査で落ちる理由・後から取れない計測 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | セッションを消す前・別のツールに乗り換える前に引き継ぎたい | `.handoff/` |
 
@@ -98,7 +99,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします。
+一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -142,7 +143,7 @@ zip -r superforge-ui.zip .
 
 ### 毎回きちんと働かせる（おすすめ）
 
-スキルは、AIが「今の相談に関係ありそうだ」と判断したときだけ自動で起動します。モデルの割り当てを絶対に飛ばしたくない場合は、使っているツールの**全プロジェクト共通の指示ファイル**に一文足してください。
+スキルは、AIが「今の相談に関係ありそうだ」と判断すれば**自分から起動します**。名前をタイプする必要はありません。固定しておく価値があるのはモデルの割り当てのほうで、これはどのスキルが動いていても、どのプロジェクトでも効くからです。使っているツールの**全プロジェクト共通の指示ファイル**に足してください。
 
 | ツール | ファイル |
 |---|---|
@@ -151,9 +152,66 @@ zip -r superforge-ui.zip .
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-サブエージェントを起動する前に superforge スキルを参照し、
-作業ごとに適切なモデルを割り当てること。全部を同じモデルで動かさない。
+サブエージェントを起動する前に superforge スキルを参照し、作業ごとに
+適切なモデルを割り当てること。全部を同じモデルで動かさない。
+使う前に、タスク・モデル・理由の表を出すこと。
 ```
+
+**これで起きないこと。ここが一番よくある誤解です。** これは**小さな依頼を安いモデルに回すものではありません**。階層分けが効くのは **AIが起動するサブエージェント**であって、あなたが打ち込んでいるセッション自体ではないからです。しかも「typoを直して」のような一行の修正は、**そのまま直すのが最も安い**——わざわざ別のエージェントを立てると、立ち上げ分だけ*高くつきます*。自分のセッションのモデルを変えたいときは、ツール側の設定（Claude Code なら `/model`）を使ってください。指示ファイルからは変えられません。
+
+効くのは**分割するだけの大きさがある作業**です。5体のサブエージェントを全部いちばん高いモデルで走らせるか、それぞれ適した5階層で走らせるか——この差がこのスイートの存在理由です。
+
+---
+## 言語は最初の一回だけ聞きます
+
+スキルの中身は英語で書かれています。あなたはその必要がありません。
+
+プロジェクトで初めて動いたときに一度だけ、**あなたの書き方から推測した答えを入れた状態で**聞き、以後は聞きません。
+
+```
+会話: 日本語   ← あなたの書き方から推測
+docs/ のファイル: 日本語
+
+[1] 両方とも英語で   [2] 会話は日本語、ファイルは英語   [3] 別の言語
+```
+
+**この2つを分けているのは意図的です。** 日本語で作業しながら、リポジトリを海外の人と共有している場合、返事は日本語・ファイルは英語が欲しいことが多く、そしてそれを自分から言い出す人はほとんどいません。
+
+答えは `docs/superforge.md` に保存され、`/clear` しても残り、引き継ぎカプセルにも乗り、「言語を変えて」と言えばいつでも変わります。質問を無視してそのまま用件を書いた場合は、推測を採用して作業に入ります。
+
+---
+
+## どこから手を付けるか分からないとき
+
+**`/superforge help`**（または「使い方を教えて」）と言ってください。短い概要と番号付きのメニューが出て、そこで止まります。壁のような文章ではなく、選んだ1つずつ:
+
+`[1]` 14個のスキル一覧 · `[2]` **どこで安くなるか** · `[3]` できないこと · `[4]` よくある勘違い · `[5]` 深く使う
+
+### どこで安くなるか
+
+安くなるかどうかは、**トークンがどこで処理されるか**で決まります。エージェントの数ではありません。
+
+| 頼んだこと | 何が起きるか | 安くなる? |
+|---|---|---|
+| 「typoを直して」 | あなたのセッションがそのまま直す | **ならない。そしてこれが最安**。エージェントを立てると逆に高い |
+| 「このログ2000行を要約して」 | 安いモデルのエージェント**1体** | **なる。大きく** — 大量のトークンが安い側で消費され、返るのは結果だけ |
+| 「この機能を実装して」（5タスクに分かれる） | タスクごとに別のモデル | **なる。ここが本命** |
+| 「アーキテクチャを決めて」 | 一番賢いモデルで、そのまま | ならない。ここは削るところではない |
+
+つまり、**1個の作業でも外に出す価値があるか**の判断基準は「タスクが2つ以上あるか」ではなく、**「大量のトークンを食うが、賢さは要らないか」**です。
+
+---
+
+## できないこと
+
+先に書いておきます。ツールが約束することと実際にやることの差は、信頼が失われる場所なので。
+
+- **あなたのセッション自体は安くなりません。** モデルの階層分けが効くのはサブエージェントです。あなたのセッションは、ツール側で設定したモデルで動き続けます。
+- **勝手にコードを書き上げるものではありません。** これはAIが読む指示書です。作業をするのはAIで、AIは間違えることがあります。
+- **法律相談ではありません。** `superforge-ship` は「どの義務が発生したか」と「どこから弁護士が必須か」を示します。規約そのものは書きません。
+- **「安全です」とは決して言いません。** `superforge-secure` が報告するのは、何を確認して何を確認していないか。それは別の、そして誠実な主張です。
+- **ユーザーに話を聞く代わりにはなりません。** `superforge-brain` は聞き方を教えますが、答えは知りません。
+- **判定は入力の質を超えません。** 市場の数字すべてに確度の等級が付いているのは、まさにこのためです。
 
 ---
 
@@ -199,7 +257,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### なぜ13個入れてもAIが重くならないのか
+### なぜ14個入れてもAIが重くならないのか
 
 常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
 
@@ -215,10 +273,15 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO ゲート——TAMを両方向から計算する、数値ごとの確度、そもそも何人の顧客が必要なのか |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | アンカリング・損失回避・既定値、症状から引く索引、そしてそれぞれの倫理的な線引き |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | チャネル適合・リードマグネット・適合度×熱意の選別・CAC/LTV計算 |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | 受託・エージェンシーの型 — 稼働時間で決まる売上の天井、スコープこそが成果物、スコープクリープは飲まずに値段をつける、顧問料、顧客集中 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | どんな機能も定量化し、論理→感情の順で語るビジネスピッチに変える |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 設計の手順、4つのデータ状態、品質チェックリスト |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` と `design.html` の仕様 |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | デザインの方向性をどこから取るか——6層の抽出、参照と模倣の線引き、他ツールで作った画面をシステムに変える手順 |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 時間、動かすプロパティで選ぶ緩急、FLIP、スクロール同期、reduced-motion のランタイム停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 売るためのページの設計——セクション順、ファーストビュー、モバイルとデスクトップの違い |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | 作ったものを信じてもらえる形で書く——読者で層を分け、信用は「決定とその代償」で作り、判断が要った場面を残す |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | 流し読みに耐える長いページ——1画面に2層・1つの主張、形は内容の役割で選ぶ。意匠は一切持たない |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 入った直後の30秒——説明せず最初の成果まで運ぶ、権限は使う瞬間に求める、あとで自分でテストできる形で完了を記録する |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 製品の振る舞いがどの義務を発火させたか、どこでも概ね通用する4つの土台、そして弁護士が必須になる線 |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 後から取れない計測、各指標が決めてよいこと、最初の4週間の回し方 |
@@ -228,13 +291,45 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各ツールが拾えるもの・拾えないことが確定しているもの、CI への組み込み |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧州アクセシビリティ法 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、適合宣言 |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | 並列で壊れない分け方 — 1タスク1成果と証明コマンド、触るファイルを列挙する規則、絶対に並列にしてはいけない組み合わせ、失敗時はまず戻す |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 自走の前提条件、ループの回し方、独断で決めてよい範囲 |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 何をテストする価値があり、何にはないか。単体/結合/E2Eのコスト階段、モックの境界、壊れやすいテストの症状、テストが無いコードへの入れ方 |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 証拠の4等級と、報告書に「断言」を混ぜてはいけない理由。「動いた」と「たまたま動いた」の違い、悪意なく証拠が偽装される7つの型 |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失敗の記憶をどこに置くか、効くのは `Looked like` の行。再現しないときの手順、「前は動いた」の二分探索、やめどきの判断 |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 7つのパスの中身——鍵が実際に漏れる場所、1時間で最悪のバグが出る二アカウント試験、注入の着地点、依存とビルド時のリスク、外から見える面の掃除 |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 原因究明より先に封じ込め——鍵の差し替え順、残っていないかもしれないログから影響範囲を組み直す、そして正直な告知 |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 権限チェックが毎回たどる所有関係、今なら安く後なら高い決定、インデックス漏れ / N+1 / 上限のない読み出し、加算的な移行、そして「削除」が何を意味しなければならないか |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 参考が一つも無いときにどうするか——名前のついた10の方向性、押す軸は1本だけ、そして「機械が作った」と読まれる具体的なデフォルト一覧 |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | デザインの決定より前に来る2つの問い——この画面での成功とは何か（そしてそのモードが何を犠牲にしてよいか）、そしてこれは改良か、作り直しか、断片か |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 意図ではなく完成物に対する検査。そしてデフォルトを「なぜ現れたか」で分類——ライブラリが吐くもの、稼いでいない感じの近道、誰も選んでいない値 |
+| [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | シェーダー・3D・GPU描画——コストの段階、電池と発熱、下限の実機、スクリーンリーダーと reduced-motion の義務、そしてなぜこれがローンチページ向きで、日常的に使う道具の中にはまず向かないのか。ライブラリ名は意図的に載せていません |
+| [`superforge-ui/references/sound.md`](./skills/superforge-ui/references/sound.md) | 最も使われていない表現の軸、そして間違えたときに最も嫌われる軸——ユーザーが起こしていない音は鳴らさない、音だけで伝える情報を作らない、そして生成音を音階に制約すると「なんか変」が「考えられている」に変わる |
+| [`superforge-ui/references/effect-vocabulary.md`](./skills/superforge-ui/references/effect-vocabulary.md) | 提案するための献立——グラフィック・音・ネイティブにわたる約30の効果を、ライブラリ名ではなく**どう感じるか**で並べてある（だから古くならない）。献立が無いと「かっこよくして」はグラデーションを返してくる |
+| [`superforge-ui/references/toolchain.md`](./skills/superforge-ui/references/toolchain.md) | 感覚から「実際に入れるもの」への橋渡し——**ライブラリ名が載っている唯一の、日付入りのファイル**。だから他の全ファイルは古くならず、確認する場所は1つで済む。逆向きにも読む：最近できるようになったことは何で、それによって何が頼めるようになったか |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | どのエージェントにどのモデルを割り当てたかを、使う前に表で出し、使った後に記録する——このスイートが約束している階層分けを、主張ではなく見えるものにする |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 後から測るのではなく、デザインと一緒に決める3つの数字。重さがどこから来るか。体感速度はデザインの問題 |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字は伸びる、そして最初に壊れるのはボタン。文を断片から組み立ててはいけない理由、ロケール依存の書式、そして多言語にするかどうか自体の判断 |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 気づけるか / 直せるか / 戻せるか / いくらかかるか——持つ価値のあるアラート1本、一度試したロールバック、一度復元したバックアップ、暴走請求の閾値 |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成メディアの実際の費用、12枚目が1枚目と揃うためのレシピ、そして出す前に答えておく商用利用と肖像の問い |
+
+---
+
+## スキルが実際に走らせるツール
+
+モデルが推論でやるべきでない決定的な計算が2つ。どちらも読むだけで、失敗時に非ゼロで終わるのでCIのゲートにできます。
+
+| スクリプト | 何をするか |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | トークンファイルからWCAGのコントラスト比を計算。相対輝度は区分的なガンマ変換で、少しずれるだけで合否の境界を跨ぐのに、見た目には間違いに見えません。アルファ付きの色は推測せず、合成しない限り UNKNOWN と報告します |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | セキュリティレビューのパス1を6箇所すべてに対して実行。**git履歴を含みます**——後のコミットで消した鍵は、そこにまだ生きています。使える形の秘密は絶対に表示しません |
+
+4つのスキルには `evals/evals.json` も入っています。発火すべき／すべきでないプロンプトに加えて、**成果物に対する**アサーション——「スキルが起動したか」だけでなく「`docs/design.md` に Design DNA と予算が実際に書かれたか」を見ます。
 
 ---
 
 ## 由来とクレジット
 
-このリポジトリのスキルは、7つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードも文章も、1バイトも含んでいません。
+このリポジトリのスキルは、8つの素材を読み込み、**自分の言葉で書き直したもの**です。第三者のコードも文章も、1バイトも含んでいません。
 
 | 素材 | 出所 | ここから受け取ったもの |
 |---|---|---|
@@ -244,7 +339,9 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 役割を分けたエージェント編成の型 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | スキルを小さく分けて配布する形 |
 | Gem_Ren_Pack | 自作 | 設計・評価まわりのフレームワーク |
+| 自分で調べたインタラクション設計・モーションの調査ノート | 自作 | `motion-system.md` と `design-process.md` の土台——時間スケール、動かすプロパティで選ぶ緩急、FLIP、スクロールエンジンの同期、フォーム検証のタイミング、到達性とタッチ標的 |
 | 譲り受けたアプリ開発系スキル一式 | 第三者・**読んだが流用していない** | **見つかった穴のほう**。市場サイジング、出荷時の法務義務、初回起動設計が、ここには揃って無かった。取ったのは分野の一般知識だけ（TAM/SAM/SOM、データ保護法の発火条件、権限の文脈的要求）で、ファイルはすべてゼロから書いている |
+| 送られてきた3つのデザインスキル集（`impeccable`, `emil-design-engineering`, `animation-patterns`） | 第三者・**読んだが流用していない** | **このスイートに欠けていた3つの概念**。いずれもゼロから書き直し、さらに拡張した——4つのサーフェスモードと「改良か作り直しか」の線引き（`surface-and-scope.md`。犠牲にしてよいものの列と、断片の場合を追加）、意図ではなく完成物に対して測る品質の床（`build-floor.md`。デフォルトが**なぜ**現れるかで分類し直した——この分類はどちらの出典にも無い）、そしてアニメーションするかどうかを頻度で決める規則 |
 
 **最後の1行について。** 他人のスキル集を読むのは、自分に何が足りないかを知る良い方法で、その穴を埋める悪い方法です。見つかったのは3つの本物の穴で、いま [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.ja.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) が埋めています。どれも元とは似ていません。設計判断が逆方向に出たからです——**凍結された法律文面を置かない**、1年で古くなるプラットフォーム機能カタログを持たない、そして手順を運ぶスイートにコード雛形を入れない。
 

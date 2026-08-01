@@ -10,7 +10,7 @@
 
 A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-superforge is thirteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+superforge is fourteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
 
 > You: "I want to build an app for the café down the street."
 > Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
@@ -18,7 +18,7 @@ superforge is thirteen of them. The one in the middle, `superforge`, works like 
 
 The front desk does exactly three things.
 
-1. **Picks who takes the job** — one of thirteen, across think / build / prove / ship
+1. **Picks who takes the job** — one of fourteen, across think / build / prove / ship
 2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
 3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
 
@@ -54,7 +54,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ---
 
-## The thirteen skills
+## The fourteen skills
 
 `superforge` is the front desk; the other twelve do the work. You can also call any of them directly, like `/superforge-ui`.
 
@@ -63,30 +63,31 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea worth building — the non-obvious one **and** the ordinary-but-needed one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
-| [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, and a pitch that quantifies the value | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, a pitch that quantifies the value, and the arithmetic of a business that sells capacity rather than a product | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
 
 ### 2. Build — make it real
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work across agents, each on a fitting model | `docs/plan.md` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design that starts from a real reference instead of the model's own average, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work so parallel is safe, then dispatch each piece to a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.md) | write the test first (Web / iOS / Android) | the tests |
-| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it | root cause appended to the relevant doc |
+| [`superforge-test`](./skills/superforge-test/README.md) | decide what earns a test, then write it first (Web / iOS / Android) | the tests |
+| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it — including the ones that will not reproduce | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.md) | accessibility, checked properly — seven passes, not one scanner | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.md) | can a logged-in user read someone else's data? seven passes, ranked by what an attacker gets — and what to do once a key has already leaked | `docs/security.md` |
 
 ### 4. Ship — get it out the door
 
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.md) | you want the flaws named before your users find them | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached, graded, and honest about what was not checked | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.md) | it works — but are you allowed to release it? legal obligations, store rejections, measurement you cannot add later | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | before clearing a session or switching tools | `.handoff/` |
 
@@ -98,7 +99,7 @@ You need `git` and an AI tool that loads skills, such as Claude Code.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all thirteen.
+Clone once and run the installer. It finds every skills directory on your machine and links all fourteen.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -142,7 +143,7 @@ zip -r superforge-ui.zip .
 
 ### Make it always-on (recommended)
 
-Skills only fire when the AI judges them relevant to the request. To be sure the model assignment is never skipped, add one line to your tool's **global** instructions file — the one that applies to every project.
+Skills fire on their own when the AI judges them relevant — you do not have to type their names. The one thing worth pinning down is the model assignment, because it applies to every project regardless of which skill is running. Add this to your tool's **global** instructions file:
 
 | Tool | File |
 |---|---|
@@ -151,10 +152,66 @@ Skills only fire when the AI judges them relevant to the request. To be sure the
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `superforge` skill to
-assign the right model per subtask instead of defaulting every agent to the
-same model.
+Before dispatching subagents, consult the `superforge` skill to assign the
+right model per subtask instead of defaulting every agent to the same model.
+Print the assignment — task, model, and why — before spending anything.
 ```
+
+**What this does not do, and it is the most common misreading.** It does not make small requests run on a cheaper model. Tiering applies to **subagents the AI spawns**, not to the session you are typing into — and a one-line typo fix is cheapest handled directly, because spawning a separate agent for it costs *more* than doing it inline. To change what your own session runs on, use your tool's model setting (`/model` in Claude Code), which no instructions file can override.
+
+Where it does pay: any task big enough to be split up. Five subagents on the right five tiers instead of five on the most expensive one is the whole point.
+
+---
+## It asks for your language once
+
+The skills are written in English. You do not have to be.
+
+On the very first run in a project it asks a single question — with its guess already filled in from what you just typed — and then never asks again:
+
+```
+Conversation: 日本語   ← inferred from how you wrote
+Files in docs/: 日本語
+
+[1] both in English   [2] talk in 日本語, write files in English   [3] another language
+```
+
+**Those two are separate on purpose.** A maker working in Japanese whose repository is shared with people elsewhere usually wants Japanese replies and English files, and nobody thinks to ask for that.
+
+The answer lives in `docs/superforge.md`, survives `/clear`, travels in the handoff capsule, and changes whenever you say so. If you ignore the question and just state your task, it takes the guess and gets on with the work.
+
+---
+
+## Not sure where to start?
+
+Say **`/superforge help`** (or just "how do I use this"). It prints a short overview and a numbered menu, then waits — one section at a time, not a wall of text:
+
+`[1]` the fourteen skills · `[2]` **where money is actually saved** · `[3]` what this cannot do · `[4]` common misunderstandings · `[5]` deeper use
+
+### Where money is actually saved
+
+The saving comes from **where the tokens get processed**, not from how many agents run.
+
+| What you ask for | What happens | Cheaper? |
+|---|---|---|
+| "fix this typo" | Your own session does it | **No — and it is already the cheapest path.** Spawning an agent costs more |
+| "summarise these 2,000 log lines" | **One** agent on a cheap tier | **Yes, a lot** — the bulk is spent on the cheap model, only the result comes back |
+| "build this feature" (splits into five tasks) | A tier per task | **Yes — this is the main case** |
+| "decide the architecture" | Best model, no delegation | No, and this is not where to economise |
+
+So the test for delegating even a *single* task is not "is there more than one" — it is **"will this eat a lot of tokens without needing much judgment?"**
+
+---
+
+## What it will not do
+
+Stated up front, because the gap between what a tool promises and what it does is where trust goes.
+
+- **It does not make your own session cheaper.** Model tiering applies to subagents. Your session runs on whatever you set in your tool.
+- **It does not write code by itself.** These are instructions the AI reads. The AI still does the work, and it can still be wrong.
+- **It is not legal advice.** `superforge-ship` names which obligations fired and where a lawyer becomes mandatory. It never drafts the policy.
+- **It never says a product is secure.** `superforge-secure` reports what was checked and what was not — that is a different, and honest, claim.
+- **It does not replace talking to users.** `superforge-brain` tells you how to ask; it cannot know the answer.
+- **Its verdicts are only as good as its inputs.** Every market number carries a confidence tier for exactly this reason.
 
 ---
 
@@ -200,7 +257,7 @@ It stops for four things only — irreversible deletion, spending money, missing
 
 Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Why thirteen skills do not slow the AI down
+### Why fourteen skills do not slow the AI down
 
 The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
 
@@ -216,10 +273,15 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | the GO/NO-GO gate — TAM computed both ways, confidence tiers, how many customers this actually needs |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | anchoring, loss aversion, defaults, the symptom index, and the ethical line on each |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | channel-market fit, lead magnets, fit×intent qualification, CAC/LTV math, minimum viable scale per tactic |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | when the business sells capacity — the arithmetic revenue ceiling, scope as the real deliverable, scope creep priced rather than absorbed, retainers, client concentration |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | turning any feature into a quantified, logic-then-emotion business pitch |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | the design steps, the four data states, the quality checklist |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | the `design.md` + `design.html` spec |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | where the direction comes from — six extraction layers, reference vs. imitation, turning a design made elsewhere into a system |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | durations, easing chosen by the property being animated, FLIP, scroll sync, runtime reduced-motion |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | designing a page built to sell — section order, the hero, mobile vs. desktop |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | writing up shipped work so it is believed — layered by reader, credibility built in the decisions and their costs, and the section where your judgment was needed |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | a long page built to be skimmed — two layers per screen, shape chosen by what the content is doing, and no visual language of its own |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | the first thirty seconds — reaching an outcome instead of explaining, permissions at the point of use, marking completion so you can still test it |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | which obligations the product's own behaviour fired, the universal four-part baseline, and where a lawyer becomes mandatory |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | the measurement that cannot be added later, what each number may decide, and the first four weeks |
@@ -229,13 +291,45 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | what each tool catches, what it provably misses, and the CI wiring |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver, Dynamic Type, TalkBack, Compose semantics, Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | EAA / EN 301 549, ADA Title II, Section 508, JIS X 8341-3, conformance claims |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | splitting work so parallel is safe — one outcome and a proof line per task, the file-list rule, what may never run in parallel, revert before retry |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | preconditions, the loop, what may be decided alone |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | what earns a test and what does not, the unit/integration/E2E cost ladder, the mocking boundary, brittle-test symptoms, adding tests to code that has none |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | the four grades of proof and why a report may not contain an assertion, "it worked" vs "it happened to work", the seven ways evidence gets faked unintentionally |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | where the failure memory lives and why `Looked like` is the field that pays, what to do when it will not reproduce, bisecting "it used to work", when to stop |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | the seven passes in detail — where secrets actually leak, the two-account test that finds the worst bugs in an hour, injection sinks, dependency and build-time risk, the exposure sweep |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | contain before diagnosing — the rotation order, reconstructing blast radius from logs you may not have kept, and the honest notice |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | the ownership chain every authorization check reads, the choices that are cheap now and expensive later, missing indexes / N+1 / unbounded reads, additive migrations, and what "deleted" has to mean |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | what to do when there is no reference at all — ten named directions, push exactly one axis, and the specific defaults that read as machine-made |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | the two questions before any design decision — what success looks like on this surface (and what that mode may sacrifice), and whether this is refinement, redesign, or a fragment |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | checks on the built result rather than the intention, and the defaults grouped by why they appeared: what the library ships, shortcuts for an unearned feeling, and values nobody chose |
+| [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | shaders, 3D and GPU-drawn effects — the cost tiers, battery and heat, the floor device, the screen-reader and reduced-motion obligations, and why this belongs on a launch page and almost never inside a tool. Names no libraries on purpose |
+| [`superforge-ui/references/sound.md`](./skills/superforge-ui/references/sound.md) | the least-used expressive axis and the one users hate most when misused — nothing may sound before the visitor causes it, nothing may be carried by sound alone, and generated tone constrained to a scale turns "something is off" into "this feels considered" |
+| [`superforge-ui/references/effect-vocabulary.md`](./skills/superforge-ui/references/effect-vocabulary.md) | the menu the proposal step needs — around thirty effects across graphics, sound and native surfaces, each named by how it *feels* rather than by which library does it, so it does not expire. Without a menu, "make it impressive" returns a gradient |
+| [`superforge-ui/references/toolchain.md`](./skills/superforge-ui/references/toolchain.md) | the bridge from a sensation to something you can actually install — **the one dated file where library names live**, so every other file stays durable and there is a single thing to re-check. Also reads the other way: what recently became possible, and what that makes askable |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | the model assigned to each agent, printed before anything is spent and recorded after — so the tiering this suite promises is visible instead of claimed |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | three numbers set with the design instead of measured after it, where the weight actually comes from, and perceived speed as a design problem |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | text expansion and the layouts it breaks first, why a sentence must never be assembled from fragments, locale-aware formats, and deciding whether to be multilingual at all |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | will you find out, can you fix it, can you get it back, what does it cost — one alert worth having, a tested rollback, a restored backup, and the runaway-bill threshold |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | what generated media actually costs, the recipe that makes the twelfth image match the first, and the commercial-use and likeness questions answered before it ships |
+
+---
+
+## Tools the skills actually run
+
+Two pieces of deterministic work that a model should not do by reasoning — both read-only, both exit non-zero on failure so they can gate CI:
+
+| Script | What it does |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | WCAG contrast ratios from a token file. Relative luminance is a piecewise gamma transform, and a small error moves a ratio across a pass/fail line without looking wrong. Refuses to guess on colours with alpha — composite first or it reports UNKNOWN |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | Pass 1 of the security review across all six places a credential hides — **including git history**, where a key deleted in a later commit still lives. Never prints a usable secret |
+
+Four skills also carry `evals/evals.json`: prompts that should and should not trigger them, plus assertions on the **artifact** — not just "did the skill fire" but "did `docs/design.md` come out with a Design DNA block and a budget".
 
 ---
 
 ## Credits & prior art
 
-The skills here were distilled from seven sources and **rewritten in my own words**. No third-party code or text is included.
+The skills here were distilled from eight sources and **rewritten in my own words**. No third-party code or text is included.
 
 | Source | Origin | What it contributed |
 |---|---|---|
@@ -245,7 +339,9 @@ The skills here were distilled from seven sources and **rewritten in my own word
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | role-separated agent structures |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | packaging skills small and distributable |
 | Gem_Ren_Pack | mine | design and evaluation frameworks |
+| My own interaction-design and motion research notes | mine | the timing scale, easing chosen by animated property, FLIP, scroll-engine synchronisation, form-validation timing, and reach/target sizing behind `motion-system.md` and `design-process.md` |
 | An app-development skill set I was sent | third party, reviewed not reused | **the gaps it exposed** — market sizing, release-time legal obligations, and first-run design were all missing here. Nothing was copied: only standard field knowledge (TAM/SAM/SOM, data-protection triggers, permission priming) was taken, and every file was written from scratch |
+| Three design skill sets I was sent (`impeccable`, `emil-design-engineering`, `animation-patterns`) | third party, reviewed not reused | **Three concepts this suite was missing**, each rewritten from scratch and extended: the four surface modes and the refinement-vs-redesign line (now `surface-and-scope.md`, with the sacrifice column and the fragment case added); a floor checked on the built result rather than the intention (now `build-floor.md`, reorganised by *why* each default appears — a grouping neither source makes); and frequency as the test for whether to animate at all. No file, structure, or wording was copied |
 
 **On that last row.** Reading someone else's skill set is a good way to find out what yours is missing, and a bad way to fill the gap. What it surfaced were three real holes, now filled by [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md), [`superforge-ship`](./skills/superforge-ship/README.md), and [`first-run.md`](./skills/superforge-ui/references/first-run.md) — none of which resemble their counterparts, because the design decisions went the other way: no frozen legal boilerplate, no platform-specific feature catalogue that expires in a year, and no code templates in a suite that carries process rather than scaffolding.
 

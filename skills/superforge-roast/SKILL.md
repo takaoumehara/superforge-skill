@@ -74,8 +74,29 @@ the synthesis rules that turn thirty findings into a usable verdict.
 Write `docs/critique.md`, led by the single worst thing in one sentence.
 Group findings by cause, not by screen. Every finding carries a fix.
 
+## Findings must reach someone
+
+`docs/critique.md` is not the end of the job. A critique nobody is assigned to
+act on is a document, and documents do not fix products.
+
+When handing back, name the destination for each finding:
+
+| Finding is about | Goes to |
+|---|---|
+| Layout, hierarchy, copy, motion, states | `superforge-ui` |
+| Something broken or unimplemented | `superforge-dev` |
+| Accessibility | `superforge-a11y` — it owns the ledger, do not duplicate findings here |
+| Pricing, paywall placement, the offer | `superforge-biz` |
+| Anything an attacker could use | `superforge-secure` — it owns that ledger too; do not restate findings here |
+| Whether it is even releasable | `superforge-ship` |
+
+And mark each finding as **acted on / rejected with a reason / deferred with a
+date**. An open finding with no state is indistinguishable from one nobody
+read.
+
 ## Delegate when a sharper skill is installed
 
 `roast`, `validate-thinking` (multi-persona attack) · `critique`, `ui-review`
-(interface) · `requesting-code-review`, `security`, `harden` (code) ·
+(interface) · `requesting-code-review` (code) · **`superforge-secure`** (anything an attacker
+could use) ·
 `release-review`.

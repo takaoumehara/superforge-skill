@@ -36,7 +36,7 @@ Entra una petición; sale una skill especialista, un nivel de modelo elegido y u
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 🧭 Deriva en vez de preguntar
 Doce especialistas cubren idea, negocio, marca, UI, implementación, pruebas, depuración, accesibilidad, crítica, verificación, preparación para publicar y traspaso. El destino y el nivel se anuncian en una línea y el trabajo empieza. Solo se pide confirmación cuando dos caminos genuinamente distintos son igual de razonables.
@@ -62,9 +62,9 @@ Cada skill escribe su artefacto en `docs/` antes de informar, así que `/clear`,
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

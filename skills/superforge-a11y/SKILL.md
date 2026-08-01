@@ -15,11 +15,12 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "1.0"
+  version: "2.0"
 compatibility: >
   Standalone.
   Reads docs/design.md, docs/design.html, and docs/brief.md when present.
   Writes docs/accessibility.md.
+  scripts/contrast.py needs python3 (stdlib only); without it, contrast is reasoned and marked as such.
   Automated passes need the project's own runner; every manual pass degrades
   to a documented reasoning check when no runtime is available.
 ---
@@ -101,6 +102,32 @@ user it stops, in one clause.
 
 Never pad the count. Twelve unlabelled icon buttons from one missing component
 prop is **one** Blocker with twelve instances, not twelve findings.
+
+---
+
+## 3b. Measure contrast, do not estimate it
+
+Relative luminance is a piecewise sRGB gamma transform, and getting it slightly
+wrong moves a ratio across a pass/fail boundary without looking wrong. A design
+system also has far more colour pairs than anyone checks by hand, and the
+unchecked ones are where the failures are.
+
+```bash
+scripts/contrast.py "#767676" "#ffffff"                 # one pair
+scripts/contrast.py --tokens tokens.json --level body   # every plausible pair
+scripts/contrast.py --tokens tokens.json --level ui --over "#ffffff"
+scripts/contrast.py --tokens tokens.json --json         # exit 1 on failure, for CI
+```
+
+It reads `docs/design.md`'s token file at any nesting, handles `#rgb` /
+`#rrggbb` / `rgb()` / `rgba()`, and **refuses to guess on a colour with alpha
+below 1** — pass `--over` to composite it first, or the pair is reported as
+UNKNOWN rather than silently wrong.
+
+**Paste its output into the report.** A computed ratio with its command is
+grade A evidence (`superforge-verify/references/evidence.md`); a ratio you
+reasoned to is not. And a clean run here covers 1.4.3 / 1.4.6 / 1.4.11 only —
+one part of one pass out of seven, never a conformance claim.
 
 ---
 

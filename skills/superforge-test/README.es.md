@@ -38,7 +38,10 @@ Un rojo que nadie miró no es un rojo. El paso 3 es justo el que esta skill se n
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### 🎯 Qué merece una prueba, decidido antes de escribir ninguna
+Probarlo todo da una suite tan lenta y frágil que la gente deja de ejecutarla; no probar nada da un código que nadie se atreve a tocar. Un solo criterio resuelve casi todo: **una prueba se gana su sitio cuando atraparía un fallo que una persona no notaría de inmediato.** Dinero, fechas, zonas horarias, límites y cada bug ya corregido, sí. Comportamiento del framework, getters de paso, píxeles exactos, no.
 
 ### 🔴 El fallo se verifica, no se supone
 El runner se ejecuta en cuanto existe la prueba y se lee la salida para confirmar que el fallo es el buscado, y no una errata, un import olvidado o una ruta mal configurada. Una prueba que pasa por el motivo equivocado es peor que no tener prueba.
@@ -64,9 +67,9 @@ Cuando existe `docs/plan.md`, la línea de prueba de cada tarea se rellena con e
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

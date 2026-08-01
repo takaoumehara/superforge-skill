@@ -44,7 +44,7 @@ Durante el barrido no se poda nada. La deduplicación y la puntuación llegan de
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 📋 «Lo hemos visto todo» se convierte en un número
 Elemento × técnica × submétodo es una fila del registro, y el estado avanza en un solo sentido: `todo → generada → sobrevive/descartada → desarrollada → juzgada`. Terminado significa *cero filas en `todo`*. Una celda saltada no puede convertirse discretamente en una celda que nunca existió.
@@ -90,9 +90,9 @@ Se pregunta una sola vez, de entrada: el barrido completo y trazado, o un métod
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

@@ -156,5 +156,11 @@ Do not invent one from imagination. Ask for imagery — screenshots, mockups,
 a Figma URL, a site the user admires. Derive tokens from what is actually
 there.
 
+Full protocol → **`references/design-sourcing.md`**: the six extraction layers,
+how to reverse a design made in another tool into a system (and prove the system
+by rebuilding the original from its own tokens), and the fallback when there is
+genuinely nothing. `docs/design.md` opens with the resulting `## Design DNA`
+block, above the tokens.
+
 If the user has none, fall back to the codebase's existing conventions and
 say plainly that the result will be weaker than working from a reference.

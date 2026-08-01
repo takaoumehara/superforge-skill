@@ -13,6 +13,7 @@ conclusion that exists only in the conversation is lost at the next
 
 | File | Written by | Read by |
 |---|---|---|
+| `docs/superforge.md` | `superforge` (first run) | **every skill, before writing anything** — carries the conversation language, the artifact language, and any project-wide preference the user pinned |
 | `docs/brief.md` | `superforge` (intake) | every skill |
 | `docs/product-idea.md` | `superforge-brain` | `superforge-biz`, `superforge-brand`, `superforge-ui`, `superforge-dev` |
 | `docs/product-idea.html` | `superforge-brain` (full sweep only) | humans only — every generated idea, killed ones included, plus the Impact×Effort, User×Company Impact, and 独創×事業 quadrant maps |
@@ -22,14 +23,22 @@ conclusion that exists only in the conversation is lost at the next
 | `docs/design.html` | `superforge-ui` | humans only — the rendered style guide |
 | `docs/plan.md` | `superforge-dev` | `superforge-dev` (progress), `superforge-test`, `superforge-verify` |
 | `docs/accessibility.md` | `superforge-a11y` | `superforge-ui` (token fixes), `superforge-verify` (the gate), `superforge-ship` (legal exposure) |
-| `docs/critique.md` | `superforge-roast` | whoever is fixing the findings |
-| `docs/verification.md` | `superforge-verify` | you, before shipping |
-| `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
-| `.handoff/*.md` | `superforge-handoff` | the next session, any tool |
+| `docs/case-study-*.md` | `superforge-brand` | `superforge-ui` (the landing page's evidence section), `superforge-biz` (the numbers) |
+| `docs/critique.md` | `superforge-roast` | `superforge-ui` / `superforge-dev` / `superforge-a11y` / `superforge-biz` / `superforge-ship`, by finding — each one is routed, not left in the file |
+| `docs/verification.md` | `superforge-verify` | `superforge-ship` (a precondition — missing means BLOCK), `superforge-handoff` |
+| `docs/security.md` | `superforge-secure` | `superforge-ship` (a precondition — missing, or an unresolved Critical, means BLOCK), `superforge-dev` (the fixes), `superforge-test` (locking them), `superforge-handoff` |
+| `docs/failforward.md` | `superforge-debug` | `superforge-debug` (**read before diagnosing anything**), `superforge-test` (what needs locking), `superforge-handoff` |
+| `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision, and `superforge-handoff` — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
+| `.handoff/*.md` | `superforge-handoff` | the next session, any tool. **Reads every file above** and carries each one's Status, last-updated, and open questions forward — including the ones that were never written |
 
 ## Reading
 
 Before asking the user anything, check `docs/` for what is already decided.
+
+**Read `docs/superforge.md` first.** It says which language to reply in and
+which language to write files in, and those may differ. A skill that writes an
+artifact in the wrong language has not finished, it has produced work the user
+will have to redo.
 
 - If an upstream file exists, **read it and pre-fill your questions from it.**
   Confirm rather than interrogate: "brief.md によると対象は X、制約は Y。この前提で進めます。違えば言ってください。"
@@ -42,7 +51,9 @@ Before asking the user anything, check `docs/` for what is already decided.
 
 - Write the file as the last step, before reporting back.
 - Overwrite the whole file rather than appending fragments — these are living
-  documents, not logs.
+  documents, not logs. **One exception: `docs/failforward.md` is append-only,
+  and an entry is never deleted.** It is a log on purpose; frequency is its
+  signal.
 - Open every artifact with the same header block so any skill or model can
   orient instantly:
 

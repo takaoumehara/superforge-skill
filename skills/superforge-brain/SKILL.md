@@ -1,26 +1,21 @@
 ---
 name: superforge-brain
 description: >
-  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep —
-  or, when the stakes don't call for it, a lighter classic method (SCAMPER,
-  Six Hats, Crazy 8s, How Might We). For a full sweep: decompose the problem
-  across five lenses, name the hidden bias on every element, ban the obvious
-  three, then push every element through eight transformation techniques and
-  their sub-methods as a tracked cell ledger, so no combination is silently
-  skipped. Nothing dies for being unoriginal: an idea that already exists
-  survives if it can name a delta, a geographic gap, a timing shift, or an
-  execution flaw, and judgment splits into an originality axis and a viability
-  axis so an ordinary-but-needed business and a brilliant-but-unfundable one
-  are told apart instead of both being discarded. Every generated idea, not
-  just the winners, is visualised in docs/product-idea.html with an
-  Impact×Effort map, a User×Company Impact map, and the four-quadrant
-  Hero/Workhorse/Lab/Discard map. Use when the user says "brainstorm",
-  "ideas", "come up with", "what could we build", "reframe this", "concept",
-  "something more original", "is it worth building even though it exists",
-  "アイデア", "発想", "ブレスト", "企画", "コンセプト",
-  "ありきたりじゃないもの", "ありきたりだけど需要はある", "既にあるけど作る価値",
-  "何が作れる", "BreakBias", "SIT", "虱潰しで考えて", or runs
-  /superforge-brain.
+  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep — or,
+  when the stakes don't call for it, a lighter classic method (SCAMPER, Six
+  Hats, Crazy 8s, How Might We). For a full sweep: decompose the problem across
+  five lenses, name the hidden bias on every element, ban the obvious three,
+  then push every element through eight transformation techniques as a tracked
+  cell ledger, so no combination is silently skipped. Nothing dies for being
+  unoriginal: an existing idea survives if it can name a delta, a geographic
+  gap, a timing shift, or an execution flaw, and judgment splits into an
+  originality axis and a viability axis so an ordinary-but-needed business and a
+  brilliant-but-unfundable one are told apart. Use when the user says
+  "brainstorm", "ideas", "what could we build", "reframe
+  this", "concept", "something more original", "worth building even though it
+  exists", "アイデア", "発想", "ブレスト", "企画", "ありきたりじゃないもの",
+  "ありきたりだけど需要はある", "何が作れる", "BreakBias", "SIT",
+  "虱潰しで考えて", or runs /superforge-brain.
 license: MIT
 metadata:
   author: Takao Umehara

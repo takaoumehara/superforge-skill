@@ -37,7 +37,7 @@ sequenceDiagram
 
 ---
 
-## ✨ 3つの強み
+## ✨ 強み
 
 ### 📦 繰り返さず指し示すから短い
 カプセルが持つのは、目的・検証済みの状態・動いているプロセスとポート・すぐ次にやること・最初に読むべきファイル。それ以外は、他のスキルがすでに書いた `docs/` の成果物に置いたままにします。
@@ -65,7 +65,7 @@ Claude Code、Codex、Gemini CLI、Antigravity、Cursor。カプセルは特定�
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

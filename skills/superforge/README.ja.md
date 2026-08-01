@@ -36,7 +36,7 @@ flowchart TD
 
 ---
 
-## ✨ 3つの強み
+## ✨ 強み
 
 ### 🧭 聞き返さずに振り分ける
 アイデア・ビジネス・ブランド・UI・実装・テスト・デバッグ・アクセシビリティ・批評・検証・出荷判定・引き継ぎの12領域を担当スキルがカバーします。行き先と階層を一行で宣言してから着手し、方向性がまったく異なる2案で本当に迷うときだけ確認します。
@@ -64,7 +64,7 @@ flowchart TD
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

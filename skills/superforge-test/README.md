@@ -40,6 +40,9 @@ A red state nobody watched is not a red state. Step 3 is the one this skill refu
 
 ## ✨ Features
 
+### 🎯 What earns a test, decided before any test is written
+Testing everything produces a suite so slow and brittle that people stop running it; testing nothing produces a codebase nobody dares change. One criterion resolves most of it: **a test earns its keep when it would catch a failure a human would not notice immediately.** Money, dates, timezones, boundaries, and every bug already fixed — yes. Framework behaviour, pass-throughs, exact pixels — no.
+
 ### 🔴 The failure is verified, not assumed
 The runner is executed the moment the test exists, and the output is read to confirm the failure is the intended one — not a typo, a missing import, or a misconfigured path. A test that passes for the wrong reason is worse than no test.
 
@@ -64,7 +67,7 @@ When `docs/plan.md` exists, each task's proof line is filled in with the exact c
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

@@ -34,7 +34,10 @@ Cada flecha es una puerta. Fallar una devuelve el trabajo hacia atrás, no hacia
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### 🏅 La evidencia se gradúa, y una afirmación nunca basta
+Reproducible, observada, derivada, afirmada. Una conclusión debe nombrar el comando o la captura en que se apoya, y **un informe de verificación no puede contener ni una sola afirmación sin respaldo.** El fallo silencioso que esto atrapa es una conclusión escrita con el tono seguro de una medición: «layout móvil verificado» no es evidencia; «captura a 375px, adjunta» sí. Y `## 確認していないこと` (lo no comprobado) es una sección obligatoria.
 
 ### 🚦 Una puerta, no una lista que se ojea
 Cero pruebas fallidas, cero errores de compilación en TypeScript, Swift o Kotlin, cero avisos del linter. Nada de «casi todo pasa»: las cifras se leen de la salida, no se estiman mirando el diff.
@@ -60,9 +63,9 @@ Por debajo de 640px: objetivos táctiles de 44px o más, sin desbordamiento hori
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

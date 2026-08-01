@@ -33,7 +33,10 @@ Las decisiones de color y tipografía pasan a `superforge-ui`, que las convierte
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
+
+### 💸 Lo que cuesta el medio generado, y si puedes usarlo
+Cada llamada es barata, y justo por eso nadie lleva la cuenta del total — el coste son las treinta imágenes que generaste para conseguir una, y el vídeo va uno o dos órdenes de magnitud por encima por segundo. Así que se fija un presupuesto de iteraciones por pieza antes de empezar. Lo difícil de verdad es la consistencia: una buena imagen es fácil, doce que parezcan de la misma marca es el problema, y se resuelve fijando los parámetros y generando el conjunto en una sola sesión, no escribiendo mejor el prompt. Y luego las tres preguntas de derechos, resueltas antes de publicar. Nunca el producto en sí, nunca un cliente.
 
 ### 🎭 Tres adjetivos ante los que responde todo lo demás
 La personalidad visual se fija en exactamente tres palabras, y cada decisión posterior — paleta, pareja tipográfica, tono de voz — tiene que poder defenderse frente a ellas. Con tres adjetivos se puede discutir; con un mood board no.
@@ -59,9 +62,9 @@ El color y la tipografía pasan a `superforge-ui` para convertirse en tokens den
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

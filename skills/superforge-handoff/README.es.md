@@ -37,7 +37,7 @@ La cápsula apunta a `docs/`, no lo duplica. Por eso se queda lo bastante corta 
 
 ---
 
-## ✨ 3 puntos clave
+## ✨ Puntos clave
 
 ### 📦 Corta porque señala en vez de repetir
 La cápsula guarda el objetivo, el estado verificado, los procesos y puertos en marcha, los siguientes pasos inmediatos y qué archivos leer primero. Todo lo demás se queda en los artefactos de `docs/` que ya escribieron las otras skills.
@@ -63,9 +63,9 @@ Junto a la cápsula recibes un prompt listo para pegar con el proyecto, el archi
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

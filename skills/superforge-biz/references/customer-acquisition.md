@@ -161,7 +161,54 @@ learning, not customers — the message has nothing real to prove yet.
 
 ---
 
-## 8. Common failure modes
+## 8. Outreach has legal limits, and they follow the recipient
+
+§7 opens with "direct outreach," and unsolicited contact is regulated almost
+everywhere. **The rule that applies is the one where the recipient is**, not
+where you are — the same logic as `superforge-ship/references/legal-triggers.md`
+§3. A Japanese maker in New York emailing a prospect in Berlin is under EU
+rules for that message.
+
+The shapes converge even though the details differ:
+
+| Region | The thing that most often surprises people |
+|---|---|
+| **US** | CAN-SPAM allows cold email without prior consent, but requires a working opt-out honoured promptly, a real physical postal address, and a subject line that does not mislead |
+| **Canada** | CASL requires **consent before sending**, with narrow implied-consent cases. Penalties are severe and it is enforced |
+| **EU / UK** | GDPR + ePrivacy: consent-first for individuals, with a narrow legitimate-interest route for B2B in some member states. Storing the prospect's data at all is itself processing, with notice duties |
+| **Japan** | 特定電子メール法 — opt-in required, sender identification required, opt-out in every message |
+
+**The universal baseline for outreach** — get these right and you are broadly
+aligned nearly everywhere, which is the practical answer to "my prospects could
+be anywhere":
+
+1. **Identify yourself truthfully** — real name, real entity, a real address
+2. **Say how you got their address**, in one line. This is required in places
+   and improves reply rates everywhere
+3. **A working opt-out in every message**, honoured immediately and permanently
+4. **Never mislead in the subject or sender line** — this is the part that is
+   illegal in essentially every jurisdiction, not merely rude
+5. **Keep a record of consent or of the basis** for each contact, from the start.
+   Reconstructing it later is impossible
+
+Two things that are not legal questions but end channels anyway:
+
+- **Scraped lists and purchased lists.** Illegal in the consent-first regimes,
+  and in the others they burn the sending domain's reputation, which takes
+  months to recover and silently degrades every legitimate email you send
+- **Platform rules are stricter than the law.** LinkedIn, Discord, Slack
+  communities, and app stores each ban outreach patterns that no statute
+  forbids. Losing the account ends the channel faster than any regulator would
+
+**Where this file stops.** As with `superforge-ship`, this identifies which
+obligations exist — it does not tell you whether a specific campaign is lawful.
+Before a paid campaign, a purchased list, or any outreach at volume into the EU,
+Canada, or a regulated industry, that is a question for a lawyer in the
+recipient's jurisdiction.
+
+---
+
+## 9. Common failure modes
 
 1. **Channel chosen by popularity, not fit** — see §1. "Everyone does content
    marketing" is not a reason if the buyer is a handful of enterprise
@@ -178,6 +225,9 @@ learning, not customers — the message has nothing real to prove yet.
    weak signal, it is no signal, and it costs the same in time.
 7. **Skipping the manual phase.** See §7 — trying to look "professional" with
    a paid campaign before there's proof to make it convert.
+8. **Outreach without checking where the recipient is.** See §8 — a purchased
+   list into the EU or Canada is not an aggressive tactic, it is an unlawful
+   one, and the domain reputation damage outlives the campaign.
 
 ---
 
@@ -193,4 +243,5 @@ Qualification: what counts as fit, what counts as intent
 CAC / LTV — current estimate and the math behind it
 First-10-customers tactics, if pre-launch
 Attribution: how we will know which channel a customer came from
+アウトリーチ: 相手の所在地域と、それに伴う要件（§8）
 ```

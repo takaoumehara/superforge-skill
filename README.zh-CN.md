@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**用一句话说出你想做什么，十三个技能就按正确的顺序，从想点子一直带到上线前的检查。**
+**用一句话说出你想做什么，十四个技能就按正确的顺序，从想点子一直带到上线前的检查。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「技能」就是**可以加进 Claude Code 这类 AI 工具的一份操作说明**。放进去一个文件夹，AI 就照着那套步骤干活。
 
-superforge 是这样的十三份。站在正中间的 `superforge` 扮演**工坊前台**。
+superforge 是这样的十四份。站在正中间的 `superforge` 扮演**工坊前台**。
 
 > 你：「我想给街角那家咖啡馆做个 App。」
 > 前台：「先把点子理清楚，交给 `superforge-brain`。这活儿需要判断力，用 Opus 5。」
@@ -18,7 +18,7 @@ superforge 是这样的十三份。站在正中间的 `superforge` 扮演**工�
 
 前台只做三件事。
 
-1. **决定交给谁**：想 / 做 / 验 / 出，十三个里挑一个
+1. **决定交给谁**：想 / 做 / 验 / 出，十四个里挑一个
 2. **决定用哪个模型**：聪明的模型贵，便宜的活儿不该用贵模型
 3. **确保结果落成文件**：这样清掉对话，东西也不会跟着没
 
@@ -54,7 +54,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ---
 
-## 十三个技能
+## 十四个技能
 
 正中间的 `superforge` 是前台，其余十二个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
@@ -63,30 +63,31 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.zh-CN.md) | 想要值得做的点子——不落俗套的**和**平凡但被真正需要的（**BreakBias 引擎**，也可以选更轻的经典方法） | `docs/product-idea.md`（彻底扫描时还有 `.html` 地图） |
-| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 这个市场究竟值不值得进；然后是定价、付费墙位置、怎么获客、把价值讲成数字 | `docs/business-model.md` |
+| [`superforge-biz`](./skills/superforge-biz/README.zh-CN.md) | 这个市场究竟值不值得进；然后是定价、付费墙位置、怎么获客、把价值讲成数字，以及卖产能而非产品时的那笔账 | `docs/business-model.md` |
 | [`superforge-brand`](./skills/superforge-brand/README.zh-CN.md) | 名字、配色、语气，外加生成素材的提示词 | `docs/brand.md` |
 
 ### 2. 做 —— 把它做出来
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计，也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
-| [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：把活儿拆开分给多个 agent，各配合适的模型 | `docs/plan.md` |
+| [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计——方向来自真实参考而不是模型自己的平均值；也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
+| [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：先拆得让并行不会出事，再把每块分给合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
-| [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先写测试再动手（Web / iOS / Android） | 测试本身 |
-| [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁 | 根因追加到对应文档 |
+| [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先定什么值得测，再先写测试（Web / iOS / Android） | 测试本身 |
+| [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁，包括复现不了的那些 | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.zh-CN.md) | 认真做无障碍检查——七道检查，不是一个扫描器 | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.zh-CN.md) | 一个已登录的普通用户，能不能读到别人的数据？七道检查，按攻击者能拿到什么来排；也包括密钥已经泄漏之后怎么办 | `docs/security.md` |
 
 ### 4. 出 —— 准备见人
 
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.zh-CN.md) | 想在用户发现之前，先听到毛病 | `docs/critique.md` |
-| [`superforge-verify`](./skills/superforge-verify/README.zh-CN.md) | 「做完了」需要带证据 | `docs/verification.md` |
+| [`superforge-verify`](./skills/superforge-verify/README.zh-CN.md) | 「做完了」需要带上分级的证据，以及诚实写下没查什么 | `docs/verification.md` |
 | [`superforge-ship`](./skills/superforge-ship/README.zh-CN.md) | 能跑了——但可以发布吗？法律义务、审核被拒的真正原因、事后补不回来的度量 | `docs/ship-readiness.md` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.zh-CN.md) | 清掉会话或换工具之前 | `.handoff/` |
 
@@ -98,7 +99,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ### 一次全装好（推荐）
 
-克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十三个一次性链接进去。
+克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十四个一次性链接进去。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -142,7 +143,7 @@ zip -r superforge-ui.zip .
 
 ### 让它常驻生效（推荐）
 
-技能只在 AI 判断「和当前请求有关」时才自动触发。想确保模型分级这一步绝不被跳过，就在所用工具的**全局**指令文件里加一行——那份对所有项目都生效的文件。
+技能在 AI 判断与当前请求相关时会**自己起来**，你不需要打它的名字。真正值得钉死的是模型分配，因为不管哪个技能在跑、在哪个项目里，它都适用。把这段加进你所用工具的**全局指令文件**：
 
 | 工具 | 文件 |
 |---|---|
@@ -151,10 +152,66 @@ zip -r superforge-ui.zip .
 | Gemini CLI / Antigravity | `~/.gemini/GEMINI.md` |
 
 ```
-Before dispatching subagents, consult the `superforge` skill to
-assign the right model per subtask instead of defaulting every agent to the
-same model.
+派发子 agent 之前，先参考 superforge 技能，按任务分配合适的模型，
+不要把所有 agent 都留在同一个模型上。开销发生前先把
+任务 / 模型 / 理由 打印出来。
 ```
+
+**它不会做什么——这是最常见的误读。** 它**不会把小请求转到便宜的模型上**。分级作用于 **AI 派发出去的子 agent**，而不是你正在输入的这个会话；而且像「改个错别字」这种一行的活，**直接改才最便宜**——专门起一个 agent 反而*更贵*，因为多了一次启动。要改自己会话用的模型，用工具自身的设置（Claude Code 里是 `/model`），指令文件覆盖不了它。
+
+真正划算的是**大到需要拆分的任务**：五个子 agent 全用最贵的模型，还是各自落在合适的五个档位上——这就是这套东西存在的理由。
+
+---
+## 语言只在第一次问一遍
+
+技能本身是用英文写的。你不必是。
+
+在一个项目里第一次跑起来时，它会问一个问题——**答案已经根据你刚才的输入猜好了**——之后再也不问:
+
+```
+对话: 中文   ← 根据你的写法推测
+docs/ 里的文件: 中文
+
+[1] 两边都用英文   [2] 对话用中文，文件用英文   [3] 换一种语言
+```
+
+**这两项是故意分开的。** 用中文工作、但仓库要和国外的人共享，通常想要中文回复加英文文件——而几乎没人会主动提这个要求。
+
+答案存在 `docs/superforge.md` 里，`/clear` 之后还在，会跟着交接胶囊一起走，你随时说一句就能改。如果你直接无视这个问题、上来就说事，它会采用猜测然后开始干活。
+
+---
+
+## 不知道从哪开始?
+
+说一句 **`/superforge help`**（或者「怎么用」）。它会给一段简短的总览和一个编号菜单，然后停下来等你选——一次只出一节，不是一堵墙:
+
+`[1]` 十四个技能 · `[2]` **钱到底省在哪** · `[3]` 它做不到什么 · `[4]` 常见误解 · `[5]` 进阶用法
+
+### 钱到底省在哪
+
+省不省，取决于**token 在哪儿被处理**，而不是跑了几个 agent。
+
+| 你说的话 | 实际发生什么 | 更便宜吗? |
+|---|---|---|
+| 「改个错别字」 | 你自己的会话直接改 | **不。而且这已经是最便宜的**——专门起 agent 反而更贵 |
+| 「把这 2000 行日志总结一下」 | **一个**便宜档位的 agent | **会，而且省很多**——大头在便宜模型上烧，回来的只有结果 |
+| 「把这个功能做出来」（拆成五个任务） | 每个任务各配一档 | **会。这才是主战场** |
+| 「定一下架构」 | 最好的模型，不外包 | 不会，而且这里本来就不该省 |
+
+所以要不要把**单个**任务派出去，判断标准不是「有没有两个以上任务」，而是**「这活会不会吃掉大量 token，却不太需要判断力」**。
+
+---
+
+## 它做不到的事
+
+先写在前面——工具承诺的和它实际做到的之间那道缝，正是信任流失的地方。
+
+- **它不会让你自己的会话变便宜。** 模型分级作用于子 agent。你的会话跑在你自己设定的模型上。
+- **它不会替你把代码写完。** 这些是给 AI 读的说明书。干活的还是 AI，而 AI 会出错。
+- **它不是法律意见。** `superforge-ship` 指出触发了哪些义务、从哪一步开始必须找律师，但它不会替你起草条款。
+- **它绝不会说产品「是安全的」。** `superforge-secure` 报告的是查了什么、没查什么——那是另一种、也更诚实的说法。
+- **它替代不了去和用户聊。** `superforge-brain` 教你怎么问，但它不知道答案。
+- **结论不会好过输入。** 每个市场数字都带着置信等级，正是因为这个。
 
 ---
 
@@ -200,7 +257,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 完整协议 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 为什么装十三个也不会拖慢 AI
+### 为什么装十四个也不会拖慢 AI
 
 常驻在 AI 上下文里的只有**每个技能那一行描述**。正文按需加载，更深的材料放在 `references/` 里，用到才读。
 
@@ -216,10 +273,15 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-biz/references/market-sizing.md`](./skills/superforge-biz/references/market-sizing.md) | GO/NO-GO 闸门——TAM 双向计算、每个数字的可信度分级、到底需要多少客户 |
 | [`superforge-biz/references/behavioral-frameworks.md`](./skills/superforge-biz/references/behavioral-frameworks.md) | 锚定、损失厌恶、默认选项、按症状查的索引，以及各自的伦理边界 |
 | [`superforge-biz/references/customer-acquisition.md`](./skills/superforge-biz/references/customer-acquisition.md) | 渠道契合、引流磁石、匹配度×意向度筛选、CAC/LTV 算法 |
+| [`superforge-biz/references/service-business.md`](./skills/superforge-biz/references/service-business.md) | 当卖的是产能而非产品 — 由工时算出的收入天花板、范围就是交付物、范围蔓延要标价而不是自己吞、顾问费、客户集中度 |
 | [`superforge-biz/references/value-pitch.md`](./skills/superforge-biz/references/value-pitch.md) | 把任何功能变成量化的、先数字后情感的商业话术 |
 | [`superforge-ui/references/design-process.md`](./skills/superforge-ui/references/design-process.md) | 设计步骤、四种数据状态、质量清单 |
 | [`superforge-ui/references/design-system-output.md`](./skills/superforge-ui/references/design-system-output.md) | `design.md` + `design.html` 的规格 |
+| [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | 设计方向从哪里来——六层提取、参考与抄袭的界线、把别处做好的设计变成系统 |
+| [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | 时长、按动画属性选缓动、FLIP、滚动同步、reduced-motion 的运行时停止 |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | 卖货页面的设计——版块顺序、首屏、移动端和桌面端的区别 |
+| [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | 把做过的事写成别人会信的东西——按读者分层，可信度靠「决定和它的代价」，再写下需要你判断的那一刻 |
+| [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | 经得起快速浏览的长页面——每屏两层、一个观点，形态按内容的作用来选；本身不带任何视觉语言 |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | 进来后的头三十秒——不解释，直接抵达第一个成果；权限在用到时才要；完成标记要让你事后还能测 |
 | [`superforge-ship/references/legal-triggers.md`](./skills/superforge-ship/references/legal-triggers.md) | 产品行为触发了哪些义务、四条到处大体通用的基线，以及必须请律师的那条线 |
 | [`superforge-ship/references/launch-metrics.md`](./skills/superforge-ship/references/launch-metrics.md) | 事后补不回来的度量、每个数字能决定什么，以及最初四周怎么走 |
@@ -229,13 +291,45 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-a11y/references/tooling.md`](./skills/superforge-a11y/references/tooling.md) | 各工具能查到什么、确定查不到什么，以及 CI 接法 |
 | [`superforge-a11y/references/native-platforms.md`](./skills/superforge-a11y/references/native-platforms.md) | VoiceOver、Dynamic Type、TalkBack、Compose semantics、Switch Access |
 | [`superforge-a11y/references/conformance-and-law.md`](./skills/superforge-a11y/references/conformance-and-law.md) | 欧盟无障碍法案 / EN 301 549、ADA Title II、Section 508、JIS X 8341-3、合规声明 |
+| [`superforge-dev/references/decomposition.md`](./skills/superforge-dev/references/decomposition.md) | 怎样拆分才能安全并行 — 每个任务一个结果加一条验证命令、列出会写入的文件、绝不可并行的组合、失败先回滚再重试 |
 | [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md) | 无人值守的前提、循环方式、可以自行拍板的范围 |
+| [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 什么值得测、什么不值得。单元/集成/E2E 的成本阶梯、mock 的边界、脆弱测试的症状、给没有测试的代码补测试 |
+| [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 证据的四个等级，以及报告里为何不能出现「断言」。「能用」和「碰巧能用」的区别，七种无意间造假的证据 |
+| [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失败记忆放在哪里，真正有价值的是 `Looked like` 那一行。复现不了时怎么办、用二分查找定位「以前是好的」、何时该停 |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 七道检查的细节——密钥真正泄漏的地方、一小时能挖出最严重 bug 的双账号测试、注入的落点、依赖与构建期风险、对外暴露面的清扫 |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 先止血，再查因——轮换顺序、从可能压根没留的日志里重建影响范围、以及一封诚实的通知 |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 每次鉴权都要走的归属链、现在便宜以后昂贵的那些决定、缺索引 / N+1 / 无上限读取、增量式迁移，以及「删除」必须意味着什么 |
+| [`superforge-ui/references/aesthetic-direction.md`](./skills/superforge-ui/references/aesthetic-direction.md) | 一个参考都没有时怎么办——十个有名字的方向、只推一根轴，以及那些一看就是「机器做的」的具体默认值 |
+| [`superforge-ui/references/surface-and-scope.md`](./skills/superforge-ui/references/surface-and-scope.md) | 任何设计决定之前的两个问题——在这个界面上「成功」是什么样（以及那个模式可以牺牲什么），以及这是改良、重做，还是一个片段 |
+| [`superforge-ui/references/build-floor.md`](./skills/superforge-ui/references/build-floor.md) | 对成品而非对意图的检查。以及按「为什么会出现」给默认值分组——库自带的、没挣来的感觉的近路、没人选过的数值 |
+| [`superforge-ui/references/heavy-visuals.md`](./skills/superforge-ui/references/heavy-visuals.md) | 着色器、3D、GPU 绘制——成本档位、电量与发热、底线机型、屏幕阅读器与 reduced-motion 的义务，以及为什么这些适合放在发布页、几乎不适合放进每天用的工具里。故意不写库名 |
+| [`superforge-ui/references/sound.md`](./skills/superforge-ui/references/sound.md) | 最少被用到的表现维度，也是用错时最招人烦的那一个——不是用户触发的声音一律不响，任何信息都不能只靠声音传达，而把生成的音高约束在音阶上，能把「哪儿不对劲」变成「这是设计过的」 |
+| [`superforge-ui/references/effect-vocabulary.md`](./skills/superforge-ui/references/effect-vocabulary.md) | 提案时需要的那份菜单——横跨图形、声音与原生端的约三十种效果，按**感觉**而不是按哪个库来命名，所以不会过期。没有菜单，「做得酷一点」换来的就是一层渐变 |
+| [`superforge-ui/references/toolchain.md`](./skills/superforge-ui/references/toolchain.md) | 从「感觉」到「实际要装什么」的桥——**唯一写有库名、并且标了日期的文件**，所以其他文件都不会过期，要复核的地方只有一处。也反着读：最近有什么变得可行了，因此又有什么变得可以提了 |
+| [`superforge-dev/references/dispatch-ledger.md`](./skills/superforge-dev/references/dispatch-ledger.md) | 每个 agent 分到哪个模型，花钱之前先列表、跑完之后再记录——让这套东西承诺的分级变成看得见的，而不是一句声明 |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 不是事后测，而是和设计一起定的三个数字。重量到底从哪来。体感速度是设计问题 |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字会变长，最先坏的是按钮。为什么句子绝不能拼接、依赖 locale 的格式，以及要不要做多语言这件事本身 |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 能不能发现 / 能不能修 / 能不能找回 / 要花多少——一条值得留的告警、演练过的回滚、真正恢复过的备份、失控账单的阈值 |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成媒体的真实成本、让第十二张和第一张对得上的配方，以及在发布前就答完的商用授权与肖像问题 |
+
+---
+
+## 技能真正会去跑的工具
+
+两件不该靠推理去做的确定性计算。都是只读，失败时返回非零，可以拿来卡 CI。
+
+| 脚本 | 做什么 |
+|---|---|
+| [`superforge-a11y/scripts/contrast.py`](./skills/superforge-a11y/scripts/contrast.py) | 从 token 文件算 WCAG 对比度。相对亮度是分段 gamma 变换，差一点就跨过合格线，而看上去一点都不像错。带 alpha 的颜色不猜，不合成就报 UNKNOWN |
+| [`superforge-secure/scripts/scan-secrets.sh`](./skills/superforge-secure/scripts/scan-secrets.sh) | 把安全评审的第 1 道跑遍全部六个地方，**包括 git 历史**——后来那次提交删掉的密钥，还在那儿。绝不打印可用的密钥 |
+
+四个技能还带了 `evals/evals.json`：该触发和不该触发的提示词，外加对**产物**的断言——不只是「技能有没有起来」，而是「`docs/design.md` 里到底有没有 Design DNA 和预算」。
 
 ---
 
 ## 来源与致谢
 
-这里的技能是从七份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码或文本。
+这里的技能是从八份材料中提炼、并**用我自己的话重写**的。不含任何第三方代码或文本。
 
 | 材料 | 出处 | 提供了什么 |
 |---|---|---|
@@ -245,7 +339,9 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | MIT © BMad Code, LLC | 按角色分工的 agent 编排范式 |
 | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Vercel Labs | 把技能拆小、便于分发的形态 |
 | Gem_Ren_Pack | 本人 | 设计与评估相关的框架 |
+| 我自己整理的交互设计与动效研究笔记 | 本人 | `motion-system.md` 与 `design-process.md` 的底子——时长分级、按动画属性选缓动、FLIP、滚动引擎同步、表单校验时机、可达性与点击目标 |
 | 别人给我的一套应用开发技能 | 第三方，**读过但未沿用** | **它暴露出来的缺口**。市场测算、发布时的法律义务、首次启动设计，这里原本一样都没有。只取了行业通识（TAM/SAM/SOM、数据保护法的触发条件、权限的情境化请求），每个文件都是从零写的 |
+| 别人发我的三套设计技能（`impeccable`、`emil-design-engineering`、`animation-patterns`） | 第三方，**读过但未沿用** | **这套东西缺的三个概念**，全部从零重写并扩展：四种界面模式与「改良还是重做」的分界（`surface-and-scope.md`，加了「可以牺牲什么」这一列和「片段」这种情况）、对成品而不是对意图去测的质量底线（`build-floor.md`，按默认值**为什么**出现来重新分组——这个分法两个来源都没有）、以及用使用频率来决定要不要做动画 |
 
 **关于最后一行。** 读别人的技能集，是发现自己缺什么的好办法，却是填补缺口的坏办法。它暴露出三个真实的缺口，现在由 [`market-sizing.md`](./skills/superforge-biz/references/market-sizing.md)、[`superforge-ship`](./skills/superforge-ship/README.zh-CN.md)、[`first-run.md`](./skills/superforge-ui/references/first-run.md) 填上。它们和原件都不像，因为设计判断走了相反的方向——**不放冻结的法律文本**、不收录一年就过期的平台功能目录、也不在一套承载流程的技能里塞代码模板。
 

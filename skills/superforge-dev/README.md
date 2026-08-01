@@ -38,6 +38,12 @@ Nothing is accepted from a subagent on its own word: tests run and diffs are rea
 
 ## ✨ Features
 
+### 🗄️ The schema is the one thing that gets harder to change as you succeed
+Code with no users can be rewritten in an afternoon; a table with real rows cannot. So the decisions that are cheap now and expensive later get made deliberately — non-guessable IDs, UTC timestamps, money in integer minor units, and **the ownership chain that every authorization check reads.** Plus the three causes of every data performance problem, and migrations run additively against a copy of production data with a rollback you have already tested.
+
+### 🧱 A split where parallel is provably safe
+Topology and model tier cannot rescue a bad split, and a bad split is where unattended runs actually fail. Every task names one outcome, a proof line, and **the files it will write** — because the rule is *two tasks may run in parallel only if those file sets do not intersect.* Not "probably fine": listed, and disjoint. Shared foundations run alone and first.
+
 ### 🎚️ A tier per subtask, across four model families
 Judgment to Opus 5, unattended long runs to Fable 5, volume implementation to Sonnet 5, routine closed tasks to Haiku 4.5 — with the equivalent tier named for Gemini, Codex, and Kimi environments too. Effort level is set alongside the model, not left at the default.
 
@@ -62,7 +68,7 @@ Subagents (one-way dispatch, low token cost) is the default; Agent Teams (intera
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

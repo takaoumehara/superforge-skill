@@ -37,7 +37,7 @@ sequenceDiagram
 
 ---
 
-## ✨ 3가지 강점
+## ✨ 강점
 
 ### 📦 되풀이하지 않고 가리키기 때문에 짧습니다
 캡슐에 담기는 것은 목표, 검증된 상태, 실행 중인 프로세스와 포트, 바로 다음에 할 일, 먼저 읽을 파일입니다. 나머지는 다른 스킬이 이미 써 둔 `docs/` 산출물에 그대로 둡니다.
@@ -63,9 +63,9 @@ Claude Code, Codex, Gemini CLI, Antigravity, Cursor 모두 가능합니다. 캡�
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열네 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

@@ -36,6 +36,9 @@ Edit one artifact and the other is regenerated in the same turn. They are never 
 
 ## ✨ Features
 
+### ⚡ Performance and a second language are layout decisions, not later problems
+The hero video, four font weights, and an animation on a layout-triggering property are all chosen in the design — and by the time anyone profiles, components sit on top of them. So three budget numbers go into `docs/design.md` with the tokens, each with a consequence for exceeding it. Same with language: German runs 30–40% longer and **short strings expand the most, so buttons break first.** Never size a container to its current text; doing that now is nearly free, and retrofitting it is a rebuild.
+
 ### 🎛️ Seven states before a component counts as finished
 Default, hover, focus, active, disabled, loading, and error are each specified — including the keyboard focus ring and the recovery path from the error state. "It looks right at rest" is not a finished component.
 
@@ -63,7 +66,7 @@ A landing page is judged by a different metric than a product screen — a stran
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
@@ -85,6 +88,11 @@ When the run finishes, open `docs/design.html` in a browser: every token and sta
 
 ---
 
+### 🧬 Design that starts from evidence, not from the model's average
+Ask any model to "make it look good" and it returns **the average of everything it has seen** — the centred hero, the three feature cards, the gradient blob. Nothing is individually wrong; nothing was *chosen*. A stronger model returns a better-executed average, not a different one.
+
+So the skill opens by sourcing the direction from outside itself: sites you admire, or screens already made in Claude Design, Google Stitch, Figma, or v0. Then it extracts the **system** in six layers — section structure and rhythm, the spacing ratio, the type scale ratio, colour *roles* rather than hex codes, motion character, imagery treatment — and never the content. **Three references beat one**: one produces imitation, three force you to find the principle they share. The sources and the deliberate divergences from them are written into `docs/design.md`, so the design can be defended later.
+
 ### 🚪 The thirty seconds nobody designs
 A landing page convinces a stranger. A product screen serves a returning user. **Between them is the moment that decides whether either investment pays off**, and it is usually handed a carousel nobody reads. The goal of first run is not to explain the product — it is to get the user to one real outcome with the fewest decisions in between, and if the product can deliver that without explanation, the explanation is friction wearing the costume of helpfulness.
 
@@ -94,4 +102,4 @@ Permissions are the specific trap: a prompt shown before the user understands wh
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); the design steps, the four data states, and the quality checklist are in [references/design-process.md](references/design-process.md), the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md), sales/landing page design is in [references/landing-page.md](references/landing-page.md), and the first thirty seconds after someone commits — first run, permission prompts, activation — is in [references/first-run.md](references/first-run.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); sourcing the direction from references is in [references/design-sourcing.md](references/design-sourcing.md), motion timing and the render pipeline in [references/motion-system.md](references/motion-system.md), the design steps, the four data states, and the quality checklist in [references/design-process.md](references/design-process.md), the two-artifact spec is in [references/design-system-output.md](references/design-system-output.md), sales/landing page design is in [references/landing-page.md](references/landing-page.md), and the first thirty seconds after someone commits — first run, permission prompts, activation — is in [references/first-run.md](references/first-run.md). Suite overview: [superforge-skill](../../README.md).

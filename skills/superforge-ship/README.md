@@ -41,6 +41,9 @@ flowchart TD
 
 ## ✨ Features
 
+### 📡 Will you find out, can you fix it, can you get it back
+The default state of a solo product is that **the user is the monitoring system.** Three things fix that and each is an afternoon: an uptime check on a URL that touches the database (not a static health page, which stays green through every outage that matters), error reporting, and one alert that means the product is not working. Then stop — more alerts than you will act on train you to ignore the real one. A tested rollback and a backup someone has actually restored are `BLOCK` conditions here, not polish: an untested backup is a belief about a file.
+
 ### ⚖️ Jurisdiction follows your users, not your address
 This is the fact that makes the gate universal. A developer in New York, in Tokyo, or anywhere else faces the same obligations, determined by where the people using the product are and what data is touched. "We're not in Europe" has never been an answer to a GDPR question — one EU user is enough.
 
@@ -77,7 +80,7 @@ Rollback path, a kill switch on the risky part specifically, a contact route tha
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

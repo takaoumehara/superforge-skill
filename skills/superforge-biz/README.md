@@ -40,6 +40,9 @@ The archetype follows from the shape of the product, never the other way round.
 
 ## ✨ Features
 
+### ⏳ When what you sell is capacity, the ceiling is arithmetic
+A product's ceiling is the market; a service's is 稼働可能時間 × 単価 × 稼働率, and it is lower than it feels. The scope sentence — artifacts, revision count, exclusions, **and an end condition** — is the actual deliverable, because a project with no defined end does not end. Scope creep, not underpricing, is the largest loss driver, and one client above 50% of revenue is an employer, not a customer.
+
 ### 🚦 A gate before the pricing page
 Before any of this, one question: does this market support the business at all? TAM computed **in both directions** — top-down and bottom-up — because a single number cannot visibly be wrong, and the gap between the two is the finding. Every input carries a confidence tier (measured / reported / derived / assumed), and a conclusion resting on an assumption is labelled a hypothesis rather than reported as a result.
 
@@ -81,7 +84,7 @@ Channel-market fit (a B2B enterprise sale and a self-serve consumer app need ent
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

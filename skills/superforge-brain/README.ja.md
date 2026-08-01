@@ -44,7 +44,7 @@ flowchart TD
 
 ---
 
-## ✨ 3つの強み
+## ✨ 強み
 
 ### 📋 「全部見た」を数字で言える
 要素 × 技法 × サブ手法を1セルとして台帳に並べ、`todo → 生成 → 生存/kill → 開発 → 審判` と状態が一方向に進みます。完了条件は「`todo` が0件」。飛ばしたセルを「無かったこと」にできない構造です。
@@ -92,7 +92,7 @@ kill できるコードは2つだけです — **G**（主語を入れ替えて�
 
 ### 🖥️ 12個まとめて入れる（最初の1回だけ）
 
-クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
+クローンしてインストーラを走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします（Claude Code / Codex CLI / Gemini CLI / Antigravity）。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

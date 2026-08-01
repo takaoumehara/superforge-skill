@@ -1,0 +1,103 @@
+{
+  "skill_name": "superforge-ui",
+  "grading": "claude",
+  "grading_note": "日本語トリガーを含むため、正規表現ベースのスコアラーでは全件 false になる。Claude による判定でのみ使うこと。",
+  "routing_risk": "frontend-design, keynote-slide-page, superforge-a11y と競合しうる。should_not_trigger の多くは無関係クエリではなく、隣接スキルへ行くべき near-miss。",
+  "what_this_measures": "(1) description が正しく発火するか (2) 発火したあと、規定の成果物と規定の判断が実際に出ているか。(2) のアサーションは docs/design.md の中身に対する検査であり、これがこのセットの主目的。",
+  "evals": [
+    {
+      "eval_id": 0,
+      "eval_name": "sourcing-before-designing",
+      "prompt": "ランディングページのデザインをお願いします",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "skill-activated", "check": "superforge-ui が起動する", "weight": 1.0},
+        {"name": "asks-for-reference-first", "check": "トークンや色を決める前に、参考サイト・スクリーンショット・既存プロダクトのいずれかを求める（design-sourcing.md §1）", "weight": 1.0},
+        {"name": "no-silent-default", "check": "参考が無いまま「モダンで洗練された」等の無出典の方向性を、検討済みの決定として提示しない", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "route-c-commits-to-a-direction",
+      "prompt": "参考サイトとか特にないです。おまかせでいい感じにしてください",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "asks-once-concretely", "check": "抽象的にではなく「好きなサイトを2〜3個貼ってください」と具体的に一度は聞く", "weight": 1.0},
+        {"name": "commits-to-named-direction", "check": "それでも無い場合、名前のついた方向性を1つ選ぶ（aesthetic-direction.md §1）。「控えめで汎用的なデフォルト」に逃げない", "weight": 1.0},
+        {"name": "one-axis-pushed", "check": "type / colour / space / layout / motion / texture のうち1軸だけを強く押し、残りは静かに保つと明言する（§2）", "weight": 1.0},
+        {"name": "labels-the-source", "check": "docs/design.md に「参考は提供されなかった」と明記する", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "avoids-named-ai-defaults",
+      "prompt": "SaaSのダッシュボードのビジュアルを決めてください",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "no-inter-as-display", "check": "Inter / Roboto / system-ui / Arial をディスプレイ書体として無自覚に選ばない（aesthetic-direction.md §3）", "weight": 1.0},
+        {"name": "no-purple-gradient", "check": "白背景に紫〜青のグラデーションを提案しない", "weight": 1.0},
+        {"name": "dominant-plus-accent", "check": "均等配分のパレットではなく、支配色1つとまれに使うアクセント1つの構成にする", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "artifact-shape",
+      "prompt": "デザインシステムを docs にまとめてください",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "writes-design-md", "check": "docs/design.md を実際に書く（会話内だけで終わらせない）", "weight": 1.0},
+        {"name": "has-design-dna", "check": "冒頭に ## Design DNA があり、出典（参考あり/なし）が書かれている", "weight": 1.0},
+        {"name": "has-budget", "check": "## Budget があり、3つの数字とそれぞれ超えたときの措置が書かれている（performance-budget.md §1）", "weight": 1.0},
+        {"name": "four-data-states", "check": "空・1件・大量・エラーの4状態が仕様に含まれる", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "motion-easing-by-property",
+      "prompt": "このモーダルの出方をもっと気持ちよくしたい",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "easing-by-property", "check": "アニメーションするプロパティによってイージングを選ぶ。opacity/色/回転には linear を使う理由を述べられる（motion-system.md）", "weight": 1.0},
+        {"name": "compositor-safe", "check": "transform と opacity 以外を動かす場合、FLIP か、レイアウトを起こすコストに言及する", "weight": 1.0},
+        {"name": "reduced-motion-runtime", "check": "prefers-reduced-motion をメディアクエリだけで済ませず、JS/スクロール側の実行時チェックにも触れる", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "i18n-layout",
+      "prompt": "このボタン、日本語だと収まるけど英語とドイツ語だと崩れませんか",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "expansion-rule", "check": "短い文字列ほど伸び率が大きく、ボタンが最初に壊れると説明する（internationalization.md §1）", "weight": 1.0},
+        {"name": "no-fixed-width", "check": "現在のテキストに合わせてコンテナ幅を決めない設計を提案する", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "not-a11y-audit",
+      "prompt": "スクリーンリーダーでの読み上げ順がおかしいので直したい",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "defers-to-a11y", "check": "superforge-a11y に渡すか、少なくとも docs/accessibility.md の台帳を重複させない", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "not-security",
+      "prompt": "APIキーがクライアントに露出していないか見てほしい",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "defers-to-secure", "check": "superforge-secure に渡す", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "not-general-coding",
+      "prompt": "この関数の計算が合っていないので直してください",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "no-ui-skill", "check": "superforge-ui は起動しない。superforge-debug が適切", "weight": 1.0}
+      ]
+    }
+  ]
+}
