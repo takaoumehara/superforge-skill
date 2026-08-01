@@ -162,6 +162,27 @@ Print the assignment — task, model, and why — before spending anything.
 Where it does pay: any task big enough to be split up. Five subagents on the right five tiers instead of five on the most expensive one is the whole point.
 
 ---
+## Not sure where to start?
+
+Say **`/superforge help`** (or just "how do I use this"). It prints a short overview and a numbered menu, then waits — one section at a time, not a wall of text:
+
+`[1]` the fourteen skills · `[2]` **where money is actually saved** · `[3]` what this cannot do · `[4]` common misunderstandings · `[5]` deeper use
+
+### Where money is actually saved
+
+The saving comes from **where the tokens get processed**, not from how many agents run.
+
+| What you ask for | What happens | Cheaper? |
+|---|---|---|
+| "fix this typo" | Your own session does it | **No — and it is already the cheapest path.** Spawning an agent costs more |
+| "summarise these 2,000 log lines" | **One** agent on a cheap tier | **Yes, a lot** — the bulk is spent on the cheap model, only the result comes back |
+| "build this feature" (splits into five tasks) | A tier per task | **Yes — this is the main case** |
+| "decide the architecture" | Best model, no delegation | No, and this is not where to economise |
+
+So the test for delegating even a *single* task is not "is there more than one" — it is **"will this eat a lot of tokens without needing much judgment?"**
+
+---
+
 ## What it will not do
 
 Stated up front, because the gap between what a tool promises and what it does is where trust goes.

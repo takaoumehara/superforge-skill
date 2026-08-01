@@ -12,7 +12,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "3.0"
 compatibility: >
   Standalone. Reads and writes docs/ in the project root when present.
   Delegates to installed superforge-* skills and to other installed skills when
@@ -41,6 +41,27 @@ that nothing gets lost between them.
 | **C — routine** | rote tests, formatting, renaming, log updates | Haiku 4.5 |
 | **D — bulk text, no repo access** | N variations, summarising pasted text, translation | local `gemini` CLI: `gemini -p "..." -m "gemini-3.6-flash <effort>"` |
 
+### What tiering can and cannot reach
+
+**The saving comes from where the tokens are processed, not from how many agents
+there are.**
+
+| The request | What happens | Cheaper? |
+|---|---|---|
+| A one-line fix, done inline | Runs on the session's own model | **No — and this is already the cheapest path.** Spawning an agent for it costs more |
+| Bulky but simple (summarise 2,000 log lines, read 40 files) | **One** agent on a cheap tier | **Yes, substantially** — the bulk tokens are spent on the cheap model and only the result returns |
+| Work that splits into several tasks | A tier per task | **Yes — this is the main case** |
+| Architecture, a security review, verifying a claim | Highest tier, no delegation | No, and this is not where to economise |
+
+So the threshold for delegating a *single* task is not "is there more than one
+task" — it is **"will this consume a lot of tokens without needing much
+judgment?"** If yes, one agent is worth it. If no, do it inline.
+
+**The session's own model cannot be changed from inside the session.** Neither
+this skill nor any instructions file can do it; that is a tool-level setting
+(`/model` in Claude Code). What is reachable is spawning agents on other models
+and handing work to them.
+
 Never leave every dispatched agent on the session default. That waste is the
 reason this suite exists.
 
@@ -50,6 +71,19 @@ the agent count broken down by model. A tiering nobody can see is a claim, not a
 saving. Format, and the after-the-fact record →
 **`skills/superforge-dev/references/dispatch-ledger.md`**. For single-agent work
 one line is enough: 「Opus 5 のまま、サブエージェントなしで進めます」.
+
+## 1b. Help
+
+When the user asks how to use this, what it can do, or runs `/superforge help`:
+print the overview and the numbered menu from **`references/help.md`** §1, then
+**stop and wait**. Print one chosen section per turn — the whole file at once is
+a wall nobody reads.
+
+The menu covers: the fourteen skills · where money is actually saved · what this
+cannot do · common misunderstandings · deeper use. **Never skip the limits when
+someone is deciding whether to adopt this** — they are the useful half.
+
+---
 
 ## 2. Intake
 
@@ -78,6 +112,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | 安全か確認したい・鍵が漏れた・不正アクセス | `/superforge-secure` |
 | 出していいのか確認したい（法務・審査・計測） | `/superforge-ship` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
+| 使い方が分からない・何ができるのか | §1b（`references/help.md`） |
 
 Announce the route and the tier in one line, then start. Ask for approval of
 the route only when the user's state is genuinely ambiguous between two very

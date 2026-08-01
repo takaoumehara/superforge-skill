@@ -162,6 +162,27 @@ Imprime la asignación — tarea, modelo y por qué — antes de gastar nada.
 Donde sí compensa: cualquier tarea lo bastante grande como para dividirse. Cinco subagentes en los cinco niveles correctos en vez de cinco en el más caro — para eso existe todo esto.
 
 ---
+## ¿No sabes por dónde empezar?
+
+Di **`/superforge help`** (o «cómo se usa esto»). Imprime un resumen corto y un menú numerado, y ahí se detiene — una sección cada vez, no un muro de texto:
+
+`[1]` las catorce skills · `[2]` **dónde se ahorra de verdad** · `[3]` lo que no puede hacer · `[4]` malentendidos habituales · `[5]` uso avanzado
+
+### Dónde se ahorra de verdad
+
+El ahorro viene de **dónde se procesan los tokens**, no de cuántos agentes corren.
+
+| Lo que pides | Qué pasa | ¿Más barato? |
+|---|---|---|
+| «corrige esta errata» | Lo hace tu propia sesión | **No — y ya es el camino más barato.** Lanzar un agente cuesta más |
+| «resume estas 2.000 líneas de log» | **Un** agente en un nivel barato | **Sí, mucho** — el grueso se gasta en el modelo barato y solo vuelve el resultado |
+| «construye esta función» (se parte en cinco tareas) | Un nivel por tarea | **Sí — este es el caso principal** |
+| «decide la arquitectura» | El mejor modelo, sin delegar | No, y aquí no es donde hay que ahorrar |
+
+Así que el criterio para delegar incluso *una sola* tarea no es «¿hay más de una?», sino **«¿va a consumir muchos tokens sin necesitar mucho criterio?»**
+
+---
+
 ## Lo que no va a hacer
 
 Dicho por delante, porque la distancia entre lo que una herramienta promete y lo que hace es justo donde se pierde la confianza.
