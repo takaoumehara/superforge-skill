@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**用一句话说出你想做什么，十三个技能就按正确的顺序，从想点子一直带到上线前的检查。**
+**用一句话说出你想做什么，十四个技能就按正确的顺序，从想点子一直带到上线前的检查。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「技能」就是**可以加进 Claude Code 这类 AI 工具的一份操作说明**。放进去一个文件夹，AI 就照着那套步骤干活。
 
-superforge 是这样的十三份。站在正中间的 `superforge` 扮演**工坊前台**。
+superforge 是这样的十四份。站在正中间的 `superforge` 扮演**工坊前台**。
 
 > 你：「我想给街角那家咖啡馆做个 App。」
 > 前台：「先把点子理清楚，交给 `superforge-brain`。这活儿需要判断力，用 Opus 5。」
@@ -18,7 +18,7 @@ superforge 是这样的十三份。站在正中间的 `superforge` 扮演**工�
 
 前台只做三件事。
 
-1. **决定交给谁**：想 / 做 / 验 / 出，十三个里挑一个
+1. **决定交给谁**：想 / 做 / 验 / 出，十四个里挑一个
 2. **决定用哪个模型**：聪明的模型贵，便宜的活儿不该用贵模型
 3. **确保结果落成文件**：这样清掉对话，东西也不会跟着没
 
@@ -54,7 +54,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ---
 
-## 十三个技能
+## 十四个技能
 
 正中间的 `superforge` 是前台，其余十二个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
@@ -80,6 +80,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | [`superforge-test`](./skills/superforge-test/README.zh-CN.md) | 先定什么值得测，再先写测试（Web / iOS / Android） | 测试本身 |
 | [`superforge-debug`](./skills/superforge-debug/README.zh-CN.md) | 出了 bug，想找根因而不是打补丁，包括复现不了的那些 | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.zh-CN.md) | 认真做无障碍检查——七道检查，不是一个扫描器 | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.zh-CN.md) | 一个已登录的普通用户，能不能读到别人的数据？七道检查，按攻击者能拿到什么来排；也包括密钥已经泄漏之后怎么办 | `docs/security.md` |
 
 ### 4. 出 —— 准备见人
 
@@ -98,7 +99,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ### 一次全装好（推荐）
 
-克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十三个一次性链接进去。
+克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十四个一次性链接进去。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -200,7 +201,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 完整协议 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 为什么装十三个也不会拖慢 AI
+### 为什么装十四个也不会拖慢 AI
 
 常驻在 AI 上下文里的只有**每个技能那一行描述**。正文按需加载，更深的材料放在 `references/` 里，用到才读。
 
@@ -239,6 +240,13 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 | [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 什么值得测、什么不值得。单元/集成/E2E 的成本阶梯、mock 的边界、脆弱测试的症状、给没有测试的代码补测试 |
 | [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 证据的四个等级，以及报告里为何不能出现「断言」。「能用」和「碰巧能用」的区别，七种无意间造假的证据 |
 | [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失败记忆放在哪里，真正有价值的是 `Looked like` 那一行。复现不了时怎么办、用二分查找定位「以前是好的」、何时该停 |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 七道检查的细节——密钥真正泄漏的地方、一小时能挖出最严重 bug 的双账号测试、注入的落点、依赖与构建期风险、对外暴露面的清扫 |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 先止血，再查因——轮换顺序、从可能压根没留的日志里重建影响范围、以及一封诚实的通知 |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 每次鉴权都要走的归属链、现在便宜以后昂贵的那些决定、缺索引 / N+1 / 无上限读取、增量式迁移，以及「删除」必须意味着什么 |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 不是事后测，而是和设计一起定的三个数字。重量到底从哪来。体感速度是设计问题 |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字会变长，最先坏的是按钮。为什么句子绝不能拼接、依赖 locale 的格式，以及要不要做多语言这件事本身 |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 能不能发现 / 能不能修 / 能不能找回 / 要花多少——一条值得留的告警、演练过的回滚、真正恢复过的备份、失控账单的阈值 |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成媒体的真实成本、让第十二张和第一张对得上的配方，以及在发布前就答完的商用授权与肖像问题 |
 
 ---
 

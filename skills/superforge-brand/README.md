@@ -35,6 +35,9 @@ Colour and type decisions are handed to `superforge-ui`, which turns them into t
 
 ## ✨ Features
 
+### 💸 What the generated media costs, and whether you may use it
+Each call is cheap, which is exactly why the total is never tracked — the cost is the thirty images you generated to get one, and video runs one to two orders of magnitude higher per second. So an iteration budget is set per asset before starting. Consistency is the actually hard part: one good image is easy, twelve that look like one brand is the problem, and it is solved by fixing the parameters and generating the set in one session, not by better wording. Then the three rights questions, answered before it ships rather than after — and never the product itself, never a customer.
+
 ### 🎭 Three adjectives everything else answers to
 Visual personality is fixed as exactly three words, and every later decision — palette, type pairing, tone of voice — has to be defensible against them. Three is a constraint you can argue with; a mood board is not.
 
@@ -59,7 +62,7 @@ Colour and type go to `superforge-ui` to become tokens in `docs/design.md`. This
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

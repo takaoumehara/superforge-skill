@@ -84,9 +84,9 @@ Encaje canal-mercado (una venta B2B enterprise y una app de consumo autoservicio
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

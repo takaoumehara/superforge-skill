@@ -36,6 +36,9 @@ Edit one artifact and the other is regenerated in the same turn. They are never 
 
 ## ✨ Features
 
+### ⚡ Performance and a second language are layout decisions, not later problems
+The hero video, four font weights, and an animation on a layout-triggering property are all chosen in the design — and by the time anyone profiles, components sit on top of them. So three budget numbers go into `docs/design.md` with the tokens, each with a consequence for exceeding it. Same with language: German runs 30–40% longer and **short strings expand the most, so buttons break first.** Never size a container to its current text; doing that now is nearly free, and retrofitting it is a rebuild.
+
 ### 🎛️ Seven states before a component counts as finished
 Default, hover, focus, active, disabled, loading, and error are each specified — including the keyboard focus ring and the recovery path from the error state. "It looks right at rest" is not a finished component.
 
@@ -63,7 +66,7 @@ A landing page is judged by a different metric than a product screen — a stran
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

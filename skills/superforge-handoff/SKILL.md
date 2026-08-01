@@ -51,6 +51,7 @@ the file's own header block:
 | design.md + design.html | agreed | 2026-07-31 | — |
 | accessibility.md | draft | 2026-07-29 | 3 criteria not assessed |
 | verification.md | — | — | **not run yet** |
+| security.md | FINDINGS-OPEN | 2026-07-31 | 1 High 未対応 |
 | ship-readiness.md | — | — | **not run yet** |
 | failforward.md | 6 entries | 2026-07-31 | 1 mitigation, cause still unknown |
 ```

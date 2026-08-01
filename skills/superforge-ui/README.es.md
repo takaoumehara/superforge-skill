@@ -36,6 +36,9 @@ Si editas uno de los artefactos, el otro se regenera en el mismo turno. Nunca se
 
 ## ✨ Puntos clave
 
+### ⚡ El rendimiento y un segundo idioma se deciden en el layout, no después
+El vídeo de portada, cuatro pesos de fuente y una animación sobre una propiedad que dispara layout se eligen todos en el diseño — y cuando alguien va a medir, ya hay componentes encima. Por eso tres números de presupuesto entran en `docs/design.md` junto a los tokens, cada uno con su consecuencia. Con el idioma igual: el alemán se alarga un 30–40% y **las cadenas cortas son las que más crecen, así que los botones se rompen primero.** Nunca dimensiones un contenedor según su texto actual: hacerlo ahora es casi gratis, y hacerlo luego es rehacerlo.
+
 ### 🎛️ Siete estados antes de dar un componente por terminado
 Default, hover, focus, active, disabled, loading y error se especifican uno a uno, incluidos el anillo de foco de teclado y la salida desde el estado de error. «En reposo se ve bien» no es un componente terminado.
 
@@ -63,9 +66,9 @@ Una landing page se juzga con otra métrica que una pantalla de producto: un des
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

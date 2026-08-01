@@ -62,9 +62,9 @@ flowchart TD
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열네 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

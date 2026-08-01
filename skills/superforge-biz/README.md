@@ -84,7 +84,7 @@ Channel-market fit (a B2B enterprise sale and a self-serve consumer app need ent
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 

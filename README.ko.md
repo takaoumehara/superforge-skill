@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · **한국어**
 
-**만들고 싶은 것을 한 문장으로 말하면, 열세 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
+**만들고 싶은 것을 한 문장으로 말하면, 열네 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 "스킬"이란 **Claude Code 같은 AI 도구에 나중에 추가할 수 있는 작업 설명서**입니다. 폴더 하나를 놓아 두면 AI가 그 절차대로 움직입니다.
 
-superforge는 그런 설명서 열세 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
+superforge는 그런 설명서 열네 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
 
 > 당신: "동네 카페용 앱을 만들고 싶어요."
 > 안내 데스크: "먼저 아이디어를 다듬죠. `superforge-brain`에 넘기겠습니다. 판단이 필요한 일이라 Opus 5로 돌립니다."
@@ -18,7 +18,7 @@ superforge는 그런 설명서 열세 장입니다. 한가운데 있는 `superfo
 
 안내 데스크가 하는 일은 딱 세 가지입니다.
 
-1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열세 개 중에서
+1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열네 개 중에서
 2. **어떤 모델을 쓸지 정합니다** — 똑똑한 모델은 비싸니, 값싼 작업에 비싼 모델을 붙이지 않습니다
 3. **결과가 반드시 파일로 남게 합니다** — 대화를 지워도 사라지지 않도록
 
@@ -54,7 +54,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ---
 
-## 열세 개의 스킬
+## 열네 개의 스킬
 
 한가운데의 `superforge`가 안내 데스크이고 나머지 열두 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
 
@@ -80,6 +80,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | [`superforge-test`](./skills/superforge-test/README.ko.md) | 무엇이 테스트할 값어치가 있는지 정한 뒤, 테스트를 먼저 (Web / iOS / Android) | 테스트 자체 |
 | [`superforge-debug`](./skills/superforge-debug/README.ko.md) | 버그가 났고, 임시방편이 아니라 원인을 잡고 싶을 때 — 재현되지 않는 것까지 | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ko.md) | 접근성을 제대로 검사할 때 — 스캐너 하나가 아니라 일곱 개 검사로 | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.ko.md) | 로그인한 평범한 사용자가 남의 데이터를 읽을 수 있는가. 일곱 개의 패스를 공격자가 무엇을 얻는지로 줄 세운다. 키가 이미 샌 뒤의 절차까지 | `docs/security.md` |
 
 ### 4. 내보낸다 — 내보낼 준비하기
 
@@ -98,7 +99,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ### 한 번에 전부 (권장)
 
-한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 링크합니다.
+한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 링크합니다.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -200,7 +201,7 @@ HTML은 `design.md`의 값을 **읽어서** 그립니다. 손으로 옮겨 그�
 
 전체 프로토콜 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 열세 개를 넣어도 AI가 무거워지지 않는 이유
+### 열네 개를 넣어도 AI가 무거워지지 않는 이유
 
 AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명뿐**입니다. 본문은 필요할 때 불러오고, 더 깊은 내용은 `references/`에 나눠 두었다가 필요할 때만 읽습니다.
 
@@ -239,6 +240,13 @@ AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명�
 | [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 무엇이 테스트할 값어치가 있고 무엇이 없는가. 단위/통합/E2E 비용 사다리, 목의 경계, 취약한 테스트의 증상, 테스트가 없는 코드에 넣는 순서 |
 | [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 증거의 네 등급과, 보고서에 「단언」이 섞이면 안 되는 이유. 「됐다」와 「어쩌다 됐다」의 차이, 악의 없이 증거가 위조되는 일곱 가지 |
 | [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 실패의 기억을 어디에 두는가, 값을 하는 건 `Looked like` 한 줄. 재현되지 않을 때의 절차, 「전에는 됐다」의 이분 탐색, 멈출 때 |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 일곱 개 패스의 내용 — 키가 실제로 새는 자리, 한 시간이면 최악의 버그가 나오는 두 계정 테스트, 인젝션이 닿는 곳, 의존성과 빌드 시점의 위험, 바깥에서 보이는 면 청소 |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 원인 파악보다 먼저 봉쇄 — 교체 순서, 남아 있지 않을 수도 있는 로그로 영향 범위를 재구성하기, 그리고 정직한 고지 |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 권한 검사가 매번 타는 소유 관계, 지금은 싸고 나중은 비싼 결정들, 인덱스 누락 / N+1 / 상한 없는 읽기, 덧붙이는 방식의 마이그레이션, 그리고 「삭제」가 무엇을 뜻해야 하는가 |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 나중에 재는 게 아니라 디자인과 함께 정하는 세 개의 숫자. 무게가 어디서 오는가. 체감 속도는 디자인의 문제 |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 글자는 늘어나고, 먼저 깨지는 건 버튼이다. 문장을 조각으로 조립하면 안 되는 이유, 로케일 의존 서식, 그리고 다국어로 갈지 말지의 판단 자체 |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 알아챌 수 있는가 / 고칠 수 있는가 / 되찾을 수 있는가 / 얼마가 드는가 — 남길 가치가 있는 알림 하나, 실제로 해 본 롤백, 실제로 복원해 본 백업, 폭주 청구서의 임계값 |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 생성 미디어의 실제 비용, 열두 번째가 첫 번째와 맞아떨어지게 하는 레시피, 그리고 내보내기 전에 끝내 두는 상업적 이용과 초상 문제 |
 
 ---
 

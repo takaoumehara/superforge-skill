@@ -3,14 +3,19 @@ name: superforge-brand
 description: >
   Define brand identity systems (naming, tone, palette, type, logo direction)
   and produce AI-generated visual and motion assets through prompt engineering
-  for generate_image, Kie.ai, and Higgsfield. Use when the user says "brand",
-  "logo", "identity", "tone of voice", "hero image", "banner", "generate an
-  image", "video concept", "moodboard", "ブランド", "ロゴ", "トンマナ",
-  "世界観", "ビジュアル", "画像を作って", "動画", or runs /superforge-brand.
+  for generate_image, Kie.ai, and Higgsfield — with the generation cost, the
+  consistency recipe that makes a twelfth image match the first, and the
+  commercial-use and likeness questions answered before the asset ships rather
+  than after. Also covers writing up work that already shipped as a case study.
+  Use when the user says "brand", "logo", "identity", "tone of voice", "hero
+  image", "banner", "generate an image", "video concept", "moodboard", "case
+  study", "generation cost", "ブランド", "ロゴ", "トンマナ", "世界観",
+  "ビジュアル", "画像を作って", "動画", "生成コスト", "商用利用",
+  "実績紹介", or runs /superforge-brand.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "3.0"
 compatibility: >
   Standalone.
   Reads docs/product-idea.md when present, writes docs/brand.md.
@@ -63,6 +68,28 @@ When creating motion concepts or AI video generation scripts:
 
 ---
 
+## 3b. What the media actually costs, and whether you may use it
+
+§2 and §3 give the prompt structures. Three things decide whether generated
+media is an asset or a slow leak, and none of them are prompt quality:
+
+- **Cost.** Each call is cheap, which is exactly why the total is not tracked.
+  The cost is the thirty images you generated to get one, and video runs one to
+  two orders of magnitude higher per second than image. **Set an iteration
+  budget per asset before starting**, and put the total in the unit economics.
+- **Consistency.** One good image is easy; twelve that look like one brand is
+  the real problem. It is solved by fixing the parameters and generating the
+  set in one session — not by better wording — and the recipe has to be written
+  down or the thirteenth image is impossible.
+- **Rights.** Commercial use on the plan you actually used, who owns the output,
+  and whether it contains a person, a trademark, or an artist invoked by name.
+  Never generate the product itself, and never a customer.
+
+Full model, including the four-way route decision and the provenance table →
+**`references/media-production.md`**.
+
+---
+
 ## 4. Writing up work that already shipped
 
 Four places in this suite demand a case study — the landing page's evidence
@@ -79,7 +106,10 @@ when it is wrong is the scarce part → **`references/case-study.md`**.
 ## Artifact
 
 Write `docs/brand.md`: the three adjectives, the colour architecture with
-intent, the type matrix, tone of voice, and the generation prompts produced.
+intent, the type matrix, tone of voice, the generation prompts produced, and —
+for any generated asset — the recipe and provenance from
+`references/media-production.md` §3–§4, so the set can be extended later and the
+rights question can be answered when it arrives.
 Hand the colour and type decisions to `superforge-ui`, which turns them into
 tokens in `docs/design.md` — do not define tokens here.
 

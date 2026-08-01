@@ -2,7 +2,7 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる13個のスキル集です。**
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる14個のスキル集です。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「スキル」とは、Claude Code のような **AIツールに後から足せる"やり方の説明書"** のことです。フォルダを1つ置くだけで、AIがその手順どおりに動くようになります。
 
-superforge は、その説明書を13枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
+superforge は、その説明書を14枚まとめたものです。中心にいる `superforge` が **工房の受付係**の役をします。
 
 > あなた：「近所のカフェ向けのアプリを作りたい」
 > 受付：「まずアイデアを固めますね。`superforge-brain` に渡します。判断が要る作業なので Opus 5 を使います」
@@ -54,7 +54,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ---
 
-## 13個のスキル
+## 14個のスキル
 
 まん中の `superforge` が受付で、残りの12個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
 
@@ -80,6 +80,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | [`superforge-test`](./skills/superforge-test/README.ja.md) | 何をテストする価値があるかを決めてから、テストを先に書く（Web / iOS / Android） | テスト本体 |
 | [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい。再現しないバグも含めて | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ja.md) | アクセシビリティをきちんと検査したい。ツール1本ではなく7つの検査で | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.ja.md) | ログインした他人が、あなたのユーザーのデータを読めてしまわないか。7つのパスを、攻撃者が何を得るかで並べる。鍵が漏れた後の手順も | `docs/security.md` |
 
 ### 4. 出す — 世に出す準備をする
 
@@ -98,7 +99,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、13個をまとめてリンクします。
+一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -199,7 +200,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### なぜ13個入れてもAIが重くならないのか
+### なぜ14個入れてもAIが重くならないのか
 
 常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
 
@@ -238,6 +239,13 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 | [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | 何をテストする価値があり、何にはないか。単体/結合/E2Eのコスト階段、モックの境界、壊れやすいテストの症状、テストが無いコードへの入れ方 |
 | [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | 証拠の4等級と、報告書に「断言」を混ぜてはいけない理由。「動いた」と「たまたま動いた」の違い、悪意なく証拠が偽装される7つの型 |
 | [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | 失敗の記憶をどこに置くか、効くのは `Looked like` の行。再現しないときの手順、「前は動いた」の二分探索、やめどきの判断 |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | 7つのパスの中身——鍵が実際に漏れる場所、1時間で最悪のバグが出る二アカウント試験、注入の着地点、依存とビルド時のリスク、外から見える面の掃除 |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | 原因究明より先に封じ込め——鍵の差し替え順、残っていないかもしれないログから影響範囲を組み直す、そして正直な告知 |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | 権限チェックが毎回たどる所有関係、今なら安く後なら高い決定、インデックス漏れ / N+1 / 上限のない読み出し、加算的な移行、そして「削除」が何を意味しなければならないか |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | 後から測るのではなく、デザインと一緒に決める3つの数字。重さがどこから来るか。体感速度はデザインの問題 |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | 文字は伸びる、そして最初に壊れるのはボタン。文を断片から組み立ててはいけない理由、ロケール依存の書式、そして多言語にするかどうか自体の判断 |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | 気づけるか / 直せるか / 戻せるか / いくらかかるか——持つ価値のあるアラート1本、一度試したロールバック、一度復元したバックアップ、暴走請求の閾値 |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | 生成メディアの実際の費用、12枚目が1枚目と揃うためのレシピ、そして出す前に答えておく商用利用と肖像の問い |
 
 ---
 

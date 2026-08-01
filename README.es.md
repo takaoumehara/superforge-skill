@@ -10,7 +10,7 @@
 
 Una «skill» es **un conjunto de instrucciones que puedes añadir a una herramienta de AI** como Claude Code. Colocas una carpeta y la AI empieza a seguir ese procedimiento.
 
-superforge son trece de ellas. La que está en el centro, `superforge`, hace de **recepción de un taller**.
+superforge son catorce de ellas. La que está en el centro, `superforge`, hace de **recepción de un taller**.
 
 > Tú: «Quiero hacer una app para la cafetería de la esquina.»
 > Recepción: «Primero damos forma a la idea; se la paso a `superforge-brain`. Esto pide criterio, así que va sobre Opus 5.»
@@ -18,7 +18,7 @@ superforge son trece de ellas. La que está en el centro, `superforge`, hace de 
 
 La recepción hace exactamente tres cosas.
 
-1. **Decide quién se encarga**: una de las trece, entre pensar / construir / probar / publicar
+1. **Decide quién se encarga**: una de las catorce, entre pensar / construir / probar / publicar
 2. **Decide qué modelo se usa**: los modelos listos cuestan más, así que el trabajo barato no se paga caro
 3. **Se asegura de que el resultado quede en un archivo**, para que nada muera al borrar la conversación
 
@@ -54,7 +54,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 ---
 
-## Las trece skills
+## Las catorce skills
 
 `superforge` es la recepción; las otras doce hacen el trabajo. También puedes llamarlas directamente, como `/superforge-ui`.
 
@@ -80,6 +80,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | [`superforge-test`](./skills/superforge-test/README.es.md) | decidir qué merece una prueba, y escribirla antes que el código (Web / iOS / Android) | las pruebas |
 | [`superforge-debug`](./skills/superforge-debug/README.es.md) | apareció un bug y quieres la causa, no un parche encima — incluidos los que no se reproducen | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.es.md) | accesibilidad comprobada en serio: siete pasadas, no un escáner | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.es.md) | ¿puede un usuario con sesión leer los datos de otro? siete pasadas, ordenadas por lo que consigue el atacante — y qué hacer cuando una clave ya se ha filtrado | `docs/security.md` |
 
 ### 4. Publicar — dejarlo listo para salir
 
@@ -98,7 +99,7 @@ Solo hacen falta `git` y una herramienta de AI que cargue skills, como Claude Co
 
 ### Todas de una vez (recomendado)
 
-Clona una vez y ejecuta el instalador. Busca todos los directorios de skills de tu máquina y enlaza las trece.
+Clona una vez y ejecuta el instalador. Busca todos los directorios de skills de tu máquina y enlaza las catorce.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -200,7 +201,7 @@ Solo se detiene por cuatro cosas: una pérdida irreversible, gastar dinero, cred
 
 Protocolo completo → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Por qué trece skills no ralentizan a la AI
+### Por qué catorce skills no ralentizan a la AI
 
 Lo único permanentemente en el contexto de la AI es **la descripción de una línea de cada skill**. El cuerpo se carga cuando hace falta, y el material profundo vive en `references/` y se lee bajo demanda.
 
@@ -239,6 +240,13 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | qué merece una prueba y qué no, la escalera de coste unitario/integración/E2E, el límite del mocking, síntomas de una prueba frágil, cómo añadir pruebas a código que no tiene |
 | [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | los cuatro grados de prueba y por qué un informe no puede contener una afirmación sin respaldo, «funcionó» frente a «funcionó de casualidad», las siete formas de falsear evidencia sin querer |
 | [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | dónde vive la memoria de fallos y por qué la línea `Looked like` es la que paga, qué hacer cuando no se reproduce, bisecar «antes funcionaba», cuándo parar |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | las siete pasadas en detalle — dónde se filtran de verdad las claves, la prueba de dos cuentas que encuentra los peores fallos en una hora, dónde aterriza la inyección, riesgo de dependencias y de build, y el barrido de superficie expuesta |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | contener antes de diagnosticar — el orden de rotación, reconstruir el alcance desde registros que quizá no guardaste, y el aviso honesto |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | la cadena de pertenencia que lee cada comprobación de permisos, las decisiones baratas ahora y caras después, índices ausentes / N+1 / lecturas sin límite, migraciones aditivas, y qué tiene que significar «borrado» |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | tres números decididos con el diseño en vez de medidos después, de dónde viene realmente el peso, y la velocidad percibida como problema de diseño |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | el texto se alarga y lo primero que se rompe son los botones, por qué una frase nunca se ensambla por trozos, formatos según locale, y decidir si ser multilingüe siquiera |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | ¿te enterarás? ¿puedes arreglarlo? ¿puedes recuperarlo? ¿cuánto cuesta? — una alerta que valga la pena, un rollback probado, una copia restaurada, y el umbral de la factura desbocada |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | lo que cuesta de verdad el medio generado, la receta que hace que la duodécima imagen encaje con la primera, y las preguntas de uso comercial y de imagen resueltas antes de publicar |
 
 ---
 

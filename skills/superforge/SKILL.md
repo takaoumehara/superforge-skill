@@ -68,6 +68,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | アクセシビリティ・WCAG・読み上げ・コントラスト | `/superforge-a11y` |
 | 出す前に叩いてほしい | `/superforge-roast` |
 | 本当に動くか確認したい | `/superforge-verify` |
+| 安全か確認したい・鍵が漏れた・不正アクセス | `/superforge-secure` |
 | 出していいのか確認したい（法務・審査・計測） | `/superforge-ship` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
 

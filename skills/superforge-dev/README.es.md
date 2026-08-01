@@ -38,6 +38,9 @@ Nada se acepta por la palabra del subagente: primero se ejecutan las pruebas y s
 
 ## ✨ Puntos clave
 
+### 🗄️ El esquema es lo único que se vuelve más difícil de cambiar cuanto mejor te va
+El código sin usuarios se reescribe en una tarde; una tabla con filas reales no. Así que las decisiones baratas ahora y caras después se toman a propósito — IDs no adivinables, marcas de tiempo en UTC, dinero en unidades menores enteras, y **la cadena de pertenencia que lee cada comprobación de permisos.** Y las tres causas de todo problema de rendimiento con datos, y migraciones aditivas contra una copia de producción con un rollback que ya has probado.
+
 ### 🧱 Una división en la que el paralelo es demostrablemente seguro
 Ni la topología ni el nivel de modelo rescatan una mala división, y es ahí donde de verdad fallan las ejecuciones desatendidas. Cada tarea nombra un resultado, una línea de prueba y **los archivos que va a escribir** — porque la regla es: *dos tareas pueden ir en paralelo solo si esos conjuntos de archivos no se cruzan.* No «seguramente va bien»: listados, y disjuntos. Los cimientos compartidos van solos y primero.
 
@@ -65,9 +68,9 @@ Subagents (envío en un solo sentido, coste bajo de tokens) es lo predeterminado
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una sola vez)
+### 🖥️ Instala las catorce skills (una sola vez)
 
-Clona el repositorio y ejecuta el instalador. Enlaza las trece skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

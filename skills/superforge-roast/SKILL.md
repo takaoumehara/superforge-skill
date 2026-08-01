@@ -87,6 +87,7 @@ When handing back, name the destination for each finding:
 | Something broken or unimplemented | `superforge-dev` |
 | Accessibility | `superforge-a11y` — it owns the ledger, do not duplicate findings here |
 | Pricing, paywall placement, the offer | `superforge-biz` |
+| Anything an attacker could use | `superforge-secure` — it owns that ledger too; do not restate findings here |
 | Whether it is even releasable | `superforge-ship` |
 
 And mark each finding as **acted on / rejected with a reason / deferred with a
@@ -96,5 +97,6 @@ read.
 ## Delegate when a sharper skill is installed
 
 `roast`, `validate-thinking` (multi-persona attack) · `critique`, `ui-review`
-(interface) · `requesting-code-review`, `security`, `harden` (code) ·
+(interface) · `requesting-code-review` (code) · **`superforge-secure`** (anything an attacker
+could use) ·
 `release-review`.

@@ -25,6 +25,7 @@ conclusion that exists only in the conversation is lost at the next
 | `docs/case-study-*.md` | `superforge-brand` | `superforge-ui` (the landing page's evidence section), `superforge-biz` (the numbers) |
 | `docs/critique.md` | `superforge-roast` | `superforge-ui` / `superforge-dev` / `superforge-a11y` / `superforge-biz` / `superforge-ship`, by finding — each one is routed, not left in the file |
 | `docs/verification.md` | `superforge-verify` | `superforge-ship` (a precondition — missing means BLOCK), `superforge-handoff` |
+| `docs/security.md` | `superforge-secure` | `superforge-ship` (a precondition — missing, or an unresolved Critical, means BLOCK), `superforge-dev` (the fixes), `superforge-test` (locking them), `superforge-handoff` |
 | `docs/failforward.md` | `superforge-debug` | `superforge-debug` (**read before diagnosing anything**), `superforge-test` (what needs locking), `superforge-handoff` |
 | `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision, and `superforge-handoff` — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
 | `.handoff/*.md` | `superforge-handoff` | the next session, any tool. **Reads every file above** and carries each one's Status, last-updated, and open questions forward — including the ones that were never written |

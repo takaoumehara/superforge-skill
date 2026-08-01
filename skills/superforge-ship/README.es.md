@@ -41,6 +41,9 @@ flowchart TD
 
 ## ✨ Puntos clave
 
+### 📡 ¿Te enterarás, puedes arreglarlo, puedes recuperarlo?
+El estado por defecto de un producto en solitario es que **el usuario hace de sistema de monitorización.** Tres cosas lo arreglan y cada una es una tarde: una comprobación de disponibilidad sobre una URL que toca la base de datos (no una página de salud estática, que sigue verde durante todas las caídas que importan), reporte de errores, y una alerta que signifique que el producto no funciona. Y ahí parar — más alertas de las que vas a atender te entrenan para ignorar la de verdad. Un rollback probado y una copia que alguien haya restaurado son condiciones de `BLOCK` aquí, no un pulido: una copia sin probar es una creencia sobre un archivo.
+
 ### ⚖️ La jurisdicción sigue a tus usuarios, no a tu dirección
 Este es el hecho que hace universal esta puerta. Alguien en Nueva York, en Tokio o en cualquier otro sitio afronta el mismo conjunto de obligaciones, determinado por **dónde están las personas que usan el producto** y **qué datos se tocan**. «No estamos en Europa» nunca ha sido una respuesta a una pregunta sobre el RGPD: basta con un usuario en la UE.
 
@@ -77,7 +80,7 @@ Camino de rollback, un interruptor **para la parte arriesgada en concreto**, una
 
 ## 🚀 Instalación y uso
 
-### 🖥️ Instala las trece skills (una vez)
+### 🖥️ Instala las catorce skills (una vez)
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

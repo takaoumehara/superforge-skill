@@ -10,7 +10,7 @@
 
 A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-superforge is thirteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+superforge is fourteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
 
 > You: "I want to build an app for the café down the street."
 > Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
@@ -18,7 +18,7 @@ superforge is thirteen of them. The one in the middle, `superforge`, works like 
 
 The front desk does exactly three things.
 
-1. **Picks who takes the job** — one of thirteen, across think / build / prove / ship
+1. **Picks who takes the job** — one of fourteen, across think / build / prove / ship
 2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
 3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
 
@@ -54,7 +54,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ---
 
-## The thirteen skills
+## The fourteen skills
 
 `superforge` is the front desk; the other twelve do the work. You can also call any of them directly, like `/superforge-ui`.
 
@@ -80,6 +80,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | [`superforge-test`](./skills/superforge-test/README.md) | decide what earns a test, then write it first (Web / iOS / Android) | the tests |
 | [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it — including the ones that will not reproduce | `docs/failforward.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.md) | accessibility, checked properly — seven passes, not one scanner | `docs/accessibility.md` |
+| [`superforge-secure`](./skills/superforge-secure/README.md) | can a logged-in user read someone else's data? seven passes, ranked by what an attacker gets — and what to do once a key has already leaked | `docs/security.md` |
 
 ### 4. Ship — get it out the door
 
@@ -98,7 +99,7 @@ You need `git` and an AI tool that loads skills, such as Claude Code.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all thirteen.
+Clone once and run the installer. It finds every skills directory on your machine and links all fourteen.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -200,7 +201,7 @@ It stops for four things only — irreversible deletion, spending money, missing
 
 Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Why thirteen skills do not slow the AI down
+### Why fourteen skills do not slow the AI down
 
 The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
 
@@ -239,6 +240,13 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-test/references/what-to-test.md`](./skills/superforge-test/references/what-to-test.md) | what earns a test and what does not, the unit/integration/E2E cost ladder, the mocking boundary, brittle-test symptoms, adding tests to code that has none |
 | [`superforge-verify/references/evidence.md`](./skills/superforge-verify/references/evidence.md) | the four grades of proof and why a report may not contain an assertion, "it worked" vs "it happened to work", the seven ways evidence gets faked unintentionally |
 | [`superforge-debug/references/failforward.md`](./skills/superforge-debug/references/failforward.md) | where the failure memory lives and why `Looked like` is the field that pays, what to do when it will not reproduce, bisecting "it used to work", when to stop |
+| [`superforge-secure/references/attack-surface.md`](./skills/superforge-secure/references/attack-surface.md) | the seven passes in detail — where secrets actually leak, the two-account test that finds the worst bugs in an hour, injection sinks, dependency and build-time risk, the exposure sweep |
+| [`superforge-secure/references/when-it-happens.md`](./skills/superforge-secure/references/when-it-happens.md) | contain before diagnosing — the rotation order, reconstructing blast radius from logs you may not have kept, and the honest notice |
+| [`superforge-dev/references/data-design.md`](./skills/superforge-dev/references/data-design.md) | the ownership chain every authorization check reads, the choices that are cheap now and expensive later, missing indexes / N+1 / unbounded reads, additive migrations, and what "deleted" has to mean |
+| [`superforge-ui/references/performance-budget.md`](./skills/superforge-ui/references/performance-budget.md) | three numbers set with the design instead of measured after it, where the weight actually comes from, and perceived speed as a design problem |
+| [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | text expansion and the layouts it breaks first, why a sentence must never be assembled from fragments, locale-aware formats, and deciding whether to be multilingual at all |
+| [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | will you find out, can you fix it, can you get it back, what does it cost — one alert worth having, a tested rollback, a restored backup, and the runaway-bill threshold |
+| [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | what generated media actually costs, the recipe that makes the twelfth image match the first, and the commercial-use and likeness questions answered before it ships |
 
 ---
 

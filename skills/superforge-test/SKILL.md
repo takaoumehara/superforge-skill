@@ -84,7 +84,9 @@ verify itself without a human interpreting the output.
 
 A test that locks a fixed bug is also what `superforge-debug` records as
 `Locked by:` in `docs/failforward.md` — when that line says 無し, this skill is
-the one that should have run.
+the one that should have run. **A security fix earns a test unconditionally**
+(`superforge-secure`): an authorization check that regresses silently is the
+worst case in §1's first row.
 
 ## Delegate when a sharper skill is installed
 

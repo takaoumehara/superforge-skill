@@ -36,6 +36,9 @@ flowchart TD
 
 ## ✨ 강점
 
+### ⚡ 성능과 두 번째 언어는 나중 문제가 아니라 레이아웃 단계의 결정
+히어로 영상도, 네 가지 폰트 굵기도, 레이아웃을 유발하는 속성에 건 애니메이션도 전부 디자인에서 정해진다. 그리고 누군가 프로파일링할 때쯤이면 그 위에 컴포넌트가 쌓여 있다. 그래서 예산 숫자 세 개를 토큰과 함께 `docs/design.md`에 적고, 넘겼을 때 무엇을 할지도 같이 적는다. 언어도 마찬가지다. 독일어는 30~40% 길어지고 **짧은 문자열일수록 더 많이 늘어나므로 버튼이 먼저 깨진다.** 컨테이너를 지금 텍스트에 맞춰 재지 말 것 — 지금 하면 거의 공짜고, 나중에 하면 다시 만드는 일이다.
+
 ### 🎛️ 일곱 가지 상태가 갖춰져야 컴포넌트가 끝납니다
 Default, hover, focus, active, disabled, loading, error를 하나씩 명세합니다. 키보드 포커스 링과 오류 상태에서 빠져나오는 경로까지 포함합니다. "가만히 있을 때 보기 좋다"는 완성이 아닙니다.
 
@@ -63,9 +66,9 @@ SwiftUI에는 Apple HIG(Dynamic Type, SF Symbols, `.presentationDetents`, 햅틱
 
 ## 🚀 설치 및 사용법
 
-### 🖥️ 열세 개를 한 번에 설치 (처음 한 번만)
+### 🖥️ 열네 개를 한 번에 설치 (처음 한 번만)
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열세 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill

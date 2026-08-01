@@ -57,6 +57,7 @@ treat any absence as "do it inline".
 | Brand discovery and positioning | `brand-discover`, `content-strategy` |
 | Copy, taglines, marketing prose | `copywriting`, `japanese-copywriting` |
 | Writing up shipped work credibly (case study, portfolio, proposal) | inline — `superforge-brand/references/case-study.md` — no external skill needed |
+| Generation cost, consistency across a set, commercial-use rights | inline — `superforge-brand/references/media-production.md` — no external skill needed |
 | Diagrams and explanatory figures | `zukai` |
 | App icon, screenshots, store assets | `app-icon-generator`, `screenshot-planner`, `app-store-assets`, `screenshot-automation` |
 | Social and share surfaces | `social-content`, `social-export`, `share-card` |
@@ -67,6 +68,8 @@ treat any absence as "do it inline".
 |---|---|
 | Where the visual direction comes from (references, or a design made elsewhere) | inline — `superforge-ui/references/design-sourcing.md` — run this **before** any other UI step |
 | Motion timing, easing, render pipeline, scroll sync | inline — `superforge-ui/references/motion-system.md` — no external skill needed |
+| Performance budget, set with the design rather than measured after it | inline — `superforge-ui/references/performance-budget.md`; `superforge-verify` measures against the numbers |
+| A second language — layout expansion, RTL, formats, string extraction | inline — `superforge-ui/references/internationalization.md`; tone per language is `superforge-brand` |
 | Overall frontend quality and craft | `impeccable`, `frontend-design`, `taste-skill` |
 | Design system generation | `design-system-builder`, `design-system`, `moodboard-design-system` |
 | Typography, spacing, colour, polish | `typeset`, `arrange`, `colorize`, `polish`, `normalize` |
@@ -86,6 +89,7 @@ treat any absence as "do it inline".
 | Step | Delegate to |
 |---|---|
 | Splitting the work, and deciding what may run in parallel | inline — `superforge-dev/references/decomposition.md` — run this **before** choosing topology or tier |
+| Schema, migrations, what "deleted" means | inline — `superforge-dev/references/data-design.md` — wave 1, alone, before anything fans out |
 | Plan writing before code | `writing-plans`, `prd-generator`, `architecture-spec` |
 | Parallel dispatch mechanics | `dispatching-parallel-agents`, `subagent-driven-development` |
 | Plan execution | `executing-plans` |
@@ -139,14 +143,30 @@ criteria — one ledger, one set of numbers, one report at `docs/accessibility.m
 | Technical audit sweep | `audit`, `optimize` |
 | Running the actual app | `run` |
 
+### `superforge-secure` — security
+| Step | Delegate to |
+|---|---|
+| The seven passes, and where the findings actually are | inline — `superforge-secure/references/attack-surface.md` — no external skill needed |
+| A leaked key or a suspected breach | inline — `superforge-secure/references/when-it-happens.md` — containment before diagnosis |
+| Deeper review or a formal threat model | `security`, `harden`, `security-review`, `threat-model` |
+| Implementing the fix | `superforge-dev`, `auth-flow` |
+| Locking the fix so it cannot regress | `superforge-test` |
+| Disclosure duties once user data is involved | **`superforge-ship`** → `legal`, and a lawyer in the affected jurisdiction |
+
+`superforge-roast`, `superforge-verify`, and `superforge-ship` all touch
+security. Each of them **calls this skill** rather than restating the checks —
+one ledger, one set of findings, one report at `docs/security.md`.
+
 ### `superforge-ship` — the release gate
 | Step | Delegate to |
 |---|---|
 | Which legal obligations the product triggered | inline — `superforge-ship/references/legal-triggers.md` — no external skill needed |
+| Monitoring, rollback, backups and their restore drill, cost control | inline — `superforge-ship/references/operations.md` — no external skill needed |
+| Security as a release gate | **`superforge-secure`** — read `docs/security.md`, never restate checks |
 | Drafting the actual policy or terms, once the facts are established | `legal`, `privacy-policy`, `privacy-manifests` |
 | Accessibility as a release blocker | **`superforge-a11y`** — read `docs/accessibility.md`, never restate criteria |
 | Does it work at all (run this first) | **`superforge-verify`** |
-| Threat surface before release | `security`, `harden`, `security-review` |
+| Threat surface before release | **`superforge-secure`** first; then `security`, `harden`, `security-review` |
 | Store listing craft | `app-store`, `product-page-optimization`, `screenshot-planner` |
 | Instrumentation and monitoring | `error-monitoring`, `logging-setup`, `ci-cd-setup` |
 | What to measure and the post-launch loop | inline — `superforge-ship/references/launch-metrics.md` — no external skill needed |

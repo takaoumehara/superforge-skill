@@ -6,18 +6,22 @@ description: >
   Codex, and Kimi. Splits work into tasks that each have one outcome, a proof
   line, and a listed set of files — so parallel safety is decidable rather than
   hoped for — and proposes Subagents versus Agent Teams topology by task
-  complexity and token cost. Use when the user says "implement", "build this
-  feature", "execute the plan", "in parallel", "dispatch agents", "subagents",
-  "split this up", "which model should", "実装して", "作って", "並列で",
-  "サブエージェント", "タスクに分けて", "プランを実行", "どのモデルで",
-  or runs /superforge-dev.
+  complexity and token cost. Also covers the schema, which is both the shared
+  foundation every parallel run depends on and the one part of a product that
+  gets harder to change as it succeeds: identity, money, time, indexes,
+  deletion, and migrations run against data you cannot restore. Use when the
+  user says "implement", "build this feature", "execute the plan", "in
+  parallel", "dispatch agents", "split this up", "which model should",
+  "database", "schema", "migration", "実装して", "作って", "並列で",
+  "サブエージェント", "タスクに分けて", "どのモデルで", "スキーマ", "DB設計",
+  "マイグレーション", or runs /superforge-dev.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "4.0"
 compatibility: >
   Standalone.
-  Reads and writes docs/plan.md.
+  Reads and writes docs/plan.md. The schema section informs superforge-secure and superforge-ship.
   Parallel dispatch requires a subagent mechanism; without one it runs the same loop sequentially.
 ---
 
@@ -48,6 +52,14 @@ The never-parallel table, how to find the dependencies a file list cannot show,
 how much context to hand each agent (both too little and too much fail, in
 different ways), what to do when a subtask fails — **revert before retry** — and
 when not to split at all → **`references/decomposition.md`**.
+
+**The schema is the shared foundation that runs first and alone**, and it is
+also the one part of a product that gets *harder* to change as the product
+succeeds — code with no users can be rewritten in an afternoon, a table with
+real rows cannot. The decisions that are cheap now and expensive later (IDs,
+timestamps, money, deletion, the ownership chain every authorization check
+reads), the three causes of every data performance problem, and how to run a
+migration against data you cannot restore → **`references/data-design.md`**.
 
 ---
 
@@ -93,6 +105,11 @@ say it is not one yet, the parallel-safety rule and the never-parallel table,
 finding the dependencies a file list cannot show (signatures, fixtures,
 migration order), what to hand each agent and the boundary to state explicitly,
 the subtask-failure table, and when splitting costs more than it saves.
+
+**`references/data-design.md`** — modelling the nouns the user actually says,
+the ownership chain that authorization depends on, the choices that are cheap
+now and expensive later, missing indexes / N+1 / unbounded reads, additive
+migrations with a tested rollback, and what "deleted" has to mean.
 
 **`references/autonomous-run.md`** — preconditions for an unattended run, the
 build/review/prove/repair loop, what to decide alone versus what must stop the

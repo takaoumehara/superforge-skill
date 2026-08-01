@@ -113,6 +113,11 @@ to see.
 whether it may be released — undisclosed data collection, a missing deletion
 path, or no rollback will stop a launch that passes every check here).
 
+**"It works" is also not "it is safe."** This skill proves the intended path
+runs. Whether a logged-in user can reach data that is not theirs is a different
+question with a different method — **`superforge-secure`**, whose
+`docs/security.md` is a `superforge-ship` precondition alongside this file's.
+
 **Passing this skill is not permission to ship.** "It works" and "we are
 allowed to release it" are different verdicts with different evidence. Hand the
 second one to `superforge-ship`.

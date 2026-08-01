@@ -14,11 +14,12 @@ description: >
   "見た目", "レイアウト", "アニメーション", "余白", "使いにくい",
   "オンボーディング", "初回起動", "権限の許可", "AIっぽいデザイン",
   "参考サイト", "インスピレーション", "デザインシステムに落とす", "moodboard",
-  "reference site", "make it not look AI-generated", or runs /superforge-ui.
+  "reference site", "遅い", "パフォーマンス", "多言語", "i18n",
+  or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "4.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -103,6 +104,30 @@ score → **`references/motion-system.md`**.
 
 ---
 
+## 4b. Performance and language are layout decisions, not later problems
+
+Both of these are treated as engineering problems discovered at the end, and
+both are decided here, in this file, at the moment a layout is agreed.
+
+**Performance.** The hero video, four webfont weights, the icon library
+imported whole, an animation on a layout-triggering property — by the time
+anyone profiles, components are built on top of those and the fix is a redesign.
+Set three numbers into `docs/design.md` alongside the tokens: time to something
+useful, time to visible response, and weight of the first screen — each with a
+consequence for exceeding it. Sources of weight in order, perceived speed
+(which is free and entirely design), and native budgets →
+**`references/performance-budget.md`**.
+
+**A second language.** German runs 30–40% longer than English, and short strings
+expand the most — so buttons break first. **Never size a container to its
+current text**, never bake text into an image, never assemble a sentence from
+fragments. Doing this now costs almost nothing; retrofitting it is a rebuild.
+Text expansion, RTL, locale-aware formats, string extraction, and the honest
+three-way decision about whether to be multilingual at all →
+**`references/internationalization.md`**.
+
+---
+
 ## 5. Platform Native Specifications
 
 ### iOS Native (SwiftUI / UIKit):
@@ -140,6 +165,15 @@ score → **`references/motion-system.md`**.
   the render-with-reveal-disabled check that catches the "it looks blank"
   failure. Carries **no visual language** on purpose — the look comes from
   `design-sourcing.md`.
+- **`references/performance-budget.md`** — three numbers set with the design and
+  measured by `superforge-verify`, where the weight actually comes from,
+  perceived speed as a design problem, animation cost, and native budgets.
+
+- **`references/internationalization.md`** — text expansion and the layouts it
+  breaks, RTL and logical properties, why a sentence must never be assembled
+  from fragments, locale-aware formats, keyed string extraction, and deciding
+  whether to be multilingual at all.
+
 - **`references/first-run.md`** — the gap between those two: the first thirty
   seconds after someone commits. Getting to a first real outcome instead of
   explaining the product, why first run means something different on web than

@@ -63,7 +63,7 @@ Along with the capsule you get a copy-paste-ready chat prompt naming the project
 
 ## 🚀 Install & Usage
 
-### 🖥️ Install all thirteen skills (once)
+### 🖥️ Install all fourteen skills (once)
 
 Clone the repository and run the installer. It links every skill into every skills directory it finds on this machine — Claude Code, Codex CLI, Gemini CLI, Antigravity.
 
