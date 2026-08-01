@@ -104,30 +104,73 @@ for problems:**
 
 ---
 
-## 4. Where this file's authority ends
+## 4. Where this file's authority ends — and why the line is not clean
 
-The boundary is **not** web versus installation. A browser is a perfectly normal
-medium for an artwork, and an installation can be a web page on a screen in a
-room. The line is what the thing is *for*:
+**Do not treat this as two boxes to sort a project into.** They are two
+*questions about the same thing*, and one artifact can answer both.
 
-| | This file | An interactive-experience skill |
-|---|---|---|
-| The thing is | A **product** — someone uses it to get something done, decide something, or understand something | A **work** — the visitor is inside it, and the experience is the point |
-| Success looks like | They achieved their goal, and the craft supported that | They felt something, and stayed |
-| So an effect must | Earn its place against the task | Carry the piece |
-| Sound, for example | **Never starts on its own** (`references/sound.md`) | Often fills the space from the moment you enter — the opposite default |
+| The question | Pulls the design toward |
+|---|---|
+| **Is someone using this to get something done?** | Everything in this skill. The effect earns its place against the task; sound never starts on its own; frequency governs motion |
+| **Is someone inside this, and the experience is the point?** | The opposite defaults. Sound may fill the space on entry; the effect *is* the content; the interface recedes |
 
-**That last row is the clearest proof these are different disciplines rather
-than different scales**, and it is why the rules here should not be carried
-across in either direction.
+A browser is a perfectly normal medium for a work, and an installation can be a
+web page on a screen in a room — so **"web versus installation" is not the
+line.** Neither is "product versus art", cleanly.
 
-**Hand over** for: sensor-driven work, projection onto physical surfaces, show
-control, multi-machine synchronisation, anything carrying DMX / OSC / NDI,
-permanent installations and their operations, and per-output-surface GPU
-budgeting. A skill built for that already holds stack selection, protocol
-tables and the economics — improvising a worse version here helps nobody.
+**A real example of why.** A piece where someone's face becomes an instrument —
+expressions drive sound and image — is genuinely a work: the visitor is inside
+it and the experience is the point. It is *also* practice for the facial
+muscles, which makes it a training tool with a measurable outcome. Push further
+and it is a rehabilitation aid. **One artifact, three purposes, and they do not
+resolve into a category.**
 
----
+### So decide per surface, not per project
+
+This is `references/surface-and-scope.md` §1 applied one level up. The same
+piece may have a gallery surface and a home-practice surface, and they take
+**opposite rules**:
+
+- **In the gallery**: sound on entry is right, the visual leads, nothing asks
+  the visitor to improve at anything
+- **At home, practising daily**: the frequency rule bites hard, sound must not
+  start unbidden, and the thing they came for is progress rather than awe
+
+Neither surface is wrong, and applying one's rules to the other produces
+something that fails at both. **Name the surface, then apply that surface's
+rules.**
+
+### When it is also training or therapy, the claims become regulated
+
+The moment a piece is described as improving, training, or rehabilitating
+anything about a person's body, **it has made a health claim**, and health
+claims are regulated differently in every market — including for something
+built as an artwork.
+
+That is not a reason to abandon the idea. It is a reason to know the line before
+the copy is written, because the wording is where the exposure is: "a piece
+about the face" and "trains your facial muscles" and "for facial rehabilitation"
+are three different legal positions, in ascending order.
+**`superforge-ship/references/legal-triggers.md` §4** covers what escalates and
+where professional advice becomes mandatory. Ask it early rather than after the
+launch page exists.
+
+### What actually changes for the technical work
+
+**This file still applies to the browser and app side of any of the above.** It
+does not stop being useful because a piece is a work.
+
+What it does not cover, and where you will need something else: sensors reading
+a body, projection onto physical surfaces, show control, multi-machine
+synchronisation, protocols like DMX / OSC / NDI, permanent installations and
+their operations, and GPU budgeting per output surface.
+
+If a skill built for that discipline is installed, hand those parts to it. **If
+one is not, do not stop** — the suite's rule is that a missing skill never
+blocks the work (`superforge` §5). Work it inline, and know what you are missing:
+latency budgets from sensor to response, what happens when the venue's network
+is not yours, and how a thing that must run unattended for months differs from
+a page that reloads.
 
 ## 5. Choosing, in order
 
