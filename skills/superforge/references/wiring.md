@@ -68,7 +68,9 @@ treat any absence as "do it inline".
 |---|---|
 | Where the visual direction comes from (references, or a design made elsewhere) | inline — `superforge-ui/references/design-sourcing.md` — run this **before** any other UI step |
 | Motion timing, easing, render pipeline, scroll sync | inline — `superforge-ui/references/motion-system.md` — no external skill needed |
-| Shaders, 3D, WebGL/WebGPU, GPU-drawn effects — whether at all, and at what tier | inline — `superforge-ui/references/heavy-visuals.md`; look the current library up once the tier is decided |
+| Shaders, 3D, WebGL/WebGPU, GPU-drawn effects — whether at all, and at what tier | inline — `superforge-ui/references/heavy-visuals.md`; look the current library up once the tier is decided. Implementation technique, once the tier is chosen: any installed `shader-dev`-style skill |
+| Showing several directions before committing to one | inline — `superforge-ui/references/aesthetic-direction.md` §1b |
+| Sound — interface feedback, generated tone, sonic identity | inline — `superforge-ui/references/sound.md`; the sonic identity itself is `superforge-brand` |
 | A ready-made DESIGN.md from a brand collection | inline — `superforge-ui/references/design-sourcing.md` §4b — read as an example, never dropped in and built against |
 | Performance budget, set with the design rather than measured after it | inline — `superforge-ui/references/performance-budget.md`; `superforge-verify` measures against the numbers |
 | A second language — layout expansion, RTL, formats, string extraction | inline — `superforge-ui/references/internationalization.md`; tone per language is `superforge-brand` |

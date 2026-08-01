@@ -31,6 +31,45 @@ not one anywhere else.
 
 ---
 
+## 1b. Propose it — the user cannot ask for what they have not seen
+
+Everything above this line is a gate, and a file made only of gates produces
+careful, forgettable work. **Most people never ask for a fluid that reacts to
+the cursor, because they do not know it is a thing that can exist on a web
+page.** Waiting to be asked is how the ambitious option never gets considered.
+
+So on Experience and Persuade surfaces, **propose one** — unprompted, early,
+before the layout hardens around a static composition.
+
+**Propose in the language of sensation, never in the language of the
+technology.** "Should we use WebGPU" is unanswerable by the person paying for
+it, and it is the wrong question anyway. These are answerable:
+
+| Do not ask | Ask |
+|---|---|
+| "Shall I add a WebGL shader?" | "The background could be liquid that moves away from your cursor. Or it could stay perfectly still and let the type carry everything." |
+| "Should we do a 3D scene?" | "The product could rotate as you scroll, so you see it from every side without clicking." |
+| "Want a particle system?" | "The logo could be assembled from thousands of drifting points that gather when the page loads." |
+| "Metal shader on this view?" | "The card could bend like a sheet of glass when you drag it." |
+
+**Every proposal carries its price in the same breath.** A proposal without a
+cost is a sales pitch, and it is how a maker ends up owning something they
+cannot maintain:
+
+> 「背景を、カーソルから逃げる液体にできます。**+約40KB、初回描画+0.3秒、
+> スマホでは電池を食うので画面外で止めます。** 静止画のままにする手もあって、
+> その場合は文字組みだけで見せることになります。どちらにしますか。」
+
+**Two or three, then the recommendation** (`aesthetic-direction.md` §1b). Give
+the still option a real defence — often it is the right answer, and offering it
+sincerely is what makes the ambitious option a choice rather than a push.
+
+**Do not propose on Operate and Read surfaces.** §1's table is not advisory
+here. Suggesting an immersive background for a dashboard is not ambition; it is
+not having asked what the screen is for.
+
+---
+
 ## 2. The cost tiers
 
 Order the options by what they cost, and take the cheapest tier that achieves

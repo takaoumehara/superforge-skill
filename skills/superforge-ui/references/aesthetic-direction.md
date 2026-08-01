@@ -44,6 +44,46 @@ default.
 
 ---
 
+## 1b. Show three, then commit to one
+
+§1 says commit. That is right for **building** and wrong for **deciding**, and
+collapsing the two is how a direction gets chosen by whoever spoke first.
+
+**Before building anything, put three directions in front of the user.** Not
+three drafts — three *positions*, each with a name, each genuinely different.
+
+```markdown
+### A. <name>
+コンセプト: <one line — what the page feels like>
+押す軸: <type / colour / space / layout / motion / texture>
+やらないこと: <what this direction deliberately gives up>
+費用: <heavier or lighter than the others, and why>
+向いているのは: <who this lands with>
+
+### B. <name>   ### C. <name>
+（同じ形式）
+
+**推し: B** — <one sentence on why this product, not this taste>
+```
+
+**Three rules that make this worth doing:**
+
+- **Three positions, not three intensities.** A, B and C differing only in how
+  loud they are is a slider wearing a costume. If all three push the same axis,
+  you produced one direction and two dilutions of it.
+- **Always recommend one, and say why.** Three options with no recommendation
+  pushes the decision back to someone who asked you precisely because they did
+  not want to make it alone. The recommendation is the work.
+- **Then commit completely.** Once one is picked, build *that* one.
+  **Averaging the three is the failure this whole file exists to prevent** —
+  it produces the middle, and the middle is where every model already lands.
+
+**Write all three into `docs/design.md`**, including the two not taken and one
+line each on why not. Six months later, "we tried that and here is what it cost"
+is worth more than the winner's description.
+
+---
+
 ## 2. Be extreme on one axis, ordinary on the rest
 
 This is the part `frontend-design`-style guidance leaves implicit, and it is

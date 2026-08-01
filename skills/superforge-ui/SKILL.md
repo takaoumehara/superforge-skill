@@ -14,12 +14,13 @@ description: >
   "見た目", "レイアウト", "アニメーション", "余白", "使いにくい",
   "オンボーディング", "初回起動", "権限の許可", "AIっぽいデザイン",
   "参考サイト", "インスピレーション", "デザインシステムに落とす", "moodboard",
-  "reference site", "遅い", "パフォーマンス", "多言語", "i18n",
+  "reference site", "遅い", "パフォーマンス", "多言語", "3D", "shader",
+  "sound", "音", "方向性を見せて",
   or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "7.0"
+  version: "8.0"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -174,6 +175,25 @@ into dark mode) → **`references/build-floor.md`**.
 
 ---
 
+## 4c. Show three directions, and propose the one they did not ask for
+
+Committing to one direction is right for **building** and wrong for
+**deciding**. Put **three named positions** in front of the user first — three
+*positions*, not three intensities of the same idea — each with its concept, the
+axis it pushes, what it gives up, and its cost. **Always name a recommendation**;
+three options with no recommendation hands the decision back to someone who
+asked precisely because they did not want to make it alone. Then build the
+chosen one completely and **never average them** (`references/aesthetic-direction.md` §1b).
+
+And on Experience and Persuade surfaces, **propose something they did not ask
+for.** People cannot request a fluid that reacts to the cursor if they do not
+know it can exist. Propose it in the language of sensation — "the background
+could be liquid that moves away from you" — never in the language of the
+technology, and **carry the price in the same breath** (§4d). A proposal
+without a cost is a sales pitch.
+
+---
+
 ## 4d. Shaders, 3D, and anything GPU-drawn
 
 Reach for the **cheapest tier that achieves the effect** — CSS before SVG before
@@ -193,6 +213,25 @@ surface's mode usually settles it → **`references/heavy-visuals.md`**.
 
 **This file names no libraries on purpose.** Which renderer leads changes yearly;
 the decision does not.
+
+---
+
+## 4e. Sound
+
+The least-used expressive axis, and therefore the one with the most
+distinctiveness still available — and the one with the sharpest downside, since
+a visual mistake is ignored and an audio mistake closes the tab.
+
+**Nothing may make a sound the visitor did not cause. No audio on page load,
+ever.** Anything a sound conveys must also be visible. The mute control lives on
+the surface, is keyboard-reachable, and is remembered. Interface sounds stay
+short, quiet, and pitch-varied on repeat — the same sample twenty times becomes
+a mosquito. Nothing attaches to scroll or hover.
+
+The highest-value use is the cheapest: a short confirmation of an action the
+user took, so someone looking at their keyboard still knows it worked. The most
+striking is generated tone rather than played file — a formula ships instead of
+a recording, and it never repeats identically → **`references/sound.md`**.
 
 ---
 
@@ -247,6 +286,11 @@ the decision does not.
   (Inter as a display face, purple-on-white, three equal cards, evenly
   distributed palettes, scattered scroll fades), atmosphere as a layer, and why
   minimal is not less work.
+
+- **`references/sound.md`** — the three uses in order of how often they are
+  right, the six non-negotiable rules, why timing rather than file size is the
+  real constraint, and constraining generated tones to a scale so "something is
+  off" becomes "this feels considered".
 
 - **`references/heavy-visuals.md`** — shaders, 3D and GPU-drawn animation: the
   cost tiers, battery and heat, the first frame, the floor device, the screen
