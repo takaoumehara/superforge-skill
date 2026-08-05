@@ -1,0 +1,20 @@
+{
+  "skill_name": "superforge-brand",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a brand identity for a high-performance developer analytics tool called PulseTrace.",
+      "expected_output": "docs/brand.md containing VVA matrix coordinates, color tokens, typography, and AI image prompts.",
+      "assertions": [
+        {
+          "name": "contains_vva_matrix",
+          "description": "Output docs/brand.md contains explicit VVA Matrix coordinates (TR, VD, UA, ST)."
+        },
+        {
+          "name": "contains_color_architecture",
+          "description": "Output contains primary accent and surface neutral color hex codes."
+        }
+      ]
+    }
+  ]
+}

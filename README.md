@@ -95,19 +95,27 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ## Install
 
-You need `git` and an AI tool that loads skills, such as Claude Code.
+You need `git` and an AI tool that loads skills, such as Claude Code, Antigravity IDE, Codex, or Gemini CLI.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all fourteen.
+Clone once and run the installer for your OS. It finds every skills directory on your machine and links all fourteen.
 
+**macOS / Linux:**
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
 ./install.sh
 ```
 
-`--dry-run` shows what would happen and changes nothing. `--uninstall` removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+.\install.ps1
+```
+
+`--dry-run` (`-DryRun`) shows what would happen and changes nothing. `--uninstall` (`-Uninstall`) removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
 
 These are the directories it looks for. Only the ones that exist get linked.
 
@@ -117,6 +125,15 @@ These are the directories it looks for. Only the ones that exist get linked.
 ~/.codex/skills                     Codex CLI
 ~/.gemini/skills                    Gemini CLI
 ~/.gemini/antigravity-ide/skills    Antigravity IDE
+~/.gemini/config/skills             Antigravity IDE global config
+```
+
+### Claude Code Plugin Installation
+
+In Claude Code, you can also install via the plugin manifest:
+
+```bash
+/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
 ```
 
 Restart your AI tool, then type `/superforge`.
@@ -134,7 +151,7 @@ Swap `superforge-ui` for the skill you want and `~/.claude/skills` for your tool
 
 ### claude.ai (browser)
 
-Zip one skill's folder and upload it under Settings → Capabilities → Skills. The browser takes one skill at a time.
+Upload `.skill` archives directly from `dist/` or zip one skill's folder under Settings → Capabilities → Skills. The browser takes one skill at a time.
 
 ```bash
 cd ~/src/superforge-skill/skills/superforge-ui

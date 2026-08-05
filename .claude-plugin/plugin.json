@@ -1,0 +1,27 @@
+{
+  "name": "superforge-skills",
+  "version": "4.5.0",
+  "description": "Say what you want to build in one sentence. Fourteen superforge skills take it from idea to release gate with model tiering and file persistence.",
+  "author": {
+    "name": "Takao Umehara",
+    "url": "https://github.com/takaoumehara/superforge-skill"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/takaoumehara/superforge-skill",
+  "skills": [
+    "skills/superforge",
+    "skills/superforge-brain",
+    "skills/superforge-biz",
+    "skills/superforge-brand",
+    "skills/superforge-ui",
+    "skills/superforge-dev",
+    "skills/superforge-test",
+    "skills/superforge-debug",
+    "skills/superforge-a11y",
+    "skills/superforge-secure",
+    "skills/superforge-roast",
+    "skills/superforge-verify",
+    "skills/superforge-ship",
+    "skills/superforge-handoff"
+  ]
+}

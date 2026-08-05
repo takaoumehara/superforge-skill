@@ -1,0 +1,19 @@
+# {{PRODUCT_NAME}}
+
+> {{ONE_SENTENCE_SUMMARY}}
+
+## Overview
+{{PRODUCT_OVERVIEW_PARAGRAPH}}
+
+## Core Features & System Capabilities
+- {{FEATURE_1_TITLE}}: {{FEATURE_1_DESC}}
+- {{FEATURE_2_TITLE}}: {{FEATURE_2_DESC}}
+- {{FEATURE_3_TITLE}}: {{FEATURE_3_DESC}}
+
+## System Architecture & Technical Specs
+- **Primary Stack**: {{PRIMARY_STACK}}
+- **API Surface**: {{API_SURFACE_ENTRY}}
+
+## Official Links & Entrypoints
+- [Documentation]({{DOCS_URL}}): Official Product Guides
+- [Repository]({{REPO_URL}}): Source Code & Issues

@@ -95,21 +95,29 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ## インストール
 
-必要なのは `git` と、スキルを読み込めるAIツール（Claude Code など）だけです。
+必要なのは `git` と、スキルを読み込めるAIツール（Claude Code、Antigravity IDE、Codex CLI、Gemini CLI など）だけです。
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします。
+一度クローンして、お使いのOSに合ったインストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを自動検出して、14個をまとめてリンクします。
 
+**macOS / Linux:**
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
 ./install.sh
 ```
 
-`--dry-run` を付けると、何もせず「何が起きるか」だけ表示します。`--uninstall` で外せます。何度実行しても結果は同じで、自分が作ったリンク以外には触りません。`git pull` のたびに走らせて構いません。
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+.\install.ps1
+```
 
-対象になるフォルダはこの5つです。存在するものだけにリンクされます。
+`--dry-run` (`-DryRun`) を付けると、何もせず「何が起きるか」だけ表示します。`--uninstall` (`-Uninstall`) で外せます。何度実行しても結果は同じで、自分が作ったリンク以外には触りません。`git pull` のたびに走らせて構いません。
+
+対象になるフォルダはこの6つです。存在するものだけにリンクされます。
 
 ```
 ~/.claude/skills                    Claude Code
@@ -117,6 +125,15 @@ cd superforge-skill
 ~/.codex/skills                     Codex CLI
 ~/.gemini/skills                    Gemini CLI
 ~/.gemini/antigravity-ide/skills    Antigravity IDE
+~/.gemini/config/skills             Antigravity IDE グローバル設定
+```
+
+### Claude Code プラグイン経由でのインストール
+
+Claude Code では、マニフェストから直接プラグインとして追加することも可能です：
+
+```bash
+/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
 ```
 
 終わったらAIツールを再起動して、`/superforge` と打ってください。
@@ -134,7 +151,7 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ### claude.ai（ブラウザ）で使う
 
-スキル1個分のフォルダを zip にして、Settings → Capabilities → Skills からアップロードします。ブラウザ版は一度に1個ずつです。
+`dist/` フォルダ内の `.skill` アーカイブをそのままアップロードするか、各スキルのフォルダを zip にして Settings → Capabilities → Skills から追加してください。ブラウザ版は一度に1個ずつです。
 
 ```bash
 cd ~/src/superforge-skill/skills/superforge-ui
