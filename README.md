@@ -153,7 +153,7 @@ Swap `superforge-ui` for the skill you want and `~/.claude/skills` for your tool
 
 ### claude.ai (browser)
 
-Upload `.skill` archives directly from `dist/` or zip one skill's folder under Settings → Capabilities → Skills. The browser takes one skill at a time.
+Upload `.zip` archives directly from `dist/` (`python3 scripts/package_skills.py`) under Settings → Capabilities → Skills. The browser takes one skill at a time — and expects a real `.zip`; a `.skill` extension will not open on double-click and may not even be selectable in the upload dialog, even though the bytes inside are identical.
 
 ```bash
 cd ~/src/superforge-skill/skills/superforge-ui
@@ -360,7 +360,7 @@ Anything that names a model, an API shape, or another vendor's guidance goes sta
 - **`SOURCES.md`** lists every externally-dependent claim with the URL it was verified against and the date. Method has no date and needs none: "two tasks may run in parallel only if the files they write are disjoint" will not expire. Model names and directory paths will.
 - **`/superforge-freshness`** re-checks all of them and reports the drift, with paste-ready replacement text.
 - **An installed copy** updates itself. `install.sh` symlinks each skill into your clone, so `git pull` refreshes every one of them, in every tool, at once. Workflows are copies rather than symlinks, so `./install.sh --update` covers those too.
-- **A detached copy** — a `.skill` uploaded to claude.ai, a file pasted into a repository — has no update path at all. Which is exactly why every dated claim carries its date: a reader always knows what today is, even when the file does not.
+- **A detached copy** — a `.zip` uploaded to claude.ai, a file pasted into a repository — has no update path at all. Which is exactly why every dated claim carries its date: a reader always knows what today is, even when the file does not.
 
 ---
 

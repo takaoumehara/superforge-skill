@@ -343,7 +343,7 @@ Todo lo que nombra un modelo, la forma de una API o la guía de otro proveedor c
 - **`SOURCES.md`** lista cada afirmación que depende del exterior, con la URL contra la que se verificó y la fecha. El método no lleva fecha ni la necesita: "dos tareas solo pueden correr en paralelo si los archivos que escriben no se cruzan" no va a caducar. Los nombres de modelo y las rutas sí.
 - **`/superforge-freshness`** los revisa todos de nuevo y reporta la desviación, con el texto de reemplazo listo para pegar.
 - **Una copia instalada** se actualiza sola. `install.sh` enlaza cada skill a tu clon, así que `git pull` refresca todas a la vez en todas las herramientas. Los workflows son copias, así que `./install.sh --update` también los cubre.
-- **Una copia desconectada** —un `.skill` subido a claude.ai, un archivo pegado en un repositorio— no tiene ninguna vía de actualización. Justamente por eso cada afirmación lleva su fecha: quien lee siempre sabe qué día es hoy, aunque el archivo no lo sepa.
+- **Una copia desconectada** —un `.zip` subido a claude.ai, un archivo pegado en un repositorio— no tiene ninguna vía de actualización. Justamente por eso cada afirmación lleva su fecha: quien lee siempre sabe qué día es hoy, aunque el archivo no lo sepa.
 
 ---
 

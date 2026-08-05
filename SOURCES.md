@@ -73,7 +73,7 @@ than symlinked (Claude Code will not load one through a symlink), so those need
 `./install.sh --update`, which pulls and re-copies in one step. Plugin
 installations update through the plugin marketplace.
 
-**Layer 3 — a detached copy.** A `.skill` zip uploaded to claude.ai, a file
+**Layer 3 — a detached copy.** A `.zip` uploaded to claude.ai, a file
 pasted into a repository, a fork nobody pulls. **There is no update path for
 these, and pretending otherwise is worse than admitting it.** So the design has
 to assume a stale reader, which is what §4 is for.
