@@ -63,9 +63,14 @@ writes `docs/verification.md` with the mandatory unverified section. Up to
 fourteen agents; say *"use a workflow"* or run `/superforge-verify-evidence`.
 
 Everywhere else, do it in one pass — but write the evidence down completely
-before grading any of it, grade only from what is written, and state in the
-report that the grader and the implementer were the same. A reader who knows that
-can discount accordingly; a reader who does not, cannot.
+before grading any of it, and grade only from what is written.
+
+Both paths write `docs/verification.md`, and **`superforge-ship` blocks on that
+file**, so the difference has to be a field rather than something a reader
+infers: the first line is `Mode: single-pass (grader = implementer)` here, and
+`Mode: independent grading (<n> claims, <n> agents)` from the workflow. A reader
+who knows the grader wrote the code can discount accordingly; a reader who does
+not, cannot.
 
 ---
 

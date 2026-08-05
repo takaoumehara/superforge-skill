@@ -333,7 +333,7 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 
 ---
 
-## Four workflows, for the parts prose cannot enforce
+## Five workflows, for the parts prose cannot enforce
 
 Three instructions in this suite were structurally unenforceable as text, because they ask one model to be two people. In Claude Code they now run as scripts instead: the loop and the intermediate results live in code, so what the plan says and what the run does cannot drift.
 
@@ -343,6 +343,7 @@ Three instructions in this suite were structurally unenforceable as text, becaus
 | `/superforge-verify-evidence` | One agent runs each proof line; **a different agent grades the output having never seen the implementation**, and is asked for the reason it does *not* prove the claim |
 | `/superforge-dev-waves` | Checks that no two parallel tasks write the same file *before* anything starts, prints the model and the reason for every task while nothing has been spent, then proves each one with a second agent |
 | `/superforge-freshness` | Re-fetches every source in `SOURCES.md` and reports only what drifted. It reports; it never rewrites |
+| `/superforge-selfcheck` | Reads `docs/superforge-log.md` — what you had to say twice — and turns it into proposed edits with named files. The only thing in here that improves the suite from real use rather than from imagining it |
 
 The one thing all four guarantee that a prompt cannot: **the agent that produces something never grades it.**
 

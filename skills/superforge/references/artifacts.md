@@ -29,9 +29,18 @@ conclusion that exists only in the conversation is lost at the next
 | `docs/security.md` | `superforge-secure` | `superforge-ship` (a precondition — missing, or an unresolved Critical, means BLOCK), `superforge-dev` (the fixes), `superforge-test` (locking them), `superforge-handoff` |
 | `docs/failforward.md` | `superforge-debug` | `superforge-debug` (**read before diagnosing anything**), `superforge-test` (what needs locking), `superforge-handoff` |
 | `docs/ship-readiness.md` | `superforge-ship` | you, at the release decision, and `superforge-handoff` — carries the SHIP / BLOCK / RISK-ACCEPTED verdict |
+| `docs/superforge-log.md` | **every skill, one entry per run** | you, and whoever maintains this suite — the only evidence the suite itself works. `superforge/references/run-log.md` |
+| `docs/superforge-selfcheck.md` | `/superforge-selfcheck` | whoever maintains this suite — proposed edits with named files, paste-ready |
 | `.handoff/*.md` | `superforge-handoff` | the next session, any tool. **Reads every file above** and carries each one's Status, last-updated, and open questions forward — including the ones that were never written |
 
 ## Reading
+
+**Every generated artifact opens with a `Mode:` line** naming the path that
+produced it — `Mode: council (5 lenses, 11 agents)` versus `Mode: single-pass
+fallback`. The workflow and the prose fallback write the same filename, and
+`superforge-ship` blocks on `docs/verification.md` without knowing which one it
+is reading. A downstream skill has to branch on a field, not parse the prose for
+a disclaimer the model may have forgotten to write.
 
 Before asking the user anything, check `docs/` for what is already decided.
 

@@ -147,21 +147,35 @@ tasks ran on a tier above the one they needed.**
 
 ---
 
-## 6. The three shipped with this suite
+## 6. The five shipped with this suite
 
-They live in `workflows/` at the repository root. Each is under the default
-15-agent size guideline, and each exists because a specific instruction in this
-suite was structurally unenforceable as prose.
+They live in `workflows/` at the repository root. Each is written to sit under
+the default 15-agent size guideline **when nothing retries** — `dev-waves` adds
+one agent per task whose proof line fails, so a 6-task plan is 14 agents and 20
+in the worst case. Read the number as a floor, not a ceiling.
+
+Each exists because a specific instruction in this suite was structurally
+unenforceable as prose.
 
 | Workflow | Fixes | Shape |
 |---|---|---|
 | `superforge-roast-council` | `superforge-roast` asks one model to play five critics in one context — by the fourth persona it has read the first three and agrees with them | 5 Sonnet critics (one lens each, no shared context) → 1 Opus skeptic per lens trying to kill its findings → 1 Opus judge writing `docs/critique.md`. 11 agents |
 | `superforge-verify-evidence` | `superforge-verify` has the agent that did the work grade its own evidence, which no instruction can correct — it already believes the claim | 1 Opus extractor → per claim: a Sonnet runner that must actually execute, then an Opus grader **shown only the command and its output** → 1 Opus reporter. Up to 14 agents |
-| `superforge-dev-waves` | The parallel-safety check and the ledger are the two rules most often skipped, and both are checkable | 1 Opus planner that re-waves on conflict and emits the ledger → per task: build on its assigned tier, then **a different agent** runs the proof line → 1 Haiku recorder. 1 + 2n + 1 agents |
+| `superforge-dev-waves` | The parallel-safety check and the ledger are the two rules most often skipped, and both are checkable | 1 Opus planner → **the script computes write-set disjointness itself** and splits any wave the planner got wrong → per task: build on its assigned tier, then **a different agent** runs the proof line → 1 Haiku recorder. 1 + 2n + 1, +1 per retry |
+| `superforge-freshness` | Nothing checked whether this suite's claims about the outside world were still true | 1 Sonnet reader of `SOURCES.md` → 1 Sonnet checker per source, which must quote a line from the page or return `unreachable` → 1 Opus report. Reports; never rewrites |
+| `superforge-selfcheck` | Nothing checked whether the suite is any good to use — `superforge-verify` proves the *product*, not this | 1 Sonnet reader of `docs/superforge-log.md` → 1 Opus diagnostician per implicated skill, reading the skill against what the user had to repeat → 1 Opus report of proposed edits |
 
-The pattern common to all three: **the agent that produces something never
-grades it.** That is not a workflow feature — it is the one thing a workflow can
-guarantee that a prompt cannot.
+The last two ask different questions with different evidence: `freshness` asks
+whether the claims are still true, `selfcheck` asks whether the suite is worth
+using (`superforge/references/run-log.md`). Staleness and unfitness are not the
+same failure.
+
+The pattern common to all five: **the agent that produces something never grades
+it.** That is not a workflow feature — it is the one thing a workflow can
+guarantee that a prompt cannot. And every artifact they write opens with a
+`Mode:` line naming the path that produced it, so a downstream skill branches on
+a field rather than reading prose for a disclaimer — `superforge-ship` blocks on
+`docs/verification.md` and the single-pass fallback writes the same filename.
 
 Each caps its work-list and `log()`s what it dropped. A silent truncation reads
 as coverage, which is the failure `superforge-verify` exists to prevent, one
@@ -202,6 +216,9 @@ Two ways to install them:
 - [ ] Nothing produced is graded by the agent that produced it
 - [ ] Every cap on the work-list is `log()`ged, including agents that died
 - [ ] The ledger is emitted before anything is spent, and the run can be stopped from `/workflows`
-- [ ] `meta.phases` titles match the `phase()` calls exactly
+- [ ] `meta.phases` lists every named stage — and `phase()` is called only where a
+      stage is a real barrier before the next. A stage inside one `pipeline()` call
+      gets `opts.phase` instead and has no separate runtime marker (§3). Every
+      string used either way appears in `meta.phases`
 - [ ] No `Date.now()`, `Math.random()`, or `new Date()` — they break resume and throw
 - [ ] Plain JavaScript. Type annotations do not parse

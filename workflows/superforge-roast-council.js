@@ -191,6 +191,10 @@ const verdict = await agent(
 
 Write \`docs/critique.md\`. Read \`docs/superforge.md\` first if it exists and follow its language setting for the file; if it does not exist, write in the language the findings are in.
 
+**The first line of the file must be the provenance field**, exactly:
+\`Mode: council (${LENSES.length} lenses, ${LENSES.length * 2 + 1} agents)\`
+Downstream skills and the next reader need to branch on a field, not parse prose for a disclaimer. A critique from five isolated critics plus a skeptic pass and one model's unrefuted opinion carry different weight and are written to the same filename; the single-pass fallback writes \`Mode: single-pass fallback\` in the same position.
+
 Structure, in this order — the order is the point:
 
 1. **One sentence: the single worst thing.** Not a summary, not a list. The one thing that, left alone, does the most damage. Everything else is below it.

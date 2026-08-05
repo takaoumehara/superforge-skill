@@ -3,7 +3,7 @@ export const meta = {
   description:
     'Execute docs/plan.md as tiered waves: check parallel safety, print the dispatch ledger, run each wave on its assigned model, prove every task with a second agent, record what actually happened',
   whenToUse:
-    'When docs/plan.md holds tasks that each have one outcome, a proof line, and a listed set of files. Assigns a model per task instead of leaving every agent on the session default. Runs 1 planner + 2 agents per task + 1 recorder.',
+    'When docs/plan.md holds tasks that each have one outcome, a proof line, and a listed set of files. Assigns a model per task instead of leaving every agent on the session default. Runs 1 planner + 2 agents per task + 1 recorder, plus one retry agent per task whose proof line fails — so 14 agents for a 6-task plan, or 20 if every task retries.',
   phases: [
     { title: 'Plan', detail: 'read the plan, check parallel safety, assign a tier per task (Opus 5)', model: 'opus' },
     { title: 'Build', detail: 'one agent per task, on the tier the plan assigned' },
@@ -17,12 +17,16 @@ export const meta = {
 // the ones most often skipped under time pressure:
 //   1. "Two tasks may run in parallel only if the files they write are disjoint"
 //   2. "Print the model, the effort, and the reason for every task before spending anything"
-// Here the first is checked before any agent starts, and the second is emitted
-// by the runtime rather than claimed. And critically: every agent in a workflow
-// inherits the session model unless the script sets opts.model — so a workflow
-// written without tiering multiplies the exact waste this suite exists to remove.
+// The first is COMPUTED here (see disjoint() below), not asked of the planner.
+// Asking a model to certify its own homework and then dispatching on the answer
+// is the same prompt this script was written to replace, wearing a script for a
+// costume. The second is emitted by the runtime rather than claimed.
+//
+// And critically: every agent in a workflow inherits the session model unless
+// the script sets opts.model — so a workflow written without tiering multiplies
+// the exact waste this suite exists to remove.
 
-const MAX_TASKS = 6 // 1 + 6×2 + 1 = 14 agents, inside the default size guideline
+const MAX_TASKS = 6 // 1 + 6×2 + 1 = 14 agents, or 20 if every task retries once
 
 const TIERS = {
   opus: { effort: 'high', why: 'judgment: architecture, schema, security, anything expensive to reverse' },
@@ -33,7 +37,55 @@ const TIERS = {
 
 const planSource =
   typeof args === 'string' ? args : (args && (args.plan || args.tasks)) || 'docs/plan.md'
-const revertOnRetry = !!(args && args.revertOnRetry)
+
+// decomposition.md §5 calls re-dispatching onto a half-finished edit "the worst
+// case in this whole file", and closes with "revert before retry is the rule
+// people skip." Shipping it opt-in meant shipping the anti-pattern as the
+// default. It is now on, scoped strictly to the paths the failed task declared,
+// and opt-out for anyone who keeps unrelated uncommitted work in those paths.
+const revertOnRetry = !(args && args.revertOnRetry === false)
+
+// --- Parallel safety, computed rather than asked ------------------------------
+// Two tasks may share a wave only if the paths they write do not intersect.
+// A directory contains everything under it, and a glob covers its prefix, so
+// `src/features/` and `src/features/billing/Foo.tsx` are a conflict even though
+// the strings differ.
+const normPath = p => String(p).split('*')[0].replace(/\/+$/, '')
+
+const firstConflict = (a, b) => {
+  for (const x of (a || []).map(normPath)) {
+    for (const y of (b || []).map(normPath)) {
+      if (!x || !y) continue
+      if (x === y || x.startsWith(y + '/') || y.startsWith(x + '/')) return `${x} ⟷ ${y}`
+    }
+  }
+  return null
+}
+
+// Greedily pack a wave into sub-waves whose write sets are pairwise disjoint.
+// Splitting is always safe: a sub-wave runs strictly before the next, which is
+// what the conflicting tasks needed in the first place.
+const packDisjoint = group => {
+  const subWaves = []
+  const splits = []
+  for (const t of group) {
+    let placed = false
+    if (!t.isolate) {
+      for (const sub of subWaves) {
+        if (sub.some(o => o.isolate)) continue
+        const clash = sub.map(o => ({ o, c: firstConflict(t.writes, o.writes) })).find(r => r.c)
+        if (!clash) {
+          sub.push(t)
+          placed = true
+          break
+        }
+        splits.push(`${t.id} ⊗ ${clash.o.id} (${clash.c})`)
+      }
+    }
+    if (!placed) subWaves.push([t])
+  }
+  return { subWaves, splits }
+}
 
 const PLAN_SCHEMA = {
   type: 'object',
@@ -118,11 +170,34 @@ if (!plan || !plan.tasks || plan.tasks.length === 0) {
   return { error: `No well-formed task in ${planSource}`, notes: plan && plan.safety && plan.safety.notes }
 }
 
-const tasks = plan.tasks.slice(0, MAX_TASKS).map(t => ({
-  ...t,
-  model: TIERS[t.model] ? t.model : 'sonnet',
-  effort: (TIERS[t.model] || TIERS.sonnet).effort,
-}))
+// The retry lookup matches on id, so a planner that re-derives ids per wave and
+// emits two `task-2`s would write one task's outcome onto the other's record.
+// Qualify duplicates rather than rejecting the plan — the ids are labels, and
+// failing a whole run over a label is a worse trade than renaming it.
+const seenIds = new Set()
+const tasks = plan.tasks.slice(0, MAX_TASKS).map((t, i) => {
+  let id = String(t.id ?? `task-${i + 1}`)
+  if (seenIds.has(id)) {
+    const qualified = `${id}#w${t.wave}-${i}`
+    log(`⚠ duplicate task id "${id}" → "${qualified}" (the record would otherwise report the wrong outcome against the wrong task)`)
+    id = qualified
+  }
+  seenIds.add(id)
+  return {
+    ...t,
+    id,
+    writes: Array.isArray(t.writes) ? t.writes : [],
+    model: TIERS[t.model] ? t.model : 'sonnet',
+    effort: (TIERS[t.model] || TIERS.sonnet).effort,
+  }
+})
+
+for (const t of tasks) {
+  if (t.writes.length === 0) {
+    log(`⚠ ${t.id} declares no files it may write, so nothing about it can be proved disjoint. Running it alone.`)
+    t.isolate = true
+  }
+}
 
 if (plan.tasks.length > MAX_TASKS) {
   log(`⚠ ${plan.tasks.length - MAX_TASKS} task(s) beyond the cap of ${MAX_TASKS} were NOT dispatched`)
@@ -136,8 +211,27 @@ if (safety.notes) log(`Planner note: ${safety.notes}`)
 // The dispatch ledger. A workflow cannot stop for approval mid-run, so this is
 // emitted at the moment nothing has been spent yet — stopping is possible from
 // /workflows, not required. superforge-dev/references/dispatch-ledger.md §1.
-const waves = [...new Set(tasks.map(t => t.wave))].sort((a, b) => a - b)
+const declaredWaves = [...new Set(tasks.map(t => t.wave))].sort((a, b) => a - b)
 const byModel = tasks.reduce((acc, t) => ({ ...acc, [t.model]: (acc[t.model] || 0) + 1 }), {})
+
+// Verify the planner's disjointness claim rather than dispatching on it. This
+// is the whole reason this file is a script: `safety.rewaved` above is the
+// planner's report on its own homework, and an ordinary model slip here means
+// two agents silently overwrite each other inside the same barrier.
+const runWaves = []
+let splitCount = 0
+for (const w of declaredWaves) {
+  const { subWaves, splits } = packDisjoint(tasks.filter(t => t.wave === w))
+  if (subWaves.length > 1) {
+    splitCount += subWaves.length - 1
+    log(
+      `⚠ wave ${w} was NOT disjoint as planned — split into ${subWaves.length} sub-waves. ` +
+        `Conflicts: ${[...new Set(splits)].join(' · ')}`,
+    )
+  }
+  subWaves.forEach((sub, i) => runWaves.push({ label: subWaves.length > 1 ? `${w}.${i + 1}` : `${w}`, tasks: sub }))
+}
+if (splitCount === 0) log('Write sets checked pairwise: every declared wave is disjoint.')
 
 log(
   [
@@ -149,16 +243,17 @@ log(
       t => `| ${t.id} | ${t.outcome} | ${t.model} | ${t.effort} | ${t.why_this_tier} | ${t.writes.join(', ')} |`,
     ),
     '',
-    `Waves: ${waves.map(w => `${w}(${tasks.filter(t => t.wave === w).length})`).join(' → ')}`,
-    `Agents: ${1 + tasks.length * 2 + 1} · ${Object.entries(byModel).map(([m, n]) => `${m} ${n}`).join(' / ')} + proofs on sonnet`,
-    `Revert before retry: ${revertOnRetry ? 'on' : 'off (pass {revertOnRetry:true} to enable)'}`,
+    `Waves: ${runWaves.map(w => `${w.label}(${w.tasks.length})`).join(' → ')}` +
+      (splitCount ? ` — ${splitCount} sub-wave(s) added because the planner's disjointness claim did not hold` : ''),
+    `Agents: ${1 + tasks.length * 2 + 1}, up to ${1 + tasks.length * 3 + 1} if every task retries once · ` +
+      `${Object.entries(byModel).map(([m, n]) => `${m} ${n}`).join(' / ')} + proofs on sonnet`,
+    `Revert before retry: ${revertOnRetry ? 'on (only the paths the failed task declared)' : 'OFF — pass {revertOnRetry:false} was set; a retry will start from a half-finished edit'}`,
   ].join('\n'),
 )
 
 const record = []
 
-for (const wave of waves) {
-  const inWave = tasks.filter(t => t.wave === wave)
+for (const { label: wave, tasks: inWave } of runWaves) {
   log(`Wave ${wave}: ${inWave.length} task(s) in parallel`)
 
   // A barrier is correct here and only here: a wave is by definition everything
@@ -265,11 +360,13 @@ phase('Record')
 await agent(
   `Append a dispatch record to \`docs/plan.md\` and tick the boxes for the tasks that passed. Follow the language setting in \`docs/superforge.md\` if it exists.
 
-Write the table exactly in this shape, under a \`## Dispatch record\` heading:
+Open the section with the provenance field on its own line: \`Mode: dev-waves (${runWaves.length} waves, ${record.length} tasks)\`.
+
+Then write the table exactly in this shape, under a \`## Dispatch record\` heading:
 
 | # | Task | Model | Result | Notes |
 
-Result is ✅ passed, ⚠️ retried, or ❌ failed. **A retried task is not a passed one** — its second attempt ran its own proof line, which is the self-grading this suite does not accept. Mark it ⚠️ and say it needs \`superforge-verify\` before anyone calls it done.
+Result is ✅ passed, ⚠ retried, or ❌ failed. **A retried task is not a passed one** — its second attempt ran its own proof line, which is the self-grading this suite does not accept. Mark it ⚠ and say it needs \`superforge-verify\` before anyone calls it done.
 
 Then below the table, in plain prose:
 - **Planned vs actual agent count**, with retries counted. A retry cost twice and is the single most useful signal for tuning the next plan — it usually means the task was underspecified, not that the model was too small.

@@ -13,12 +13,12 @@ description: >
   than trusted. Use at the start of any build, or when the request spans several
   of those areas. Use when the user says "let's build", "I want to make", "help
   me ship", "where do I start", "which model should I use", "use a workflow",
-  "is this still current", "何か作りたい", "作って", "どこから始める",
-  "一気に進めたい", "どのモデルで", "情報が古くないか", or runs /superforge.
+  "is this still current", "same thing twice", "何か作りたい", "作って", "どこから始める",
+  "一気に進めたい", "どのモデルで", "情報が古くないか", "同じことを何度も言っている", or runs /superforge.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.1"
+  version: "4.2"
 compatibility: >
   Asks the conversation and artifact language once on first run, then writes
   docs/superforge.md and never asks again.
@@ -196,7 +196,8 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | 出していいのか確認したい（法務・審査・AEO/GEO・llms.txt） | `/superforge-ship` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
 | Devin など非同期エージェントに投げるか迷う・投げる用の指示書が欲しい | `/superforge-handoff`（`references/external-agents.md`） |
-| このスキルの情報が古くないか確認したい | §9 → `/superforge-freshness` |
+| このスキルの情報が古くないか確認したい | §10 → `/superforge-freshness` |
+| このスキル自体の使い勝手が悪い・同じ指摘を何度もしている | §9 → `/superforge-selfcheck`（`references/run-log.md`） |
 | 使い方が分からない・何ができるのか | §1b（`references/help.md`） |
 
 Announce the route and the tier in one line, then start. Ask for approval of
@@ -256,7 +257,7 @@ missing skill.
   the loop, the branching, and the intermediate results live in a script rather
   than a context window, so the plan and the run cannot drift. Reach for it when
   the work-list is already known and larger than about five items, or when a
-  finding must be judged by an agent that did not produce it. Four are shipped
+  finding must be judged by an agent that did not produce it. Five are shipped
   in `workflows/` → **`skills/superforge-dev/references/workflow-graphs.md`**
 - **An async cloud agent (Devin and the like)** — it runs on their machine while
   you do something else and returns a pull request. Right when the spec is
@@ -284,7 +285,39 @@ gated a decision, finish the point and add one line: 「これは説明できま
 Aim any explanation at a product designer's level — design systems, tokens,
 state, APIs, git are assumed; compilers and memory models are not.
 
-## 9. This file has a date, and you know today's
+## 9. Leave a line in the run log
+
+`superforge-verify` proves the **product** works. Nothing proves **this suite**
+works — and the only person holding that evidence is the one using it on real
+work, who usually cannot tell which parts are worth reporting.
+
+So at the end of any invocation that produced an artifact or dispatched an
+agent, append five lines to **`docs/superforge-log.md`**. Skip it for a one-line
+answer; a log full of noise is worse than none.
+
+```markdown
+## <date> · <which skill> · <what was asked, in the user's own words>
+Ran: <tiers> · <retries and why>
+Wrote: <artifact paths, or none>
+Corrected: <what the user had to say again, or none>
+Wrong: <what did not work, or nothing>
+```
+
+**`Corrected:` is the line that matters.** Something the user had to say twice
+is a missing instruction, not a bad day — and it is the only measure of this
+suite's quality that the suite does not grade itself on. Write it in their
+words, not a softened paraphrase. This is the one place where the skill is the
+defendant.
+
+Write it when the run went well too; a log containing only failures cannot tell
+"this is broken" from "this is used for the hard cases". Then paste the file back
+to whoever maintains the suite — under about ten entries there is nothing to
+summarise, and past that, `/superforge-selfcheck` turns the patterns into
+proposed edits with named files. Format, what a non-expert can and cannot
+genuinely verify, and where this stops being honest →
+**`references/run-log.md`**.
+
+## 10. This file has a date, and you know today's
 
 Most of this suite is method, and method does not expire. But some of it names
 things other people ship — models, effort levels, directory paths, another
@@ -303,8 +336,10 @@ Do not silently trust it, and do not silently discard it either. A stale claim i
 usually still roughly right, and 「2026-08 時点の情報なので確認します」 is a more
 useful sentence than either confident assertion or silence.
 
-To check the whole suite at once, run **`/superforge-freshness`** — it re-fetches
-every source, reports only what drifted, and deliberately edits nothing. Where
+**Where Claude Code is available**, check the whole suite at once with **`/superforge-freshness`** — it re-fetches
+every source, reports only what drifted, and deliberately edits nothing.
+Everywhere else, open `SOURCES.md`, take the rows whose date is oldest, and check
+those against their URLs by hand — it is the same loop without the fan-out. Where
 the suite was installed by `./install.sh`, the skills are symlinks into the
 clone, so `git pull` updates every one of them everywhere; workflows are copies
 and need `./install.sh --update`. A copy detached from the repository has no

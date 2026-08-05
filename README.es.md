@@ -316,7 +316,7 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 
 ---
 
-## Cuatro workflows, para lo que la prosa no puede hacer cumplir
+## Cinco workflows, para lo que la prosa no puede hacer cumplir
 
 Tres instrucciones de esta suite eran estructuralmente imposibles de hacer cumplir como texto, porque le piden a un solo modelo que sea dos personas. En Claude Code ahora se ejecutan como scripts: el bucle y los resultados intermedios viven en código, así que lo que dice el plan y lo que hace la ejecución no pueden separarse.
 
@@ -326,6 +326,7 @@ Tres instrucciones de esta suite eran estructuralmente imposibles de hacer cumpl
 | `/superforge-verify-evidence` | Un agente ejecuta cada criterio de prueba; **otro agente califica la salida sin haber visto jamás la implementación**, y se le pide la razón por la que esa evidencia *no* demuestra la afirmación |
 | `/superforge-dev-waves` | Comprueba que dos tareas paralelas no escriban el mismo archivo *antes* de que empiece nada, imprime el modelo y el motivo de cada tarea cuando todavía no se ha gastado nada, y luego un segundo agente prueba cada una |
 | `/superforge-freshness` | Vuelve a descargar cada fuente de `SOURCES.md` y reporta solo lo que se desvió. Reporta; nunca reescribe |
+| `/superforge-selfcheck` | Lee `docs/superforge-log.md` —lo que tuviste que decir dos veces— y lo convierte en cambios propuestos con archivos concretos. Lo único aquí que mejora la suite a partir del uso real y no de imaginarlo |
 
 Lo único que los cuatro garantizan y un prompt no puede: **el agente que produce algo nunca lo califica.**
 
