@@ -1,0 +1,20 @@
+{
+  "skill_name": "superforge-ship",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run pre-release audit for our web application and generate llms.txt for AI search discoverability.",
+      "expected_output": "docs/ship-readiness.md with SHIP/BLOCK verdict and generated llms.txt in root.",
+      "assertions": [
+        {
+          "name": "contains_verdict",
+          "description": "Output contains clear SHIP, BLOCK, or RISK-ACCEPTED verdict."
+        },
+        {
+          "name": "generates_llms_txt",
+          "description": "Generates valid llms.txt file for AI crawlers."
+        }
+      ]
+    }
+  ]
+}

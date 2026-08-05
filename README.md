@@ -64,13 +64,13 @@ superforge skills write a file under `docs/` before they report back. Decide the
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.md) | you want an idea worth building — the non-obvious one **and** the ordinary-but-needed one (**BreakBias engine**, or a faster classic method — your choice) | `docs/product-idea.md` (+ `.html` map for a full sweep) |
 | [`superforge-biz`](./skills/superforge-biz/README.md) | is this market worth entering at all — then price, paywall, customers, a pitch that quantifies the value, and the arithmetic of a business that sells capacity rather than a product | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/README.md) | name, colour, tone — plus prompts that generate the assets | `docs/brand.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.md) | VVA Matrix 4-axis direction, tone, visual tokens — plus prompts that generate the media assets | `docs/brand.md` |
 
 ### 2. Build — make it real
 
 | Skill | When | File it leaves |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design that starts from a real reference instead of the model's own average, landing pages built to sell, and the first thirty seconds after someone commits — with a style guide a human can open and check | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.md) | interface design with VVA token alignment, GEC growth widgets (ROI calculators, quizzes, onboarding), reference extraction, and first-run polish | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work so parallel is safe, then dispatch each piece to a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
@@ -78,7 +78,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.md) | decide what earns a test, then write it first (Web / iOS / Android) | the tests |
-| [`superforge-debug`](./skills/superforge-debug/README.md) | a bug appeared and you want the cause, not a patch over it — including the ones that will not reproduce | `docs/failforward.md` |
+| [`superforge-debug`](./skills/superforge-debug/README.md) | root-cause debugging with FailForward memory + PIR Engine for production incident post-mortems | `docs/failforward.md` + `docs/postmortem.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.md) | accessibility, checked properly — seven passes, not one scanner | `docs/accessibility.md` |
 | [`superforge-secure`](./skills/superforge-secure/README.md) | can a logged-in user read someone else's data? seven passes, ranked by what an attacker gets — and what to do once a key has already leaked | `docs/security.md` |
 
@@ -88,26 +88,34 @@ superforge skills write a file under `docs/` before they report back. Decide the
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.md) | you want the flaws named before your users find them | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.md) | "it's done" needs evidence attached, graded, and honest about what was not checked | `docs/verification.md` |
-| [`superforge-ship`](./skills/superforge-ship/README.md) | it works — but are you allowed to release it? legal obligations, store rejections, measurement you cannot add later | `docs/ship-readiness.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.md) | legal compliance, store review, analytics, plus AEO/GEO AI-search discoverability & `llms.txt` generation | `docs/ship-readiness.md` + `llms.txt` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | before clearing a session or switching tools | `.handoff/` |
 
 ---
 
 ## Install
 
-You need `git` and an AI tool that loads skills, such as Claude Code.
+You need `git` and an AI tool that loads skills, such as Claude Code, Antigravity IDE, Codex, or Gemini CLI.
 
 ### All of them at once (recommended)
 
-Clone once and run the installer. It finds every skills directory on your machine and links all fourteen.
+Clone once and run the installer for your OS. It finds every skills directory on your machine and links all fourteen.
 
+**macOS / Linux:**
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
 ./install.sh
 ```
 
-`--dry-run` shows what would happen and changes nothing. `--uninstall` removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+.\install.ps1
+```
+
+`--dry-run` (`-DryRun`) shows what would happen and changes nothing. `--uninstall` (`-Uninstall`) removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
 
 These are the directories it looks for. Only the ones that exist get linked.
 
@@ -117,6 +125,15 @@ These are the directories it looks for. Only the ones that exist get linked.
 ~/.codex/skills                     Codex CLI
 ~/.gemini/skills                    Gemini CLI
 ~/.gemini/antigravity-ide/skills    Antigravity IDE
+~/.gemini/config/skills             Antigravity IDE global config
+```
+
+### Claude Code Plugin Installation
+
+In Claude Code, you can also install via the plugin manifest:
+
+```bash
+/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
 ```
 
 Restart your AI tool, then type `/superforge`.
@@ -134,7 +151,7 @@ Swap `superforge-ui` for the skill you want and `~/.claude/skills` for your tool
 
 ### claude.ai (browser)
 
-Zip one skill's folder and upload it under Settings → Capabilities → Skills. The browser takes one skill at a time.
+Upload `.skill` archives directly from `dist/` or zip one skill's folder under Settings → Capabilities → Skills. The browser takes one skill at a time.
 
 ```bash
 cd ~/src/superforge-skill/skills/superforge-ui

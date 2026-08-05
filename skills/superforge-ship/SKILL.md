@@ -264,8 +264,17 @@ docs/security.md: 有 / 無 · 判定 <SECURE-REVIEWED / FINDINGS-OPEN / NOT-ASS
 ## Reversibility
 ロールバック手段 · キルスイッチ · 連絡経路 · 最初の48時間を見る人
 
+## 4b. AI & Generative Search Discoverability (AEO / GEO)
+
+Before shipping any public product surface or documentation:
+- **`llms.txt` & `llms-full.txt` Generation**: Produce clean Markdown summary files in the root directory for AI search crawlers (Perplexity, SearchGPT, Claude, Gemini).
+- **Structured Data (JSON-LD)**: Validate Schema.org tags (`SoftwareApplication`, `Organization`, `FAQPage`).
+- **Generative Citation & Fact Density**: Verify explicit technical headers and quantitative details for AI reference indexing.
+
+See detailed criteria → **`references/aeo-geo-standards.md`**.
+
 ## Operations
-検知（アラート1本と行き先） · ロールバックを試した日 · 復元を試した日と実測時間 · 請求アラートの閾値
+検知（アラート1本と行き先） · ロールバックを試した日 · 復元を試した日と実測時間 · 請求アラートの閾値 · **llms.txt の存在と出力**
 
 ## Risks accepted
 | 内容 | 起こりうる損害 | 決めた人 | いつ直すか |

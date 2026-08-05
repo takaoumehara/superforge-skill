@@ -64,13 +64,13 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 |---|---|---|
 | [`superforge-brain`](./skills/superforge-brain/README.ja.md) | 作る価値のあるアイデアが欲しい。ありきたりじゃない案**も**、ありきたりだけど必要とされる案**も**（**BreakBias エンジン**、または軽い定番手法を選んでも良い） | `docs/product-idea.md`（徹底スイープ時は `.html` マップも） |
 | [`superforge-biz`](./skills/superforge-biz/README.ja.md) | そもそもこの市場に入る価値があるか。その上で、いくらで売るか、どこから課金するか、どう顧客を獲得するか、価値をどう数字で語るか。プロダクトではなく稼働を売る場合の算数も | `docs/business-model.md` |
-| [`superforge-brand`](./skills/superforge-brand/README.ja.md) | 名前・色・世界観を決めて、画像や動画の生成指示まで欲しい | `docs/brand.md` |
+| [`superforge-brand`](./skills/superforge-brand/README.ja.md) | VVA Matrix 4軸設計（トーン・視覚密度・ユーザー立ち位置・テンポ）によるブランド世界観・トークン・画像/動画プロンプト生成 | `docs/brand.md` |
 
 ### 2. 作る — 形にする
 
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
-| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | 画面のデザイン。モデルの平均値からではなく実在の参照から方向性を取る。売るためのランディングページも、入った直後の30秒（初回起動）も。人が見て確認できるスタイルガイドも一緒に出る | `docs/design.md` + `docs/design.html` |
+| [`superforge-ui`](./skills/superforge-ui/README.ja.md) | VVAトークン連動画面デザイン。GECコンポーネント（ROI計算機・診断クイズ・多段階オンボーディング）、実在参照からの抽出、初回起動 polish | `docs/design.md` + `docs/design.html` |
 | [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。並列で壊れないように作業を分け、それぞれに合うモデルへ配る | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
@@ -78,7 +78,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-test`](./skills/superforge-test/README.ja.md) | 何をテストする価値があるかを決めてから、テストを先に書く（Web / iOS / Android） | テスト本体 |
-| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグが出た。場当たり的に直さず、原因から潰したい。再現しないバグも含めて | `docs/failforward.md` |
+| [`superforge-debug`](./skills/superforge-debug/README.ja.md) | バグ原因究明 + FailForward学習記憶、および本番障害のポストモーテム（PIR Engine） | `docs/failforward.md` + `docs/postmortem.md` |
 | [`superforge-a11y`](./skills/superforge-a11y/README.ja.md) | アクセシビリティをきちんと検査したい。ツール1本ではなく7つの検査で | `docs/accessibility.md` |
 | [`superforge-secure`](./skills/superforge-secure/README.ja.md) | ログインした他人が、あなたのユーザーのデータを読めてしまわないか。7つのパスを、攻撃者が何を得るかで並べる。鍵が漏れた後の手順も | `docs/security.md` |
 
@@ -88,28 +88,36 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 |---|---|---|
 | [`superforge-roast`](./skills/superforge-roast/README.ja.md) | 出す前に、忖度なしでダメ出ししてほしい | `docs/critique.md` |
 | [`superforge-verify`](./skills/superforge-verify/README.ja.md) | 「できました」の前に、等級つきの証拠と「確認していないこと」を添えて確認したい | `docs/verification.md` |
-| [`superforge-ship`](./skills/superforge-ship/README.ja.md) | 動くのはわかった。では出していいのか。法務の義務・審査で落ちる理由・後から取れない計測 | `docs/ship-readiness.md` |
+| [`superforge-ship`](./skills/superforge-ship/README.ja.md) | 法務義務・ストア審査・アナリティクス、および AI検索（AEO/GEO）対応 & `llms.txt` 自動生成 | `docs/ship-readiness.md` + `llms.txt` |
 | [`superforge-handoff`](./skills/superforge-handoff/README.ja.md) | セッションを消す前・別のツールに乗り換える前に引き継ぎたい | `.handoff/` |
 
 ---
 
 ## インストール
 
-必要なのは `git` と、スキルを読み込めるAIツール（Claude Code など）だけです。
+必要なのは `git` と、スキルを読み込めるAIツール（Claude Code、Antigravity IDE、Codex CLI、Gemini CLI など）だけです。
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、インストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを全部探して、14個をまとめてリンクします。
+一度クローンして、お使いのOSに合ったインストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを自動検出して、14個をまとめてリンクします。
 
+**macOS / Linux:**
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
 cd superforge-skill
 ./install.sh
 ```
 
-`--dry-run` を付けると、何もせず「何が起きるか」だけ表示します。`--uninstall` で外せます。何度実行しても結果は同じで、自分が作ったリンク以外には触りません。`git pull` のたびに走らせて構いません。
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/takaoumehara/superforge-skill
+cd superforge-skill
+.\install.ps1
+```
 
-対象になるフォルダはこの5つです。存在するものだけにリンクされます。
+`--dry-run` (`-DryRun`) を付けると、何もせず「何が起きるか」だけ表示します。`--uninstall` (`-Uninstall`) で外せます。何度実行しても結果は同じで、自分が作ったリンク以外には触りません。`git pull` のたびに走らせて構いません。
+
+対象になるフォルダはこの6つです。存在するものだけにリンクされます。
 
 ```
 ~/.claude/skills                    Claude Code
@@ -117,6 +125,15 @@ cd superforge-skill
 ~/.codex/skills                     Codex CLI
 ~/.gemini/skills                    Gemini CLI
 ~/.gemini/antigravity-ide/skills    Antigravity IDE
+~/.gemini/config/skills             Antigravity IDE グローバル設定
+```
+
+### Claude Code プラグイン経由でのインストール
+
+Claude Code では、マニフェストから直接プラグインとして追加することも可能です：
+
+```bash
+/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
 ```
 
 終わったらAIツールを再起動して、`/superforge` と打ってください。
@@ -134,7 +151,7 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ### claude.ai（ブラウザ）で使う
 
-スキル1個分のフォルダを zip にして、Settings → Capabilities → Skills からアップロードします。ブラウザ版は一度に1個ずつです。
+`dist/` フォルダ内の `.skill` アーカイブをそのままアップロードするか、各スキルのフォルダを zip にして Settings → Capabilities → Skills から追加してください。ブラウザ版は一度に1個ずつです。
 
 ```bash
 cd ~/src/superforge-skill/skills/superforge-ui
