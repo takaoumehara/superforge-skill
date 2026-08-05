@@ -27,6 +27,7 @@ TARGETS=(
   "$HOME/.codex/skills"                     # Codex CLI
   "$HOME/.gemini/skills"                    # Gemini CLI
   "$HOME/.gemini/antigravity-ide/skills"    # Antigravity IDE
+  "$HOME/.gemini/config/skills"             # Antigravity IDE global config
 )
 
 # Every skill, router included, lives in skills/ — so each installed skill
