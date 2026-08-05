@@ -110,11 +110,21 @@ thing at a time, and never leave a "fix" you cannot explain.
 
 ---
 
+## 3. Production Incident Resilience & Post-Mortem Engine (PIR Engine)
+
+For production outages or major system failures:
+- Conduct a 5-Whys Root Cause Analysis.
+- Document Chronological Timeline and Time to Recovery (TTR).
+- Produce a blameless post-mortem report in **`docs/postmortem.md`**.
+
+See post-mortem structure & guidelines → **`references/postmortem-guide.md`**.
+
+---
+
 ## Artifact
 
 **`docs/failforward.md`** — one entry per bug that took more than a few
-minutes, appended, never deleted. Also append the root cause and the fix to the
-relevant `docs/` file, or to `docs/plan.md` under the task that failed.
+minutes, appended, never deleted. For production incidents, also generate **`docs/postmortem.md`**.
 
 A fix nobody can find again will be rediscovered the hard way. This file is
 also carried forward by `superforge-handoff`, so what a session learned about

@@ -339,10 +339,14 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   still test afterwards. Read it before building any welcome screen, intro
   carousel, or setup wizard.
 
+- **`references/interactive-components.md`** — Growth-Engineered Conversational
+  & Interactive Components (GEC Framework): design standards for ROI calculators,
+  assessment quizzes, multi-step wizards, and comparison grids that drive conversion.
+
 ## Artifact
 
-Write **both** `docs/design.md` (YAML tokens the agent parses) and
-`docs/design.html` (a self-contained style guide a human can open and review).
+Write **both** `docs/design.md` (YAML tokens & VVA Matrix alignment the agent parses) and
+`docs/design.html` (a self-contained style guide and component preview a human can open and review).
 They must never drift: editing one regenerates the other in the same turn.
 
 Never inline a raw colour, size, or radius. If a needed token does not exist,
