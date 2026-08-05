@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 """
-Packages superforge skills into standalone .skill ZIP archives in dist/,
-plus superforge-workflows.zip for the Claude Code workflow scripts.
+Packages superforge skills into standalone .zip archives in dist/, ready for
+claude.ai's Settings -> Capabilities -> Skills upload.
 
   python3 scripts/package_skills.py              # everything
   python3 scripts/package_skills.py skills/superforge-dev
 
-A .skill bundle is the detached copy SOURCES.md §3 calls layer 3: it has no
-update path at all. So every bundle carries PROVENANCE.md naming the commit it
-was cut from and the date of that commit, which is what lets a reader a year
-from now tell whether they are holding something current.
+Output is .zip, not .skill. claude.ai's own docs say only "upload a ZIP file"
+and never mention .skill; on macOS, Finder does not associate .skill with an
+archive tool, so a .skill file will not open on double-click and may not even
+be selectable in a browser upload dialog filtered to .zip. Anthropic's
+skill-creator tooling uses .skill for its own local packaging convention, which
+is a different consumer than the claude.ai upload flow this script targets —
+match what the destination actually documents.
+
+A zip bundle is the detached copy SOURCES.md §3 calls layer 3: it has no update
+path at all. So every bundle carries PROVENANCE.md naming the commit it was cut
+from and the date of that commit, which is what lets a reader a year from now
+tell whether they are holding something current.
 """
 
 import os
@@ -71,8 +79,8 @@ SKILL_NOTE = """## Workflows are not in this bundle
 
 Five of this suite's behaviours run as Claude Code dynamic workflows
 (`/superforge-roast-council`, `/superforge-verify-evidence`, `/superforge-dev-waves`,
-`/superforge-freshness`, `/superforge-selfcheck`). They are not part of a `.skill`
-archive and will not run on claude.ai, which has no workflow runtime.
+`/superforge-freshness`, `/superforge-selfcheck`). They are not part of this zip
+and will not run on claude.ai, which has no workflow runtime.
 
 Nothing blocks without them — every skill that names one also states what to do
 instead, and the prose fallback is complete. But a critique produced without the
@@ -154,7 +162,7 @@ def collect(folder, prefix):
 def package_skill(skill_folder):
     name = os.path.basename(skill_folder)
     files = collect(skill_folder, prefix=name)
-    out = write_zip(os.path.join(DIST_DIR, f"{name}.skill"), files, name, SKILL_NOTE, prefix=name)
+    out = write_zip(os.path.join(DIST_DIR, f"{name}.zip"), files, name, SKILL_NOTE, prefix=name)
     print(f"  {name:26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB")
     return out
 
@@ -194,7 +202,7 @@ def package_all():
             count += 1
     package_workflows()
     print(f"\n{count} skills packaged. Every bundle carries PROVENANCE.md —")
-    print("a .skill copy has no update path, which is why the commit date is stamped in.")
+    print("a zipped copy has no update path, which is why the commit date is stamped in.")
     return 0
 
 
