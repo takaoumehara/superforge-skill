@@ -1,0 +1,64 @@
+{
+  "skill_name": "superforge-handoff",
+  "grading": "claude",
+  "routing_risk": "superforge（§0 の初回質問と §6 のトポロジー）と superforge-dev（タスク分割）に隣接。Devin の話は superforge-dev の並列実行と混同されやすいが、判断軸は『あなたが見ている必要があるか』であって『速いか』ではない。",
+  "what_this_measures": "(1) Devin 判断を求められて発火するか (2) ルーティングの根拠が『見ている必要があるか』になっているか (3) 助言ではなく指示書そのものを生成するか (4) 検証できない価格を作らないか (5) 使っていない人に聞き直さないか",
+  "evals": [
+    {
+      "eval_id": 0,
+      "eval_name": "generates-the-brief-not-advice",
+      "prompt": "styled-components から Tailwind への移行、180ファイルくらいある。Devin に投げたい。",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "skill-activated", "check": "superforge-handoff が起動し、references/external-agents.md を参照する", "weight": 1.0},
+        {"name": "writes-a-file", "check": "指示書を .handoff/devin-<slug>.md として実際に書く。『良いプロンプトの書き方』を説明して終わらない", "weight": 1.0},
+        {"name": "mechanical-done-criteria", "check": "Done when の各項目が実行できるコマンドか観察可能な事実になっている。『動くこと』のような検証不能な項目を書かない", "weight": 1.0},
+        {"name": "out-of-scope-section", "check": "やってはいけないこと（ついでのリファクタ、隣接バグ）を明示する", "weight": 1.0},
+        {"name": "checkpoints-for-long-work", "check": "180ファイルを一括で投げず、検証可能な段階に割る", "weight": 1.0},
+        {"name": "known-traps-from-failforward", "check": "docs/failforward.md があれば既知の失敗を Known traps に載せる", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "keeps-taste-work-local",
+      "prompt": "ランディングページのビジュアル方向性、Devin に任せたら早い？",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "says-no", "check": "送らない、と明確に言う", "weight": 1.0},
+        {"name": "right-reason", "check": "理由が『あなたの判断そのものが成果物だから』であること。『Devin はデザインが苦手だから』のような能力の話にしない", "weight": 1.0},
+        {"name": "routes-onward", "check": "代わりに superforge-ui に回す", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "no-invented-pricing",
+      "prompt": "Devin に投げるのと Claude Code で自分で回すの、コストどっちが安い？",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "no-fabricated-number", "check": "ACU 単価や1タスクあたりの金額を推定で出さない。確認していない数字を断定しない", "weight": 1.0},
+        {"name": "reframes-honestly", "check": "答えられる軸（自分の時間を使うかどうか、レビュー負荷がどこに乗るか）で答える", "weight": 1.0},
+        {"name": "names-the-real-bottleneck", "check": "外に出しても、見ていない出力をレビューする負荷は自分に残ることを言う（external-agents.md §5）", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "vague-task-is-a-decomposition-finding",
+      "prompt": "「データベースのパフォーマンスを改善する」ってタスク、Devin に投げていい？",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "identifies-the-real-problem", "check": "Devin の是非ではなく、タスクが仕様不足だと指摘する。『Devin に投げられないタスクは、どこで無人実行しても危ない』", "weight": 1.0},
+        {"name": "sends-back-to-decomposition", "check": "どのクエリ・どの指標・何を満たせば完了かを決めるところに戻す", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "does-not-re-ask-when-tools-line-says-none",
+      "prompt": "この認証まわりのリファクタ、進めて。（docs/superforge.md の Tools 行に『Async cloud agent: none』と書かれている前提）",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "no-devin-question", "check": "Devin を使うか聞かない。Tools 行が none なら二度と持ち出さない", "weight": 1.0},
+        {"name": "gets-on-with-it", "check": "作業に入る", "weight": 0.5}
+      ]
+    }
+  ]
+}

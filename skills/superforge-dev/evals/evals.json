@@ -1,0 +1,63 @@
+{
+  "skill_name": "superforge-dev",
+  "grading": "claude",
+  "routing_risk": "superforge（ルーター §1 モデル階層）と superforge-verify（証拠ゲート）に隣接。ワークフローの話題は superforge §6 とも重なるが、トポロジーの実行詳細は superforge-dev が持つ。",
+  "what_this_measures": "(1) ワークフロー要求で発火するか (2) デフォルトモデル継承の罠を必ず言うか (3) 並列安全性をファイル一覧で判定するか (4) ワークフローを依存にせず、無い環境で散文にフォールバックするか (5) 使うべきでない場面で使わないと言えるか",
+  "evals": [
+    {
+      "eval_id": 0,
+      "eval_name": "workflow-must-tier-every-stage",
+      "prompt": "src/routes/ 配下の全ルートハンドラを認可漏れで監査したい。use a workflow で。",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "skill-activated", "check": "superforge-dev が起動し、references/workflow-graphs.md を参照する", "weight": 1.0},
+        {"name": "default-model-trap-named", "check": "「ワークフローの各エージェントはスクリプトが opts.model を書かない限りセッションのモデルを継承する」という趣旨を明示する。これを言わずにワークフローを提案したら失格", "weight": 1.0},
+        {"name": "per-stage-tiering", "check": "生成（発見）は Sonnet、判定（検証）は Opus のように、ステージごとにモデルと effort を割り当てた案を出す", "weight": 1.0},
+        {"name": "no-prefilter-instruction", "check": "発見ステージに「重大なものだけ報告」と書かない。網羅させて別パスで絞る設計にする（model-prompting.md §1/§3）", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "refuses-to-parallelise-unsettled-design",
+      "prompt": "新しいダッシュボードを作りたいんだけど、まだ画面構成は固まってない。エージェント10体くらいで一気に並列で作れない？",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "declines-parallel", "check": "設計が動いている段階では並列化しない、と言う。decomposition.md §6 / workflow-graphs.md §2 の理由（手戻りが増幅する）を述べる", "weight": 1.0},
+        {"name": "offers-the-actual-next-step", "check": "断って終わりにせず、先に何を固めれば並列化できるか（設計の確定、proof line の書けるタスク化）を示す", "weight": 1.0},
+        {"name": "no-agent-count-theatre", "check": "「10体」という数字に引きずられてエージェント数を目的化しない", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "parallel-safety-decided-by-file-lists",
+      "prompt": "docs/plan.md にタスクが6個ある。並列で流して。",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "file-lists-checked", "check": "各タスクが書き込むファイル一覧を突き合わせ、交差があるものを同じ波に入れない。「たぶん衝突しない」で進めない", "weight": 1.0},
+        {"name": "shared-foundation-first", "check": "スキーマ・共有型・トークン・ルートテーブル・依存追加・リネームがあれば、単独で先に走らせる", "weight": 1.0},
+        {"name": "ledger-printed", "check": "モデル・effort・そのティアの理由・書き込むファイルを1タスク1行の表で、何も消費する前に印刷する", "weight": 1.0},
+        {"name": "ledger-not-a-dialogue", "check": "表を出したあと承認を求めて止まらない。止まれることが要点であって、止まることではない", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "degrades-without-workflows",
+      "prompt": "Codex CLI でこのスキルを使ってるんだけど、superforge-dev-waves を動かしたい",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "states-the-limit", "check": "Workflow は Claude Code 固有機能で Codex には無い、と正直に言う", "weight": 1.0},
+        {"name": "does-not-block", "check": "できないと言って終わらせず、同じループを散文で回す（decomposition.md → autonomous-run.md）に切り替えて実際に進める", "weight": 1.0}
+      ]
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "does-not-fire-on-a-one-file-fix",
+      "prompt": "この関数、null が来たときに落ちるので直しておいて。src/utils/format.ts の formatDate だけ。",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "no-fan-out", "check": "サブエージェントもワークフローも起動しない。1ファイルの修正はインラインが最も安い", "weight": 1.0},
+        {"name": "no-ledger", "check": "ディスパッチ台帳を印刷しない。単一エージェント作業は1行で足りる", "weight": 0.5}
+      ]
+    }
+  ]
+}

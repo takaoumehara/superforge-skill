@@ -109,6 +109,8 @@ cd superforge-skill
 
 `--dry-run` muestra qué pasaría sin cambiar nada; `--uninstall` lo quita. Es idempotente y solo toca sus propios enlaces simbólicos, así que puedes reejecutarlo tras cada `git pull`.
 
+Como las skills son enlaces simbólicos a tu clon, con `git pull` se actualizan todas a la vez en todas las herramientas. Los workflows son copias en lugar de enlaces, así que `./install.sh --update` (`-Update`) hace el pull y los refresca en un solo paso.
+
 Estos son los directorios que busca. Solo enlaza los que existan.
 
 ```
@@ -311,6 +313,36 @@ Lo único permanentemente en el contexto de la AI es **la descripción de una l�
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | el texto se alarga y lo primero que se rompe son los botones, por qué una frase nunca se ensambla por trozos, formatos según locale, y decidir si ser multilingüe siquiera |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | ¿te enterarás? ¿puedes arreglarlo? ¿puedes recuperarlo? ¿cuánto cuesta? — una alerta que valga la pena, un rollback probado, una copia restaurada, y el umbral de la factura desbocada |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | lo que cuesta de verdad el medio generado, la receta que hace que la duodécima imagen encaje con la primera, y las preguntas de uso comercial y de imagen resueltas antes de publicar |
+
+---
+
+## Cuatro workflows, para lo que la prosa no puede hacer cumplir
+
+Tres instrucciones de esta suite eran estructuralmente imposibles de hacer cumplir como texto, porque le piden a un solo modelo que sea dos personas. En Claude Code ahora se ejecutan como scripts: el bucle y los resultados intermedios viven en código, así que lo que dice el plan y lo que hace la ejecución no pueden separarse.
+
+| Workflow | Qué arregla |
+|---|---|
+| `/superforge-roast-council` | Cinco críticos en contextos separados que nunca se ven, luego un escéptico por lente cuyo único trabajo es matar los hallazgos que no se sostienen, y por último un juez. La versión escrita le pide a un modelo que interprete a cinco críticos en un mismo contexto, y para el cuarto ya leyó a los tres primeros y está de acuerdo con ellos |
+| `/superforge-verify-evidence` | Un agente ejecuta cada criterio de prueba; **otro agente califica la salida sin haber visto jamás la implementación**, y se le pide la razón por la que esa evidencia *no* demuestra la afirmación |
+| `/superforge-dev-waves` | Comprueba que dos tareas paralelas no escriban el mismo archivo *antes* de que empiece nada, imprime el modelo y el motivo de cada tarea cuando todavía no se ha gastado nada, y luego un segundo agente prueba cada una |
+| `/superforge-freshness` | Vuelve a descargar cada fuente de `SOURCES.md` y reporta solo lo que se desvió. Reporta; nunca reescribe |
+
+Lo único que los cuatro garantizan y un prompt no puede: **el agente que produce algo nunca lo califica.**
+
+Vale la pena saberlo antes de ejecutar uno: cada agente dentro de un workflow usa lo que tengas en `/model`, salvo que el script asigne uno por etapa. Un workflow sin escalonado no solo deja de ahorrar: **multiplica el desperdicio por la cantidad de agentes**. Estos cuatro asignan modelo y effort a cada etapa, e imprimen el desglose.
+
+Solo Claude Code (v2.1.154 o posterior). En el resto de entornos el mismo bucle corre como prosa y nada se bloquea.
+
+---
+
+## Mantenerlo al día
+
+Todo lo que nombra un modelo, la forma de una API o la guía de otro proveedor caduca en silencio, y una skill que nombra con seguridad algo que ya no existe es peor que una que no dice nada.
+
+- **`SOURCES.md`** lista cada afirmación que depende del exterior, con la URL contra la que se verificó y la fecha. El método no lleva fecha ni la necesita: "dos tareas solo pueden correr en paralelo si los archivos que escriben no se cruzan" no va a caducar. Los nombres de modelo y las rutas sí.
+- **`/superforge-freshness`** los revisa todos de nuevo y reporta la desviación, con el texto de reemplazo listo para pegar.
+- **Una copia instalada** se actualiza sola. `install.sh` enlaza cada skill a tu clon, así que `git pull` refresca todas a la vez en todas las herramientas. Los workflows son copias, así que `./install.sh --update` también los cubre.
+- **Una copia desconectada** —un `.skill` subido a claude.ai, un archivo pegado en un repositorio— no tiene ninguna vía de actualización. Justamente por eso cada afirmación lleva su fecha: quien lee siempre sabe qué día es hoy, aunque el archivo no lo sepa.
 
 ---
 

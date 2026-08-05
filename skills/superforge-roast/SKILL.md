@@ -10,7 +10,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "2.1"
 compatibility: >
   Standalone.
   Reads any docs/ artifact as the critique target, writes docs/critique.md.
@@ -46,6 +46,27 @@ Analyze the artifact across 4 ruthless lenses:
 4. **Copy & Positioning Roast**:
    - Is the copy preachy, jargon-filled, or vague?
    - Does it sound like corporate filler instead of direct human communication?
+
+### The lenses have to be independent, and in one context they are not
+
+Running all four in a single pass is the compromised version of this skill. By
+the fourth lens the same context has already read the first three and agrees with
+them — the later critics inherit the earlier ones' framing, and a flaw that only
+shows up when you have *not* been told what to look for never surfaces. Worse,
+the pass that generates findings is also the pass that decides which ones are
+real, and it has no reason to kill its own.
+
+Where Claude Code is available, run **`workflows/superforge-roast-council.js`**
+instead: five critics on separate contexts that never see each other, then an
+Opus skeptic per lens whose only job is to kill findings that turn out to be
+absent, taste, already handled, or fixed at a cost higher than the defect. Then
+one judge writes `docs/critique.md`. Eleven agents; say *"use a workflow"* or run
+`/superforge-roast-council`.
+
+Everywhere else, run the four lenses in one pass — but read the target once per
+lens before writing anything, and refuse your own findings on those four grounds
+before they reach the artifact. It is the weaker version, and it is worth saying
+so in the output rather than implying a council that did not convene.
 
 ---
 

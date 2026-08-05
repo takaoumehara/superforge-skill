@@ -4,18 +4,24 @@ description: >
   Write the session state to a structured capsule in .handoff/ so any AI model
   or tool (Claude Code, Codex, Gemini CLI, Antigravity, Cursor) can resume the
   work with zero context loss. Use before clearing a long thread or switching
-  tools. Use when the user says "handoff", "save the session", "switch models",
-  "before I clear", "pick this up later", "context is getting long",
+  tools. Also packages work for an async cloud agent such as Devin — deciding
+  whether a task belongs locally or should be sent, and generating the brief with
+  scope, completion criteria, and known traps rather than advice about how to
+  write one. Use when the user says "handoff", "save the session", "switch
+  models", "before I clear", "pick this up later", "context is getting long",
+  "send this to Devin", "should Devin do this", "hand this off",
   "引き継ぎ", "ハンドオフ", "セッションを保存", "モデルを切り替える",
-  "コンテキストが長い", or runs /superforge-handoff or /handoff.
+  "コンテキストが長い", "Devinに投げる", "Devinでやるべき",
+  "非同期エージェント", or runs /superforge-handoff or /handoff.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.0"
+  version: "2.1"
 compatibility: >
   Standalone.
   Writes .handoff/ in the project root.
   No other document or skill required.
+  The Devin brief reads docs/plan.md and docs/failforward.md when they exist.
 ---
 
 # Superforge Handoff — Cross-Model Session Transition Protocol
@@ -113,6 +119,21 @@ it under 80 lines.
 which is the one thing the conversation already was.** The value of this skill
 is entirely in the ledger: what was decided, where it is written down, what is
 still open, and what was never run.
+
+## Deeper reference
+
+**`references/external-agents.md`** — the other direction of handoff: packaging
+work so somebody else's agent runs it **without you**, on their machine, and
+returns a pull request. Devin is the reference case and the shape generalises.
+Covers the one-line tools question to ask once and record in `docs/superforge.md`,
+the routing test (*is the value in you being there?*), what belongs in Knowledge
+versus a Playbook versus repo setup, the brief to **generate rather than describe**,
+what to run on the PR when it comes back, and the honest limit — handing work out
+does not make you faster at reviewing it.
+
+The test worth remembering even if you never read the file: **a task too vague to
+hand to Devin is too vague to run unattended anywhere.** `docs/plan.md` already
+carries one outcome, a proof line, and a file list per task; that *is* the brief.
 
 ## Delegate when a sharper skill is installed
 

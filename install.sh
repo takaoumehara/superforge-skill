@@ -3,6 +3,8 @@
 # AI tool's skills directory. Idempotent — safe to re-run after `git pull`.
 #
 #   ./install.sh            # install into every tool found on this machine
+#   ./install.sh --update   # git pull, then re-install (skills are symlinks, so
+#                           # the pull alone updates them; workflows are copies)
 #   ./install.sh --dry-run  # show what would happen, change nothing
 #   ./install.sh --uninstall
 
@@ -11,14 +13,29 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DRY_RUN=false
 UNINSTALL=false
+UPDATE=false
 
 for arg in "$@"; do
   case "$arg" in
     --dry-run)   DRY_RUN=true ;;
     --uninstall) UNINSTALL=true ;;
+    --update)    UPDATE=true ;;
     *) echo "unknown option: $arg" >&2; exit 1 ;;
   esac
 done
+
+# Skills are symlinked, so a `git pull` updates every installed copy on every
+# tool at once — nothing else to do. Workflows are copied (see install_workflows),
+# so they need this script re-run. --update does both.
+if $UPDATE && ! $UNINSTALL; then
+  echo "Updating $REPO"
+  if $DRY_RUN; then
+    echo "  would run: git -C \"$REPO\" pull --ff-only"
+  else
+    git -C "$REPO" pull --ff-only
+  fi
+  echo
+fi
 
 # Skills directories, in the order each tool discovers them.
 TARGETS=(
@@ -66,6 +83,53 @@ unlink_if_ours() { # unlink_if_ours <destination>
   esac
 }
 
+# Dynamic workflows are a Claude Code feature (v2.1.154+); the other tools have
+# no equivalent, so this step is Claude-Code-only and every skill degrades to
+# the prose loop without it. See skills/superforge-dev/references/workflow-graphs.md §7.
+#
+# These are COPIED rather than symlinked: Claude Code refuses to write through a
+# symlinked workflow file, and a copy has no such ambiguity. Re-run this script
+# after `git pull` to pick up changes.
+install_workflows() {
+  local dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/workflows"
+  [ -d "$REPO/workflows" ] || return 0
+
+  if $UNINSTALL; then
+    [ -d "$dir" ] || return 0
+    echo "$dir"
+    for src in "$REPO"/workflows/*.js; do
+      [ -e "$src" ] || continue
+      local dest="$dir/$(basename "$src")"
+      [ -f "$dest" ] || continue
+      if $DRY_RUN; then echo "  would remove $dest"; else rm -f "$dest"; echo "  rm    $dest"; fi
+    done
+    return 0
+  fi
+
+  echo "$dir"
+  if [ ! -d "$dir" ]; then
+    if $DRY_RUN; then echo "  would mkdir $dir"; else mkdir -p "$dir"; fi
+  fi
+  for src in "$REPO"/workflows/*.js; do
+    [ -e "$src" ] || continue
+    local dest="$dir/$(basename "$src")"
+    if [ -L "$dest" ]; then
+      echo "  skip  $dest (symlink — Claude Code will not load through one; remove it manually)"
+      continue
+    fi
+    if [ -f "$dest" ] && cmp -s "$src" "$dest"; then
+      echo "  ok    $dest"
+      continue
+    fi
+    if $DRY_RUN; then
+      echo "  would copy $dest"
+    else
+      cp "$src" "$dest"
+      echo "  copy  $dest"
+    fi
+  done
+}
+
 for dir in "${TARGETS[@]}"; do
   [ -d "$dir" ] || { echo "skipping $dir (not present)"; continue; }
   echo "$dir"
@@ -83,5 +147,15 @@ for dir in "${TARGETS[@]}"; do
   fi
 done
 
+install_workflows
+
 echo
-$UNINSTALL && echo "Uninstalled." || echo "Done. Restart your AI tool to pick up the new skills."
+if $UNINSTALL; then
+  echo "Uninstalled."
+else
+  echo "Done. Restart your AI tool to pick up the new skills."
+  echo
+  echo "Skills are symlinks into this repo, so \`git pull\` updates them everywhere."
+  echo "Workflows are copies — re-run \`./install.sh --update\` to refresh those too."
+  echo "What each skill's external claims were checked against, and when: SOURCES.md"
+fi

@@ -5,14 +5,20 @@ description: >
   product. Reads intent, hands the work to the right superforge-* skill (brain,
   biz, brand, ui, dev, test, debug, roast, verify, handoff), and assigns a
   model tier per subtask across Claude 5, Gemini 3.6, Codex, and Kimi before
-  any agent is dispatched. Use at the start of any build, or when the request
-  spans several of those areas. Use when the user says "let's build", "I want
-  to make", "help me ship", "where do I start", "何か作りたい", "作って",
-  "どこから始める", "一気に進めたい", or runs /superforge.
+  any agent is dispatched, applying the per-model prompting deltas — including
+  the two instructions this suite gives that are counterproductive on Opus 5 and
+  Sonnet 5. Also routes work to a scripted workflow or to an async cloud agent
+  such as Devin when either fits better than the session, and carries a dated
+  source ledger so a stale claim about a model or an API can be caught rather
+  than trusted. Use at the start of any build, or when the request spans several
+  of those areas. Use when the user says "let's build", "I want to make", "help
+  me ship", "where do I start", "which model should I use", "use a workflow",
+  "is this still current", "何か作りたい", "作って", "どこから始める",
+  "一気に進めたい", "どのモデルで", "情報が古くないか", or runs /superforge.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.0"
+  version: "4.1"
 compatibility: >
   Asks the conversation and artifact language once on first run, then writes
   docs/superforge.md and never asks again.
@@ -48,17 +54,19 @@ setting (skip this entirely for a one-off question or a two-line fix), ask
 
 **話す言葉**: 日本語 ← あなたの書き方から推測しました
 **docs/ に残すファイルの言葉**: 日本語
+**非同期エージェント（Devin など）**: 使っていない ← 推測
 
 そのままでよければ「はい」。変えるなら番号で:
   [1] 両方とも英語で
   [2] 会話は日本語、ファイルは英語（海外のチームと共有する場合）
   [3] 別の言語 — 言語名を書いてください
+  [4] 非同期エージェントを使っている — 名前を書いてください
 
 以後は聞きません。`docs/superforge.md` に保存し、変えたくなったら
-「言語を変えて」と言ってください。
+「言語を変えて」「Devin を使う」などと言ってください。
 ```
 
-Four rules that keep this from being an annoyance:
+Five rules that keep this from being an annoyance:
 
 - **Infer first, then confirm.** The language the user just wrote in is the
   answer nine times out of ten. Asking an open question whose answer is already
@@ -70,6 +78,10 @@ Four rules that keep this from being an annoyance:
   Japanese replies and English files, and no one thinks to ask for that.
 - **Never ask twice, and never block.** If the user ignores the question and
   states their task, take the inference, record it, and get on with the work.
+- **Put every once-only question in this one.** The tools line belongs here and
+  nowhere else — asking "do you use Devin?" three weeks later, at the moment
+  someone wants a thing built, is an interruption rather than a service (§6,
+  `superforge-handoff/references/external-agents.md` §0).
 
 Write the answer to `docs/superforge.md` and treat it as binding for every
 superforge skill afterwards.
@@ -119,6 +131,30 @@ saving. Format, and the after-the-fact record →
 **`skills/superforge-dev/references/dispatch-ledger.md`**. For single-agent work
 one line is enough: 「Opus 5 のまま、サブエージェントなしで進めます」.
 
+### Picking the tier is half the decision
+
+The same prompt does not get the same result from each of these models, and
+**two instructions this suite gives are actively counterproductive on the model
+they were written for** — asking Opus 5 to re-check its own work wastes tokens
+for no gain, and telling any reviewer to "only report what matters" now
+suppresses real findings on both Opus 5 and Sonnet 5. Effort, not the model, is
+the primary cost lever; on Opus 5 it controls thinking and not response length,
+which is the mistake people make first.
+
+What changes per model, which superforge instructions to delete, and the two
+prompts worth pasting verbatim → **`references/model-prompting.md`**. Read it
+before writing a dispatch prompt, and re-read it when a model version changes.
+
+### Some work should leave this machine entirely
+
+Where `docs/superforge.md` records an async cloud agent (Devin and the like), a
+settled spec with a mechanical completion criterion — a migration, a ticket
+queue, test backfill — is often better sent than run locally, because the value
+was never in watching it. The routing test, what to set up once, and the brief
+to generate rather than describe →
+**`skills/superforge-handoff/references/external-agents.md`**. Where that line
+says `none`, never raise it.
+
 ## 1b. Help
 
 When the user asks how to use this, what it can do, or runs `/superforge help`:
@@ -159,6 +195,8 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | 安全か確認したい・鍵が漏れた・不正アクセス | `/superforge-secure` |
 | 出していいのか確認したい（法務・審査・AEO/GEO・llms.txt） | `/superforge-ship` |
 | セッションを保存・モデルを切り替える | `/superforge-handoff` |
+| Devin など非同期エージェントに投げるか迷う・投げる用の指示書が欲しい | `/superforge-handoff`（`references/external-agents.md`） |
+| このスキルの情報が古くないか確認したい | §9 → `/superforge-freshness` |
 | 使い方が分からない・何ができるのか | §1b（`references/help.md`） |
 
 Announce the route and the tier in one line, then start. Ask for approval of
@@ -181,10 +219,21 @@ first file every other skill should honour and the last one to argue with.
 docs/ のファイル: English
 （違う場合のみ理由を1行）
 
+## Tools
+Local, interactive: Claude Code
+Async cloud agent: <Devin / none>
+
 ## Pinned by the user
 <a font, a palette, an era, a constraint — anything that outranks every
 default in this suite. See superforge-ui/references/surface-and-scope.md §4>
 ```
+
+**The `Tools` line is asked once, in the same breath as the language question,
+and never again.** Where it names an async cloud agent, a settled spec with a
+mechanical completion criterion should say which side of the line it falls on —
+in one line, not as a question. Where it says `none`, never raise it. The
+question to ask and the brief to generate →
+**`skills/superforge-handoff/references/external-agents.md`** §0.
 
 Every skill leaves a file in `docs/`. A conclusion that exists only in the
 conversation is lost at the next `/clear` → **`references/artifacts.md`**.
@@ -203,8 +252,23 @@ missing skill.
 
 - **Subagents (default, low cost)** — isolated modular execution
 - **Agent Teams (interactive, high cost)** — cross-perspective debate
+- **Workflow (scripted, Claude Code only)** — the orchestration itself is code:
+  the loop, the branching, and the intermediate results live in a script rather
+  than a context window, so the plan and the run cannot drift. Reach for it when
+  the work-list is already known and larger than about five items, or when a
+  finding must be judged by an agent that did not produce it. Four are shipped
+  in `workflows/` → **`skills/superforge-dev/references/workflow-graphs.md`**
+- **An async cloud agent (Devin and the like)** — it runs on their machine while
+  you do something else and returns a pull request. Right when the spec is
+  settled and the proof is mechanical; wrong whenever the value was in you
+  watching → **`skills/superforge-handoff/references/external-agents.md`**
 
 State the choice in one line: *"Subagents パターン（Sonnet 5 ワーカー）で進めます。議論させたい場合は Agent Teams と言ってください。"*
+
+**The trap worth naming out loud:** every agent inside a workflow runs on the
+session's model unless the script assigns one per stage. A workflow written
+without tiering does not merely fail to save — it multiplies §1's waste by the
+agent count. Never dispatch one that has not assigned a model per stage.
 
 ## 7. Running long without stopping
 
@@ -219,3 +283,30 @@ Do not explain jargon inline by default. When a technical term genuinely
 gated a decision, finish the point and add one line: 「これは説明できますが、聞きたいですか？」
 Aim any explanation at a product designer's level — design systems, tokens,
 state, APIs, git are assumed; compilers and memory models are not.
+
+## 9. This file has a date, and you know today's
+
+Most of this suite is method, and method does not expire. But some of it names
+things other people ship — models, effort levels, directory paths, another
+vendor's guidance — and those go stale silently. A skill that confidently names
+a model that no longer exists is worse than one that says nothing.
+
+Every externally-dependent claim in the suite is listed in **`SOURCES.md`** with
+the date it was last verified against its source. So:
+
+> When a version-dependent claim is about to gate a real decision — which model
+> to dispatch, which API shape to write against, whether a store will accept
+> something — and its check date in `SOURCES.md` is more than about six months
+> before today, **verify it before relying on it, and say that you did.**
+
+Do not silently trust it, and do not silently discard it either. A stale claim is
+usually still roughly right, and 「2026-08 時点の情報なので確認します」 is a more
+useful sentence than either confident assertion or silence.
+
+To check the whole suite at once, run **`/superforge-freshness`** — it re-fetches
+every source, reports only what drifted, and deliberately edits nothing. Where
+the suite was installed by `./install.sh`, the skills are symlinks into the
+clone, so `git pull` updates every one of them everywhere; workflows are copies
+and need `./install.sh --update`. A copy detached from the repository has no
+update path at all, which is exactly why the check date is written down rather
+than assumed. `SOURCES.md` §3 has all three layers.
