@@ -105,31 +105,56 @@ multiplying the waste by the agent count.
 """
 
 
-def write_zip(out_path, files, prov_name, prov_note):
+def write_zip(out_path, files, prov_name, prov_note, prefix=""):
+    # PROVENANCE.md rides inside the same prefix as everything else. claude.ai
+    # validates that the zip's top-level entry is a folder named after the
+    # skill; a file sitting outside that folder is the same shape of mistake
+    # this whole rewrite exists to fix.
+    prov_path = os.path.join(prefix, "PROVENANCE.md") if prefix else "PROVENANCE.md"
     os.makedirs(DIST_DIR, exist_ok=True)
     with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as z:
         for src, arcname in files:
             z.write(src, arcname)
-        z.writestr("PROVENANCE.md", provenance(prov_name, prov_note))
+        z.writestr(prov_path, provenance(prov_name, prov_note))
     return out_path
 
 
-def collect(folder):
+# claude.ai expects the skill's own folder INSIDE the zip — arcname is
+# "<skill-name>/SKILL.md", not "SKILL.md" at the zip root. This is what the
+# upload error "Skill folder name doesn't match the skill name" is checking.
+# Confirmed against Anthropic's own skill-creator packager, which builds arcname
+# as file_path.relative_to(skill_path.parent) for exactly this reason.
+#
+# evals/ is excluded at the skill root: it is this repo's own test harness for
+# tuning a skill's description, not something the skill needs at runtime, and
+# the reference packager excludes it the same way.
+ROOT_EXCLUDE_DIRS = {"evals", "__pycache__", "node_modules"}
+
+
+def collect(folder, prefix):
     files = []
     for root, dirs, filenames in os.walk(folder):
-        dirs[:] = [d for d in dirs if not d.startswith(".")]
+        rel_root = os.path.relpath(root, folder)
+        depth = 0 if rel_root == "." else len(rel_root.split(os.sep))
+        dirs[:] = [
+            d
+            for d in dirs
+            if not d.startswith(".")
+            and not (depth == 0 and d in ROOT_EXCLUDE_DIRS)
+        ]
         for f in sorted(filenames):
-            if f.startswith("."):
+            if f.startswith(".") or f == ".DS_Store" or f.endswith(".pyc"):
                 continue
             path = os.path.join(root, f)
-            files.append((path, os.path.relpath(path, folder)))
+            arcname = os.path.join(prefix, os.path.relpath(path, folder)) if prefix else os.path.relpath(path, folder)
+            files.append((path, arcname))
     return files
 
 
 def package_skill(skill_folder):
     name = os.path.basename(skill_folder)
-    files = collect(skill_folder)
-    out = write_zip(os.path.join(DIST_DIR, f"{name}.skill"), files, name, SKILL_NOTE)
+    files = collect(skill_folder, prefix=name)
+    out = write_zip(os.path.join(DIST_DIR, f"{name}.skill"), files, name, SKILL_NOTE, prefix=name)
     print(f"  {name:26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB")
     return out
 
