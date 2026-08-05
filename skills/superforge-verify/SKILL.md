@@ -14,7 +14,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "3.0"
+  version: "3.1"
 compatibility: >
   Standalone.
   Requires the project's own build and test commands.
@@ -47,6 +47,25 @@ The quiet failure to watch for is **a C written in the confident tone of an A**.
 evidence. What makes each grade valid, and the "it worked" versus "it happened
 to work" table (cold start is the check most often skipped and the one that
 catches the most) → **`references/evidence.md`**.
+
+### Whoever did the work cannot grade it
+
+Grading your own evidence is a conflict of interest no instruction repairs. The
+grader has already read the reasoning, already believes the claim, and reads the
+output looking for the confirmation it expects — which is precisely how a C gets
+written in the tone of an A.
+
+Where Claude Code is available, run **`workflows/superforge-verify-evidence.js`**:
+one agent extracts the claims, one runs each proof line and pastes raw output,
+and **a separate agent grades that output having never seen the implementation**
+and being asked for the reason it does *not* prove the claim. Then a reporter
+writes `docs/verification.md` with the mandatory unverified section. Up to
+fourteen agents; say *"use a workflow"* or run `/superforge-verify-evidence`.
+
+Everywhere else, do it in one pass — but write the evidence down completely
+before grading any of it, grade only from what is written, and state in the
+report that the grader and the implementer were the same. A reader who knows that
+can discount accordingly; a reader who does not, cannot.
 
 ---
 

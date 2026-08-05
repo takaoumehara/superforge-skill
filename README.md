@@ -117,6 +117,8 @@ cd superforge-skill
 
 `--dry-run` (`-DryRun`) shows what would happen and changes nothing. `--uninstall` (`-Uninstall`) removes it. It is idempotent and only ever touches its own symlinks, so re-run it after every `git pull`.
 
+Because the skills are symlinked into your clone, `git pull` alone updates every installed skill in every tool at once. The workflows are copies rather than symlinks, so `./install.sh --update` (`-Update`) pulls and refreshes those too, in one step.
+
 These are the directories it looks for. Only the ones that exist get linked.
 
 ```
@@ -328,6 +330,36 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-ui/references/internationalization.md`](./skills/superforge-ui/references/internationalization.md) | text expansion and the layouts it breaks first, why a sentence must never be assembled from fragments, locale-aware formats, and deciding whether to be multilingual at all |
 | [`superforge-ship/references/operations.md`](./skills/superforge-ship/references/operations.md) | will you find out, can you fix it, can you get it back, what does it cost — one alert worth having, a tested rollback, a restored backup, and the runaway-bill threshold |
 | [`superforge-brand/references/media-production.md`](./skills/superforge-brand/references/media-production.md) | what generated media actually costs, the recipe that makes the twelfth image match the first, and the commercial-use and likeness questions answered before it ships |
+
+---
+
+## Four workflows, for the parts prose cannot enforce
+
+Three instructions in this suite were structurally unenforceable as text, because they ask one model to be two people. In Claude Code they now run as scripts instead: the loop and the intermediate results live in code, so what the plan says and what the run does cannot drift.
+
+| Workflow | What it fixes |
+|---|---|
+| `/superforge-roast-council` | Five critics on separate contexts that never see each other, then a skeptic per lens whose only job is to kill the findings that do not hold up, then one judge. The written version asks one model to play five critics in one context, and by the fourth it has read the first three and agrees with them |
+| `/superforge-verify-evidence` | One agent runs each proof line; **a different agent grades the output having never seen the implementation**, and is asked for the reason it does *not* prove the claim |
+| `/superforge-dev-waves` | Checks that no two parallel tasks write the same file *before* anything starts, prints the model and the reason for every task while nothing has been spent, then proves each one with a second agent |
+| `/superforge-freshness` | Re-fetches every source in `SOURCES.md` and reports only what drifted. It reports; it never rewrites |
+
+The one thing all four guarantee that a prompt cannot: **the agent that produces something never grades it.**
+
+Worth knowing before you run one. Every agent inside a workflow uses whatever `/model` is set to, unless the script assigns one per stage. A workflow with no tiering does not merely fail to save money — it multiplies the waste by the agent count. These four assign a model and an effort to every stage, and print the breakdown.
+
+Claude Code only (v2.1.154 or later). Everywhere else the same loop runs as prose and nothing blocks.
+
+---
+
+## Staying current
+
+Anything that names a model, an API shape, or another vendor's guidance goes stale silently, and a skill that confidently names something that no longer exists is worse than one that says nothing.
+
+- **`SOURCES.md`** lists every externally-dependent claim with the URL it was verified against and the date. Method has no date and needs none: "two tasks may run in parallel only if the files they write are disjoint" will not expire. Model names and directory paths will.
+- **`/superforge-freshness`** re-checks all of them and reports the drift, with paste-ready replacement text.
+- **An installed copy** updates itself. `install.sh` symlinks each skill into your clone, so `git pull` refreshes every one of them, in every tool, at once. Workflows are copies rather than symlinks, so `./install.sh --update` covers those too.
+- **A detached copy** — a `.skill` uploaded to claude.ai, a file pasted into a repository — has no update path at all. Which is exactly why every dated claim carries its date: a reader always knows what today is, even when the file does not.
 
 ---
 

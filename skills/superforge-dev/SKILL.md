@@ -5,24 +5,29 @@ description: >
   subagents, assigning a model tier per subtask across Claude 5, Gemini 3.6,
   Codex, and Kimi. Splits work into tasks that each have one outcome, a proof
   line, and a listed set of files — so parallel safety is decidable rather than
-  hoped for — and proposes Subagents versus Agent Teams topology by task
-  complexity and token cost. Also covers the schema, which is both the shared
+  hoped for — and proposes Subagents versus Agent Teams versus a scripted
+  Workflow topology by task complexity and token cost, including the trap that
+  every agent inside a workflow inherits the session's model unless the script
+  assigns one per stage. Also covers the schema, which is both the shared
   foundation every parallel run depends on and the one part of a product that
   gets harder to change as it succeeds: identity, money, time, indexes,
   deletion, and migrations run against data you cannot restore. Use when the
   user says "implement", "build this feature", "execute the plan", "in
   parallel", "dispatch agents", "split this up", "which model should",
+  "use a workflow", "run a workflow", "orchestrate", "fan out", "ultracode",
   "database", "schema", "migration", "実装して", "作って", "並列で",
-  "サブエージェント", "タスクに分けて", "どのモデルで", "スキーマ", "DB設計",
+  "サブエージェント", "タスクに分けて", "どのモデルで", "ワークフローで",
+  "オーケストレーション", "一気に流して", "スキーマ", "DB設計",
   "マイグレーション", or runs /superforge-dev.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "5.0"
+  version: "5.1"
 compatibility: >
   Standalone.
   Reads and writes docs/plan.md. The schema section informs superforge-secure and superforge-ship.
   Parallel dispatch requires a subagent mechanism; without one it runs the same loop sequentially.
+  The workflows/ scripts require Claude Code v2.1.154+; everywhere else the same loop runs as prose.
 ---
 
 # Superforge Dev — Multi-Agent Building & Model Tiering Engine
@@ -63,15 +68,23 @@ migration against data you cannot restore → **`references/data-design.md`**.
 
 ---
 
-## 1. Agent Topology Proposal (Subagents vs Agent Teams)
+## 1. Agent Topology Proposal (Subagents · Agent Teams · Workflow)
 
 Before dispatching, evaluate and **explicitly notify the user** of the recommended structure:
 
 - **Subagents Pattern (Default — Low Token Cost)**: Use for isolated, modular tasks (building components, fixing bugs, writing tests). One-way dispatch.
 - **Agent Teams Pattern (Interactive — High Token Cost)**: Use when cross-perspective debate is required (architecture trade-offs, multi-agent debate).
+- **Workflow (Scripted — Claude Code only)**: Use when the work-list is already known and larger than about five items, when the same orchestration will run again, or when something must be judged by an agent that did not produce it. The loop and the intermediate results live in a script, so §0's parallel-safety rule and §3's ledger are executed rather than trusted. Three are shipped in `workflows/` → **`references/workflow-graphs.md`**
 
 *Notification Template*:
-> *"Proposing **Subagents Pattern** (Sonnet 5 workers) for fast, token-efficient execution. Say 'use Agent Teams' if you prefer interactive multi-agent debate."*
+> *"Proposing **Subagents Pattern** (Sonnet 5 workers) for fast, token-efficient execution. Say 'use Agent Teams' if you prefer interactive multi-agent debate, or 'use a workflow' to run it as a script."*
+
+**The one thing that must not be got wrong:** every agent inside a workflow runs
+on the *session's* model unless the script sets one per stage. A workflow with no
+tiering does not merely fail to save — it takes whatever `/model` happens to be
+and multiplies §2's waste by the agent count. Generation is volume (Sonnet),
+adjudication is judgment (Opus), bookkeeping is routine (Haiku); if a script does
+not show that split, it is not ready to dispatch.
 
 ---
 
@@ -128,8 +141,16 @@ what may honestly be said about cost, and what may not.
 build/review/prove/repair loop, what to decide alone versus what must stop the
 run, and the morning report format. Read it before any long or overnight run.
 
+**`references/workflow-graphs.md`** — when the orchestration should be a script
+rather than prose: the default-model trap that makes an untiered workflow worse
+than no workflow, why a wave is a barrier and a barrier is usually the wrong
+default, the four things a workflow cannot do (starting with: it cannot stop to
+ask you anything), what the three-wave cap does and does not limit, and the three
+workflows shipped in `workflows/`. Read it before writing or running one.
+
 Split first, then run: `decomposition.md` produces the task list that
-`autonomous-run.md` executes.
+`autonomous-run.md` executes, or that `workflows/superforge-dev-waves.js`
+executes as a script.
 
 ## Artifact
 
