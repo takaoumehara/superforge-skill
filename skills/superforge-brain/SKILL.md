@@ -5,17 +5,16 @@ description: >
   when the stakes don't call for it, a lighter classic method (SCAMPER, Six
   Hats, Crazy 8s, How Might We). For a full sweep: decompose the problem across
   five lenses, name the hidden bias on every element, ban the obvious three,
-  then push every element through eight transformation techniques as a tracked
-  cell ledger, so no combination is silently skipped. Nothing dies for being
+  then push each through eight transformation techniques as a tracked cell
+  ledger, so no combination is silently skipped. Nothing dies for being
   unoriginal: an existing idea survives if it can name a delta, a geographic
-  gap, a timing shift, or an execution flaw, and judgment splits into an
-  originality axis and a viability axis so an ordinary-but-needed business and a
-  brilliant-but-unfundable one are told apart. Use when the user says
-  "brainstorm", "ideas", "what could we build", "reframe
-  this", "concept", "something more original", "worth building even though it
-  exists", "アイデア", "発想", "ブレスト", "企画", "ありきたりじゃないもの",
-  "ありきたりだけど需要はある", "何が作れる", "BreakBias", "SIT",
-  "虱潰しで考えて", or runs /superforge-brain.
+  gap, a timing shift, or an execution flaw — judgment splits into an
+  originality axis and a viability axis so ordinary-but-needed and
+  brilliant-but-unfundable are told apart. Use when the user says "brainstorm",
+  "ideas", "what could we build", "reframe this", "concept", "something more
+  original", "worth building even though it exists", "アイデア", "発想",
+  "ブレスト", "企画", "ありきたりじゃないもの", "ありきたりだけど需要はある",
+  "何が作れる", "BreakBias", "SIT", "虱潰しで考えて", or runs /superforge-brain.
 license: MIT
 metadata:
   author: Takao Umehara

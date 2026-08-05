@@ -2,21 +2,20 @@
 name: superforge-ui
 description: >
   Design and build interfaces across Web, iOS (SwiftUI), and Android (Jetpack
-  Compose), covering layout, visual hierarchy, typography, responsive behaviour,
-  state specification, and micro-interactions. Opens by sourcing the visual
-  direction from references or from a design made in another tool, and
+  Compose), covering layout, visual hierarchy, typography, responsive
+  behaviour, state specification, and micro-interactions. Opens by sourcing the
+  visual direction from references or a design made in another tool, and
   extracting the system behind it — structure, space, type, colour role, motion
-  character, imagery — because a model designing from its own priors returns the
-  average of everything it has seen. Follows a five-phase design process, Apple
-  HIG, and Material 3. Use when the user says "design", "UI", "UX", "layout",
-  "screen", "component", "make it look better", "animation", "typography",
-  "onboarding", "first launch", "permission prompt", "デザイン", "画面",
-  "見た目", "レイアウト", "アニメーション", "余白", "使いにくい",
-  "オンボーディング", "初回起動", "権限の許可", "AIっぽいデザイン",
-  "参考サイト", "インスピレーション", "デザインシステムに落とす", "moodboard",
-  "reference site", "遅い", "パフォーマンス", "多言語", "3D", "shader",
-  "sound", "音", "方向性を見せて",
-  or runs /superforge-ui.
+  character, imagery — because a model designing from its own priors returns
+  the average of everything it has seen. Follows a five-phase design process,
+  Apple HIG, and Material 3. Use when the user says "design", "UI", "UX",
+  "layout", "screen", "component", "make it look better", "animation",
+  "typography", "onboarding", "first launch", "permission prompt", "デザイン",
+  "画面", "見た目", "レイアウト", "アニメーション", "余白", "使いにくい",
+  "オンボーディング", "初回起動", "権限の許可", "AIっぽいデザイン", "参考サイト",
+  "インスピレーション", "デザインシステムに落とす", "moodboard", "reference
+  site", "遅い", "パフォーマンス", "多言語", "3D", "shader", "sound", "音",
+  "方向性を見せて", or runs /superforge-ui.
 license: MIT
 metadata:
   author: Takao Umehara

@@ -1,20 +1,20 @@
 ---
 name: superforge-ship
 description: >
-  Decide whether a product may be released, which is a different question from
-  whether it works. Runs the release gate: which legal obligations the product's
-  own data handling has triggered and where a lawyer becomes mandatory, what
-  will actually get it rejected from the App Store or Google Play, the
-  measurement that must exist before launch because it cannot be recovered
-  afterwards, the ability to stop a bad release, and whether you will find out
-  when it breaks — monitoring, a tested rollback, and a backup someone has
-  actually restored. Ends in a single verdict — SHIP / BLOCK / RISK-ACCEPTED —
-  never in prose. Use when the user says "ship it", "release", "launch",
-  "submit to the App Store", "app review", "rejected", "privacy policy", "terms
-  of service", "GDPR", "compliance", "can we release this", "monitoring",
-  "backup", "rollback", "出荷", "リリース", "公開", "ローンチ", "審査",
-  "リジェクト", "プライバシーポリシー", "利用規約", "個人情報", "特商法",
-  "監視", "バックアップ", "障害対応", "出せる状態か", or runs /superforge-ship.
+  Decide whether a product may be released, a different question from whether
+  it works. Runs the release gate: which legal obligations the product's own
+  data handling triggered and where a lawyer becomes mandatory, what will
+  actually get it rejected from the App Store or Google Play, the measurement
+  that must exist before launch because it cannot be recovered afterwards, the
+  ability to stop a bad release, and whether you will find out when it breaks —
+  monitoring, a tested rollback, a backup someone has actually restored. Ends
+  in a single verdict — SHIP / BLOCK / RISK-ACCEPTED — never prose. Use when
+  the user says "ship it", "release", "launch", "submit to the App Store", "app
+  review", "rejected", "privacy policy", "terms of service", "GDPR",
+  "compliance", "can we release this", "monitoring", "backup", "rollback",
+  "出荷", "リリース", "公開", "ローンチ", "審査", "リジェクト",
+  "プライバシーポリシー", "利用規約", "個人情報", "特商法", "監視",
+  "バックアップ", "障害対応", "出せる状態か", or runs /superforge-ship.
 license: MIT
 metadata:
   author: Takao Umehara

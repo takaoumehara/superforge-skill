@@ -31,6 +31,7 @@ claim without adding a row here.
 | Workflow discovery: `.claude/workflows/` (project) · `~/.claude/workflows/` or `$CLAUDE_CONFIG_DIR/workflows/` (personal) · plugin `workflows/` namespaced as `/<plugin>:<name>` | `install.sh` · `install.ps1` · `workflow-graphs.md` §7 | same | 2026-08-05 |
 | Workflow limits: v2.1.154+, 16 concurrent agents, 1,000 per run, no mid-run user input, resume replays in start order | `workflow-graphs.md` §4 | same | 2026-08-05 |
 | Devin: suited to specified, CI-verifiable, long work; needs explicit completion criteria; Knowledge vs Playbooks distinction; vague prompts are the main failure mode | `superforge-handoff/references/external-agents.md` | [Devin intro](https://docs.devin.ai/get-started/devin-intro) · [Instructing Devin effectively](https://docs.devin.ai/essential-guidelines/instructing-devin-effectively) | 2026-08-05 |
+| claude.ai skill upload: zip must contain a top-level folder named after the skill, plus `SKILL.md`; `description` in `SKILL.md` capped at 1024 chars, hard-rejected over | `scripts/package_skills.py` | **Not written in the support docs — found by an upload actually bouncing.** No public source to cite; re-verify by test-uploading if this behaviour is ever suspect | 2026-08-05 |
 
 ## 2. Named but not verified in the last pass
 

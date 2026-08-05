@@ -136,12 +136,16 @@ Cambia `superforge-ui` por la skill que quieras y `~/.claude/skills` por el dire
 
 ### claude.ai (navegador)
 
-Comprime la carpeta de una skill y súbela en Settings → Capabilities → Skills. El navegador acepta una por vez.
+Sube los `.zip` de `dist/` en Settings → Capabilities → Skills. El navegador acepta una skill por vez. El script comprueba las dos cosas que un zip hecho a mano suele arruinar: que la extensión sea realmente `.zip` (un `.skill` puede no ser ni siquiera seleccionable en el diálogo de subida), y que dentro del zip haya una carpeta de primer nivel con el nombre de la skill (`zip -r nombre.zip .` desde dentro de la carpeta aplana esa capa y la subida falla con "Zip must contain a top-level folder").
 
 ```bash
-cd ~/src/superforge-skill/skills/superforge-ui
-zip -r superforge-ui.zip .
+cd ~/src/superforge-skill
+python3 scripts/package_skills.py skills/superforge-ui   # omite la ruta para empaquetar las catorce
 ```
+
+También atrapa el error que no se ve venir: claude.ai limita `description` en `SKILL.md` a 1024 caracteres y rechaza lo que se pase. El script se niega a empaquetar una skill que lo supere, y avisa cuando se acerca.
+
+`dist/superforge-workflows.zip` no es una skill — no la subas aquí. Son cinco scripts sueltos para el runtime de workflows de Claude Code.
 
 ### Dejarlo siempre activo (recomendado)
 

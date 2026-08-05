@@ -3,18 +3,18 @@ name: superforge-biz
 description: >
   Decide whether a market is worth entering, then architect the business model
   on top of it. Opens with a GO/NO-GO gate: TAM/SAM/SOM computed both ways,
-  confidence tiers on every input, and the reverse calculation that asks how
-  many customers this needs and whether you can reach that many. Then
-  monetization archetype, price anchoring, paywall placement, growth loops,
-  channel-market fit, minimum viable scale per tactic, and quantifying value
-  (time saved, cost avoided, revenue captured) as a pitch instead of an
-  adjective. Also covers selling capacity rather than a product — the revenue
-  ceiling, scope as the deliverable, retainers, client concentration — and the
-  legality of outreach. Use when the user says "pricing", "monetization",
-  "paywall", "subscription", "business model", "revenue", "GTM", "market size",
-  "TAM", "worth building", "customer acquisition", "agency", "retainer", "cold
-  email", "価格", "課金", "マネタイズ", "ビジネスモデル", "市場規模",
-  "儲かるのか", "顧客獲得", "受託", "見積もり", or runs /superforge-biz.
+  confidence tiers on every input, and the reverse calculation asking how many
+  customers this needs and whether you can reach that many. Then monetization
+  archetype, price anchoring, paywall placement, growth loops, channel-market
+  fit, minimum viable scale per tactic, and quantifying value (time saved, cost
+  avoided, revenue captured) as a pitch instead of an adjective. Also covers
+  selling capacity rather than a product — revenue ceiling, scope as the
+  deliverable, retainers, client concentration — and outreach legality. Use
+  when the user says "pricing", "monetization", "paywall", "subscription",
+  "business model", "revenue", "GTM", "market size", "TAM", "worth building",
+  "customer acquisition", "agency", "retainer", "cold email", "価格", "課金",
+  "マネタイズ", "ビジネスモデル", "市場規模", "儲かるのか", "顧客獲得", "受託",
+  "見積もり", or runs /superforge-biz.
 license: MIT
 metadata:
   author: Takao Umehara

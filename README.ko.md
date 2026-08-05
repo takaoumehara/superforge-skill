@@ -136,12 +136,16 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ### claude.ai (브라우저)
 
-스킬 하나의 폴더를 zip으로 묶어 Settings → Capabilities → Skills에서 업로드합니다. 브라우저는 한 번에 하나씩만 받습니다.
+`dist/`의 `.zip`을 Settings → Capabilities → Skills에서 업로드하세요. 브라우저는 한 번에 하나씩만 받습니다. 수작업 zip이 흔히 틀리는 두 가지를 이 스크립트가 검사합니다 — 확장자는 반드시 진짜 `.zip`이어야 하고(`.skill`은 업로드 창에서 선택조차 안 될 수 있습니다), zip 안에는 스킬 이름의 폴더가 한 겹 감싸고 있어야 합니다(폴더 안에서 `zip -r name.zip .`으로 묶으면 이 계층이 사라져 "Zip must contain a top-level folder" 오류가 납니다).
 
 ```bash
-cd ~/src/superforge-skill/skills/superforge-ui
-zip -r superforge-ui.zip .
+cd ~/src/superforge-skill
+python3 scripts/package_skills.py skills/superforge-ui   # 경로를 생략하면 열네 개 전부
 ```
+
+눈에 안 보이는 함정도 하나 더 잡아줍니다. claude.ai는 `SKILL.md`의 `description`을 1024자로 제한하고 넘으면 업로드를 거부합니다. 이 스크립트는 초과한 스킬은 아예 패키징하지 않고, 근접한 것은 경고합니다.
+
+`dist/superforge-workflows.zip`은 스킬이 아니니 여기에 올리지 마세요. Claude Code 워크플로 런타임용 스크립트 다섯 개가 들어 있을 뿐입니다.
 
 ### 항상 켜 두기 (권장)
 

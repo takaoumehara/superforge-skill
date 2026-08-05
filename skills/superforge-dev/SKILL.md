@@ -2,23 +2,19 @@
 name: superforge-dev
 description: >
   Build multi-component features by decomposing the work and dispatching
-  subagents, assigning a model tier per subtask across Claude 5, Gemini 3.6,
-  Codex, and Kimi. Splits work into tasks that each have one outcome, a proof
-  line, and a listed set of files — so parallel safety is decidable rather than
-  hoped for — and proposes Subagents versus Agent Teams versus a scripted
-  Workflow topology by task complexity and token cost, including the trap that
-  every agent inside a workflow inherits the session's model unless the script
-  assigns one per stage. Also covers the schema, which is both the shared
-  foundation every parallel run depends on and the one part of a product that
-  gets harder to change as it succeeds: identity, money, time, indexes,
-  deletion, and migrations run against data you cannot restore. Use when the
-  user says "implement", "build this feature", "execute the plan", "in
-  parallel", "dispatch agents", "split this up", "which model should",
-  "use a workflow", "run a workflow", "orchestrate", "fan out", "ultracode",
-  "database", "schema", "migration", "実装して", "作って", "並列で",
-  "サブエージェント", "タスクに分けて", "どのモデルで", "ワークフローで",
-  "オーケストレーション", "一気に流して", "スキーマ", "DB設計",
-  "マイグレーション", or runs /superforge-dev.
+  subagents, assigning a model tier per subtask. Splits work into tasks with
+  one outcome, a proof line, and a listed set of files — so parallel safety is
+  decidable rather than hoped for — and proposes Subagents versus Agent Teams
+  versus a scripted Workflow topology, including the trap that a workflow
+  agent inherits the session's model unless the script assigns one per stage.
+  Also covers the schema: the shared foundation every parallel run depends on,
+  and the part of a product that gets harder to change as it succeeds —
+  identity, money, deletion, migrations run against data you cannot restore.
+  Use when the user says "implement", "build this feature", "execute the
+  plan", "in parallel", "dispatch agents", "split this up", "which model
+  should", "use a workflow", "database", "schema", "migration", "実装して",
+  "作って", "並列で", "サブエージェント", "タスクに分けて", "どのモデルで",
+  "スキーマ", "DB設計", "マイグレーション", or runs /superforge-dev.
 license: MIT
 metadata:
   author: Takao Umehara

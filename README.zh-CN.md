@@ -136,12 +136,16 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ### claude.ai（浏览器）
 
-把一个技能的文件夹打成 zip，在 Settings → Capabilities → Skills 里上传。浏览器端一次只收一个。
+把 `dist/` 里的 `.zip` 上传到 Settings → Capabilities → Skills。浏览器一次只收一个。手动打包最容易踩的两个坑，脚本都会检查：扩展名必须是真正的 `.zip`（`.skill` 在上传对话框里可能根本选不中）；zip 内部必须包着一层以技能名命名的文件夹（在文件夹里直接 `zip -r name.zip .` 会把这层拍平，上传时报「Zip must contain a top-level folder」）。
 
 ```bash
-cd ~/src/superforge-skill/skills/superforge-ui
-zip -r superforge-ui.zip .
+cd ~/src/superforge-skill
+python3 scripts/package_skills.py skills/superforge-ui   # 省略路径则打包全部十四个
 ```
+
+这个脚本还会拦住一个肉眼看不出来的坑：claude.ai 把 `SKILL.md` 里的 `description` 限制在 1024 字符以内，超了直接拒绝上传。脚本会拒绝打包超限的技能，接近上限的会给出警告。
+
+`dist/superforge-workflows.zip` 不是技能，不要传到这里——里面只是给 Claude Code 工作流运行时用的五个脚本。
 
 ### 让它常驻生效（推荐）
 
