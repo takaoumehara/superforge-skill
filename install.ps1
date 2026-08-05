@@ -41,6 +41,13 @@ $Targets = @(
 $SkillsDir = Join-Path $RepoDir "skills"
 $Skills = Get-ChildItem -Path $SkillsDir -Directory
 
+# This repo's former name, pointed at the router so existing
+# `model-aware-superpowers` references in CLAUDE.md / AGENTS.md keep resolving.
+# Must stay in step with LEGACY_ALIAS in install.sh — a user with one machine of
+# each OS and one CLAUDE.md gets a silent non-resolution otherwise.
+$LegacyAlias = "model-aware-superpowers"
+$RouterPath = Join-Path $SkillsDir "superforge"
+
 function Create-Symlink {
     param (
         [string]$Source,
@@ -95,6 +102,15 @@ foreach ($targetDir in $Targets) {
 
     Write-Host "`nTarget: $targetDir" -ForegroundColor Cyan
 
+    if ($LegacyAlias) {
+        $aliasPath = Join-Path $targetDir $LegacyAlias
+        if ($Uninstall) {
+            Remove-Symlink -Target $aliasPath
+        } else {
+            Create-Symlink -Source $RouterPath -Target $aliasPath
+        }
+    }
+
     foreach ($skill in $Skills) {
         $destPath = Join-Path $targetDir $skill.Name
         if ($Uninstall) {
@@ -117,6 +133,12 @@ function Install-Workflows {
 
     $configDir = if ($env:CLAUDE_CONFIG_DIR) { $env:CLAUDE_CONFIG_DIR } else { "$env:USERPROFILE\.claude" }
     $workflowDir = Join-Path $configDir "workflows"
+
+    # Same guard the target loop uses: install nothing where the tool is absent.
+    if ((-not $Uninstall) -and (-not (Test-Path $configDir))) {
+        Write-Host "`nSkipping $workflowDir (Claude Code not present - workflows are Claude-Code-only)" -ForegroundColor DarkYellow
+        return
+    }
 
     if ($Uninstall) {
         if (-not (Test-Path $workflowDir)) { return }

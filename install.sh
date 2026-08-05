@@ -91,8 +91,18 @@ unlink_if_ours() { # unlink_if_ours <destination>
 # symlinked workflow file, and a copy has no such ambiguity. Re-run this script
 # after `git pull` to pick up changes.
 install_workflows() {
-  local dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/workflows"
+  local config="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+  local dir="$config/workflows"
   [ -d "$REPO/workflows" ] || return 0
+
+  # Same guard the TARGETS loop uses: install nothing where the tool is absent.
+  # A Codex- or Gemini-only machine getting a ~/.claude/workflows/ directory of
+  # files it can never execute is precisely the footprint "additive, never a
+  # dependency" exists to prevent.
+  if ! $UNINSTALL && [ ! -d "$config" ]; then
+    echo "skipping $dir (Claude Code not present — workflows are Claude-Code-only)"
+    return 0
+  fi
 
   if $UNINSTALL; then
     [ -d "$dir" ] || return 0

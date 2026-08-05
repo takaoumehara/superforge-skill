@@ -135,7 +135,7 @@ phase('Report')
 const report = await agent(
   `Write the freshness report for the superforge suite. **Do not edit any file** — this report is read by a human who decides.
 
-Order by what a stale claim would actually cost, not by how many words changed:
+Open with the provenance field on its own first line: \`Mode: freshness sweep (${results.length}/${rows.length} sources fetched)\`. Then order by what a stale claim would actually cost, not by how many words changed:
 
 1. **\`contradicted\` first.** The suite is currently telling people to do something the source says not to. Name the file, the line, and the replacement.
 2. **Then \`drifted\`** — a renamed model, a moved default, an added constraint. Still roughly right; will mislead on the edge.

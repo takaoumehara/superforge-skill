@@ -50,8 +50,16 @@ these, and move the row up when you do.
 
 ## 3. Keeping this true — three layers, and only two of them can be fixed
 
-**Layer 1 — the repository.** Run `/superforge-freshness`
-(`workflows/superforge-freshness.js`). It re-fetches every source in §1 in
+**Layer 0 — real use.** The suite's own quality is not in this file, because it
+is not an external fact. It is in `docs/superforge-log.md`, written by the person
+it failed, and `/superforge-selfcheck` turns that into proposed edits. Staleness
+and unfitness are different problems with different evidence:
+`superforge/references/run-log.md`.
+
+**Layer 1 — the repository.** Where Claude Code is available, run
+`/superforge-freshness` (`workflows/superforge-freshness.js`); everywhere else,
+work down §1 by hand from the oldest date, which is the same loop without the
+fan-out. It re-fetches every source in §1 in
 parallel, compares it against what the file claims, and reports only the rows
 that drifted, with the replacement text. Run it monthly, or on any release. It
 does not edit anything — drift is a judgment call, and a workflow that silently

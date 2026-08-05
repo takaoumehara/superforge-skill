@@ -65,8 +65,12 @@ one judge writes `docs/critique.md`. Eleven agents; say *"use a workflow"* or ru
 
 Everywhere else, run the four lenses in one pass — but read the target once per
 lens before writing anything, and refuse your own findings on those four grounds
-before they reach the artifact. It is the weaker version, and it is worth saying
-so in the output rather than implying a council that did not convene.
+before they reach the artifact.
+
+It is the weaker version, and both paths write `docs/critique.md`, so **the first
+line of that file states which one ran**: `Mode: single-pass fallback` here,
+`Mode: council (5 lenses, 11 agents)` from the workflow. A reader deciding how
+much to trust a critique should not have to infer it from tone.
 
 ---
 

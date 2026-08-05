@@ -179,6 +179,7 @@ The one rule this file exists to enforce: **a verification report may not contai
 
 Structure:
 
+0. **The first line is the provenance field**, exactly: \`Mode: independent grading (${claims.length} claims, ${claims.length * 2 + 2} agents)\`. \`superforge-ship\` blocks on this file and the single-pass fallback writes to the same name, so whether the grader had seen the implementation has to be a field rather than something a reader infers.
 1. **Verdict in one line** — proven / not proven, with the count. Do not write "verified" over a report containing failures.
 2. **A table: claim · grade · the exact command · pass or fail.** One row per claim.
 3. **The raw output for every claim, pasted.** Not described. A reader who cannot see the output is reading an assertion about an assertion. Fold long output into a collapsed block rather than trimming it.
