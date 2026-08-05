@@ -153,12 +153,16 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ### claude.ai（ブラウザ）で使う
 
-`dist/` フォルダ内の `.zip`（`python3 scripts/package_skills.py` で生成）を Settings → Capabilities → Skills からそのままアップロードしてください。ブラウザ版は一度に1個ずつです。拡張子は必ず `.zip` を使ってください — 中身は同じでも `.skill` だとダブルクリックで開けず、アップロード画面で選べないことがあります。
+`dist/` フォルダ内の `.zip` を Settings → Capabilities → Skills からアップロードしてください。ブラウザ版は一度に1個ずつです。手作業の zip でよく崩れる2点をこのスクリプトはチェックします — 拡張子は必ず `.zip`（`.skill` だとアップロード画面で選べないことがあります）、そして zip の中身はスキル名のフォルダで包まれている必要があります（フォルダの中身だけを `zip -r name.zip .` で固めるとこの階層が消え、「Zip must contain a top-level folder」で弾かれます）。
 
 ```bash
-cd ~/src/superforge-skill/skills/superforge-ui
-zip -r superforge-ui.zip .
+cd ~/src/superforge-skill
+python3 scripts/package_skills.py skills/superforge-ui   # パスを省略すると14個まとめて
 ```
+
+もう一つ、目に見えない落とし穴もここで検出します。claude.ai は `SKILL.md` の `description` を1024文字までに制限していて、超えると問答無用でアップロードが弾かれます。このスクリプトは超えているスキルをそもそも梱包せず、近づいているものには警告を出します。
+
+`dist/superforge-workflows.zip` はスキルではないので、ここにはアップロードしないでください。Claude Code のワークフロー実行用のスクリプト5本が入っているだけです。
 
 ### 毎回きちんと働かせる（おすすめ）
 

@@ -4,17 +4,14 @@ description: >
   Concierge and router for the whole making process, from idea to shipped
   product. Reads intent, hands the work to the right superforge-* skill (brain,
   biz, brand, ui, dev, test, debug, roast, verify, handoff), and assigns a
-  model tier per subtask across Claude 5, Gemini 3.6, Codex, and Kimi before
-  any agent is dispatched, applying the per-model prompting deltas — including
-  the two instructions this suite gives that are counterproductive on Opus 5 and
-  Sonnet 5. Also routes work to a scripted workflow or to an async cloud agent
-  such as Devin when either fits better than the session, and carries a dated
-  source ledger so a stale claim about a model or an API can be caught rather
-  than trusted. Use at the start of any build, or when the request spans several
-  of those areas. Use when the user says "let's build", "I want to make", "help
-  me ship", "where do I start", "which model should I use", "use a workflow",
-  "is this still current", "same thing twice", "何か作りたい", "作って", "どこから始める",
-  "一気に進めたい", "どのモデルで", "情報が古くないか", "同じことを何度も言っている", or runs /superforge.
+  model tier per subtask before any agent is dispatched, applying per-model
+  prompting deltas. Also routes to a scripted workflow or an async cloud agent
+  like Devin when either fits better, and tracks a dated source ledger so stale
+  claims about a model or API get caught. Use at the start of any build, or
+  when the request spans several of those areas. Use when the user says "let's
+  build", "I want to make", "help me ship", "where do I start", "which model
+  should I use", "use a workflow", "same thing twice", "何か作りたい", "作って",
+  "どこから始める", "一気に進めたい", "どのモデルで", "同じことを何度も言っている", or runs /superforge.
 license: MIT
 metadata:
   author: Takao Umehara

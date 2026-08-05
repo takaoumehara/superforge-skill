@@ -21,6 +21,7 @@ tell whether they are holding something current.
 """
 
 import os
+import re
 import subprocess
 import sys
 import zipfile
@@ -29,6 +30,75 @@ REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SKILLS_DIR = os.path.join(REPO_DIR, "skills")
 WORKFLOWS_DIR = os.path.join(REPO_DIR, "workflows")
 DIST_DIR = os.path.join(REPO_DIR, "dist")
+
+# claude.ai rejects a skill upload outright if this field exceeds 1024 chars —
+# not documented anywhere, only discovered by an actual upload bouncing. Warn
+# well before the cliff: our own folding here is a close approximation of
+# claude.ai's YAML parsing, not a byte-identical implementation of it, and a
+# description sitting right at 1024 could tip either way on a parser we don't
+# control. 950 leaves room for that uncertainty and for normal editing drift.
+DESCRIPTION_LIMIT = 1024
+DESCRIPTION_WARN_AT = 950
+
+
+def folded_description(frontmatter):
+    """Approximates YAML '>' block-scalar folding well enough to catch a
+    description that's grown too long — not a general YAML parser."""
+    m = re.search(r"^description:\s*>-?\s*\n((?:^[ \t].*\n?|\n)*)", frontmatter, re.M)
+    if not m:
+        m2 = re.search(r"^description:\s*(.+)$", frontmatter, re.M)
+        return m2.group(1).strip() if m2 else ""
+    lines = m.group(1).split("\n")
+    while lines and lines[-1] == "":
+        lines.pop()
+    if not lines:
+        return ""
+    indent = len(lines[0]) - len(lines[0].lstrip(" "))
+    stripped = [l[indent:] if len(l) >= indent else l.lstrip() for l in lines]
+    out, para = [], []
+    for l in stripped:
+        if l.strip() == "":
+            if para:
+                out.append(" ".join(para))
+                para = []
+            out.append("")
+        else:
+            para.append(l)
+    if para:
+        out.append(" ".join(para))
+    return "\n".join(out)
+
+
+def check_description_lengths():
+    """Refuses to package anything over the limit, and flags anything close to
+    it. This exists because the limit was found the hard way — an upload
+    bounced with 'field description in SKILL.md must be at most 1024
+    characters' — and nothing before this caught it."""
+    problems = []
+    for f in sorted(glob_skill_md()):
+        text = open(f, encoding="utf-8").read()
+        fm = text.split("---\n", 2)[1]
+        n = len(folded_description(fm))
+        rel = os.path.relpath(f, REPO_DIR)
+        if n > DESCRIPTION_LIMIT:
+            problems.append(f"  ✗ {rel}: {n} chars — OVER the {DESCRIPTION_LIMIT}-char limit, claude.ai will reject this upload")
+        elif n > DESCRIPTION_WARN_AT:
+            print(f"  ⚠ {rel}: {n} chars — close to the {DESCRIPTION_LIMIT}-char limit, trim if you touch this again")
+    if problems:
+        print("\n".join(problems), file=sys.stderr)
+        print(
+            f"\n{len(problems)} description(s) over {DESCRIPTION_LIMIT} chars. "
+            "Not packaging until these are trimmed.",
+            file=sys.stderr,
+        )
+        return False
+    return True
+
+
+def glob_skill_md():
+    import glob
+
+    return glob.glob(os.path.join(SKILLS_DIR, "*", "SKILL.md"))
 
 
 def git(*args, default="unknown"):
@@ -90,7 +160,15 @@ skeptic pass, and the artifact says which it was on its first line (`Mode:`).
 To get them: clone the repository and run `./install.sh`, or install the plugin.
 """
 
-WORKFLOW_NOTE = """## Installing these
+WORKFLOW_NOTE = """## This is not a claude.ai skill — do not upload it there
+
+This zip has no `SKILL.md` and no top-level folder wrapping its contents,
+because it isn't a skill; it's five loose `.js` scripts for Claude Code's
+workflow runtime. claude.ai's "Upload a skill" will reject it — correctly —
+with "Zip must contain a SKILL.md file" and "Zip must contain a top-level
+folder with all files inside it". That is expected, not a bug in this bundle.
+
+## Installing these
 
 Copy the `.js` files into one of:
 
@@ -161,6 +239,15 @@ def collect(folder, prefix):
 
 def package_skill(skill_folder):
     name = os.path.basename(skill_folder)
+    md = os.path.join(skill_folder, "SKILL.md")
+    if os.path.exists(md):
+        text = open(md, encoding="utf-8").read()
+        if text.startswith("---\n"):
+            fm = text.split("---\n", 2)[1]
+            n = len(folded_description(fm))
+            if n > DESCRIPTION_LIMIT:
+                print(f"  ✗ {name}: description is {n} chars — over the {DESCRIPTION_LIMIT}-char claude.ai limit. Not packaging.", file=sys.stderr)
+                return None
     files = collect(skill_folder, prefix=name)
     out = write_zip(os.path.join(DIST_DIR, f"{name}.zip"), files, name, SKILL_NOTE, prefix=name)
     print(f"  {name:26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB")
@@ -183,7 +270,7 @@ def package_workflows():
         "superforge workflows",
         WORKFLOW_NOTE,
     )
-    print(f"  {'superforge-workflows.zip':26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB")
+    print(f"  {'superforge-workflows.zip':26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB  (not a claude.ai skill — see PROVENANCE.md)")
     return out
 
 
@@ -194,6 +281,8 @@ def package_all():
     print(f"Packaging {COMMIT} ({COMMIT_DATE}) -> dist/\n")
     if DIRTY:
         print("  ⚠ working tree is dirty — these bundles match no commit\n")
+    if not check_description_lengths():
+        return 1
     count = 0
     for entry in sorted(os.listdir(SKILLS_DIR)):
         folder = os.path.join(SKILLS_DIR, entry)

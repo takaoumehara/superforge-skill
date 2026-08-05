@@ -153,12 +153,16 @@ Swap `superforge-ui` for the skill you want and `~/.claude/skills` for your tool
 
 ### claude.ai (browser)
 
-Upload `.zip` archives directly from `dist/` (`python3 scripts/package_skills.py`) under Settings → Capabilities → Skills. The browser takes one skill at a time — and expects a real `.zip`; a `.skill` extension will not open on double-click and may not even be selectable in the upload dialog, even though the bytes inside are identical.
+Upload `.zip` archives directly from `dist/` under Settings → Capabilities → Skills. The browser takes one skill at a time, and it checks two things a hand-rolled zip usually gets wrong: a real `.zip` extension (`.skill` won't even be selectable in the dialog, though the bytes are identical), and a top-level folder inside the zip named after the skill (`zip -r name.zip .` from inside the folder flattens this away and the upload fails with "Zip must contain a top-level folder").
 
 ```bash
-cd ~/src/superforge-skill/skills/superforge-ui
-zip -r superforge-ui.zip .
+cd ~/src/superforge-skill
+python3 scripts/package_skills.py skills/superforge-ui   # or omit the path for all fourteen
 ```
+
+This also catches the one error you can't see coming: claude.ai silently caps `description` in `SKILL.md` at 1024 characters and rejects anything over. The script refuses to package a skill that's over, and warns once one gets close.
+
+`dist/superforge-workflows.zip` is not a skill — do not upload it here. It's five loose scripts for Claude Code's workflow runtime; see [Five workflows](#five-workflows-for-the-parts-prose-cannot-enforce) below.
 
 ### Make it always-on (recommended)
 
