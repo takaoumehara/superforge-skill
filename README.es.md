@@ -10,7 +10,7 @@
 
 Una «skill» es **un conjunto de instrucciones que puedes añadir a una herramienta de AI** como Claude Code. Colocas una carpeta y la AI empieza a seguir ese procedimiento.
 
-superforge son catorce de ellas. La que está en el centro, `superforge`, hace de **recepción de un taller**.
+superforge son quince de ellas. La que está en el centro, `superforge`, hace de **recepción de un taller**.
 
 > Tú: «Quiero hacer una app para la cafetería de la esquina.»
 > Recepción: «Primero damos forma a la idea; se la paso a `superforge-brain`. Esto pide criterio, así que va sobre Opus 5.»
@@ -18,7 +18,7 @@ superforge son catorce de ellas. La que está en el centro, `superforge`, hace d
 
 La recepción hace exactamente tres cosas.
 
-1. **Decide quién se encarga**: una de las catorce, entre pensar / construir / probar / publicar
+1. **Decide quién se encarga**: una de las quince, entre pensar / construir / probar / publicar
 2. **Decide qué modelo se usa**: los modelos listos cuestan más, así que el trabajo barato no se paga caro
 3. **Se asegura de que el resultado quede en un archivo**, para que nada muera al borrar la conversación
 
@@ -54,7 +54,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 
 ---
 
-## Las catorce skills
+## Las quince skills
 
 `superforge` es la recepción; las otras doce hacen el trabajo. También puedes llamarlas directamente, como `/superforge-ui`.
 
@@ -71,6 +71,7 @@ Las skills de superforge escriben un archivo en `docs/` antes de dar el parte. D
 | Skill | Cuándo | Archivo que deja |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.es.md) | diseño de interfaz que parte de una referencia real en vez del promedio del propio modelo, landing pages hechas para vender, y los primeros treinta segundos tras decidirse, con una guía de estilo que una persona abre y revisa | `docs/design.md` + `docs/design.html` |
+| [`superforge-scroll`](./skills/superforge-scroll/README.md) | páginas cinematográficas con scroll: la cámara planificada sobre un plano antes de renderizar nada, en el servicio de vídeo que ya tengas | `docs/scroll-world.md` |
 | [`superforge-dev`](./skills/superforge-dev/README.es.md) | implementación: dividir el trabajo para que el paralelo no rompa, y repartirlo entre modelos adecuados | `docs/plan.md` |
 
 ### 3. Probar — comprobar que nada falla
@@ -99,7 +100,7 @@ Solo hacen falta `git` y una herramienta de AI que cargue skills, como Claude Co
 
 ### Todas de una vez (recomendado)
 
-Clona una vez y ejecuta el instalador. Busca todos los directorios de skills de tu máquina y enlaza las catorce.
+Clona una vez y ejecuta el instalador. Busca todos los directorios de skills de tu máquina y enlaza las quince.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -140,7 +141,7 @@ Sube los `.zip` de `dist/` en Settings → Capabilities → Skills. El navegador
 
 ```bash
 cd ~/src/superforge-skill
-python3 scripts/package_skills.py skills/superforge-ui   # omite la ruta para empaquetar las catorce
+python3 scripts/package_skills.py skills/superforge-ui   # omite la ruta para empaquetar las quince
 ```
 
 También atrapa el error que no se ve venir: claude.ai limita `description` en `SKILL.md` a 1024 caracteres y rechaza lo que se pase. El script se niega a empaquetar una skill que lo supere, y avisa cuando se acerca.
@@ -191,7 +192,7 @@ La respuesta vive en `docs/superforge.md`, sobrevive a `/clear`, viaja en la cá
 
 Di **`/superforge help`** (o «cómo se usa esto»). Imprime un resumen corto y un menú numerado, y ahí se detiene — una sección cada vez, no un muro de texto:
 
-`[1]` las catorce skills · `[2]` **dónde se ahorra de verdad** · `[3]` lo que no puede hacer · `[4]` malentendidos habituales · `[5]` uso avanzado
+`[1]` las quince skills · `[2]` **dónde se ahorra de verdad** · `[3]` lo que no puede hacer · `[4]` malentendidos habituales · `[5]` uso avanzado
 
 ### Dónde se ahorra de verdad
 
@@ -263,7 +264,7 @@ Solo se detiene por cuatro cosas: una pérdida irreversible, gastar dinero, cred
 
 Protocolo completo → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Por qué catorce skills no ralentizan a la AI
+### Por qué quince skills no ralentizan a la AI
 
 Lo único permanentemente en el contexto de la AI es **la descripción de una línea de cada skill**. El cuerpo se carga cuando hace falta, y el material profundo vive en `references/` y se lee bajo demanda.
 

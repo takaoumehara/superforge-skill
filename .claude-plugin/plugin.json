@@ -1,7 +1,7 @@
 {
   "name": "superforge-skills",
   "version": "4.7.0",
-  "description": "Say what you want to build in one sentence. Fourteen superforge skills take it from idea to release gate with model tiering and file persistence, plus five Claude Code workflows that enforce the parts prose cannot.",
+  "description": "Say what you want to build in one sentence. Fifteen superforge skills take it from idea to release gate with model tiering and file persistence, plus five Claude Code workflows that enforce the parts prose cannot.",
   "author": {
     "name": "Takao Umehara",
     "url": "https://github.com/takaoumehara/superforge-skill"
@@ -14,6 +14,7 @@
     "skills/superforge-biz",
     "skills/superforge-brand",
     "skills/superforge-ui",
+    "skills/superforge-scroll",
     "skills/superforge-dev",
     "skills/superforge-test",
     "skills/superforge-debug",

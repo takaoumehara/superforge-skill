@@ -10,7 +10,7 @@
 
 A "skill" is **a set of instructions you can add to an AI tool** like Claude Code. You drop in a folder, and the AI starts following that procedure.
 
-superforge is fourteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
+superforge is fifteen of them. The one in the middle, `superforge`, works like **the front desk of a workshop**.
 
 > You: "I want to build an app for the café down the street."
 > Front desk: "Let's shape the idea first — handing this to `superforge-brain`. It needs judgment, so it runs on Opus 5."
@@ -18,7 +18,7 @@ superforge is fourteen of them. The one in the middle, `superforge`, works like 
 
 The front desk does exactly three things.
 
-1. **Picks who takes the job** — one of fourteen, across think / build / prove / ship
+1. **Picks who takes the job** — one of fifteen, across think / build / prove / ship
 2. **Picks which AI model to use** — smart models cost more, so cheap work does not get an expensive model
 3. **Makes sure the result lands in a file** — so nothing dies when the conversation is cleared
 
@@ -54,7 +54,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 
 ---
 
-## The fourteen skills
+## The fifteen skills
 
 `superforge` is the front desk; the other twelve do the work. You can also call any of them directly, like `/superforge-ui`.
 
@@ -71,6 +71,7 @@ superforge skills write a file under `docs/` before they report back. Decide the
 | Skill | When | File it leaves |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.md) | interface design with VVA token alignment, GEC growth widgets (ROI calculators, quizzes, onboarding), reference extraction, and first-run polish | `docs/design.md` + `docs/design.html` |
+| [`superforge-scroll`](./skills/superforge-scroll/README.md) | scroll-scrubbed cinematic pages: the camera planned on a floor plan before anything renders, on whichever video service you have | `docs/scroll-world.md` |
 | [`superforge-dev`](./skills/superforge-dev/README.md) | implementation: split the work so parallel is safe, then dispatch each piece to a fitting model | `docs/plan.md` |
 
 ### 3. Prove — check nothing is broken
@@ -99,7 +100,7 @@ You need `git` and an AI tool that loads skills, such as Claude Code, Antigravit
 
 ### All of them at once (recommended)
 
-Clone once and run the installer for your OS. It finds every skills directory on your machine and links all fourteen.
+Clone once and run the installer for your OS. It finds every skills directory on your machine and links all fifteen.
 
 **macOS / Linux:**
 ```bash
@@ -157,7 +158,7 @@ Upload `.zip` archives directly from `dist/` under Settings → Capabilities →
 
 ```bash
 cd ~/src/superforge-skill
-python3 scripts/package_skills.py skills/superforge-ui   # or omit the path for all fourteen
+python3 scripts/package_skills.py skills/superforge-ui   # or omit the path for all fifteen
 ```
 
 This also catches the one error you can't see coming: claude.ai silently caps `description` in `SKILL.md` at 1024 characters and rejects anything over. The script refuses to package a skill that's over, and warns once one gets close.
@@ -208,7 +209,7 @@ The answer lives in `docs/superforge.md`, survives `/clear`, travels in the hand
 
 Say **`/superforge help`** (or just "how do I use this"). It prints a short overview and a numbered menu, then waits — one section at a time, not a wall of text:
 
-`[1]` the fourteen skills · `[2]` **where money is actually saved** · `[3]` what this cannot do · `[4]` common misunderstandings · `[5]` deeper use
+`[1]` the fifteen skills · `[2]` **where money is actually saved** · `[3]` what this cannot do · `[4]` common misunderstandings · `[5]` deeper use
 
 ### Where money is actually saved
 
@@ -280,7 +281,7 @@ It stops for four things only — irreversible deletion, spending money, missing
 
 Full protocol → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### Why fourteen skills do not slow the AI down
+### Why fifteen skills do not slow the AI down
 
 The only thing permanently in the AI's context is **each skill's one-line description**. The body loads when needed, and the deep material sits in `references/` and is read on demand.
 
@@ -303,6 +304,8 @@ The only thing permanently in the AI's context is **each skill's one-line descri
 | [`superforge-ui/references/design-sourcing.md`](./skills/superforge-ui/references/design-sourcing.md) | where the direction comes from — six extraction layers, reference vs. imitation, turning a design made elsewhere into a system |
 | [`superforge-ui/references/motion-system.md`](./skills/superforge-ui/references/motion-system.md) | durations, easing chosen by the property being animated, FLIP, scroll sync, runtime reduced-motion |
 | [`superforge-ui/references/landing-page.md`](./skills/superforge-ui/references/landing-page.md) | designing a page built to sell — section order, the hero, mobile vs. desktop |
+| [`superforge-scroll/references/planning.md`](./skills/superforge-scroll/references/planning.md) | the camera planned before anything renders — world type, floor plan and apertures, the four invariants, the shot list, the seam contract, sun-derived light continuity, and the gate that must pass before money is spent |
+| [`superforge-scroll/references/providers.md`](./skills/superforge-scroll/references/providers.md) | what makes a video backend usable at all — the five-capability contract, the adapter interface, Kie.ai / Higgsfield / Monid / fal / Replicate / MCP / generic HTTP, and the three-clip probe that catches a backend silently ignoring your prompt |
 | [`superforge-brand/references/case-study.md`](./skills/superforge-brand/references/case-study.md) | writing up shipped work so it is believed — layered by reader, credibility built in the decisions and their costs, and the section where your judgment was needed |
 | [`superforge-ui/references/slide-page.md`](./skills/superforge-ui/references/slide-page.md) | a long page built to be skimmed — two layers per screen, shape chosen by what the content is doing, and no visual language of its own |
 | [`superforge-ui/references/first-run.md`](./skills/superforge-ui/references/first-run.md) | the first thirty seconds — reaching an outcome instead of explaining, permissions at the point of use, marking completion so you can still test it |

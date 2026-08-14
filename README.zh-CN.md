@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**用一句话说出你想做什么，十四个技能就按正确的顺序，从想点子一直带到上线前的检查。**
+**用一句话说出你想做什么，十五个技能就按正确的顺序，从想点子一直带到上线前的检查。**
 
 ---
 
@@ -10,7 +10,7 @@
 
 「技能」就是**可以加进 Claude Code 这类 AI 工具的一份操作说明**。放进去一个文件夹，AI 就照着那套步骤干活。
 
-superforge 是这样的十四份。站在正中间的 `superforge` 扮演**工坊前台**。
+superforge 是这样的十五份。站在正中间的 `superforge` 扮演**工坊前台**。
 
 > 你：「我想给街角那家咖啡馆做个 App。」
 > 前台：「先把点子理清楚，交给 `superforge-brain`。这活儿需要判断力，用 Opus 5。」
@@ -18,7 +18,7 @@ superforge 是这样的十四份。站在正中间的 `superforge` 扮演**工�
 
 前台只做三件事。
 
-1. **决定交给谁**：想 / 做 / 验 / 出，十四个里挑一个
+1. **决定交给谁**：想 / 做 / 验 / 出，十五个里挑一个
 2. **决定用哪个模型**：聪明的模型贵，便宜的活儿不该用贵模型
 3. **确保结果落成文件**：这样清掉对话，东西也不会跟着没
 
@@ -54,7 +54,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ---
 
-## 十四个技能
+## 十五个技能
 
 正中间的 `superforge` 是前台，其余十二个是干活的。当然也可以像 `/superforge-ui` 这样直接叫。
 
@@ -71,6 +71,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 | 技能 | 什么时候用 | 留下的文件 |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.zh-CN.md) | 界面设计——方向来自真实参考而不是模型自己的平均值；也包括卖货型落地页，以及用户下定决心后的头三十秒（首次启动），附带一份人能打开核对的样式指南 | `docs/design.md` + `docs/design.html` |
+| [`superforge-scroll`](./skills/superforge-scroll/README.md) | 滚动驱动镜头的电影感页面：先在平面图上把镜头排好，再用你手上的视频服务渲染 | `docs/scroll-world.md` |
 | [`superforge-dev`](./skills/superforge-dev/README.zh-CN.md) | 实现：先拆得让并行不会出事，再把每块分给合适的模型 | `docs/plan.md` |
 
 ### 3. 验 —— 确认没坏
@@ -99,7 +100,7 @@ superforge 的技能在汇报之前一定先往 `docs/` 里写文件。定了设
 
 ### 一次全装好（推荐）
 
-克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十四个一次性链接进去。
+克隆一次，跑一遍安装脚本。它会找出本机所有技能目录，把十五个一次性链接进去。
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -140,7 +141,7 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ```bash
 cd ~/src/superforge-skill
-python3 scripts/package_skills.py skills/superforge-ui   # 省略路径则打包全部十四个
+python3 scripts/package_skills.py skills/superforge-ui   # 省略路径则打包全部十五个
 ```
 
 这个脚本还会拦住一个肉眼看不出来的坑：claude.ai 把 `SKILL.md` 里的 `description` 限制在 1024 字符以内，超了直接拒绝上传。脚本会拒绝打包超限的技能，接近上限的会给出警告。
@@ -191,7 +192,7 @@ docs/ 里的文件: 中文
 
 说一句 **`/superforge help`**（或者「怎么用」）。它会给一段简短的总览和一个编号菜单，然后停下来等你选——一次只出一节，不是一堵墙:
 
-`[1]` 十四个技能 · `[2]` **钱到底省在哪** · `[3]` 它做不到什么 · `[4]` 常见误解 · `[5]` 进阶用法
+`[1]` 十五个技能 · `[2]` **钱到底省在哪** · `[3]` 它做不到什么 · `[4]` 常见误解 · `[5]` 进阶用法
 
 ### 钱到底省在哪
 
@@ -263,7 +264,7 @@ HTML 是**读取** `design.md` 的值来渲染的，而不是照着重画一遍�
 
 完整协议 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 为什么装十四个也不会拖慢 AI
+### 为什么装十五个也不会拖慢 AI
 
 常驻在 AI 上下文里的只有**每个技能那一行描述**。正文按需加载，更深的材料放在 `references/` 里，用到才读。
 
