@@ -40,6 +40,9 @@ flowchart TD
 ### 🗺️ The camera is planned before anything is generated
 The still is not a picture of the scene — it is the camera's frame 0. So the skill draws the space first: a floor plan with rooms and apertures, a route map, or an island layout, then a shot list carrying position, heading, lens and eye height per leg, and a seam contract naming what must be visible on both sides of every handoff. Story order is walked against the adjacency graph, and when the story wants a room the geometry can't reach, that conflict is resolved on paper — reorder, insert a corridor, split a room, or declare an exception seam — instead of discovered after the render.
 
+### 🖨️ The plan renders to a drawing that checks itself
+`scripts/plan_map.py` turns the plan's tables into an SVG — room footprints, apertures, the numbered camera path with a heading tick per leg, north, the sun, a scale bar — so gate 1 is something a client can approve or reject in ten seconds instead of a table they won't read. On the way past it verifies that each leg ends exactly where the next begins and that no seam turns more than 15°, because those are arithmetic on numbers already written down. Chrome labels in English by default, `--lang` for ja / ko / zh-CN / es; room and scene names stay in whatever language the plan is written in.
+
 ### ☀️ The sun does not move
 Light direction is derived from one fixed azimuth minus the current camera heading, per leg, rather than picked per scene. A build where you walk straight ahead and the backlight stays behind you is the thing the eye rejects without being able to say why.
 
@@ -67,6 +70,7 @@ Always asked, never silently generated, cost stated. A native 9:16 render compos
 | Seams | Hope, then a longer crossfade | A contract with two named anchors |
 | Video backend | Whatever the skill was written against | Any service that passes the probe |
 | First spend | The full chain | A free plan, then cheap stills, then previz |
+| Reviewing the plan | Reading a table of coordinates | A drawing, and two checks run for you |
 
 ---
 

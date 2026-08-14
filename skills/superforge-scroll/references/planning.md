@@ -131,6 +131,34 @@ exactly four honest moves:
 
 What you may not do is put the seam there anyway and hope. That's the pop.
 
+### 2e. Render it, and let the render check itself
+
+The tables carry coordinates, so the map can be drawn rather than imagined:
+
+```bash
+python3 scripts/plan_map.py docs/scroll-world.md            # -> docs/scroll-world.svg
+python3 scripts/plan_map.py --lang ja                       # chrome in ja/ko/zh-CN/es; default en
+```
+
+Room footprints, apertures as diamonds on the walls they pierce, the numbered camera
+path, a heading tick at each leg start, north, the sun's direction, and a scale bar.
+Room and scene names render in whatever language the plan is written in; only the
+chrome labels are translated.
+
+It also runs two checks on the way past, because they are arithmetic on numbers already
+in the tables and no human should be doing them by hand:
+
+- **`pos end` of leg *i* equals `pos start` of leg *i+1`** (§5). A gap means the camera
+  teleports.
+- **Δheading at each seam is within 15°** (§6 law 2). A bigger turn has to happen inside
+  the outgoing leg.
+
+It exits non-zero when either fails, so it can gate a build, and it draws the map anyway
+— a picture of the broken plan is exactly what you want while fixing it.
+
+That covers two lines of §8's checklist mechanically. The rest still need a person,
+because "is the story order right" is not arithmetic.
+
 ---
 
 ## 3. Fix the invariants — one line each, and never revisited
@@ -289,9 +317,9 @@ Do not generate video until every line is true. Write the checked plan to
 - [ ] `WORLD_TYPE` recorded, and the chosen architecture is coherent with it (§1)
 - [ ] Every consecutive scene pair is joined by a named aperture/threshold — or is a
       declared exception seam with a named device (§2d, §6)
-- [ ] `pos end` of every leg equals `pos start` of the next, numerically (§5)
+- [ ] `pos end` of every leg equals `pos start` of the next, numerically (§5) — `plan_map.py` checks this
 - [ ] No seam reverses velocity; every Δheading ≤ 15° (or ≤ 45° through an occluding
-      aperture); every Δheight = 0 (§6)
+      aperture); every Δheight = 0 (§6) — `plan_map.py` checks the heading
 - [ ] Eye height, lens, sun azimuth, and speed fixed once and stated in every prompt (§3)
 - [ ] Every leg's light clause is *derived* from `sun_azimuth − heading`, not chosen (§4)
 - [ ] Every seam names two shared anchors, one of them a light source or large surface (§6)
@@ -301,6 +329,7 @@ Do not generate video until every line is true. Write the checked plan to
       prompted without one (§9)
 - [ ] Clip count `(2N−1)` desktop, `×2` if mobile, `+15%` re-roll headroom — costed
       against the chosen backend's actual per-clip price and approved by the user
+- [ ] `docs/scroll-world.svg` rendered (§2e), exits clean, and shown to the user
 - [ ] Total runtime ≈ Σ durations. Over ~70 s, cut a scene rather than speed everything up
 
 Five to seven scenes is the working range. Under four there is no journey; over eight the

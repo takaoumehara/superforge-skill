@@ -50,6 +50,17 @@ graph LR
   a --> b --> c
 ```
 
+### Rendered map
+
+`python3 scripts/plan_map.py docs/scroll-world.md` → `docs/scroll-world.svg`
+(add `--lang ja|ko|zh-CN|es` for chrome labels; default English). Re-run after every
+edit to the tables above — it also checks position and heading continuity.
+
+| | |
+|---|---|
+| Last rendered | [date] |
+| Continuity check | [ok / N problems — paste them here] |
+
 ### Path walkability
 
 | # | scene | reached from previous via | ok? |
@@ -122,9 +133,9 @@ Total runtime ≈ [Σ durations] s. Over ~70 s, cut a scene rather than speed ev
 - [ ] `WORLD_TYPE` recorded and the architecture is coherent with it
 - [ ] Every consecutive scene pair joined by a named aperture/threshold, or a declared
       exception seam with a named device
-- [ ] `pos end` of every leg equals `pos start` of the next, numerically
+- [ ] `pos end` of every leg equals `pos start` of the next, numerically — `plan_map.py` checks this
 - [ ] No seam reverses velocity; Δheading ≤ 15° (≤ 45° only through an occluding
-      aperture); Δheight = 0 at every seam
+      aperture); Δheight = 0 at every seam — `plan_map.py` checks the heading
 - [ ] Eye height, lens, sun azimuth, speed fixed and stated in every prompt
 - [ ] Every light clause derived from `SUN_AZ − heading`, not chosen
 - [ ] Two shared anchors per seam, one a light source or large surface
@@ -133,6 +144,7 @@ Total runtime ≈ [Σ durations] s. Over ~70 s, cut a scene rather than speed ev
 - [ ] Every still prompt carries its camera pose from §4
 - [ ] Clip count and cost computed against the probed price and approved by the user
 - [ ] Total runtime under ~70 s
+- [ ] `docs/scroll-world.svg` rendered, exits clean, and shown to the user
 
 ## 9. Build log
 

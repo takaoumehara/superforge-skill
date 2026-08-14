@@ -113,6 +113,20 @@ and produces two tables that the rest of the build consumes directly:
 - **the seam contract**, one row per seam: what the outgoing frame must show, what the
   incoming frame must show, and the two shared anchors that carry across.
 
+Render the plan and let the render check itself:
+
+```bash
+python3 scripts/plan_map.py docs/scroll-world.md      # -> docs/scroll-world.svg
+python3 scripts/plan_map.py --lang ja                 # chrome in ja/ko/zh-CN/es; default en
+```
+
+Room footprints, apertures, the numbered camera path with a heading tick per leg, north,
+the sun, a scale bar — and two of §8's checks run mechanically on the way past, because
+`pos end == pos start` and Δheading are arithmetic on numbers already in the tables. It
+exits non-zero on a failure and draws the map anyway; a picture of the broken plan is what
+you want while fixing it. **Show the user this SVG** — it is the artifact they can approve
+or reject in ten seconds, which is the whole point of gate 1.
+
 Then walk the story order along the adjacency graph and confirm the camera can physically
 make every move. When the story and the geometry disagree — and they will — reorder,
 insert a transit leg, split a room in two, or declare an exception seam with a named
@@ -451,6 +465,9 @@ directions.
 - `references/planning.md` — **read first.** World-type classification, floor plan and
   route map, camera invariants, the shot list, the seam contract, light continuity, the
   three approval gates, and the pre-spend validation checklist.
+- `scripts/plan_map.py` — renders the plan's tables to an SVG floor plan with the camera
+  path on it, and machine-checks position and heading continuity. Stdlib only; `--lang`
+  for chrome labels (en default, plus ja / ko / zh-CN / es).
 - `references/providers.md` — the backend capability contract, the adapter interface, the
   registry (Kie.ai, Higgsfield, Monid, fal, Replicate, vendor APIs, MCP, generic HTTP),
   the mandatory qualification probe, frame hosting, and key handling.
