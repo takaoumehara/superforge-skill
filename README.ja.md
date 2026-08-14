@@ -2,7 +2,7 @@
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · [한국어](./README.ko.md)
 
-**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる14個のスキル集です。**
+**「◯◯を作りたい」と一言いうだけで、アイデア出しから出荷前チェックまでを、AIが順番どおりに進めてくれる15個のスキル集です。**
 
 ---
 
@@ -54,7 +54,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ---
 
-## 14個のスキル
+## 15個のスキル
 
 まん中の `superforge` が受付で、残りの12個が担当者です。もちろん `/superforge-ui` のように直接呼んでも構いません。
 
@@ -71,6 +71,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 | スキル | どんなとき | 残るファイル |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.ja.md) | VVAトークン連動画面デザイン。GECコンポーネント（ROI計算機・診断クイズ・多段階オンボーディング）、実在参照からの抽出、初回起動 polish | `docs/design.md` + `docs/design.html` |
+| [`superforge-scroll`](./skills/superforge-scroll/README.ja.md) | スクロール連動シネマティック。生成の前に間取り図の上でカメラを設計し、手元にある動画サービスでレンダリングする | `docs/scroll-world.md` |
 | [`superforge-dev`](./skills/superforge-dev/README.ja.md) | 実装。並列で壊れないように作業を分け、それぞれに合うモデルへ配る | `docs/plan.md` |
 
 ### 3. 試す — 壊れていないか確かめる
@@ -99,7 +100,7 @@ superforge のスキルは、報告する前に必ず `docs/` の中にファイ
 
 ### 全部まとめて入れる（おすすめ）
 
-一度クローンして、お使いのOSに合ったインストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを自動検出して、14個をまとめてリンクします。
+一度クローンして、お使いのOSに合ったインストーラを1回走らせるだけです。マシンの中にあるスキル用フォルダを自動検出して、15個をまとめてリンクします。
 
 **macOS / Linux:**
 ```bash
@@ -157,7 +158,7 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ```bash
 cd ~/src/superforge-skill
-python3 scripts/package_skills.py skills/superforge-ui   # パスを省略すると14個まとめて
+python3 scripts/package_skills.py skills/superforge-ui   # パスを省略すると15個まとめて
 ```
 
 もう一つ、目に見えない落とし穴もここで検出します。claude.ai は `SKILL.md` の `description` を1024文字までに制限していて、超えると問答無用でアップロードが弾かれます。このスクリプトは超えているスキルをそもそも梱包せず、近づいているものには警告を出します。
@@ -208,7 +209,7 @@ docs/ のファイル: 日本語
 
 **`/superforge help`**（または「使い方を教えて」）と言ってください。短い概要と番号付きのメニューが出て、そこで止まります。壁のような文章ではなく、選んだ1つずつ:
 
-`[1]` 14個のスキル一覧 · `[2]` **どこで安くなるか** · `[3]` できないこと · `[4]` よくある勘違い · `[5]` 深く使う
+`[1]` 15個のスキル一覧 · `[2]` **どこで安くなるか** · `[3]` できないこと · `[4]` よくある勘違い · `[5]` 深く使う
 
 ### どこで安くなるか
 
@@ -280,7 +281,7 @@ HTML側は `design.md` の値を**読み込んで**描画します。手で描�
 
 詳細 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### なぜ14個入れてもAIが重くならないのか
+### なぜ15個入れてもAIが重くならないのか
 
 常にAIの記憶に載っているのは、各スキルの**1行の説明文だけ**です。中身は必要になったときに読み込まれ、さらに深い知識は `references/` に分けてあります。
 

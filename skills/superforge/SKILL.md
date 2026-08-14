@@ -183,6 +183,7 @@ the assumption. Skip intake entirely for bounded tasks inside existing work.
 | 市場規模を知りたい・そもそも作る価値があるか | `/superforge-biz`（§0 の GO/NO-GO ゲート） |
 | ブランド・世界観・VVA Matrix・画像/動画が要る | `/superforge-brand` |
 | 何を作るかは決まっている・GECコンポーネント・UIデザイン | `/superforge-ui` → `/superforge-dev` |
+| シネマティックスクロール・スクロールで動くサイト・ウォークスルー動画・間取りからカメラワーク | `/superforge-scroll` |
 | 実装を回したい・複数エージェントで進めたい | `/superforge-dev` |
 | テストを書きたい・TDDで進めたい | `/superforge-test` |
 | バグ・エラー・障害・ポストモーテム | `/superforge-debug` |

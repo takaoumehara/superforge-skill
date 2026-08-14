@@ -1,0 +1,85 @@
+{
+  "skill_name": "superforge-scroll",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a cinematic scrolling landing page for a boutique architecture studio. Here is the floor plan of the house we want to show.",
+      "expected_output": "docs/scroll-world.md containing a transcribed room and aperture table, a walkable camera path, a shot list with per-leg camera pose, and a seam contract — produced before any image or video generation.",
+      "assertions": [
+        {
+          "name": "plan_before_generation",
+          "description": "No image or video generation is attempted before docs/scroll-world.md exists and its §8 validation gate is satisfied."
+        },
+        {
+          "name": "floor_plan_transcribed",
+          "description": "The supplied floor plan is transcribed into the rooms table and apertures table with coordinates, rather than described in prose."
+        },
+        {
+          "name": "shot_list_has_camera_pose",
+          "description": "Every leg row carries position, heading, lens, and eye height; pos_end of each leg equals pos_start of the next."
+        },
+        {
+          "name": "architecture_a_for_interior",
+          "description": "A bounded interior selects architecture A (continuous forward take), not architecture B, or explicitly justifies an override."
+        },
+        {
+          "name": "light_derived_not_chosen",
+          "description": "A single sun azimuth is fixed and each leg's light clause is derived from sun_azimuth minus camera heading."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I want a scroll cinematic for my tea brand, but I don't have Higgsfield — I use Kie.ai.",
+      "expected_output": "The build runs on Kie.ai through the adapter interface, after the qualification probe, with no Higgsfield dependency anywhere in the pipeline.",
+      "assertions": [
+        {
+          "name": "backend_offered_not_assumed",
+          "description": "Available backends are detected and presented to the user; none is silently selected before spending."
+        },
+        {
+          "name": "probe_run_before_spend",
+          "description": "The three-probe qualification (frame-lock, steerability, end-frame) runs at the lowest resolution before the full chain, and the result plus date is recorded in docs/scroll-world.md."
+        },
+        {
+          "name": "steerability_probe_present",
+          "description": "Probe 2 specifically renders two opposite prompts from the same image and checks that the outputs diverge."
+        },
+        {
+          "name": "no_hardcoded_vendor",
+          "description": "The pipeline calls vg_leg / vg_conn rather than a specific vendor CLI, and frame extraction, encoding, and QA are unchanged by backend choice."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The seams in my scroll site look perfect frame-to-frame but the building feels impossible. What went wrong?",
+      "expected_output": "Diagnosis that the stills were generated before the camera path, so pixel continuity holds while spatial continuity does not; remedy is the planning step, not an encoding change.",
+      "assertions": [
+        {
+          "name": "distinguishes_pixel_from_spatial",
+          "description": "The answer separates frame-lock (pixel continuity) from a coherent camera path (spatial continuity) and states that frame-locking cannot fix the latter."
+        },
+        {
+          "name": "no_encoding_red_herring",
+          "description": "The answer does not propose crossfade length, GOP, or codec changes as the fix."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Render the whole 7-scene chain at 1080p now, we're in a hurry.",
+      "expected_output": "Cost stated for N stills + (2N-1) clips + re-roll headroom against the probed per-clip price, with the cheap gates offered before the full-resolution spend.",
+      "assertions": [
+        {
+          "name": "cost_stated_before_spend",
+          "description": "An estimated total is computed and stated, and explicit user approval is obtained before the first paid clip."
+        },
+        {
+          "name": "previz_offered_at_scale",
+          "description": "A low-resolution previz of the same model is recommended for a chain of this size rather than skipped for speed."
+        }
+      ]
+    }
+  ]
+}

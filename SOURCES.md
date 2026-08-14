@@ -46,6 +46,9 @@ these, and move the row up when you do.
 | WCAG version and criterion numbering | `superforge-a11y` | W3C WCAG |
 | App Store / Play Store review requirements, and the privacy-disclosure rules | `superforge-ship` | Apple · Google developer policy |
 | Image and video generation pricing and commercial-use terms | `superforge-brand` | each vendor |
+| Kie.ai API shape: base `https://api.kie.ai`, bearer auth, `POST /api/v1/jobs/createTask` + task polling, per-model `input` schema, image inputs as URLs | `superforge-scroll/references/providers.md` §3 | `docs.kie.ai` — **not reachable from the environment this was written in**; the skill's §4 probe is the standing substitute |
+| Which model families accept a first frame, an optional last frame, or a mandatory last frame (Kling, Veo 3.1, Seedance, Wan FLF2V, Sora 2, Hailuo) | `superforge-scroll/references/providers.md` §3 | each vendor's docs — catalogues move in both directions; re-check per build |
+| Higgsfield and Monid CLI flags, model ids, and per-clip prices carried over from the upstream scroll-world skill | `superforge-scroll/references/providers.md` §3 | [oso95/scroll-world](https://github.com/oso95/scroll-world) — measured by that project in 2026-07, not re-verified here |
 
 ---
 

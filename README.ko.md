@@ -2,7 +2,7 @@
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-CN.md) · [Español](./README.es.md) · **한국어**
 
-**만들고 싶은 것을 한 문장으로 말하면, 열네 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
+**만들고 싶은 것을 한 문장으로 말하면, 열다섯 개의 스킬이 아이디어부터 출시 전 점검까지 올바른 순서로 끌고 갑니다.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 "스킬"이란 **Claude Code 같은 AI 도구에 나중에 추가할 수 있는 작업 설명서**입니다. 폴더 하나를 놓아 두면 AI가 그 절차대로 움직입니다.
 
-superforge는 그런 설명서 열네 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
+superforge는 그런 설명서 열다섯 장입니다. 한가운데 있는 `superforge`가 **공방의 안내 데스크** 역할을 합니다.
 
 > 당신: "동네 카페용 앱을 만들고 싶어요."
 > 안내 데스크: "먼저 아이디어를 다듬죠. `superforge-brain`에 넘기겠습니다. 판단이 필요한 일이라 Opus 5로 돌립니다."
@@ -18,7 +18,7 @@ superforge는 그런 설명서 열네 장입니다. 한가운데 있는 `superfo
 
 안내 데스크가 하는 일은 딱 세 가지입니다.
 
-1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열네 개 중에서
+1. **누구에게 넘길지 정합니다** — 생각한다 / 만든다 / 확인한다 / 내보낸다, 열다섯 개 중에서
 2. **어떤 모델을 쓸지 정합니다** — 똑똑한 모델은 비싸니, 값싼 작업에 비싼 모델을 붙이지 않습니다
 3. **결과가 반드시 파일로 남게 합니다** — 대화를 지워도 사라지지 않도록
 
@@ -54,7 +54,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ---
 
-## 열네 개의 스킬
+## 열다섯 개의 스킬
 
 한가운데의 `superforge`가 안내 데스크이고 나머지 열두 개가 담당자입니다. 물론 `/superforge-ui`처럼 직접 불러도 됩니다.
 
@@ -71,6 +71,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 | 스킬 | 언제 | 남는 파일 |
 |---|---|---|
 | [`superforge-ui`](./skills/superforge-ui/README.ko.md) | 모델 자신의 평균이 아니라 실제 레퍼런스에서 방향을 가져오는 화면 설계. 팔기 위한 랜딩 페이지, 마음을 정한 직후의 30초(첫 실행)까지. 사람이 열어 확인하는 스타일 가이드도 함께 | `docs/design.md` + `docs/design.html` |
+| [`superforge-scroll`](./skills/superforge-scroll/README.md) | 스크롤이 카메라를 움직이는 시네마틱 페이지. 렌더링 전에 평면도 위에서 카메라를 설계하고, 가진 영상 서비스로 렌더링 | `docs/scroll-world.md` |
 | [`superforge-dev`](./skills/superforge-dev/README.ko.md) | 구현. 병렬로 깨지지 않게 나눈 뒤 각자 맞는 모델에 배분 | `docs/plan.md` |
 
 ### 3. 확인한다 — 망가진 데가 없는지 보기
@@ -99,7 +100,7 @@ superforge의 스킬은 보고하기 전에 반드시 `docs/` 안에 파일을 �
 
 ### 한 번에 전부 (권장)
 
-한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 링크합니다.
+한 번 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열다섯 개를 링크합니다.
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -140,7 +141,7 @@ ln -s ~/src/superforge-skill/skills/superforge-ui ~/.claude/skills/superforge-ui
 
 ```bash
 cd ~/src/superforge-skill
-python3 scripts/package_skills.py skills/superforge-ui   # 경로를 생략하면 열네 개 전부
+python3 scripts/package_skills.py skills/superforge-ui   # 경로를 생략하면 열다섯 개 전부
 ```
 
 눈에 안 보이는 함정도 하나 더 잡아줍니다. claude.ai는 `SKILL.md`의 `description`을 1024자로 제한하고 넘으면 업로드를 거부합니다. 이 스크립트는 초과한 스킬은 아예 패키징하지 않고, 근접한 것은 경고합니다.
@@ -191,7 +192,7 @@ docs/ 안의 파일: 한국어
 
 **`/superforge help`**(또는 「사용법 알려줘」)라고 하세요. 짧은 개요와 번호 메뉴가 나오고 거기서 멈춥니다. 벽 같은 글이 아니라 고른 것 하나씩:
 
-`[1]` 열네 개의 스킬 · `[2]` **돈이 실제로 아껴지는 지점** · `[3]` 하지 못하는 것 · `[4]` 흔한 오해 · `[5]` 깊이 쓰기
+`[1]` 열다섯 개의 스킬 · `[2]` **돈이 실제로 아껴지는 지점** · `[3]` 하지 못하는 것 · `[4]` 흔한 오해 · `[5]` 깊이 쓰기
 
 ### 돈이 실제로 아껴지는 지점
 
@@ -263,7 +264,7 @@ HTML은 `design.md`의 값을 **읽어서** 그립니다. 손으로 옮겨 그�
 
 전체 프로토콜 → [`superforge-dev/references/autonomous-run.md`](./skills/superforge-dev/references/autonomous-run.md)
 
-### 열네 개를 넣어도 AI가 무거워지지 않는 이유
+### 열다섯 개를 넣어도 AI가 무거워지지 않는 이유
 
 AI의 컨텍스트에 항상 올라가는 것은 **각 스킬의 한 줄 설명뿐**입니다. 본문은 필요할 때 불러오고, 더 깊은 내용은 `references/`에 나눠 두었다가 필요할 때만 읽습니다.
 
