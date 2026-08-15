@@ -296,8 +296,20 @@ this entirely. Photoreal directions skip it always — those scenes are full-ble
 
 ## 8. Encode for scrubbing
 
-Scrubbing means setting `video.currentTime` from scroll. Two things matter and both are
-routinely gotten wrong.
+Scrubbing means setting `video.currentTime` from scroll — when you ship video at all.
+Several things matter here and every one of them is routinely gotten wrong.
+
+**There is a second delivery format, and on a short hero it is the better one: a numbered
+image sequence drawn to a canvas.** Frames decode from memory, so seek cost is not small
+but structurally absent — no keyframe distance, no GOP, no `seekable`, no byte-range, no
+iOS priming, no blob. The cost is bytes: on one measured build, 141 frames at 1440px WebP
+q71 came to 5.9 MB against 2.7 MB for the same clip as mp4, ~2×. Pay it with progressive
+loading — fetch frame 0 at high priority, paint it immediately, stream the rest at ~8
+concurrent, and draw the nearest loaded frame in the meantime, so the hero is interactive
+long before the sequence finishes.
+
+Rule of thumb: **under ~200 frames, ship frames; over that, ship mp4** and do the
+verification below. A 4-leg chain at 8s each is ~770 frames and belongs on mp4.
 
 **Seekability, not keyframe density, is what makes scrubbing work.** Many static hosts —
 including `python -m http.server` — don't serve HTTP byte-range requests, which pins
@@ -310,6 +322,19 @@ all-intra video.
 GOP rather than all-intra — all-intra bloats an 8s clip to ~25 MB, `-g 8` is ~8 MB and
 scrubs fine via blob.
 
+**Grade before you encode, not in CSS.** Generative video comes back with wildly
+inconsistent exposure, and a night or interior scene routinely lands unusably dark. Fix it
+once at the encode, where it costs nothing at runtime. Prefer a curve that holds the black
+point over a gamma lift — gamma raises the floor too and the result goes milky, which on a
+dusk exterior blows the sky at the same time it lifts the shadows:
+
+```
+-vf "curves=master='0/0 0.08/0.30 0.30/0.60 0.65/0.86 1/1',eq=saturation=1.10"
+```
+
+Measured on one build's night clip: mean YAVG 34.4 → 62.1 over the whole clip, 15.5 → 49.2
+over the last third, with the black point unmoved.
+
 ```bash
 ffmpeg -i src.mp4 -an -vf "unsharp=5:5:0.8:5:5:0.0" \
   -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p \
@@ -317,6 +342,23 @@ ffmpeg -i src.mp4 -an -vf "unsharp=5:5:0.8:5:5:0.0" \
 ```
 
 Same settings for every clip, for uniform quality.
+
+**Verify the encode instead of trusting the flag.** A clip that skipped this step looks
+identical in a player and scrubs three to ten times slower. Measured on one build: a hero
+that shipped with **one keyframe for 141 frames** and no faststart seeked at p50 30.2 ms /
+p90 51.4 ms, against 6.2 / 8.2 ms for a correctly encoded sibling. A 30 ms median seek caps
+the footage at ~33 fps while the page composites at 120 — the page is smooth and the film
+is not, and the eye reads the film.
+
+```bash
+ffprobe -v error -select_streams v:0 -show_entries frame=key_frame \
+  -of csv=p=0 clip.mp4 | grep -c '^1'      # want frames/8, not 1
+python3 -c "import sys;d=open(sys.argv[1],'rb').read(64);\
+  print('faststart' if d[4:8]==b'ftyp' and b'moov' in d else 'CHECK')" clip.mp4
+```
+
+And measure the thing that actually matters, in a real browser: 40 pseudo-random seeks,
+report p50/p90/max. Over ~15 ms at p90 and the footage cannot keep up with the page.
 
 **Mobile encodes only if the user opted in at §1.7:** the native 9:16 chain encoded 720
 wide, `-g 4` (twice the keyframes ≈ half the seek-decode work — phone seek cost scales
@@ -354,11 +396,35 @@ rail, `prefers-reduced-motion`, and phone hardening. Theme it with CSS variables
 (`--accent`, `--sw-bg`, `--sw-ink`); the visual identity comes from the clips, so the
 chrome stays quiet.
 
-**Pacing.** Per-section `scroll` overrides the default dwell; `linger` (0–1, keep ≤ 0.6)
-remaps time so the camera settles mid-scene exactly while the copy peaks, then picks up
-toward the seam — seam frames untouched, so `f(0)=0` and `f(1)=1`. Give the hero and
-finale a higher `scroll` plus some `linger`; keep transit scenes brisk. Prefer expressive
-motion in the *clip* and restraint in the *scrub mapping*; they compound.
+**Pacing.** Per-section `scroll` overrides the default dwell. `linger` (0–1, keep ≤ 0.6)
+remaps time within each beat:
+
+```
+v(u)  = u + k·sin(2πu)/(2π)        v(0) = 0,  v(1) = 1
+v'(u) = 1 + k·cos(2πu)             v'(0.5) = 1 − k,  v'(0) = v'(1) = 1 + k
+```
+
+At k = 0.5 the camera runs at half speed exactly where the headline is legible and 1.5×
+across the boundary. Beat boundaries are **fixed points**, so the remap can never shift
+which beat the visitor is reading — that property is the reason to use this shape rather
+than an ease.
+
+Two traps worth a test each: do not clamp the input into the last beat
+(`min(beats − ε, p·beats)` returns 0.9999999985 at p = 1 and the final frame is never
+drawn), and clamp `k < 1` (at k = 1 the derivative reaches 0 and the film stalls dead
+mid-beat).
+
+Give the hero and finale a higher `scroll` plus some `linger`; keep transit scenes brisk.
+Prefer expressive motion in the *clip* and restraint in the *scrub mapping*; they compound.
+
+**Never unmount the pinned copy.** Swapping beats with `if (!active) return null` destroys
+whatever the visitor had focused: tab to the hero CTA, scroll, and focus falls to `<body>`
+— a keyboard user is returned to the top of the tab order by the act of scrolling. Keep
+every beat mounted, cross-fade `opacity`, and mark the inactive ones `inert` +
+`aria-hidden` so exactly one is in the reading order. Better still, lift the CTA out of the
+beats entirely — one button that never moves and never remounts, rather than one per beat.
+`scrub-engine.js` handles its own copy layer correctly; this applies the moment you write
+your own, which most builds do.
 
 **On phones the engine adapts automatically** (coarse pointer or ≤860px): serves the
 mobile encodes when present, **coalesces seeks** so a fast flick can't queue a new
@@ -375,17 +441,49 @@ directions.
 
 ## 10. QA — verify the seams, don't eyeball the page
 
+- **First, prove the pin pins.** At 0/25/50/75/100% of the section, assert the pinned
+  element's `getBoundingClientRect()` has `top <= 1` and `bottom >= innerHeight - 1` —
+  whether it pins with `position: fixed` as `scrub-engine.js` does, or with
+  `position: sticky` as a hand-written copy layer usually does. Reading
+  the video or canvas proves it *painted*, not that anyone can *see* it — a released pin
+  scrolls the hero off screen while every other check in this section still passes. Then
+  walk the pin's ancestors and fail on any with a computed `overflow-y` other than
+  `visible`, or a `transform` / `filter` / `contain` that creates a containing block.
+- **Measure the exposure, do not eyeball it on your own monitor.** At each of the same five
+  positions, mean luminance of the decoded frame must clear ~12% of white. Below that the
+  hero reads as an empty black box to everyone not sitting in a dark room, and it will
+  still pass every seam check because both sides of the seam are equally dark.
+
+  ```bash
+  ffprobe -v error -f lavfi -i "movie=clip.mp4,signalstats" \
+    -show_entries frame_tags=lavfi.signalstats.YAVG -of csv=p=0 \
+    | awk '{s+=$1;n++} END {printf "mean YAVG %.1f (%.0f%% of white)\n", s/n, s/n/255*100}'
+  ```
+
 - **Screenshot just before and just after each seam.** The two frames must be
   near-identical. Judge by **composition, not raw PSNR** — a correctly frame-locked seam
   can read 18–25 dB from detail shimmer alone. A real mismatch shows as different
   composition or props, not as softness. If they pop, you used a still instead of a
   rendered frame (§6), or the crossfade band is too short.
+  **Screenshots lie about media.** Headless Chrome does not composite `<video>` into a CDP
+  screenshot — you get a black rectangle from a perfectly good clip. Run headful, or skip
+  the screenshot and read the pixels in-page with `ctx.drawImage(videoOrCanvas, …)` +
+  `getImageData`. And `page.screenshot({clip})` is **document**-relative: after scrolling,
+  `{x:0,y:0}` is the top of the page, not the top of the viewport. Use
+  `captureBeyondViewport: false` and no clip.
 - **Check the plan, not just the pixels.** At each seam, are the two anchors from the seam
   contract visible on both sides? Did the heading hold? Is the light still coming from the
   same side of the world? These are the failures that survive a clean PSNR.
 - Console clear, `video.seekable.end(0) > 0` (blob working), `currentTime` tracking scroll
   across each clip's band.
-- **Mobile.** Desktop-only build: sanity-check one phone viewport — loads, posters show,
+- **Focus survives a scroll.** Focus the hero CTA, scroll past it, assert the element is
+  still in the DOM and still `document.activeElement`.
+- **A canvas is a blank rectangle to a screen reader.** `role="img"` plus an `aria-label`
+  that describes the journey, and the beat copy in real DOM text — never baked into the
+  frames.
+- **Mobile.** Fail the build outright if the plan's `Mobile:` line still reads
+  `not asked` — §1.7 is a question with an answer, and an unanswered one is a defect, not a
+  default. Desktop-only build: sanity-check one phone viewport — loads, posters show,
   nothing overlaps. Opted-in mobile build: emulate a phone with CPU throttled 4–6× and
   scroll fast (should track without freezing); confirm the first scene shows immediately
   and the video takes over on scroll with no black flash (test iOS Safari specifically);
@@ -438,6 +536,12 @@ directions.
 
 **Page**
 
+- **The hero scrolls away instead of pinning** → an ancestor is a scroll container.
+  `overflow-x: hidden` is the usual culprit: it is invalid beside a visible `overflow-y`,
+  so the computed value becomes `hidden auto` and every descendant `position: sticky`
+  silently dies. Use `overflow-x: clip`, which clips identically and creates no scrollport.
+  `transform`, `filter`, `backdrop-filter`, `contain` and `will-change` on an ancestor do
+  the same thing by a different mechanism.
 - **Frozen video / stuck at frame 0** → `seekable=[0,0]`; the host isn't serving byte
   ranges. Blob URLs fix it; the engine already does.
 - **Huge files** → all-intra. Use `-g 8` plus blob.
