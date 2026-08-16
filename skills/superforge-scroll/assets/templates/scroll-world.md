@@ -6,7 +6,8 @@
 - **Subject:** [business + one-line pitch]
 - **Brand:** [name] · palette from `docs/brand.md` if it exists, otherwise listed in §0
 - **Scenes (N):** [5–7]
-- **Mobile:** [desktop only | desktop + native 9:16]
+- **Mobile:** [not asked | desktop only | desktop + native 9:16 | landscape crop, user approved YYYY-MM-DD]
+  — §10 fails the build while this still reads `not asked`.
 - **Plan approved by user:** [date] · **Storyboard approved:** [date] · **Previz approved:** [date]
 
 ---

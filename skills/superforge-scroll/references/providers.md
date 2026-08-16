@@ -233,6 +233,13 @@ is backend-independent and unchanged.
 
 ## 6. Getting local frames to a backend that wants URLs
 
+**Decide this with the user before §4, not during it.** Every option here publishes frames
+of their unreleased film to a URL a third party can fetch, and two of the three create a
+public surface that did not exist before. Ask which they want and get an explicit yes; a
+build that discovers this at the probe stops with money already committed to a plan it
+cannot execute. If the answer is no, the honest options are a provider with a first-party
+upload endpoint, or not using a URL-based backend at all.
+
 The seam method extracts frames from rendered video on your disk, and most of these APIs
 want a public URL. Three options, best first:
 
@@ -244,8 +251,9 @@ want a public URL. Three options, best first:
    instead of JSON.
 
 Whichever you use: these frames are **frames of the user's unreleased marketing film**.
-Prefer expiring URLs, use unguessable paths, and don't leave them in a public bucket
-after the build.
+Prefer expiring URLs, use unguessable paths, and delete them once the build is done — this
+is the mechanics of the consent decision at the top of this section, not a substitute for
+having made it.
 
 ---
 
