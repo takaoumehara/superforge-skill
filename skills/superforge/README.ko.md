@@ -1,70 +1,40 @@
 # ⚡ superforge
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
-[![Superforge](https://img.shields.io/badge/Superforge-11%20skills-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
 
 [English](README.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · **한국어**
 
-> **만들고 싶은 것을 한 줄로 말하면, 담당 스킬이 그 작업에 맞는 모델 위에서 바로 움직입니다.**
+> 작업 단계가 시작될 때 한 번만 호출하고, 이후에는 일반 피드백으로 이어갑니다.
 
----
+## 무엇인가요?
 
-## 🔰 이게 뭔가요?
+`superforge`는 14개의 `superforge-*` 전문 스킬로 연결하는 가벼운 입구입니다.
+요청을 Small / Medium / Large로 나누고, 필요할 때 주 담당 하나를 선택하며,
+검증과 출시 판단 단계를 유지합니다.
 
-큰 공방의 안내 데스크를 떠올려 보세요. 무엇을 만들고 싶은지 말하면, 모든 작업대를 아는 사람이 알맞은 자리로 안내하고 솜씨가 맞는 장인에게 일을 넘깁니다. 매번 가장 비싼 사람을 부르지는 않습니다.
+작은 수정마다 다시 호출할 필요는 없습니다. 작업 단계가 시작된 뒤에는 문구,
+CSS, 템플릿 수정도 기존 조건을 그대로 이어받습니다.
 
-`superforge`는 열두 개의 `superforge-*` 스킬을 위한 그 안내 데스크입니다. 요청을 읽고 목적지를 정하며, 에이전트를 띄우기 전에 하위 작업마다 모델 등급을 배정하고, 모든 단계가 파일을 남기도록 보장합니다.
+## 세 가지 진입점
 
----
-
-## 📐 시스템 구조
-
-```mermaid
-flowchart TD
-    U[👤 한 줄 요청] --> R{🧭 superforge}
-    R --> T[🎚️ 모델 등급 A / B / C / D]
-    R --> S1[💡 brain · biz · brand]
-    R --> S2[🎨 ui · dev · test]
-    R --> S3[🔥 a11y · roast · verify · ship · handoff]
-    S1 --> D[(🗂️ docs/)]
-    S2 --> D
-    S3 --> D
-```
-
-들어가는 것은 요청 하나, 나오는 것은 담당 스킬과 선택된 모델 등급, 그리고 `docs/`에 남는 파일입니다.
-
----
-
-## ✨ 강점
-
-### 🧭 되묻지 않고 배분합니다
-아이디어, 비즈니스, 브랜드, UI, 구현, 테스트, 디버깅, 접근성, 비평, 검증, 출시 판정, 인수인계까지 열두 개의 전문 스킬이 담당합니다. 목적지와 등급을 한 줄로 알린 뒤 바로 시작하고, 전혀 다른 두 경로가 모두 타당할 때만 확인을 요청합니다.
-
-### 🎚️ 배분 전에 하위 작업별 등급을 정합니다
-판단은 Opus 5, 물량은 Sonnet 5, 잡무는 Haiku 4.5, 무인 장시간 실행은 Fable 5, 저장소를 건드리지 않는 대량 텍스트는 로컬 `gemini` CLI로 넘깁니다. 혹시 몰라서 세션 기본 모델에 그대로 두는 일은 없습니다.
-
-### 🗂️ 결론이 대화 안에만 남지 않습니다
-각 스킬은 보고하기 전에 산출물을 `docs/`에 씁니다. `/clear`를 하든 모델을 바꾸든 다음 날 아침에 다시 열든, 이미 정해진 것을 다시 논쟁할 필요가 없습니다.
-
----
-
-## 🔄 도입 전 / 도입 후
-
-| | 도입 전 | 도입 후 |
+| 진입점 | 사용 시점 | 기본 동작 |
 |---|---|---|
-| 시작할 때 | "어디부터 손대지?" | 한 문장이면 한 줄로 배분 |
-| 모델 선택 | 모든 에이전트가 세션 기본값 | 하위 작업마다 등급을 명시 |
-| 잡무 비용 | 판단용 모델 단가로 처리 | Haiku 4.5 또는 Anthropic 밖에서 |
-| `/clear` 이후 | 정해진 결정을 다시 논의 | `docs/`에서 다시 읽기 |
+| `/superforge quick` | 범위가 한정된 수정 | 인라인 처리, 전문 스킬·docs·log 없음 |
+| `/superforge build` | 새 기능이나 의미 있는 변경 | 한 번에 주 담당 하나만 사용 |
+| `/superforge ship` | 공개 또는 유료 출시 판단 | 먼저 검증하고, 그다음 출시 가능 여부 판단 |
 
----
+모드 없이 `/superforge`를 호출하면 가장 작은 안전한 진입점을 고릅니다. 매
+메시지마다 반복할 필요가 없습니다.
 
-## 🚀 설치 및 사용법
+## 더 가벼운 이유
 
-### 🖥️ 열네 개를 한 번에 설치 (처음 한 번만)
+- 라우터는 최대 100줄이며 모델 목록을 포함하지 않습니다.
+- intake, 위임, 모델, 산출물, 로그 지침은 필요할 때만 읽습니다.
+- Small 작업에는 조정 비용을 추가하지 않습니다.
+- UI/디자인 스킬을 자동으로 겹쳐 쓰지 않습니다.
+- 로그는 반복된 정정, 실패, 재시도, 출시만 기록합니다.
 
-저장소를 클론하고 설치 스크립트를 실행하면 됩니다. 이 머신의 모든 스킬 디렉터리를 찾아 열네 개를 한 번에 링크합니다(Claude Code / Codex CLI / Gemini CLI / Antigravity).
+## 설치
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -72,18 +42,7 @@ cd superforge-skill
 ./install.sh
 ```
 
-옵션 전체와 스킬 하나만 설치하는 방법, claude.ai 업로드 절차는 [스위트 README](../../README.ko.md)에 있습니다.
+큰 작업 단계는 `/superforge build`로 시작합니다. 담당 영역을 이미 알고 있다면
+전문 스킬을 직접 호출해도 됩니다.
 
-### ⌨️ 호출하기
-
-```
-/superforge
-```
-
-작업을 시작하기 전에 목적지와 모델 등급이 한 줄로 표시됩니다.
-
----
-
-## 📄 라이선스
-
-MIT — [LICENSE](../../LICENSE)를 참고하세요. 스킬 본문은 [SKILL.md](SKILL.md)에 있고, 필요할 때만 읽는 규칙은 [references/intake.md](references/intake.md), [references/artifacts.md](references/artifacts.md), [references/wiring.md](references/wiring.md)에 있습니다. 스위트 전체 소개는 [superforge-skill](../../README.ko.md)을 보세요.
+MIT — [LICENSE](../../LICENSE). 전체 소개: [superforge-skill](../../README.ko.md).
