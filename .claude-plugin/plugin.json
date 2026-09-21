@@ -1,7 +1,7 @@
 {
   "name": "superforge-skills",
-  "version": "4.7.0",
-  "description": "Say what you want to build in one sentence. Fifteen superforge skills take it from idea to release gate with model tiering and file persistence, plus five Claude Code workflows that enforce the parts prose cannot.",
+  "version": "5.0.0",
+  "description": "One thin router chooses among fourteen product specialists. Start a meaningful phase once, continue follow-up edits normally, and verify before release.",
   "author": {
     "name": "Takao Umehara",
     "url": "https://github.com/takaoumehara/superforge-skill"

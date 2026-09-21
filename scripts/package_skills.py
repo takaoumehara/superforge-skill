@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Packages superforge skills into standalone .zip archives in dist/, ready for
-claude.ai's Customize -> Skills upload.
+Packages superforge skills into .zip archives in dist/. The `--claude-web`
+bundle is the current one-upload Claude.ai release path.
 
   python3 scripts/package_skills.py              # everything
   python3 scripts/package_skills.py skills/superforge-dev
@@ -32,12 +32,11 @@ SKILLS_DIR = os.path.join(REPO_DIR, "skills")
 WORKFLOWS_DIR = os.path.join(REPO_DIR, "workflows")
 DIST_DIR = os.path.join(REPO_DIR, "dist")
 
-# claude.ai rejects a skill upload outright if this field exceeds 1024 chars —
-# not documented anywhere, only discovered by an actual upload bouncing. Warn
-# well before the cliff: our own folding here is a close approximation of
-# claude.ai's YAML parsing, not a byte-identical implementation of it, and a
-# description sitting right at 1024 could tip either way on a parser we don't
-# control. 950 leaves room for that uncertainty and for normal editing drift.
+# The per-skill archive command retains a historical backend guard discovered
+# through an upload rejection. Anthropic's current public guide is stricter:
+# 200 characters. The supported `--claude-web` release path enforces that
+# published limit on its only top-level entrypoint. Nested specialist GUIDE.md
+# files are resources, not independently registered skills.
 DESCRIPTION_LIMIT = 1024
 DESCRIPTION_WARN_AT = 950
 
@@ -74,7 +73,8 @@ def check_description_lengths():
     """Refuses to package anything over the limit, and flags anything close to
     it. This exists because the limit was found the hard way — an upload
     bounced with 'field description in SKILL.md must be at most 1024
-    characters' — and nothing before this caught it."""
+    characters' — and nothing before this caught it. The combined Claude Web
+    package applies the current published 200-character limit separately."""
     problems = []
     for f in sorted(glob_skill_md()):
         text = open(f, encoding="utf-8").read()
