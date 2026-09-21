@@ -20,6 +20,8 @@ superforge — Redesign onboarding so a first-time user can publish in three min
 
 You do **not** need to know the specialist names. The router reads the task, inspects the project, classifies its size, and selects the primary specialist. If another specialist becomes necessary, it adds it only at that boundary.
 
+You also do not need to know which library makes an experience possible. Describe the outcome; in a substantial UI phase with the technique still open, Superforge checks the existing stack, scans current options from official sources once, explains the choice, and implements it. If the native platform is the better answer, it adds no dependency.
+
 Keep giving normal feedback after that:
 
 ```text

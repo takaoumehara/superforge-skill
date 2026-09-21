@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "10.0"
+  version: "10.1"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -77,6 +77,18 @@ honestly → **`references/aesthetic-direction.md`**.
 
 Three references beat one: one produces imitation, three force you to find the
 principle they share.
+
+### The outcome is enough; tool discovery is agent work
+
+Do not require the user to know a library name or add a phrase such as “research
+the latest options.” When a new Medium or Large UI phase leaves the technique
+open, inspect the existing stack, then read **`references/library-discovery.md`**
+and perform one bounded fresh scan before naming or installing anything. Compare
+a native or already-installed approach with current maintained options, state
+the selection reason and cost, and—when the request is to build or change the
+product—continue through implementation and evidence. Do not stop at a
+recommendation list. A bounded follow-up does not reopen discovery unless its
+requirements invalidate the choice.
 
 ---
 
@@ -197,6 +209,12 @@ leaves a designer exactly where they started. Names live in one dated file,
 other way, because some capabilities only became askable once the technology
 existed.
 
+When the user delegates the choice or asks for autonomous implementation, show
+the three positions compactly, name the recommendation, adopt it, and continue
+in the same run. Waiting for the user to repeat “use your recommendation” adds
+no information. Pause only when the tradeoff changes the goal or crosses a stop
+condition in the router.
+
 **Propose from a menu, not from memory.** `references/effect-vocabulary.md`
 holds what is actually possible — matter that flows, swarms that assemble,
 things that grow differently on every load, space you move through, and sound
@@ -305,6 +323,10 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   asking what it makes askable, with two guards against solutions looking for
   problems. Stops at the browser and the app bundle — installations and sensors
   belong to an interactive-experience skill.
+
+- **`references/library-discovery.md`** — the default outcome-to-tool loop:
+  inspect the repository, compare native and current maintained choices using
+  official evidence, explain the decision, implement it, and verify its real cost.
 
 - **`references/effect-vocabulary.md`** — the menu the proposal step needs:
   around thirty effects across graphics, sound and native surfaces, each named

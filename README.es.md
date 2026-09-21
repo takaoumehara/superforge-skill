@@ -20,6 +20,8 @@ superforge — Rediseña el onboarding para que una persona nueva pueda publicar
 
 No necesitas conocer los nombres de las skills especializadas. El router lee la petición y el proyecto, clasifica el tamaño del trabajo y elige la especialidad principal. Solo añade otra cuando existe una dependencia real.
 
+Tampoco necesitas saber qué biblioteca hace posible una experiencia. Describe el resultado: en una fase importante de UI con la técnica aún abierta, Superforge revisa la base existente, consulta una vez las opciones actuales en fuentes oficiales, explica la elección y la implementa. Si la plataforma nativa es la mejor respuesta, no añade dependencias.
+
 Después, continúa con instrucciones normales:
 
 ```text
