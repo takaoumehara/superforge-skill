@@ -167,6 +167,7 @@ def check_zip(errors: list[str], zip_path: Path) -> None:
                 "superforge/PROVENANCE.md",
                 "superforge/LICENSE",
                 "superforge/references/claude-web.md",
+                "superforge/specialists/superforge-ui/references/library-discovery.md",
             }
             required.update(
                 f"superforge/specialists/{name}/GUIDE.md" for name in SPECIALISTS

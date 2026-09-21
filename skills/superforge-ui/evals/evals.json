@@ -15,6 +15,39 @@
           "description": "Produces docs/design.html style guide and component preview."
         }
       ]
+    },
+    {
+      "id": 2,
+      "category": "library-discovery",
+      "prompt": "superforge。このポートフォリオサイトを、かっこよくモダンで印象に残るものに作り直して。細かい技術は分からないので、あとは任せます。",
+      "expected_output": "The agent derives a concrete visual direction, checks the repository, researches current official options only where tooling adds value, explains the chosen approach, then implements and verifies it without asking the user to name a library.",
+      "assertions": [
+        {"name": "researches_current_options_without_prompting", "description": "Fresh official research happens automatically before adding a version-dependent dependency."},
+        {"name": "explains_selection_reason", "description": "The chosen native, existing, or external approach is explained against its nearest alternative."},
+        {"name": "implements_when_build_was_requested", "description": "Because the prompt requests a redesign, the run proceeds through implementation and evidence rather than stopping at recommendations."}
+      ]
+    },
+    {
+      "id": 3,
+      "category": "library-discovery",
+      "prompt": "料金ページを今っぽく高級感のある体験にして。数字やスクロールの動きも含めて、使う技術はお任せします。",
+      "expected_output": "The agent compares native and current maintained options for numeric and scroll motion, selects the smallest coherent toolset, implements it, and verifies mobile, performance, accessibility, and reduced motion.",
+      "assertions": [
+        {"name": "researches_current_options_without_prompting", "description": "The agent checks current official sources without requiring the user to request research."},
+        {"name": "explains_selection_reason", "description": "The answer states why each selected tool beats the native or existing alternative for this surface."},
+        {"name": "implements_when_build_was_requested", "description": "The agent installs only justified dependencies and completes the requested implementation."}
+      ]
+    },
+    {
+      "id": 4,
+      "category": "library-discovery",
+      "prompt": "このカード一覧を、触りたくなるような奥行きのあるUIにしてください。ライブラリのことは分からないので判断も実装も任せます。",
+      "expected_output": "The agent evaluates CSS/pointer transforms before tilt or 3D libraries, researches current candidates if a dependency is justified, implements the choice with touch and reduced-motion fallbacks, and records the tradeoff.",
+      "assertions": [
+        {"name": "researches_current_options_without_prompting", "description": "Any proposed external library is checked against fresh official evidence before selection."},
+        {"name": "explains_selection_reason", "description": "The selected technique is justified by fit, cost, maintenance, and fallback behavior."},
+        {"name": "implements_when_build_was_requested", "description": "The agent implements the chosen interaction instead of returning only a library list."}
+      ]
     }
   ]
 }

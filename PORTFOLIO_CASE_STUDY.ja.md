@@ -147,6 +147,12 @@ superforge — 初めての利用者が3分で公開まで進めるよう、オ�
 
 ここでは`superforge`を再指定しません。新しい機能に取りかかる、セキュリティ監査を始める、公開判定へ進むといった大きな区切りで改めて呼びます。
 
+### ライブラリ名も、「最新を調べて」も不要
+
+ユーザーは作りたい体験だけを伝えます。実現方法が決まっていないMedium／LargeのUI制作では、AIが既存構成とブラウザ標準を基準に、公式情報から現在の候補を一度だけ調べます。最大3候補に絞り、選定理由、最も近い代替案、導入コスト、未対応環境での代替表現を説明したうえで、そのまま実装と検証まで進みます。
+
+この調査手順はUIスキル本体へ列挙せず、必要な場合だけ読む`library-discovery.md`へ分離しました。新しいライブラリが増えてもThin Routerの入力は増えず、小さな修正では再調査も発生しません。
+
 ### 専門スキル名を知らなくても動く
 
 ```text
@@ -220,6 +226,8 @@ Thin Routerの動作ルールは`check_superforge_router.py`で静的に検査�
 - 記録済み5ケースの判定と期待値が一致する
 
 5ケースのプロンプトをモデルへ再実行するテストではありません。
+
+ライブラリ選定には別の契約テストを置き、目的だけを伝える3ケースで、自動調査、選定理由の説明、制作依頼時の実装継続が指示されていることを確認します。
 
 公開資料には別の静的検査を用意しました。5言語のREADMEでは、必須のモード、作業規模、専門スキル名が文字列として含まれることを確認します。10枚のSVGに固定モデル名がないこと、ポートフォリオ資料に実測と制約があることも検査対象です。翻訳の意味や文章品質までは判定しません。
 
@@ -336,6 +344,7 @@ Superforgeは、戦略・デザイン・実装・検証・公開を14の専門�
 git show d6d0665:skills/superforge/SKILL.md | wc -l -w
 git show HEAD:skills/superforge/SKILL.md | wc -l -w
 python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
 python3 scripts/generate_public_diagrams.py
 python3 scripts/package_skills.py --claude-web
 python3 scripts/check_public_release.py

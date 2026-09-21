@@ -13,6 +13,10 @@ name-free**:
 
 > **Names live here and nowhere else, with a date on them.**
 
+This is a curated shelf, not a complete market scan. When a real task leaves
+the tool choice open, follow `library-discovery.md`; it decides whether this
+shelf is enough or fresh discovery is required.
+
 One file to check, one date to compare against, and everything else in this
 skill stays durable. It is the same arrangement `superforge-ship/references/
 legal-triggers.md` uses for regimes that change, and the same one

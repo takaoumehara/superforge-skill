@@ -7,7 +7,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "5.0"
+  version: "5.1"
 compatibility: Standalone. Uses installed superforge-* skills when available.
 ---
 
@@ -58,7 +58,7 @@ When uncertain, choose the smaller route until evidence requires promotion.
 | Release readiness, legal/ops checks | `superforge-ship` |
 | Session continuity | `superforge-handoff` |
 
-Announce the entry, size, and current route in one line, then work. Ask about the route only
+Treat the desired outcome as sufficient input; do not require a specialist or technology name. Announce the entry, size, and current route in one line, then work. Ask about the route only
 when two materially different goals remain plausible.
 
 ## 4. Enforce the skill budget
