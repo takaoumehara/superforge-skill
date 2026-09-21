@@ -309,13 +309,19 @@ def rewrite_claude_web_paths(content):
     )
 
 
+def zip_arcname(arcname):
+    """Return the forward-slash path required by the ZIP file format."""
+    return arcname.replace("\\", "/")
+
+
 def write_claude_web_file(archive, src, arcname):
     """Write a source file, adapting Markdown paths to the bundle layout."""
     if src.lower().endswith(".md"):
-        content = open(src, encoding="utf-8").read()
-        archive.writestr(arcname, rewrite_claude_web_paths(content))
+        with open(src, encoding="utf-8") as source:
+            content = source.read()
+        archive.writestr(zip_arcname(arcname), rewrite_claude_web_paths(content))
     else:
-        archive.write(src, arcname)
+        archive.write(src, zip_arcname(arcname))
 
 
 def collect(folder, prefix):
