@@ -1,70 +1,40 @@
 # ⚡ superforge
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)](https://claude.com/claude-code)
-[![Superforge](https://img.shields.io/badge/Superforge-11%20skills-6C5CE7)](https://github.com/takaoumehara/superforge-skill)
 
 [English](README.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md) · **Español** · [한국어](README.ko.md)
 
-> **Di qué quieres construir: la especialista adecuada empieza a trabajar, sobre el modelo que esa parte del trabajo realmente necesita.**
+> Inicia una fase una vez. Continúa con indicaciones normales.
 
----
+## Qué es
 
-## 🔰 ¿Qué es esto?
+`superforge` es la puerta de entrada ligera a catorce skills especializadas.
+Clasifica la petición como Small, Medium o Large, elige una sola especialista
+principal cuando hace falta y conserva las puertas de verificación y publicación.
 
-Imagina la recepción de un taller grande. Cuentas qué quieres construir, alguien que conoce todos los bancos de trabajo te lleva al correcto y le pasa el encargo a la artesana cuyo oficio encaja, en vez de llamar siempre a la más cara.
+No hay que invocarla para cada corrección. Una vez iniciada la fase, los cambios
+de texto, CSS o plantillas continúan con las mismas condiciones.
 
-`superforge` es esa recepción para las diez skills `superforge-*`. Lee la petición, decide el destino, asigna un nivel de modelo a cada subtarea antes de lanzar ningún agente y se asegura de que cada paso deje un archivo detrás.
+## Tres entradas
 
----
-
-## 📐 Arquitectura
-
-```mermaid
-flowchart TD
-    U[👤 Petición de una línea] --> R{🧭 superforge}
-    R --> T[🎚️ Nivel de modelo A / B / C / D]
-    R --> S1[💡 brain · biz · brand]
-    R --> S2[🎨 ui · dev · test]
-    R --> S3[🔥 a11y · roast · verify · ship · handoff]
-    S1 --> D[(🗂️ docs/)]
-    S2 --> D
-    S3 --> D
-```
-
-Entra una petición; sale una skill especialista, un nivel de modelo elegido y un archivo en `docs/`.
-
----
-
-## ✨ Puntos clave
-
-### 🧭 Deriva en vez de preguntar
-Doce especialistas cubren idea, negocio, marca, UI, implementación, pruebas, depuración, accesibilidad, crítica, verificación, preparación para publicar y traspaso. El destino y el nivel se anuncian en una línea y el trabajo empieza. Solo se pide confirmación cuando dos caminos genuinamente distintos son igual de razonables.
-
-### 🎚️ Un nivel por subtarea, decidido antes de lanzar agentes
-El juicio va a Opus 5, el volumen a Sonnet 5, la rutina a Haiku 4.5, las ejecuciones largas sin supervisión a Fable 5, y el texto masivo que no toca el repositorio a la CLI local `gemini`. Nada se queda en el modelo por defecto de la sesión «por si acaso».
-
-### 🗂️ Ninguna conclusión vive solo en el chat
-Cada skill escribe su artefacto en `docs/` antes de informar, así que `/clear`, un cambio de modelo o simplemente el día siguiente no te cuestan nada de lo ya decidido.
-
----
-
-## 🔄 Antes / Después
-
-| | Antes | Después |
+| Entrada | Cuándo usarla | Comportamiento predeterminado |
 |---|---|---|
-| Al arrancar | «¿Por dónde empiezo?» | Una frase, derivada en una línea |
-| Elección de modelo | Todos los agentes en el modelo por defecto | Un nivel por subtarea, anunciado |
-| Trabajo rutinario | Facturado a precio de modelo de juicio | Haiku 4.5, o fuera de Anthropic |
-| Después de `/clear` | Se rediscute lo ya decidido | Se relee desde `docs/` |
+| `/superforge quick` | Corrección acotada | En línea; sin especialista, docs ni log |
+| `/superforge build` | Nueva función o cambio relevante | Una especialista principal cada vez |
+| `/superforge ship` | Publicación pública o de pago | Primero verificar; después decidir si se publica |
 
----
+`/superforge` sin modo elige la entrada segura más pequeña. No hace falta
+repetirlo en cada mensaje.
 
-## 🚀 Instalación y uso
+## Por qué consume menos
 
-### 🖥️ Instala las catorce skills (una sola vez)
+- El router tiene como máximo 100 líneas y no contiene un catálogo de modelos.
+- Intake, delegación, modelos, artefactos y logs se leen solo cuando hacen falta.
+- El trabajo Small no crea coordinación adicional.
+- Las skills de UI/diseño son alternativas, no una pila automática.
+- El log registra correcciones repetidas, fallos, reintentos y publicaciones.
 
-Clona el repositorio y ejecuta el instalador. Enlaza las catorce skills en todos los directorios de skills de tu máquina (Claude Code, Codex CLI, Gemini CLI, Antigravity).
+## Instalación
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill
@@ -72,18 +42,7 @@ cd superforge-skill
 ./install.sh
 ```
 
-Todas las opciones, la instalación de una sola skill y la ruta de subida a claude.ai están en el [README de la suite](../../README.es.md).
+Empieza una fase importante con `/superforge build`, o llama directamente a la
+especialista si ya conoces el dominio.
 
-### ⌨️ Invócala
-
-```
-/superforge
-```
-
-Antes de ponerse a trabajar anuncia en una línea el destino y el nivel de modelo.
-
----
-
-## 📄 Licencia
-
-MIT — consulta [LICENSE](../../LICENSE). El cuerpo de la skill está en [SKILL.md](SKILL.md), y las reglas que carga bajo demanda en [references/intake.md](references/intake.md), [references/artifacts.md](references/artifacts.md) y [references/wiring.md](references/wiring.md). Visión general de la suite: [superforge-skill](../../README.es.md).
+MIT — consulta [LICENSE](../../LICENSE). Vista general: [superforge-skill](../../README.es.md).

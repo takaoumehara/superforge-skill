@@ -1,17 +1,17 @@
 # Wiring — Delegating to Installed Skills
 
-A superforge skill owns the **process**: the order of work, the quality bar, the
-model tier, and the artifact it must leave behind. It does not need to own
-every piece of domain knowledge. Where a sharper, deeper skill is already
-installed, call it and keep ownership of the outcome.
+A superforge specialist owns its **process**: the order of work, the quality
+bar, and the outcome. It does not need to own every piece of domain knowledge.
+Where a sharper, deeper skill is already installed, call it without turning
+one primary route into a stack of overlapping generalists.
 
 ## The rule
 
-1. Do the superforge process (intake → decide → dispatch → verify → write artifact).
+1. Follow the active phase and the size chosen by the thin router.
 2. At the step where a specialist would do better, **invoke it** rather than
    improvising.
-3. Take its output back into the superforge artifact. The specialist's output is an
-   input, not the deliverable.
+3. Take its output back into the active deliverable. Write a durable artifact
+   only when `references/artifacts.md` requires one.
 4. If the named skill is not installed, do the step yourself. Never block on a
    missing skill, and never tell the user to go install something mid-run.
 
@@ -196,5 +196,5 @@ first; ship assumes it passed.
   not a deliverable. Use it, then report what changed.
 - **Chaining specialists without a decision in between.** Each hop must
   narrow the work. If two skills would do the same step, pick one.
-- **Losing the artifact.** However many specialists ran, the superforge skill still
-  owes its `docs/` file.
+- **Losing durable state.** When the artifact contract is triggered, update the
+  relevant current-state file. Otherwise the code and tests are the artifact.

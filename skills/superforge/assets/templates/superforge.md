@@ -1,13 +1,14 @@
-# superforge — project settings
+# superforge — current project settings
 
-> Written by: superforge · Last updated: {{DATE}}
+> Last updated: {{DATE}}
 
 ## Language
-会話: {{CONVERSATION_LANG}}
-docs/ のファイル: {{ARTIFACT_LANG}}
+Conversation: {{CONVERSATION_LANG}}
+Artifacts: {{ARTIFACT_LANG}}
 
-## Pinned by the user
+## Tools
+Interactive: {{INTERACTIVE_TOOL}}
+Async agent: {{ASYNC_AGENT_OR_NONE}}
+
+## Pinned constraints
 {{USER_CONSTRAINTS}}
-
-## Router History
-- {{TIMESTAMP}}: {{ACTION_DESCRIPTION}}

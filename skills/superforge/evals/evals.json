@@ -1,0 +1,76 @@
+{
+  "skill_name": "superforge",
+  "grading": "behavior-and-structure",
+  "what_this_measures": "Whether the router avoids orchestration overhead for bounded work while preserving specialist routing and release gates.",
+  "evals": [
+    {
+      "eval_id": 0,
+      "eval_name": "small-css-fix-stays-inline",
+      "prompt": "前回の条件は維持。Template 4 の緑と青の左マージンだけ揃えて。ほかは変えないで。",
+      "baseline_2026_09_21": "Stayed inline with no docs/log, but still named superforge-ui for a two-line fix.",
+      "post_change_2026_09_21": "Quick + Small, inline, no specialist, docs, or run log.",
+      "observed_2026_09_21": {"mode": "quick", "size": "Small", "primary_specialists": [], "new_docs": false, "run_log": false},
+      "expected_mode": "quick",
+      "expected_size": "Small",
+      "max_primary_specialists": 0,
+      "allow_new_docs": false,
+      "allow_run_log": false
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "medium-ui-batch-picks-one-specialist",
+      "prompt": "既存LPの5テンプレートについて、余白と本文開始位置の不一致をまとめて直し、最後にpreviewを見せて。",
+      "baseline_2026_09_21": "Selected superforge-ui + superforge-dev + superforge-verify, subagents, docs/superforge.md, and a run log.",
+      "post_change_2026_09_21": "Build + Medium, selected only superforge-ui; no docs or run log.",
+      "observed_2026_09_21": {"mode": "build", "size": "Medium", "primary_specialists": ["superforge-ui"], "new_docs": false, "run_log": false},
+      "expected_mode": "build",
+      "expected_size": "Medium",
+      "expected_primary_specialist": "superforge-ui",
+      "max_primary_specialists": 1,
+      "allow_new_docs": false,
+      "allow_run_log": false
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "follow-up-does-not-restart-router",
+      "prompt": "同じ作業フェーズの続きです。Template 9 の03と04だけ、画像幅とタイプ開始位置を統一して。",
+      "baseline_2026_09_21": "Stayed inline with no docs/log, but re-selected superforge-ui instead of explicitly continuing the active phase.",
+      "post_change_2026_09_21": "Quick + Small continuation, no specialist, docs, or run log.",
+      "observed_2026_09_21": {"mode": "quick", "size": "Small", "primary_specialists": [], "new_docs": false, "run_log": false},
+      "expected_mode": "quick",
+      "expected_size": "Small",
+      "max_primary_specialists": 0,
+      "allow_new_docs": false,
+      "allow_run_log": false
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "large-feature-sequences-specialists",
+      "prompt": "新しいチケット販売機能を設計から実装、テストまで一気に進めたい。",
+      "baseline_2026_09_21": "Selected four specialists and mandatory docs/log; sequencing was implied but no one-at-a-time budget existed.",
+      "post_change_2026_09_21": "Build + Large, sequenced UI, dev, test, and verify one phase at a time.",
+      "observed_2026_09_21": {"mode": "build", "size": "Large", "sequence": ["superforge-ui", "superforge-dev", "superforge-test", "superforge-verify"], "max_primary_specialists_at_once": 1, "new_docs": true, "run_log": false, "verification_gate": true},
+      "expected_mode": "build",
+      "expected_size": "Large",
+      "max_primary_specialists_at_once": 1,
+      "requires_verification_gate": true,
+      "allow_new_docs": true,
+      "allow_run_log": false
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "release-enters-verify-then-ship",
+      "prompt": "/superforge ship この状態で一般公開と課金を開始してよいか判定して。",
+      "baseline_2026_09_21": "Routed directly to superforge-ship, omitted superforge-verify, and named the wrong artifact docs/ship.md.",
+      "post_change_2026_09_21": "Ship + Large, sequenced superforge-verify before superforge-ship and logged the verdict.",
+      "observed_2026_09_21": {"mode": "ship", "size": "Large", "sequence": ["superforge-verify", "superforge-ship"], "max_primary_specialists_at_once": 1, "new_docs": true, "run_log": true, "verification_gate": true},
+      "expected_mode": "ship",
+      "expected_size": "Large",
+      "expected_sequence": ["superforge-verify", "superforge-ship"],
+      "max_primary_specialists_at_once": 1,
+      "requires_verification_gate": true,
+      "allow_new_docs": true,
+      "allow_run_log": true
+    }
+  ]
+}
