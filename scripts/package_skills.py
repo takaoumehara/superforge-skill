@@ -245,6 +245,11 @@ folder only when the current phase reaches that boundary. Claude Code dynamic
 workflows are unavailable here; use the complete prose procedure in the guide.
 """
 
+CLAUDE_WEB_RESOURCE_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9_/-])(?:skills/)?"
+    r"(superforge-[a-z-]+/references/)\s*([A-Za-z0-9_./-]+\.md)"
+)
+
 CLAUDE_WEB_README = """# Superforge for Claude.ai
 
 This is the single-upload Claude.ai edition of Superforge. It contains the thin
@@ -283,7 +288,8 @@ scripts only when its instructions require them. Never preload all specialists.
 - Specialist `SKILL.md` files are named `GUIDE.md` so the ZIP remains one skill.
 - Test fixtures, caches, repository metadata, and Claude Code workflows are not
   shipped.
-- Specialist reference paths remain relative to each specialist folder.
+- A specialist's own files keep their relative layout. Cross-specialist
+  resource paths are normalized to `specialists/<name>/...` at build time.
 - `PROVENANCE.md` identifies the exact source revision. The ZIP does not update
   itself; upload a newly generated archive to upgrade it.
 
@@ -294,6 +300,28 @@ If Claude does not invoke Superforge automatically, start the phase with
 keep the plan and evidence contract, explain the unavailable operation, and ask
 for the smallest missing input rather than claiming it ran.
 """
+
+
+def rewrite_claude_web_paths(content):
+    """Make suite-internal resource paths resolve from the bundled skill root."""
+    return CLAUDE_WEB_RESOURCE_PATTERN.sub(
+        lambda match: f"specialists/{match.group(1)}{match.group(2)}", content
+    )
+
+
+def zip_arcname(arcname):
+    """Return the forward-slash path required by the ZIP file format."""
+    return arcname.replace("\\", "/")
+
+
+def write_claude_web_file(archive, src, arcname):
+    """Write a source file, adapting Markdown paths to the bundle layout."""
+    if src.lower().endswith(".md"):
+        with open(src, encoding="utf-8") as source:
+            content = source.read()
+        archive.writestr(zip_arcname(arcname), rewrite_claude_web_paths(content))
+    else:
+        archive.write(src, zip_arcname(arcname))
 
 
 def collect(folder, prefix):
@@ -376,12 +404,12 @@ def package_claude_web():
                 relative.startswith("README") and relative.endswith(".md")
             ):
                 continue
-            archive.write(src, arcname)
+            write_claude_web_file(archive, src, arcname)
             file_count += 1
 
         sources = os.path.join(REPO_DIR, "SOURCES.md")
         if os.path.isfile(sources):
-            archive.write(sources, "superforge/SOURCES.md")
+            write_claude_web_file(archive, sources, "superforge/SOURCES.md")
             file_count += 1
 
         license_path = os.path.join(REPO_DIR, "LICENSE")
@@ -398,12 +426,14 @@ def package_claude_web():
                 if relative == "SKILL.md":
                     relative = "GUIDE.md"
                 arcname = os.path.join("superforge", "specialists", name, relative)
-                archive.write(src, arcname)
+                write_claude_web_file(archive, src, arcname)
                 file_count += 1
 
         archive.writestr(
             "superforge/SKILL.md",
-            router.rstrip() + CLAUDE_WEB_ROUTER_FALLBACK,
+            rewrite_claude_web_paths(
+                router.rstrip() + CLAUDE_WEB_ROUTER_FALLBACK
+            ),
         )
         archive.writestr("superforge/README-WEB.md", CLAUDE_WEB_README)
         archive.writestr(
