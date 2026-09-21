@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
 Packages superforge skills into standalone .zip archives in dist/, ready for
-claude.ai's Settings -> Capabilities -> Skills upload.
+claude.ai's Customize -> Skills upload.
 
   python3 scripts/package_skills.py              # everything
   python3 scripts/package_skills.py skills/superforge-dev
+  python3 scripts/package_skills.py --claude-web # one complete Superforge upload
 
 Output is .zip, not .skill. claude.ai's own docs say only "upload a ZIP file"
 and never mention .skill; on macOS, Finder does not associate .skill with an
@@ -216,6 +217,84 @@ def write_zip(out_path, files, prov_name, prov_note, prefix=""):
 # the reference packager excludes it the same way.
 ROOT_EXCLUDE_DIRS = {"evals", "__pycache__", "node_modules"}
 
+SPECIALIST_NAMES = (
+    "superforge-brain",
+    "superforge-biz",
+    "superforge-brand",
+    "superforge-roast",
+    "superforge-dev",
+    "superforge-ui",
+    "superforge-scroll",
+    "superforge-a11y",
+    "superforge-test",
+    "superforge-debug",
+    "superforge-secure",
+    "superforge-verify",
+    "superforge-ship",
+    "superforge-handoff",
+)
+
+CLAUDE_WEB_ROUTER_FALLBACK = """
+
+## Claude.ai bundle fallback
+
+This archive exposes one top-level skill. After selecting a route, read only
+`specialists/<skill-name>/GUIDE.md` and the files that guide explicitly needs.
+Do not scan every specialist. Resolve another Superforge route from the sibling
+folder only when the current phase reaches that boundary. Claude Code dynamic
+workflows are unavailable here; use the complete prose procedure in the guide.
+"""
+
+CLAUDE_WEB_README = """# Superforge for Claude.ai
+
+This is the single-upload Claude.ai edition of Superforge. It contains the thin
+router plus fourteen specialist guides, while preserving progressive disclosure.
+
+## Install
+
+1. Open **Customize → Skills** in Claude.ai.
+2. Click **+**, choose **Create skill**, then **Upload a skill**.
+3. Upload `superforge-claude-web.zip` and enable Superforge.
+4. Start a meaningful phase with `superforge — <the outcome you want>`.
+
+You do not need to name a specialist. Continue bounded feedback normally without
+repeating `superforge`; invoke it again when the goal or phase changes.
+
+## Browser limits
+
+Claude.ai does not provide Claude Code's dynamic workflow runtime. Those workflow
+files are intentionally absent. The bundled specialist guides include prose
+fallbacks, but commands that require local repositories, CLIs, credentials, or
+device testing still depend on the tools available in the current conversation.
+
+See `references/claude-web.md` for package behavior and troubleshooting.
+"""
+
+CLAUDE_WEB_REFERENCE = """# Claude.ai bundle behavior
+
+## Routing
+
+The root `SKILL.md` is the only skill entrypoint. When it selects a specialist,
+open `specialists/<name>/GUIDE.md`. Load that guide's references, assets, or
+scripts only when its instructions require them. Never preload all specialists.
+
+## Deliberate differences from the repository install
+
+- Specialist `SKILL.md` files are named `GUIDE.md` so the ZIP remains one skill.
+- Test fixtures, caches, repository metadata, and Claude Code workflows are not
+  shipped.
+- Specialist reference paths remain relative to each specialist folder.
+- `PROVENANCE.md` identifies the exact source revision. The ZIP does not update
+  itself; upload a newly generated archive to upgrade it.
+
+## Troubleshooting
+
+If Claude does not invoke Superforge automatically, start the phase with
+`superforge — ...`. If an operation needs a tool unavailable in the browser,
+keep the plan and evidence contract, explain the unavailable operation, and ask
+for the smallest missing input rather than claiming it ran.
+"""
+
 
 def collect(folder, prefix):
     files = []
@@ -251,6 +330,104 @@ def package_skill(skill_folder):
     files = collect(skill_folder, prefix=name)
     out = write_zip(os.path.join(DIST_DIR, f"{name}.zip"), files, name, SKILL_NOTE, prefix=name)
     print(f"  {name:26} {len(files):3} files  {os.path.getsize(out) // 1024:4} KB")
+    return out
+
+
+def package_claude_web():
+    """Build one Claude.ai upload containing the router and all specialists.
+
+    Claude.ai accepts one skill folder per ZIP. Specialist entrypoints therefore
+    become bundled GUIDE.md resources instead of fourteen additional SKILL.md
+    files. Their references, scripts, and assets keep their relative layout.
+    """
+    router_folder = os.path.join(SKILLS_DIR, "superforge")
+    router_path = os.path.join(router_folder, "SKILL.md")
+    if not os.path.isfile(router_path):
+        print("skills/superforge/SKILL.md not found.", file=sys.stderr)
+        return None
+
+    router = open(router_path, encoding="utf-8").read()
+    frontmatter = router.split("---\n", 2)[1]
+    description_length = len(folded_description(frontmatter))
+    if description_length > 200:
+        print(
+            f"  ✗ superforge: description is {description_length} chars — "
+            "Claude's published custom-skill limit is 200.",
+            file=sys.stderr,
+        )
+        return None
+
+    missing = [
+        name
+        for name in SPECIALIST_NAMES
+        if not os.path.isfile(os.path.join(SKILLS_DIR, name, "SKILL.md"))
+    ]
+    if missing:
+        print(f"Missing specialist entrypoints: {', '.join(missing)}", file=sys.stderr)
+        return None
+
+    os.makedirs(DIST_DIR, exist_ok=True)
+    out = os.path.join(DIST_DIR, "superforge-claude-web.zip")
+    file_count = 0
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as archive:
+        for src, arcname in collect(router_folder, prefix="superforge"):
+            relative = os.path.relpath(src, router_folder)
+            if relative == "SKILL.md" or (
+                relative.startswith("README") and relative.endswith(".md")
+            ):
+                continue
+            archive.write(src, arcname)
+            file_count += 1
+
+        sources = os.path.join(REPO_DIR, "SOURCES.md")
+        if os.path.isfile(sources):
+            archive.write(sources, "superforge/SOURCES.md")
+            file_count += 1
+
+        license_path = os.path.join(REPO_DIR, "LICENSE")
+        if os.path.isfile(license_path):
+            archive.write(license_path, "superforge/LICENSE")
+            file_count += 1
+
+        for name in SPECIALIST_NAMES:
+            folder = os.path.join(SKILLS_DIR, name)
+            for src, _ in collect(folder, prefix=""):
+                relative = os.path.relpath(src, folder)
+                if relative.startswith("README") and relative.endswith(".md"):
+                    continue
+                if relative == "SKILL.md":
+                    relative = "GUIDE.md"
+                arcname = os.path.join("superforge", "specialists", name, relative)
+                archive.write(src, arcname)
+                file_count += 1
+
+        archive.writestr(
+            "superforge/SKILL.md",
+            router.rstrip() + CLAUDE_WEB_ROUTER_FALLBACK,
+        )
+        archive.writestr("superforge/README-WEB.md", CLAUDE_WEB_README)
+        archive.writestr(
+            "superforge/references/claude-web.md", CLAUDE_WEB_REFERENCE
+        )
+        archive.writestr(
+            "superforge/PROVENANCE.md",
+            provenance(
+                "Superforge for Claude.ai",
+                """## One upload, progressive disclosure
+
+This bundle carries fourteen specialist guides as resources beneath one
+top-level Superforge skill. The router reads only the selected guide. Claude
+Code dynamic workflows are intentionally excluded because Claude.ai cannot run
+that workflow runtime.
+""",
+            ),
+        )
+        file_count += 4
+
+    print(
+        f"  {'superforge-claude-web.zip':26} {file_count:3} files  "
+        f"{os.path.getsize(out) // 1024:4} KB"
+    )
     return out
 
 
@@ -296,6 +473,8 @@ def package_all():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--claude-web":
+        sys.exit(0 if package_claude_web() else 1)
     if len(sys.argv) > 1 and sys.argv[1] != "--all":
         sys.exit(0 if package_skill(os.path.abspath(sys.argv[1])) else 1)
     sys.exit(package_all())

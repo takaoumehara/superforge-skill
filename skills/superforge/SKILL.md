@@ -1,10 +1,9 @@
 ---
 name: superforge
 description: >
-  Use when starting a substantial product or feature phase, coordinating work
-  across specialties, choosing the next specialist, verifying completion, or
-  deciding whether to release. Do not use for bounded follow-up edits inside an
-  active phase.
+  Use when starting a substantial product or feature phase, choosing the next
+  specialist across strategy, design, engineering, verification, security, or
+  release. Skip bounded follow-up edits.
 license: MIT
 metadata:
   author: Takao Umehara

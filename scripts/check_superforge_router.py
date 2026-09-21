@@ -58,7 +58,7 @@ def main() -> int:
     description = folded_description(skill)
     require(len(lines) <= 100, f"router has {len(lines)} lines; maximum is 100")
     require(description.startswith("Use when"), "description must start with 'Use when'")
-    require(len(description) <= 500, f"description has {len(description)} characters; maximum is 500")
+    require(len(description) <= 200, f"description has {len(description)} characters; maximum is 200")
 
     for mode in ("quick", "build", "ship"):
         require(f"| `/superforge {mode}` |" in skill, f"router table is missing mode: {mode}")
