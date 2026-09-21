@@ -59,6 +59,14 @@ README_TOKENS = (
 STALE_MODEL_PATTERN = re.compile(
     r"(?:Opus|Sonnet|Haiku|Gemini|Kimi|GPT)[ -]?(?:\d|Flash|Pro)", re.IGNORECASE
 )
+LEGACY_BUNDLED_RESOURCE_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9_/-])(?:skills/)?"
+    r"superforge-[a-z-]+/references/\s*[A-Za-z0-9_./-]+\.md"
+)
+BUNDLED_RESOURCE_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9_/-])"
+    r"specialists/superforge-[a-z-]+/references/[A-Za-z0-9_./-]+\.md"
+)
 
 
 def read(relative: str) -> str:
@@ -134,7 +142,7 @@ def check_portfolio(errors: list[str]) -> None:
 
 def check_zip(errors: list[str], zip_path: Path) -> None:
     if not zip_path.is_file():
-        errors.append(f"missing Claude.ai bundle: {zip_path.relative_to(ROOT)}")
+        errors.append(f"missing Claude.ai bundle: {zip_path}")
         return
 
     try:
@@ -197,6 +205,18 @@ def check_zip(errors: list[str], zip_path: Path) -> None:
                 if not name.lower().endswith(".md"):
                     continue
                 content = archive.read(name).decode("utf-8", errors="replace")
+                for target in LEGACY_BUNDLED_RESOURCE_PATTERN.findall(content):
+                    errors.append(
+                        f"{zip_path.name}: unconverted specialist resource in "
+                        f"{name}: {target}"
+                    )
+                for target in BUNDLED_RESOURCE_PATTERN.findall(content):
+                    resolved = posixpath.join("superforge", target)
+                    if resolved not in name_set:
+                        errors.append(
+                            f"{zip_path.name}: missing specialist resource in "
+                            f"{name}: {target}"
+                        )
                 for raw_target in markdown_link.findall(content):
                     target = raw_target.split("#", 1)[0].split("?", 1)[0].strip()
                     if not target or target.startswith(("#", "/", "mailto:")) or "://" in target:
