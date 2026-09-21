@@ -122,12 +122,12 @@ def check_portfolio(errors: list[str]) -> None:
 
     required = (
         "## エグゼクティブサマリー",
-        "## 課題",
-        "## 設計",
-        "## 使い方",
-        "## 14の専門スキル",
-        "## 検証",
-        "## 制約とトレードオフ",
+        "## 入口の肥大化が、小さな作業にも固定費を生んだ",
+        "## Thin Routerで、必要な専門性だけを遅れて読む",
+        "## 使い方は、フェーズの最初に一度だけ",
+        "## 14の専門スキルを、一つの入口から選ぶ",
+        "## ルールと配布構造を自動検査する",
+        "## 静的検査だけでは、実利用の効果までは証明できない",
         "## ポートフォリオ掲載用コピー",
         "345行",
         "99行",
@@ -194,10 +194,30 @@ def check_zip(errors: list[str], zip_path: Path) -> None:
                 router = archive.read("superforge/SKILL.md").decode("utf-8")
                 if "Claude.ai bundle fallback" not in router:
                     errors.append(f"{zip_path.name}: router lacks Claude.ai bundle fallback")
+                parts = router.split("---\n", 2)
+                if len(parts) < 3:
+                    errors.append(f"{zip_path.name}: router lacks valid YAML frontmatter")
+                else:
+                    match = re.search(
+                        r"^description:\s*>-?\s*\n((?:^[ \t].*\n?|\n)*)",
+                        parts[1],
+                        re.M,
+                    )
+                    description = (
+                        " ".join(line.strip() for line in match.group(1).splitlines()).strip()
+                        if match
+                        else ""
+                    )
+                    if not description or len(description) > 200:
+                        errors.append(
+                            f"{zip_path.name}: root description is {len(description)} characters; maximum is 200"
+                        )
             if "superforge/PROVENANCE.md" in names:
                 provenance = archive.read("superforge/PROVENANCE.md").decode("utf-8")
                 if "WORKING TREE WAS DIRTY" in provenance:
                     errors.append(f"{zip_path.name}: provenance was generated from a dirty tree")
+                if not re.search(r"Cut from `[0-9a-f]{7,40}` \(\d{4}-\d{2}-\d{2}\)", provenance):
+                    errors.append(f"{zip_path.name}: provenance lacks a source commit and date")
 
             name_set = set(names)
             markdown_link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
