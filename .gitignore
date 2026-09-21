@@ -3,6 +3,9 @@
 # Build output — zips generated for the claude.ai skill uploader.
 dist/
 
+# Isolated development worktrees created by agent workflows.
+.worktrees/
+
 # This repo is public, and the skills here write their artifacts to docs/.
 # Running them in this checkout must not stage working notes for publication.
 # Positioning and campaign work lives in the private superforge-studio repo.
