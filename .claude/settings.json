@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "deny": [
+      "mcp__claude-code-remote__subscribe_pr_activity",
+      "mcp__claude-code-remote__send_later"
+    ]
+  }
+}
