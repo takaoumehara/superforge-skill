@@ -1,12 +1,12 @@
 # Model prompting — what changes per tier, beyond which model you picked
 
-`SKILL.md` §1 assigns a model. This file is the other half: **the same prompt
+`superforge-dev/SKILL.md` §2 assigns a model. This file is the other half: **the same prompt
 does not get the same result from Fable 5, Opus 5, and Sonnet 5**, and two of
 this suite's own instructions actively hurt on the model they were written for.
 
 > **Checked: 2026-08-05.** Every claim below is version-dependent. If today is
 > more than about six months past that date and one of these is about to gate a
-> real decision, verify it first and say that you did (`SKILL.md` §9 ·
+> real decision, verify it first and say that you did (`SKILL.md` §6 ·
 > `SOURCES.md`). Run `/superforge-freshness` to check the whole suite at once.
 
 Source: Anthropic's per-model prompting guides for

@@ -1,0 +1,50 @@
+name: Validate plugin
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      # `claude plugin validate` is a local, offline check of the manifests and
+      # skill files. It is expected to run without login or an API key, so no
+      # secrets are configured here. Verified 2026-10-04 (Claude Code 2.1.283)
+      # with an empty, logged-out config dir.
+      - name: Validate marketplace manifest (repo root)
+        run: claude plugin validate --strict .
+
+      - name: Validate plugin manifest
+        run: claude plugin validate --strict .claude-plugin/plugin.json
+
+      # Repository checks that pass on a fresh clone (no build step needed).
+      # check_public_release.py without --skip-zip needs
+      # `python3 scripts/package_skills.py --claude-web` first; see README.
+      - name: Router contract
+        run: python3 scripts/check_superforge_router.py
+
+      - name: Library discovery contract
+        run: python3 scripts/check_library_discovery.py
+
+      - name: Public docs contract (sources only)
+        run: python3 scripts/check_public_release.py --skip-zip
+
+      - name: llms.txt template
+        run: python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt

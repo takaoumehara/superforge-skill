@@ -90,7 +90,7 @@ superforge — 重新设计新手引导，让第一次使用的人能在三分�
 - 只有真正分派代理时，才读取模型相关指南；
 - 只有对以后有价值时，才写入长期状态和日志。
 
-实际费用会随工具、模型、提示缓存和任务变化。可测量的设计依据见[日语作品集案例](./PORTFOLIO_CASE_STUDY.ja.md)。
+实际费用会随工具、模型、提示缓存和任务变化。可测量的设计依据见[作品集案例](./PORTFOLIO_CASE_STUDY.md)（英文摘要；[日文完整版](./PORTFOLIO_CASE_STUDY.ja.md)）。
 
 ## 证据、发布和记忆
 
@@ -100,6 +100,17 @@ Superforge把工作、完成验证和发布许可分开。`superforge-verify` �
 
 ## 安装
 
+### Claude Code插件（推荐）
+
+```text
+/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge
+```
+
+会一并安装路由器、十四个专业技能和可选的动态workflow。
+
+### 其他本地AI工具（Codex、Gemini CLI等）或手动安装到Claude Code
+
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill.git
 cd superforge-skill
@@ -108,11 +119,7 @@ cd superforge-skill
 
 Windows请使用 `.\install.ps1`。安装程序会把十五个技能链接到机器上已经存在的兼容目录，包括 `~/.agents/skills` 和 `~/.codex/skills`。`./install.sh --dry-run` 可预览，`./install.sh --update` 会同时刷新Claude Code workflow副本。
 
-Claude Code插件：
-
-```bash
-/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
-```
+如果存在 `~/.claude/skills`，安装程序也会链接到那里。在已安装Claude Code插件的机器上同时使用，同样的技能会出现两次，因此Claude Code请只选择一种方式。
 
 ### 浏览器版Claude.ai——一个ZIP
 
@@ -144,14 +151,30 @@ skills/superforge-*/          十四个专业技能
 workflows/                    可选Claude Code workflow
 scripts/                      打包与确定性检查
 assets/                       本地化公开图表
-PORTFOLIO_CASE_STUDY.ja.md    详细作品集案例
+.claude-plugin/               Claude Code插件与marketplace清单
+PORTFOLIO_CASE_STUDY.md       作品集案例（英文摘要）
+PORTFOLIO_CASE_STUDY.ja.md    详细作品集案例（日文）
 SOURCES.md                    带日期的外部来源
 ```
 
-进一步阅读：[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md)、[帮助](./skills/superforge/references/help.md)、[`SOURCES.md`](./SOURCES.md)和[案例研究](./PORTFOLIO_CASE_STUDY.ja.md)。
+进一步阅读：[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md)、[帮助](./skills/superforge/references/help.md)、[`SOURCES.md`](./SOURCES.md)和[案例研究](./PORTFOLIO_CASE_STUDY.md)。
+
+## 贡献者检查
+
+以下检查在全新clone后只需Python 3和Claude Code CLI即可通过，CI也运行同样的检查：
+
+```bash
+claude plugin validate --strict .
+python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
+python3 scripts/check_public_release.py --skip-zip
+python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt
+```
+
+另外两项在没有生成文件时会在全新clone中失败：不带 `--skip-zip` 运行 `scripts/check_public_release.py` 前，需先运行 `python3 scripts/package_skills.py --claude-web` 生成 `dist/superforge-claude-web.zip`（未提交到仓库）；`scripts/validate_llms_txt.py` 默认查找 `./llms.txt`，本仓库没有该文件，请传入上面的模板或为项目生成的 `llms.txt` 路径。
 
 ## 致谢与许可证
 
-本套件参考了作者自己的BreakBias与cross-model handoff工作，以及[obra/superpowers](https://github.com/obra/superpowers)、[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD)、[Vercel Labs Skills](https://github.com/vercel-labs/skills)等公开模式。仓库没有直接收录第三方文字或代码。详情见各技能的来源说明和[`SOURCES.md`](./SOURCES.md)。
+本套件参考了作者自己的BreakBias与cross-model handoff工作，以及[obra/superpowers](https://github.com/obra/superpowers)、[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD)、[Vercel Labs Skills](https://github.com/vercel-labs/skills)等公开模式。仓库没有直接收录这些项目的文字或代码。例外：`superforge-scroll` 派生自 [oso95/scroll-world](https://github.com/oso95/scroll-world)（MIT），并原样再分发其中三个文件，上游许可证全文见 [`skills/superforge-scroll/NOTICE.md`](./skills/superforge-scroll/NOTICE.md)。详情见各技能的来源说明和[`SOURCES.md`](./SOURCES.md)。
 
 MIT——见[LICENSE](./LICENSE)。

@@ -1,0 +1,27 @@
+{
+  "name": "superforge",
+  "owner": {
+    "name": "Takao Umehara",
+    "url": "https://github.com/takaoumehara"
+  },
+  "metadata": {
+    "description": "Marketplace for the Superforge skill suite: one thin router plus fourteen product specialists."
+  },
+  "plugins": [
+    {
+      "name": "superforge-skills",
+      "source": "./",
+      "description": "One thin router chooses among fourteen product specialists. Start a meaningful phase once, continue follow-up edits normally, and verify before release.",
+      "version": "5.1.0",
+      "author": {
+        "name": "Takao Umehara",
+        "url": "https://github.com/takaoumehara"
+      },
+      "homepage": "https://github.com/takaoumehara/superforge-skill",
+      "repository": "https://github.com/takaoumehara/superforge-skill",
+      "license": "MIT",
+      "keywords": ["skills", "router", "product-development", "ui", "verification", "workflows"],
+      "category": "development"
+    }
+  ]
+}

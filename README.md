@@ -90,7 +90,7 @@ The saving comes from structure, not a promise about a particular vendor's price
 - model-specific guidance is read only when real agent dispatch is required;
 - durable files and logs are written only when they will matter later.
 
-Actual billing varies by tool, model, prompt caching, and task. See the measured design evidence in [the Japanese portfolio case study](./PORTFOLIO_CASE_STUDY.ja.md).
+Actual billing varies by tool, model, prompt caching, and task. See the measured design evidence in the [portfolio case study](./PORTFOLIO_CASE_STUDY.md) ([日本語の詳細版](./PORTFOLIO_CASE_STUDY.ja.md)).
 
 ## Evidence and memory
 
@@ -104,7 +104,16 @@ It writes project state only when the decision must survive the conversation. It
 
 ## Install
 
-### Local AI tools
+### Claude Code plugin (recommended)
+
+```text
+/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge
+```
+
+This installs the router, all fourteen specialists, and the optional dynamic workflows.
+
+### Other local AI tools (Codex, Gemini CLI, …) or a manual Claude Code install
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill.git
@@ -120,13 +129,7 @@ cd superforge-skill
 .\install.ps1
 ```
 
-The installer links every skill into the compatible tool directories already present on the machine, including `~/.agents/skills` and `~/.codex/skills`. Run `./install.sh --dry-run` to preview or `./install.sh --update` to pull and refresh Claude Code workflow copies.
-
-Claude Code plugin:
-
-```bash
-/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
-```
+The installer links every skill into the compatible tool directories already present on the machine, including `~/.agents/skills` and `~/.codex/skills`. Run `./install.sh --dry-run` to preview or `./install.sh --update` to pull and refresh Claude Code workflow copies. The installer also links into `~/.claude/skills` when that directory exists, so on a machine where the Claude Code plugin is installed the same skills would appear twice; use one path for Claude Code, not both.
 
 ### Claude.ai in the browser — one ZIP
 
@@ -160,14 +163,30 @@ skills/superforge-*/          fourteen specialist skills
 workflows/                    optional Claude Code workflow enforcement
 scripts/                      packaging and deterministic checks
 assets/                       localized public diagrams
-PORTFOLIO_CASE_STUDY.ja.md    detailed portfolio source
+.claude-plugin/               Claude Code plugin and marketplace manifests
+PORTFOLIO_CASE_STUDY.md       portfolio case study (English summary)
+PORTFOLIO_CASE_STUDY.ja.md    detailed portfolio source (Japanese)
 SOURCES.md                    dated external claims
 ```
 
-Start with [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), its [`help`](./skills/superforge/references/help.md), the [source ledger](./SOURCES.md), or the [portfolio case study](./PORTFOLIO_CASE_STUDY.ja.md).
+Start with [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), its [`help`](./skills/superforge/references/help.md), the [source ledger](./SOURCES.md), or the [portfolio case study](./PORTFOLIO_CASE_STUDY.md) ([日本語](./PORTFOLIO_CASE_STUDY.ja.md)).
+
+## Checks for contributors
+
+These run on a fresh clone with only Python 3 and the Claude Code CLI, and are what CI runs:
+
+```bash
+claude plugin validate --strict .
+python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
+python3 scripts/check_public_release.py --skip-zip
+python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt
+```
+
+Two checks fail on a fresh clone unless given generated input: `scripts/check_public_release.py` without `--skip-zip` needs `python3 scripts/package_skills.py --claude-web` first (creates `dist/superforge-claude-web.zip`, which is not committed), and `scripts/validate_llms_txt.py` defaults to `./llms.txt`, which this repository does not have — pass the path of the template above or of an `llms.txt` generated for your project.
 
 ## Credits and license
 
-The suite was informed by the author's BreakBias and cross-model handoff work, plus openly documented agent and skill patterns from projects including [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), and [Vercel Labs Skills](https://github.com/vercel-labs/skills). Third-party text and code are not copied into this repository. See the specialist provenance files and [`SOURCES.md`](./SOURCES.md) for details.
+The suite was informed by the author's BreakBias and cross-model handoff work, plus openly documented agent and skill patterns from projects including [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), and [Vercel Labs Skills](https://github.com/vercel-labs/skills). Those projects' text and code are not copied into this repository. One exception: `superforge-scroll` is derived from [oso95/scroll-world](https://github.com/oso95/scroll-world) (MIT) and redistributes three of its files unmodified, with the upstream license reproduced in [`skills/superforge-scroll/NOTICE.md`](./skills/superforge-scroll/NOTICE.md). See the specialist provenance files and [`SOURCES.md`](./SOURCES.md) for details.
 
 MIT — see [LICENSE](./LICENSE).

@@ -90,7 +90,7 @@ superforge — 처음 온 사용자가 3분 안에 게시할 수 있도록 온�
 - 모델별 안내는 실제 에이전트 위임이 필요할 때만 읽습니다.
 - 오래 남길 상태와 로그는 나중에도 가치가 있을 때만 씁니다.
 
-실제 비용은 도구, 모델, 프롬프트 캐시, 작업에 따라 달라집니다. 측정 가능한 설계 근거는 [일본어 포트폴리오 사례 연구](./PORTFOLIO_CASE_STUDY.ja.md)에 정리했습니다.
+실제 비용은 도구, 모델, 프롬프트 캐시, 작업에 따라 달라집니다. 측정 가능한 설계 근거는 [포트폴리오 사례 연구](./PORTFOLIO_CASE_STUDY.md)(영어 요약, [일본어 상세판](./PORTFOLIO_CASE_STUDY.ja.md))에 정리했습니다.
 
 ## 증거, 출시, 기억
 
@@ -100,6 +100,17 @@ Superforge는 작업, 완료 검증, 출시 판단을 분리합니다. `superfor
 
 ## 설치
 
+### Claude Code 플러그인 (권장)
+
+```text
+/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge
+```
+
+라우터, 열네 전문 스킬, 선택적 동적 workflow가 함께 설치됩니다.
+
+### 기타 로컬 AI 도구 (Codex, Gemini CLI 등) 또는 Claude Code 수동 설치
+
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill.git
 cd superforge-skill
@@ -108,11 +119,7 @@ cd superforge-skill
 
 Windows에서는 `.\install.ps1`을 사용합니다. 설치 프로그램은 이미 존재하는 호환 디렉터리에 열다섯 스킬을 연결하며 `~/.agents/skills`와 `~/.codex/skills`도 지원합니다. `./install.sh --dry-run`은 변경을 미리 보여 주고, `./install.sh --update`는 Claude Code workflow 사본까지 갱신합니다.
 
-Claude Code 플러그인:
-
-```bash
-/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
-```
+설치 프로그램은 `~/.claude/skills`가 있으면 그곳에도 연결합니다. Claude Code 플러그인을 설치한 컴퓨터에서 함께 쓰면 같은 스킬이 두 번 보이므로, Claude Code에서는 한 가지 방법만 사용하세요.
 
 ### 브라우저 Claude.ai — ZIP 하나
 
@@ -144,14 +151,30 @@ skills/superforge-*/          열네 전문 스킬
 workflows/                    선택적 Claude Code workflow
 scripts/                      패키징과 결정론적 검사
 assets/                       현지화된 공개 다이어그램
-PORTFOLIO_CASE_STUDY.ja.md    상세 포트폴리오 사례 연구
+.claude-plugin/               Claude Code 플러그인·마켓플레이스 매니페스트
+PORTFOLIO_CASE_STUDY.md       포트폴리오 사례 연구 (영어 요약)
+PORTFOLIO_CASE_STUDY.ja.md    상세 포트폴리오 사례 연구 (일본어)
 SOURCES.md                    날짜가 있는 외부 출처
 ```
 
-[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), [도움말](./skills/superforge/references/help.md), [`SOURCES.md`](./SOURCES.md), [사례 연구](./PORTFOLIO_CASE_STUDY.ja.md)에서 더 자세히 볼 수 있습니다.
+[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), [도움말](./skills/superforge/references/help.md), [`SOURCES.md`](./SOURCES.md), [사례 연구](./PORTFOLIO_CASE_STUDY.md)에서 더 자세히 볼 수 있습니다.
+
+## 기여자를 위한 검사
+
+새로 clone한 상태에서도 Python 3와 Claude Code CLI만으로 통과하며, CI도 같은 검사를 실행합니다.
+
+```bash
+claude plugin validate --strict .
+python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
+python3 scripts/check_public_release.py --skip-zip
+python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt
+```
+
+다음 두 검사는 생성물이 없으면 새 clone에서 실패합니다. `scripts/check_public_release.py`를 `--skip-zip` 없이 실행하려면 먼저 `python3 scripts/package_skills.py --claude-web`으로 `dist/superforge-claude-web.zip`(커밋되지 않음)을 만드세요. `scripts/validate_llms_txt.py`는 인자가 없으면 `./llms.txt`를 찾는데 이 저장소에는 없으므로, 위 템플릿이나 프로젝트용으로 생성한 `llms.txt` 경로를 넘기세요.
 
 ## 출처와 라이선스
 
-이 제품군은 저자의 BreakBias 및 cross-model handoff 작업과 [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Vercel Labs Skills](https://github.com/vercel-labs/skills)의 공개 패턴을 참고했습니다. 제3자의 글이나 코드를 그대로 포함하지 않습니다. 각 스킬의 출처 정보와 [`SOURCES.md`](./SOURCES.md)를 확인해 주세요.
+이 제품군은 저자의 BreakBias 및 cross-model handoff 작업과 [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Vercel Labs Skills](https://github.com/vercel-labs/skills)의 공개 패턴을 참고했습니다. 이 프로젝트들의 글이나 코드를 그대로 포함하지 않습니다. 예외로 `superforge-scroll`은 [oso95/scroll-world](https://github.com/oso95/scroll-world)(MIT)에서 파생되었으며, 그 파일 세 개를 수정 없이 재배포합니다. 원본 라이선스 전문은 [`skills/superforge-scroll/NOTICE.md`](./skills/superforge-scroll/NOTICE.md)에 있습니다. 각 스킬의 출처 정보와 [`SOURCES.md`](./SOURCES.md)를 확인해 주세요.
 
 MIT — [LICENSE](./LICENSE)를 참고하세요.
