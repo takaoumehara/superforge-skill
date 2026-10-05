@@ -4,26 +4,19 @@
   "description": "One thin router chooses among fourteen product specialists. Start a meaningful phase once, continue follow-up edits normally, and verify before release.",
   "author": {
     "name": "Takao Umehara",
-    "url": "https://github.com/takaoumehara/superforge-skill"
+    "url": "https://github.com/takaoumehara"
   },
-  "license": "MIT",
+  "homepage": "https://github.com/takaoumehara/superforge-skill",
   "repository": "https://github.com/takaoumehara/superforge-skill",
-  "skills": [
-    "skills/superforge",
-    "skills/superforge-brain",
-    "skills/superforge-biz",
-    "skills/superforge-brand",
-    "skills/superforge-ui",
-    "skills/superforge-scroll",
-    "skills/superforge-dev",
-    "skills/superforge-test",
-    "skills/superforge-debug",
-    "skills/superforge-a11y",
-    "skills/superforge-secure",
-    "skills/superforge-roast",
-    "skills/superforge-verify",
-    "skills/superforge-ship",
-    "skills/superforge-handoff"
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "router",
+    "product-development",
+    "ui",
+    "verification",
+    "workflows",
+    "context-budget"
   ],
   "workflows": "./workflows"
 }

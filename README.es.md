@@ -90,7 +90,7 @@ El ahorro procede de la estructura, no de una promesa sobre el precio de un prov
 - la guía específica de modelos se consulta solo al delegar de verdad;
 - el estado duradero y los registros se escriben únicamente cuando tendrán valor posterior.
 
-La facturación real depende de la herramienta, el modelo, la caché y la tarea. Las pruebas medibles del diseño están en el [caso de estudio en japonés](./PORTFOLIO_CASE_STUDY.ja.md).
+La facturación real depende de la herramienta, el modelo, la caché y la tarea. Las pruebas medibles del diseño están en el [caso de estudio](./PORTFOLIO_CASE_STUDY.md) (resumen en inglés; [versión completa en japonés](./PORTFOLIO_CASE_STUDY.ja.md)).
 
 ## Pruebas, publicación y memoria
 
@@ -100,6 +100,17 @@ Solo guarda estado cuando una decisión debe sobrevivir a la conversación. El r
 
 ## Instalación
 
+### Plugin de Claude Code (recomendado)
+
+```text
+/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge
+```
+
+Instala el router, las catorce especialidades y los workflows dinámicos opcionales.
+
+### Otras herramientas locales (Codex, Gemini CLI…) o instalación manual en Claude Code
+
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill.git
 cd superforge-skill
@@ -108,11 +119,7 @@ cd superforge-skill
 
 En Windows usa `.\install.ps1`. El instalador enlaza las quince skills en los directorios compatibles que ya existen, incluidos `~/.agents/skills` y `~/.codex/skills`. `./install.sh --dry-run` muestra los cambios y `./install.sh --update` actualiza también las copias de workflows de Claude Code.
 
-Plugin de Claude Code:
-
-```bash
-/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
-```
+El instalador también enlaza en `~/.claude/skills` si ese directorio existe; si además tienes el plugin de Claude Code, las mismas skills aparecerían dos veces. Para Claude Code usa una sola vía.
 
 ### Claude.ai en el navegador — un solo ZIP
 
@@ -144,14 +151,30 @@ skills/superforge-*/          catorce especialidades
 workflows/                    workflows opcionales de Claude Code
 scripts/                      empaquetado y comprobaciones deterministas
 assets/                       diagramas públicos localizados
-PORTFOLIO_CASE_STUDY.ja.md    caso de estudio detallado
+.claude-plugin/               manifiestos de plugin y marketplace de Claude Code
+PORTFOLIO_CASE_STUDY.md       caso de estudio (resumen en inglés)
+PORTFOLIO_CASE_STUDY.ja.md    caso de estudio detallado (japonés)
 SOURCES.md                    fuentes externas con fecha
 ```
 
-Consulta [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), la [ayuda](./skills/superforge/references/help.md), [`SOURCES.md`](./SOURCES.md) o el [caso de estudio](./PORTFOLIO_CASE_STUDY.ja.md).
+Consulta [`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md), la [ayuda](./skills/superforge/references/help.md), [`SOURCES.md`](./SOURCES.md) o el [caso de estudio](./PORTFOLIO_CASE_STUDY.md).
+
+## Comprobaciones para colaboradores
+
+Funcionan en un clon recién hecho con Python 3 y la CLI de Claude Code; son las que ejecuta la CI:
+
+```bash
+claude plugin validate --strict .
+python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
+python3 scripts/check_public_release.py --skip-zip
+python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt
+```
+
+Dos comprobaciones fallan en un clon nuevo sin archivos generados: `scripts/check_public_release.py` sin `--skip-zip` necesita antes `python3 scripts/package_skills.py --claude-web` (crea `dist/superforge-claude-web.zip`, que no está en el repositorio), y `scripts/validate_llms_txt.py` busca `./llms.txt` por defecto, que este repositorio no tiene; pásale la plantilla anterior o el `llms.txt` generado para tu proyecto.
 
 ## Créditos y licencia
 
-La suite se apoya en el trabajo propio del autor sobre BreakBias y traspaso entre modelos, además de patrones públicos de [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) y [Vercel Labs Skills](https://github.com/vercel-labs/skills). No incorpora texto ni código de terceros. Consulta la procedencia de cada skill y [`SOURCES.md`](./SOURCES.md).
+La suite se apoya en el trabajo propio del autor sobre BreakBias y traspaso entre modelos, además de patrones públicos de [obra/superpowers](https://github.com/obra/superpowers), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) y [Vercel Labs Skills](https://github.com/vercel-labs/skills). No incorpora texto ni código de esos proyectos. Una excepción: `superforge-scroll` deriva de [oso95/scroll-world](https://github.com/oso95/scroll-world) (MIT) y redistribuye tres de sus archivos sin modificar; la licencia original se reproduce en [`skills/superforge-scroll/NOTICE.md`](./skills/superforge-scroll/NOTICE.md). Consulta la procedencia de cada skill y [`SOURCES.md`](./SOURCES.md).
 
 MIT — consulta [LICENSE](./LICENSE).

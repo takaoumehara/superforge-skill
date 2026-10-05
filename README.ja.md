@@ -90,7 +90,7 @@ superforge — 初めての人が3分で公開まで進めるよう、オンボ�
 - モデル固有の情報は、実際にエージェントを分担させるときだけ読む
 - ドキュメントは後で必要になる判断だけ、ログは失敗・訂正・リリースだけ残す
 
-実際の課金量は、利用するツール、モデル、プロンプトキャッシュ、作業内容によって変わります。測定できる設計上の変化は、[ポートフォリオ向けケーススタディ](./PORTFOLIO_CASE_STUDY.ja.md)にまとめています。
+実際の課金量は、利用するツール、モデル、プロンプトキャッシュ、作業内容によって変わります。測定できる設計上の変化は、[ポートフォリオ向けケーススタディ](./PORTFOLIO_CASE_STUDY.ja.md)（[英語の要約版](./PORTFOLIO_CASE_STUDY.md)）にまとめています。
 
 ## 完了・公開・記録を分ける
 
@@ -104,7 +104,16 @@ Superforgeでは、次の3つを同じ扱いにしません。
 
 ## インストール
 
-### ローカルのAIツール
+### Claude Codeのプラグイン（推奨）
+
+```text
+/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge
+```
+
+ルーター、14の専門スキル、任意の動的ワークフローがまとめて入ります。
+
+### その他のローカルAIツール（Codex、Gemini CLIなど）、またはClaude Codeへの手動導入
 
 ```bash
 git clone https://github.com/takaoumehara/superforge-skill.git
@@ -116,11 +125,7 @@ Windows PowerShellでは `./install.sh` の代わりに `.\install.ps1` を使�
 
 変更内容だけを確認する場合は `./install.sh --dry-run`、更新とClaude Code用ワークフローの再配置は `./install.sh --update` を使います。
 
-Claude Codeのプラグインとして入れる場合：
-
-```bash
-/plugin install superforge-skills@https://github.com/takaoumehara/superforge-skill
-```
+インストーラーは `~/.claude/skills` があればそこにもリンクを作ります。Claude Codeのプラグインを入れた端末で併用すると同じスキルが二重に見えるため、Claude Codeではどちらか一方だけを使ってください。
 
 ### Claude Web版 — ZIP一つで導入
 
@@ -154,14 +159,30 @@ skills/superforge-*/          14の専門スキル
 workflows/                    Claude Code向けの任意ワークフロー
 scripts/                      配布物の生成と機械的な検査
 assets/                       言語別の公開図版
+.claude-plugin/               Claude Codeのプラグインとマーケットプレイスの定義
+PORTFOLIO_CASE_STUDY.md       ポートフォリオ向け資料（英語の要約版）
 PORTFOLIO_CASE_STUDY.ja.md    ポートフォリオ向け詳細資料
 SOURCES.md                    更新日付きの外部情報一覧
 ```
 
 詳しく見る場合は、[`skills/superforge/SKILL.md`](./skills/superforge/SKILL.md)、[使い方の詳細](./skills/superforge/references/help.md)、[外部情報の一覧](./SOURCES.md)、[ポートフォリオ向けケーススタディ](./PORTFOLIO_CASE_STUDY.ja.md)から読めます。
 
+## 開発者向けの検査
+
+次の検査は、clone直後でもPython 3とClaude Code CLIだけで通ります。CIでも同じものを実行します。
+
+```bash
+claude plugin validate --strict .
+python3 scripts/check_superforge_router.py
+python3 scripts/check_library_discovery.py
+python3 scripts/check_public_release.py --skip-zip
+python3 scripts/validate_llms_txt.py skills/superforge-ship/assets/templates/llms.txt
+```
+
+次の2つは、生成物がないとclone直後には失敗します。`scripts/check_public_release.py` を `--skip-zip` なしで実行する場合は、先に `python3 scripts/package_skills.py --claude-web` で `dist/superforge-claude-web.zip`（コミットしていません）を作ります。`scripts/validate_llms_txt.py` は引数なしだと `./llms.txt` を探しますが、このリポジトリにはありません。上のテンプレートか、プロジェクト用に生成した `llms.txt` のパスを渡してください。
+
 ## クレジットとライセンス
 
-このスイートは、作者自身のBreakBiasとcross-model handoffの研究に加え、[obra/superpowers](https://github.com/obra/superpowers)、[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD)、[Vercel Labs Skills](https://github.com/vercel-labs/skills)など、公開されているエージェント設計・スキル設計の考え方を参考にしています。第三者の文章やコードをそのまま収録してはいません。詳細は各スキルの来歴情報と[`SOURCES.md`](./SOURCES.md)を参照してください。
+このスイートは、作者自身のBreakBiasとcross-model handoffの研究に加え、[obra/superpowers](https://github.com/obra/superpowers)、[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD)、[Vercel Labs Skills](https://github.com/vercel-labs/skills)など、公開されているエージェント設計・スキル設計の考え方を参考にしています。これらのプロジェクトの文章やコードはそのまま収録していません。例外として、`superforge-scroll` は [oso95/scroll-world](https://github.com/oso95/scroll-world)（MIT）を元にしており、その3ファイルを無改変で再配布しています。上流のライセンス全文は [`skills/superforge-scroll/NOTICE.md`](./skills/superforge-scroll/NOTICE.md) に掲載しています。詳細は各スキルの来歴情報と[`SOURCES.md`](./SOURCES.md)を参照してください。
 
 MITライセンスです。詳しくは[LICENSE](./LICENSE)をご覧ください。

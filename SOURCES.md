@@ -22,12 +22,12 @@ claim without adding a row here.
 
 | Claim | Lives in | Source | Checked |
 |---|---|---|---|
-| Model line and tiering: Opus 5 judgment · Fable 5 endurance · Sonnet 5 volume · Haiku 4.5 routine | `superforge/SKILL.md` §1 · `superforge-dev/SKILL.md` §2 | [Claude models overview](https://platform.claude.com/docs/en/about-claude/models/overview) | 2026-08-05 |
+| Model line and tiering: Opus 5 judgment · Fable 5 endurance · Sonnet 5 volume · Haiku 4.5 routine | `superforge-dev/SKILL.md` §2 · `superforge/references/model-prompting.md` (per-tier prompting) | [Claude models overview](https://platform.claude.com/docs/en/about-claude/models/overview) | 2026-08-05 |
 | Fable 5: long autonomous runs, effort defaults, independent-context verifiers beat self-critique, over-prescriptive skills degrade output, `reasoning_extraction` refusal | `superforge/references/model-prompting.md` §2 | [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) | 2026-08-05 |
 | Opus 5: delete explicit self-verification instructions, cap delegation, effort ≠ response length, review prompts must not pre-filter | `superforge/references/model-prompting.md` §1 | [Prompting Claude Opus 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5) | 2026-08-05 |
 | Sonnet 5: literal instruction following, no `temperature`/`top_p`, ~30% more tokens per text, design defaults collapse to one house style | `superforge/references/model-prompting.md` §3 · `superforge-ui` | [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5) | 2026-08-05 |
 | Dynamic workflows: script API (`agent`/`parallel`/`pipeline`/`phase`/`log`/`args`/`budget`), `meta` required fields, no `Date.now()`/`Math.random()` | `workflows/*.js` · `superforge-dev/references/workflow-graphs.md` | [Claude Code — dynamic workflows](https://code.claude.com/docs/en/workflows) | 2026-08-05 |
-| Workflow agents inherit the session model unless the script sets `opts.model`; `CLAUDE_CODE_SUBAGENT_MODEL` overrides both | `superforge/SKILL.md` §6 · `superforge-dev/SKILL.md` §1 · `workflow-graphs.md` §1 | same | 2026-08-05 |
+| Workflow agents inherit the session model unless the script sets `opts.model`; `CLAUDE_CODE_SUBAGENT_MODEL` overrides both | `superforge-dev/SKILL.md` §1 · `workflow-graphs.md` §1 | same | 2026-08-05 |
 | Workflow discovery: `.claude/workflows/` (project) · `~/.claude/workflows/` or `$CLAUDE_CONFIG_DIR/workflows/` (personal) · plugin `workflows/` namespaced as `/<plugin>:<name>` | `install.sh` · `install.ps1` · `workflow-graphs.md` §7 | same | 2026-08-05 |
 | Workflow limits: v2.1.154+, 16 concurrent agents, 1,000 per run, no mid-run user input, resume replays in start order | `workflow-graphs.md` §4 | same | 2026-08-05 |
 | Devin: suited to specified, CI-verifiable, long work; needs explicit completion criteria; Knowledge vs Playbooks distinction; vague prompts are the main failure mode | `superforge-handoff/references/external-agents.md` | [Devin intro](https://docs.devin.ai/get-started/devin-intro) · [Instructing Devin effectively](https://docs.devin.ai/essential-guidelines/instructing-devin-effectively) | 2026-08-05 |
@@ -41,7 +41,7 @@ these, and move the row up when you do.
 | Claim | Lives in | Source to check against |
 |---|---|---|
 | Devin ACU pricing and per-task cost | `external-agents.md` §2 — deliberately states no number | Devin pricing page |
-| `gemini-3.6-flash` model id and effort syntax for the local `gemini` CLI | `superforge/SKILL.md` §1 tier D | Gemini CLI docs |
+| `gemini-3.6-flash` model id and effort syntax for the local `gemini` CLI | `superforge-dev/SKILL.md` §2 tier D | Gemini CLI docs |
 | Codex tier names (Sol / Terra / Luna), Kimi tier names (K3 Max / High / Standard) | `superforge-dev/SKILL.md` §2 | each vendor's docs |
 | WCAG version and criterion numbering | `superforge-a11y` | W3C WCAG |
 | App Store / Play Store review requirements, and the privacy-disclosure rules | `superforge-ship` | Apple · Google developer policy |
@@ -92,7 +92,7 @@ has one thing the file does not: **it knows today's date.**
 So every claim in this suite that depends on the outside world carries its check
 date, either in this ledger or inline as a `> Checked: <source> · <date>` line at
 the top of the section that makes it. And the instruction that goes with it,
-stated once here and pointed at from `superforge/SKILL.md` §9:
+stated once here and pointed at from `superforge/SKILL.md` §6:
 
 > When a version-dependent claim is about to gate a real decision — which model
 > to dispatch, which API shape to write against, whether a store will accept
