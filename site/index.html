@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>superforge: one thin router, fourteen specialists</title>
+  <meta name="description" data-i18n-key="meta.description" content="superforge is a Claude Code plugin: one 99-line router reads your task, sizes it, and loads only the specialist it needs from fourteen skills for strategy, design, implementation, proof and release.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://takaoumehara.github.io/superforge-skill/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="superforge">
+  <meta property="og:title" content="superforge: one thin router, fourteen specialists">
+  <meta property="og:description" content="One thin router. Fourteen specialists. Less context. A Claude Code plugin that loads only the skill the current phase needs.">
+  <meta property="og:url" content="https://takaoumehara.github.io/superforge-skill/">
+  <meta property="og:image" content="https://takaoumehara.github.io/superforge-skill/assets/img/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&amp;family=Noto+Sans+JP:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* Page-level tweaks: long install commands and brand names must not widen the hero grid or push the nav tools off-screen. */
+    .hero-grid > div, .grid > *, .demo-teaser > * { min-width: 0; }
+    p code, li code, td code, summary code, details code { white-space: normal; overflow-wrap: anywhere; }
+    .install-line { max-width: 100% !important; }
+    .install-line span { min-width: 0; }
+    .install-line .prompt, .install-line [data-copy] { flex: none !important; }
+    @media (max-width: 519px) {
+      .brand { flex-shrink: 1; min-width: 0; }
+      .brand span { overflow: hidden; text-overflow: ellipsis; }
+    }
+  </style>
+  <script src="assets/boot.js" data-loader></script>
+</head>
+<body data-title-key="meta.title">
+  <div class="loader" aria-hidden="true">
+    <div class="loader-mark"><span class="loader-word">superforge</span><span class="loader-rule"></span></div>
+  </div>
+  <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to content</a>
+
+  <header class="nav">
+    <div class="container">
+      <a class="brand" href="./" aria-label="superforge home">
+        <img src="assets/favicon.svg" alt="" width="22" height="22">
+        <span>superforge</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#what" data-i18n="nav.what">Why a router</a></li>
+        <li><a href="#specialists" data-i18n="nav.specialists">Specialists</a></li>
+        <li><a href="#install" data-i18n="nav.install">Install</a></li>
+        <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-tools">
+        <a class="icon-btn nav-demo" href="#install" data-i18n="nav.cta">Install</a>
+        <button class="icon-btn" type="button" data-lang-toggle aria-label="日本語に切り替え" lang="ja"><span class="lang-long">日本語</span><span class="lang-short" aria-hidden="true">JA</span></button>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"></button>
+        <a class="icon-btn" href="https://github.com/takaoumehara/superforge-skill" aria-label="GitHub repository" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Sections">
+    <a href="#what" data-i18n="nav.what">Why a router</a>
+    <a href="#specialists" data-i18n="nav.specialists">Specialists</a>
+    <a href="#install" data-i18n="nav.install">Install</a>
+    <a href="#how" data-i18n="nav.how">How it works</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="eyebrow" data-i18n="hero.eyebrow">Claude Code plugin · MIT</span>
+          <span>v5.1.0 · 1 router + 14 skills</span>
+        </div>
+        <h1>superforge</h1>
+        <div class="hero-grid">
+          <p class="tagline" data-i18n="hero.tagline">One thin router. Fourteen specialists. Less context.</p>
+          <div>
+            <p class="lead" data-i18n="hero.lead">Say <code>superforge</code> once at the start of a phase and describe the result you want. The router reads the task, inspects the project, sizes the work and loads only the specialist it needs — strategy, design, implementation, proof or release.</p>
+            <ul class="meta-list" aria-label="Phases">
+              <li>Think</li><li>Build</li><li>Prove</li><li>Ship</li><li>Continue</li>
+            </ul>
+            <div class="cta">
+              <a class="btn btn-primary" href="#install"><span data-i18n="hero.ctaStart">Install the plugin</span><span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="#specialists" data-i18n="hero.ctaSpecialists">See the 14 specialists</a>
+              <a class="btn btn-link" href="https://github.com/takaoumehara/superforge-skill">GitHub</a>
+            </div>
+            <div class="install-line" style="max-width:520px">
+              <span class="prompt">&gt;</span><span id="hero-cmd">/plugin marketplace add takaoumehara/superforge-skill</span>
+              <span data-copy="hero-cmd" style="flex:0"></span>
+            </div>
+          </div>
+        </div>
+        <figure class="hero-art">
+          <img class="diagram" src="assets/img/hero.svg" width="1200" height="420" alt="A request enters a thin router, which sizes it and routes to one specialist out of fourteen arranged in five phases: Think, Build, Prove, Ship and Continue." data-i18n-attr="alt:hero.alt">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= WHAT / WHY ================= -->
+    <section id="what">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">01</span><span class="eyebrow" data-i18n="what.eyebrow">Why a thin router</span></p>
+          <div>
+            <h2 data-i18n="what.title">A front door, not a suite that loads all at once</h2>
+            <p class="lead" data-i18n="what.lead">You do not need to know the specialist names. superforge is the concierge; the fourteen skills are the workshop behind it. Each request loads the smallest useful route, and nothing more.</p>
+          </div>
+        </div>
+        <div class="cols cols-3" data-reveal>
+          <article class="col">
+            <span class="col-k">Router</span>
+            <h3 data-i18n="what.c1Title">99 lines at a phase boundary</h3>
+            <p data-i18n="what.c1Body">Only skill metadata is normally discoverable. The router loads when a meaningful phase starts, classifies the work and picks one primary specialist.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">Specialists</span>
+            <h3 data-i18n="what.c2Title">Fourteen, loaded on demand</h3>
+            <p data-i18n="what.c2Body">Medium work loads one specialist. Large work loads them in sequence rather than all at once. A second specialist joins only at the boundary where it becomes necessary.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">Evidence</span>
+            <h3 data-i18n="what.c3Title">Work, proof, release</h3>
+            <p data-i18n="what.c3Body">The specialist does the work. <code>superforge-verify</code> checks evidence before “done”. <code>superforge-ship</code> independently decides whether it may reach users.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head" data-i18n="what.whyTitle">Why it uses less context</h3>
+        <ul class="paths" data-reveal>
+          <li><span class="num">01</span><div><h3 data-i18n="what.w1Title">Small work stays inline</h3><p data-i18n="what.w1Body">A one-file fix loads no extra skill unless the task genuinely needs one.</p></div></li>
+          <li><span class="num">02</span><div><h3 data-i18n="what.w2Title">Follow-ups reuse the active phase</h3><p data-i18n="what.w2Body">Ordinary feedback continues the current route instead of re-reading the router.</p></div></li>
+          <li><span class="num">03</span><div><h3 data-i18n="what.w3Title">Model guidance only for real dispatch</h3><p data-i18n="what.w3Body">Per-subagent model tiers are read only when an agent is actually dispatched.</p></div></li>
+          <li><span class="num">04</span><div><h3 data-i18n="what.w4Title">Files only when they matter later</h3><p data-i18n="what.w4Body">Project state and run logs are written for corrections, failures and releases — not for small edits.</p></div></li>
+        </ul>
+        <p class="muted small" style="margin-top:16px" data-i18n="what.note">The saving comes from structure, not a promise about a vendor's price. Actual billing varies by tool, model, prompt caching and task.</p>
+      </div>
+    </section>
+
+    <!-- ================= SPECIALISTS ================= -->
+    <section id="specialists">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">02</span><span class="eyebrow" data-i18n="sp.eyebrow">Specialists</span></p>
+          <div>
+            <h2 data-i18n="sp.title">Fourteen routes across five phases</h2>
+            <p class="lead" data-i18n="sp.lead">Direct invocation still works for experts, but it is optional. Describe the outcome; the router picks the route.</p>
+          </div>
+        </div>
+        <div class="table-wrap" data-reveal><table>
+          <thead><tr><th data-i18n="sp.thPhase">Phase</th><th data-i18n="sp.thSkill">Specialist</th><th data-i18n="sp.thRole">Responsibility</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="sp.think">Think</td><td><code>superforge-brain</code></td><td data-i18n="sp.brain">Explore and judge product ideas</td></tr>
+            <tr><td data-i18n="sp.think">Think</td><td><code>superforge-biz</code></td><td data-i18n="sp.biz">Market, pricing, business model and value case</td></tr>
+            <tr><td data-i18n="sp.think">Think</td><td><code>superforge-brand</code></td><td data-i18n="sp.brand">Brand direction, voice and visual system</td></tr>
+            <tr><td data-i18n="sp.think">Think</td><td><code>superforge-roast</code></td><td data-i18n="sp.roast">Expose weak assumptions before they reach users</td></tr>
+            <tr><td data-i18n="sp.build">Build</td><td><code>superforge-dev</code></td><td data-i18n="sp.dev">Plan and implement multi-component features</td></tr>
+            <tr><td data-i18n="sp.build">Build</td><td><code>superforge-ui</code></td><td data-i18n="sp.ui">Design and build Web, iOS and Android interfaces</td></tr>
+            <tr><td data-i18n="sp.build">Build</td><td><code>superforge-scroll</code></td><td data-i18n="sp.scroll">Cinematic scroll-driven experiences</td></tr>
+            <tr><td data-i18n="sp.prove">Prove</td><td><code>superforge-a11y</code></td><td data-i18n="sp.a11y">WCAG, assistive technology and platform accessibility</td></tr>
+            <tr><td data-i18n="sp.prove">Prove</td><td><code>superforge-test</code></td><td data-i18n="sp.test">Choose and implement valuable tests</td></tr>
+            <tr><td data-i18n="sp.prove">Prove</td><td><code>superforge-debug</code></td><td data-i18n="sp.debug">Root-cause debugging and failure memory</td></tr>
+            <tr><td data-i18n="sp.prove">Prove</td><td><code>superforge-secure</code></td><td data-i18n="sp.secure">Practical security review for small teams</td></tr>
+            <tr><td data-i18n="sp.prove">Prove</td><td><code>superforge-verify</code></td><td data-i18n="sp.verify">Attach evidence before any completion claim</td></tr>
+            <tr><td data-i18n="sp.ship">Ship</td><td><code>superforge-ship</code></td><td data-i18n="sp.shipRole">Decide whether a product may be released</td></tr>
+            <tr><td data-i18n="sp.continue">Continue</td><td><code>superforge-handoff</code></td><td data-i18n="sp.handoff">Preserve session state before switching tools or threads</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= INSTALL ================= -->
+    <section id="install">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">03</span><span class="eyebrow" data-i18n="in.eyebrow">Install</span></p>
+          <div>
+            <h2 data-i18n="in.title">Two lines in Claude Code</h2>
+            <p class="lead" data-i18n="in.lead">The plugin installs the router, all fourteen specialists and the optional dynamic workflows. Use one install path per tool, not both.</p>
+          </div>
+        </div>
+        <div class="tabs" data-reveal>
+          <div class="tablist" role="tablist" aria-label="Install method">
+            <button role="tab" id="in-plugin" data-key="plugin" aria-controls="in-plugin-p" aria-selected="true" data-i18n="in.tabPlugin">Claude Code plugin</button>
+            <button role="tab" id="in-script" data-key="script" aria-controls="in-script-p" aria-selected="false" data-i18n="in.tabScript">Codex · Gemini CLI · manual</button>
+            <button role="tab" id="in-web" data-key="web" aria-controls="in-web-p" aria-selected="false">Claude.ai</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="in-plugin-p" aria-labelledby="in-plugin">
+            <div class="code"><span class="lang">claude code</span><pre><code>/plugin marketplace add takaoumehara/superforge-skill
+/plugin install superforge-skills@superforge</code></pre></div>
+            <p class="muted small" data-i18n="in.pluginNote">Recommended. Open a new session afterwards and start a phase with <code>superforge</code>.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="in-script-p" aria-labelledby="in-script" hidden>
+            <div class="code"><span class="lang">bash</span><pre><code>git clone https://github.com/takaoumehara/superforge-skill.git
+cd superforge-skill
+./install.sh            # --dry-run to preview, --update to refresh</code></pre></div>
+            <p class="muted small" data-i18n="in.scriptNote">Links every skill into the tool directories already on the machine, including <code>~/.agents/skills</code> and <code>~/.codex/skills</code>. On Windows use <code>.\install.ps1</code>.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="in-web-p" aria-labelledby="in-web" hidden>
+            <div class="code"><span class="lang">bash</span><pre><code>python3 scripts/package_skills.py --claude-web
+# upload dist/superforge-claude-web.zip in Customize → Skills</code></pre></div>
+            <p class="muted small" data-i18n="in.webNote">One ZIP holds the router and all fourteen guides. Dynamic workflows are not available in the browser; the bundle uses the prose fallback.</p>
+          </div>
+        </div>
+
+        <h3 class="sub-head tbl-title" data-i18n="in.compatTitle">Where it runs</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th data-i18n="in.thEnv">Environment</th><th data-i18n="in.thSupport">Support</th></tr></thead>
+          <tbody>
+            <tr><td>Claude Code</td><td data-i18n="in.cc">Skills plus optional dynamic workflows</td></tr>
+            <tr><td>Codex CLI / app</td><td data-i18n="in.codex">Skills through <code>~/.agents/skills</code> or <code>~/.codex/skills</code></td></tr>
+            <tr><td>Gemini CLI / Antigravity</td><td data-i18n="in.gemini">Skills through their discovered skill directories</td></tr>
+            <tr><td>Claude.ai</td><td data-i18n="in.web">Standalone ZIP; no dynamic workflow runtime</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">04</span><span class="eyebrow" data-i18n="how.eyebrow">How it works</span></p>
+          <div>
+            <h2 data-i18n="how.title">Say it once per phase, then talk normally</h2>
+            <p class="lead" data-i18n="how.lead">Start a meaningful phase with <code>superforge</code>. Keep giving ordinary feedback after that. Say it again only when you begin a different feature, a release review or another substantial phase.</p>
+          </div>
+        </div>
+        <div class="grid grid-2" data-reveal>
+          <div>
+            <h3 data-i18n="how.startTitle">Start the phase</h3>
+            <div class="code"><span class="lang">prompt</span><pre><code>superforge — Redesign onboarding so a first-time
+user can publish in three minutes.</code></pre></div>
+          </div>
+          <div>
+            <h3 data-i18n="how.followTitle">Then just give feedback</h3>
+            <div class="code"><span class="lang">prompt</span><pre><code>Keep the previous conditions. Make the empty
+state clearer, then show one preview.</code></pre></div>
+          </div>
+        </div>
+
+        <h3 class="sub-head" data-i18n="how.sizeTitle">Small, Medium, Large</h3>
+        <div class="cols cols-3" data-reveal>
+          <article class="col">
+            <span class="col-k">Small · 1–3 files</span>
+            <h3 data-i18n="how.sTitle">Work inline</h3>
+            <p data-i18n="how.sBody">One issue, usually a few files. No extra skill is loaded unless the task genuinely needs one.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">Medium · one flow</span>
+            <h3 data-i18n="how.mTitle">One primary specialist</h3>
+            <p data-i18n="how.mBody">One UI flow, an investigation or a coordinated multi-file change. The router loads exactly one specialist.</p>
+          </article>
+          <article class="col">
+            <span class="col-k">Large · feature / release</span>
+            <h3 data-i18n="how.lTitle">The minimum sequence</h3>
+            <p data-i18n="how.lBody">A new feature, broad redesign, security review or release. Specialists run in order, and verification comes before completion.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head tbl-title" data-i18n="how.modesTitle">Three optional modes</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th data-i18n="how.thMode">Mode</th><th data-i18n="how.thUse">Use it for</th><th data-i18n="how.thDefault">Default behaviour</th></tr></thead>
+          <tbody>
+            <tr><td><code>superforge quick</code></td><td data-i18n="how.qUse">One bounded correction</td><td data-i18n="how.qDo">Handle inline; no orchestration or log by default</td></tr>
+            <tr><td><code>superforge build</code></td><td data-i18n="how.bUse">A feature or multi-file change</td><td data-i18n="how.bDo">Plan, choose one primary specialist, implement, verify</td></tr>
+            <tr><td><code>superforge ship</code></td><td data-i18n="how.shUse">Release readiness</td><td data-i18n="how.shDo">Verify evidence first, then run the independent release gate</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">05</span><span class="eyebrow">FAQ</span></p>
+          <div>
+            <h2 data-i18n="faq.title">Frequently asked questions</h2>
+          </div>
+        </div>
+        <div class="faq-list" data-reveal>
+        <details class="faq"><summary data-i18n="faq.q1">Do I need to learn the fourteen skill names?</summary><div data-i18n="faq.a1">No. Say <code>superforge</code> and describe the outcome. The router chooses the specialist. Calling a specialist directly still works if you prefer.</div></details>
+        <details class="faq"><summary data-i18n="faq.q2">Should I repeat “superforge” on every message?</summary><div data-i18n="faq.a2">No. Once per phase is enough. Follow-up feedback reuses the active phase. Start it again for a different feature, a release review or another substantial phase.</div></details>
+        <details class="faq"><summary data-i18n="faq.q3">Does it make my model cheaper?</summary><div data-i18n="faq.a3">It does not change the price of the active model. It loads less context per request and assigns an appropriate model tier when it dispatches subagents. Actual billing depends on your tool, model, caching and task.</div></details>
+        <details class="faq"><summary data-i18n="faq.q4">Will it pick a library for me?</summary><div data-i18n="faq.a4">In a substantial UI phase where the technique is still open, it checks your existing stack, scans current options from official sources once, explains the choice and implements it. If the native platform is the better answer, it adds no dependency.</div></details>
+        <details class="faq"><summary data-i18n="faq.q5">Can it declare my app secure or correct?</summary><div data-i18n="faq.a5">No. It makes routing and evidence requirements explicit. Results are still limited by the available tools, credentials, source material and human decisions.</div></details>
+        <details class="faq"><summary data-i18n="faq.q6">I installed both the plugin and install.sh. Why do skills appear twice?</summary><div data-i18n="faq.a6">The installer also links into <code>~/.claude/skills</code> when it exists. Use one path for Claude Code — the plugin is recommended.</div></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-word" aria-hidden="true">superforge</div>
+      <div class="foot-row">
+        <span>© <span id="year">2026</span> superforge · <span data-i18n="footer.license">MIT License</span></span>
+        <span class="foot-links">
+          <a href="https://github.com/takaoumehara/superforge-skill">GitHub</a>
+          <a href="https://github.com/takaoumehara/superforge-skill/blob/main/skills/superforge/SKILL.md">SKILL.md</a>
+          <a href="https://github.com/takaoumehara/superforge-skill/blob/main/PORTFOLIO_CASE_STUDY.md" data-i18n="footer.case">Case study</a>
+          <a href="https://github.com/takaoumehara/superforge-skill/blob/main/SOURCES.md" data-i18n="footer.sources">Sources</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/i18n.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
