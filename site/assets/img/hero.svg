@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-labelledby="title desc">
+  <title id="title">superforge: one thin router, fourteen specialists</title>
+  <desc id="desc">A request enters a thin router, which sizes it and routes to one specialist out of fourteen arranged in five phases.</desc>
+  <style>
+    .bg{fill:#f5f5f5}.surface{fill:#ffffff}.canvas{fill:#ffffff}
+    .hair{stroke:#e5e5e5}.strong{stroke:#cfcfcf}.strong-f{fill:#cfcfcf}.ink-s{stroke:#0a0a0a}.mut-s{stroke:#999999}
+    .ink{fill:#0a0a0a}.ink2{fill:#3d3d3d}.muted{fill:#666666}.faint{fill:#999999}
+    .acc{fill:#0062cc}.acc-s{stroke:#0062cc}.acc-soft{fill:#e8f0fa}
+    text{font-family:"Outfit",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    @media (prefers-color-scheme: dark){
+      .bg{fill:#141414}.surface{fill:#111111}.canvas{fill:#0a0a0a}
+      .hair{stroke:#262626}.strong{stroke:#3a3a3a}.strong-f{fill:#3a3a3a}.ink-s{stroke:#f2f2f2}.mut-s{stroke:#6b6b6b}
+      .ink{fill:#f2f2f2}.ink2{fill:#d4d4d4}.muted{fill:#a3a3a3}.faint{fill:#6b6b6b}
+      .acc{fill:#3b9cff}.acc-s{stroke:#3b9cff}.acc-soft{fill:#0f1f33}
+    }
+  </style>
+  <rect class="bg" x="0" y="0" width="1200" height="420"/>
+
+  <g>
+    <text class="faint mono" x="64" y="150" font-size="10" letter-spacing="1.5">REQUEST</text>
+    <rect class="surface strong" x="64" y="164" width="236" height="92" rx="8" stroke-width="1.25"/>
+    <text class="acc mono" x="84" y="192" font-size="12">superforge —</text>
+    <text class="ink2" x="84" y="214" font-size="14">Redesign onboarding so a</text>
+    <text class="ink2" x="84" y="234" font-size="14">first-timer publishes in 3 min</text>
+  </g>
+  <path class="acc-s" d="M300 210 H388" fill="none" stroke-width="1.25" stroke-dasharray="3 5" stroke-linecap="round"/>
+  <circle class="acc" cx="388" cy="210" r="2.5"/>
+  <path class="acc-s" d="M402 210 H468 Q476 210 476 202 V58 Q476 50 484 50 H654 Q662 50 662 58 V154 Q662 162 668 162" fill="none" stroke-width="1.5"/>
+  <rect class="ink" x="396" y="78" width="6" height="264" rx="3"/>
+  <text class="faint mono" x="418" y="92" font-size="10" letter-spacing="1.5">ROUTER</text>
+  <text class="ink2 mono" x="418" y="108" font-size="11">99 lines</text>
+  <g class="mono" font-size="10" letter-spacing="1">
+    <text class="faint" x="418" y="300">S  inline</text>
+    <text class="acc" x="418" y="316">M  one specialist</text>
+    <text class="faint" x="418" y="332">L  in sequence</text>
+  </g>
+  <path class="strong" d="M476 50 H1142" fill="none" stroke-width="1" stroke-dasharray="2 4"/>
+  <text class="faint mono" x="548" y="78" font-size="10" letter-spacing="1.5">THINK</text>
+  <line class="ink-s" x1="548" y1="86" x2="654" y2="86" stroke-width="1"/>
+  <rect class="surface hair" x="548" y="98" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="560" y="121" font-size="12">brain</text>
+  <rect class="surface hair" x="548" y="144" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="560" y="167" font-size="12">biz</text>
+  <rect class="surface hair" x="548" y="190" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="560" y="213" font-size="12">brand</text>
+  <rect class="surface hair" x="548" y="236" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="560" y="259" font-size="12">roast</text>
+  <text class="faint mono" x="670" y="78" font-size="10" letter-spacing="1.5">BUILD</text>
+  <line class="ink-s" x1="670" y1="86" x2="776" y2="86" stroke-width="1"/>
+  <rect class="surface hair" x="670" y="98" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="682" y="121" font-size="12">dev</text>
+  <rect class="acc-soft acc-s" x="670" y="144" width="106" height="36" rx="6" stroke-width="1.5"/>
+  <text class="acc mono" x="682" y="167" font-size="12">ui</text>
+  <circle class="acc" cx="670" cy="162" r="3"/>
+  <rect class="surface hair" x="670" y="190" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="682" y="213" font-size="12">scroll</text>
+  <text class="faint mono" x="792" y="78" font-size="10" letter-spacing="1.5">PROVE</text>
+  <line class="ink-s" x1="792" y1="86" x2="898" y2="86" stroke-width="1"/>
+  <rect class="surface hair" x="792" y="98" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="804" y="121" font-size="12">a11y</text>
+  <rect class="surface hair" x="792" y="144" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="804" y="167" font-size="12">test</text>
+  <rect class="surface hair" x="792" y="190" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="804" y="213" font-size="12">debug</text>
+  <rect class="surface hair" x="792" y="236" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="804" y="259" font-size="12">secure</text>
+  <rect class="surface hair" x="792" y="282" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="804" y="305" font-size="12">verify</text>
+  <text class="faint mono" x="914" y="78" font-size="10" letter-spacing="1.5">SHIP</text>
+  <line class="ink-s" x1="914" y1="86" x2="1020" y2="86" stroke-width="1"/>
+  <rect class="surface hair" x="914" y="98" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="926" y="121" font-size="12">ship</text>
+  <text class="faint mono" x="1036" y="78" font-size="10" letter-spacing="1.5">CONTINUE</text>
+  <line class="ink-s" x1="1036" y1="86" x2="1142" y2="86" stroke-width="1"/>
+  <rect class="surface hair" x="1036" y="98" width="106" height="36" rx="6" stroke-width="1"/>
+  <text class="ink2 mono" x="1048" y="121" font-size="12">handoff</text>
+  <text class="faint mono" x="548" y="372" font-size="10" letter-spacing="1.5">14 SPECIALISTS · LOADED ONLY WHEN THE PHASE NEEDS THEM</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>superforge</title>
+  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
+  <rect x="12" y="14" width="4" height="36" rx="2" fill="#ffffff"/>
+  <path d="M16 32 H30 M30 32 L48 18 M30 32 H48 M30 32 L48 46" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="48" cy="18" r="3.5" fill="#ffffff"/>
+  <circle cx="48" cy="32" r="4.5" fill="#3b9cff"/>
+  <circle cx="48" cy="46" r="3.5" fill="#ffffff"/>
+</svg>
