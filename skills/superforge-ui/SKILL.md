@@ -371,6 +371,13 @@ slider versus a stepper are specified per platform in
   controls chosen by how often a value is entered, metric-card hierarchy, and
   exposing content instead of framing it.
 
+- **`references/rive.md`** — stateful vector animation: when Rive earns its
+  runtime and when CSS, video or a shader is the better answer, the different
+  rules for a web app and a portfolio (one Rive moment, everything else HTML),
+  the split between what Claude builds through the Rive MCP and what a person
+  draws, and the state-machine spec and accessibility checklist for
+  integration.
+
 - **`references/interactive-components.md`** — Growth-Engineered Conversational
   & Interactive Components (GEC Framework): design standards for ROI calculators,
   assessment quizzes, multi-step wizards, and comparison grids that drive conversion.
