@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "10.2"
+  version: "10.3"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -380,6 +380,11 @@ slider versus a stepper are specified per platform in
 Write **both** `docs/design.md` (YAML tokens & VVA Matrix alignment the agent parses) and
 `docs/design.html` (a self-contained style guide and component preview a human can open and review).
 They must never drift: editing one regenerates the other in the same turn.
+
+The token file also declares the visual layer agents otherwise default on:
+**tinted, layered elevation** (no neutral grey shadow), **density** per surface
+mode, and **figure type tokens** for metrics — spec in
+`references/design-system-output.md`.
 
 Never inline a raw colour, size, or radius. If a needed token does not exist,
 add it to `docs/design.md` and record it under `New patterns needed`.

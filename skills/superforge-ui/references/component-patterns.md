@@ -21,6 +21,7 @@ current guidelines before quoting them to a client (`SOURCES.md` §2).
 | **Safe area** | The bar sits above the home indicator inset (≈34pt on Face ID iPhones in portrait), its background extends into it. Read the inset at runtime — never hard-code it |
 | **Active state** | At least two signals, never colour alone: outline → filled icon, the primary colour, a heavier label. (Colour alone fails WCAG 1.4.1 — `superforge-a11y`) |
 | **Separation from content** | One mechanism: a hairline at low alpha, a surface tone step, or a soft shadow — not all three (`build-floor.md` §1 Elevation) |
+| **Tokens** | `nav-bar-bottom` in `docs/design.md` (`design-system-output.md`) holds these values so they are decided once |
 | **Badges** | Top-right of the icon, small, with a 1px outline in the bar's colour so it reads on any icon. Only for things that need attention; a badge on every tab is a badge on none |
 
 ## 2. Search that answers before it is asked
@@ -90,6 +91,11 @@ not jitter as it updates (`build-floor.md` §1 Stability). A comparison
 This is not the "metrics banner" `build-floor.md` §2 ① warns about — that is
 the same shape used on a marketing page **where no one is monitoring anything**.
 The test is whether the number changes and someone watches it change.
+
+The sizes, weights and padding live in `docs/design.md` as `metricValue`,
+`metricLabel`, `density.compact` and `card-metric`
+(`design-system-output.md` §Visual-layer extensions), so every card on every
+screen draws from the same values.
 
 ## 7. Don't hide the content behind the frame around it
 

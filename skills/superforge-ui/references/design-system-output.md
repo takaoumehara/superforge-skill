@@ -71,6 +71,95 @@ components:
     padding: "{spacing.sm} {spacing.md}"
 ```
 
+### Visual-layer extensions — elevation, density, figures
+
+The core groups above say what colour and size things are. They do not say how
+a surface sits on another, how tightly an Operate screen packs, or how a number
+is set — and those three are where an agent falls back to defaults (a grey
+`0 4px 12px rgba(0,0,0,.1)`, 24px padding everywhere, a figure in body weight).
+Declare them as tokens so the defaults never get the chance.
+
+```yaml
+# Shadows are tinted with the hue of the surface they fall on, never neutral.
+# shadowTint holds bare OKLCH components so alpha can vary per layer.
+# Each level is 2–3 layers: a tight contact shadow plus a wide ambient one.
+shadowTint:
+  light: "0.35 0.04 <surface hue>"          # low chroma, the surface's own hue
+  dark:  "0.10 0.02 <surface hue>"          # dark mode: deeper, less chroma
+elevation:
+  flat: "none"
+  raised: "0 1px 2px oklch({shadowTint} / 0.10), 0 4px 12px oklch({shadowTint} / 0.08)"
+  overlay: "0 2px 4px oklch({shadowTint} / 0.10), 0 12px 32px oklch({shadowTint} / 0.14)"
+  separator: "{colors.border}"               # the one mechanism a bar uses instead of a shadow
+
+density:
+  regular:
+    cardPadding: "{spacing.lg}"
+    gridGap: "{spacing.md}"
+    rowHeight: 48px
+  compact:                                   # Operate surfaces: dashboards, tables, admin
+    cardPadding: "{spacing.md}"
+    gridGap: "{spacing.sm}"
+    rowHeight: 36px
+
+typography:                                  # added to the group above
+  metricValue:
+    fontFamily: <family>
+    fontSize: 32px
+    fontWeight: 600
+    lineHeight: 1.1
+    fontFeature: "tnum"                      # tabular figures — numbers must not jitter
+  metricLabel:
+    fontFamily: <family>
+    fontSize: 13px
+    fontWeight: 500
+    lineHeight: 1.4
+    color: "{colors.textSecondary}"
+
+components:
+  card-metric:
+    backgroundColor: "{colors.surface}"
+    elevation: "{elevation.raised}"          # or a border — never both
+    padding: "{density.compact.cardPadding}"
+    value: "{typography.metricValue}"
+    label: "{typography.metricLabel}"
+  card-selectable:
+    backgroundColor: "{colors.surface}"
+    border: "1px solid {colors.border}"
+    selectedBorder: "2px solid {colors.accent}"
+    selectedSignal: "border + check icon"    # never colour alone
+    rounded: "{rounded.lg}"
+  nav-bar-bottom:
+    backgroundColor: "{colors.surface}"
+    separator: "{elevation.separator}"
+    itemMinSize: 44px                        # 48dp on Android
+    iconSize: 24px
+    activeSignal: "filled icon + {colors.accent} + label weight 600"
+    safeArea: "env(safe-area-inset-bottom)"  # read at runtime, never hard-coded
+```
+
+Rules for this layer:
+
+- **No neutral shadow anywhere.** Every shadow references `shadowTint`, whose
+  hue is taken from the surface the shadow lands on. A violet-tinted page gets a
+  violet-leaning shadow; a grey `rgba(0,0,0,…)` on a coloured surface turns to
+  mud (`build-floor.md` §3). When one shadow level must sit on two differently
+  tinted surfaces, define `shadowTint` per surface rather than averaging.
+- **In CSS** this becomes `--shadow-tint: 0.35 0.04 285;` and
+  `box-shadow: 0 1px 2px oklch(var(--shadow-tint) / 0.10), …`. Dark mode swaps
+  only `--shadow-tint`, so the elevation tokens never fork.
+- **One elevation mechanism per element.** A component declares `elevation` or
+  `border`, not both (`build-floor.md` §1).
+- **Density is chosen per surface mode, once.** Operate surfaces use `compact`;
+  Persuade and Read use `regular`. A screen that mixes them inside one grid has
+  not decided.
+- **Figures have their own type tokens.** `metricValue` carries the size and
+  weight; `metricLabel` is metadata. Using `card-metric` on a page where nobody
+  watches the number change is the "metrics banner" `build-floor.md` §2 ① warns
+  about — the token exists for dashboards, not for decoration.
+- These groups extend the open format. An agent that does not recognise them
+  should still find every value resolvable through `{group.token}` references.
+
 Rules:
 - Token names are **semantic, not literal**. `colors.accent`, never
   `colors.indigo600`. Renaming a colour must not require renaming a token.
@@ -123,11 +212,17 @@ Structure:
 3. **Typography** — every scale token rendered at its real size, with a
    Japanese and a Latin sample so mixed-script behaviour is visible
 4. **Spacing** — each step drawn to scale
-5. **Radius and elevation** — rendered boxes, not a table of numbers
+5. **Radius and elevation** — rendered boxes, not a table of numbers. Draw
+   every elevation level **on every surface colour** it will sit on, in light
+   and dark, so a muddy or invisible shadow shows up here and not in the product
 6. **Components** — every component in every state: default, hover, focus,
    active, disabled. Interactive, so a reviewer can tab through it
 7. **The four data states** — empty, loading, partial, error, rendered
-8. **Don'ts** — the prohibitions, shown as visual examples where possible
+   — including the four-part empty state (`component-patterns.md` §4)
+8. **Density and figures** — the same metric-card row at `regular` and
+   `compact`, with a value that ticks so tabular figures can be seen holding
+   still; a bottom navigation bar at 375px with the safe area drawn
+9. **Don'ts** — the prohibitions, shown as visual examples where possible
 
 Implementation rules:
 - Emit the tokens once as CSS custom properties in `:root`, and build every

@@ -17,6 +17,16 @@ typography:
   body: "{{BODY_FONT_STACK}}"
 spacing:
   base: "8px"
+shadowTint:
+  light: "{{SHADOW_TINT_LIGHT}}"   # oklch, low chroma, hue of the surface — never neutral grey
+  dark: "{{SHADOW_TINT_DARK}}"
+elevation:
+  raised: "{{ELEVATION_RAISED}}"   # 2–3 layers referencing shadowTint
+  overlay: "{{ELEVATION_OVERLAY}}"
+density: "{{DENSITY}}"             # compact (Operate) / regular (Persuade, Read)
+figures:
+  metricValue: "{{METRIC_VALUE_TYPE}}"   # with tabular-nums
+  metricLabel: "{{METRIC_LABEL_TYPE}}"
 ```
 
 ## 3. Interactive GEC Component Specification
