@@ -92,6 +92,7 @@ that is considered.
 | A solid light-grey hairline (`#e0e0e0`) | Sits on top of the surface instead of in it | Black at low alpha — it takes on whatever is behind it |
 | A solid dark hairline in dark mode | Disappears into the panel | White at low alpha, so the edge catches light |
 | A single wide drop shadow | Reads as a sticker on glass | Two or three shadows at different blur and opacity — real depth is layered |
+| A black or neutral-grey shadow on a coloured surface | Turns muddy where it meets the colour — a grey smudge on lavender | Tint the shadow with the hue of the surface it falls on, at low chroma and low alpha: a violet-leaning shadow on a violet-tinted background. Keep the layering and the offset; tinting is not a licence for a coloured halo. Declare it once as `shadowTint` (`design-system-output.md`) |
 | A darker hex chosen by eye for hover | The hue drifts, usually toward purple or brown | Mix in the same colour space you authored in: `color-mix(in oklch, …)` |
 | Comparing lightness in HSL | HSL's lightness is not perceptual — 50% blue and 50% yellow are visibly unequal | Compare in OKLCH, where equal numbers look equal |
 | A pale tint made by reducing opacity | Drains toward grey and goes flat | Lower the chroma instead and keep the lightness |

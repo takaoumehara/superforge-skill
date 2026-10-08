@@ -6,9 +6,12 @@ that match what is being critiqued, run them explicitly, then synthesise.
 | Target | Methods |
 |---|---|
 | UI or flow | 1, 2, 3, 4 |
-| Concept, PRD, plan | 4, 5 |
-| Copy | 3, 4 |
+| Concept, PRD, plan | 6, 4, 5 |
+| Copy | 6, 3, 4 |
 | Architecture or code | 5 + the `security` / `harden` skills |
+
+Method 6 runs first whenever the target argues from numbers — a proposal, a
+growth plan, a pitch, a rationale section.
 
 ---
 
@@ -103,6 +106,13 @@ The most-skipped method, and often the one that matters most.
   is it not the plan?
 - Who would be unhappy if this shipped exactly as specified?
 
+## Method 6 — Claim audit
+
+Every statistic and law-like statement in the target, traced to a primary
+source and tagged A (measured) / B (reported) / C (derived) / D (asserted), with
+year and scope. A D carrying a decision is a Blocker. Procedure, the folklore
+already traced, and the `## Evidence base` table → **`claim-audit.md`**.
+
 ---
 
 ## Synthesis
@@ -133,6 +143,9 @@ Write `docs/critique.md`:
 
 ## The worst thing
 <one sentence>
+
+## Evidence base
+<only when Method 6 ran — see claim-audit.md §4>
 
 ## Blockers
 | Finding | Where | Why it kills | Fix |

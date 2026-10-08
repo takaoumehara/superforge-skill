@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "10.1"
+  version: "10.3"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -274,6 +274,10 @@ a recording, and it never repeats identically → **`references/sound.md`**.
 ### Android Native (Jetpack Compose / Kotlin):
 - **Material Design 3 (Material You)**: Dynamic Color extraction (`dynamicDarkColorScheme`), Predictive Back gestures, surface tonal elevation, 48dp minimum touch targets.
 
+Bottom navigation, search, live order status, empty states, and choosing a
+slider versus a stepper are specified per platform in
+**`references/component-patterns.md`**.
+
 ---
 
 ## Deeper references
@@ -360,6 +364,20 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   still test afterwards. Read it before building any welcome screen, intro
   carousel, or setup wizard.
 
+- **`references/component-patterns.md`** — the components almost every app
+  rebuilds the same weak way: bottom navigation (count, destinations not
+  actions, safe area, two-signal active state, badges), search that answers on
+  focus, live status of an order or booking, the four-part empty state, input
+  controls chosen by how often a value is entered, metric-card hierarchy, and
+  exposing content instead of framing it.
+
+- **`references/rive.md`** — stateful vector animation: when Rive earns its
+  runtime and when CSS, video or a shader is the better answer, the different
+  rules for a web app and a portfolio (one Rive moment, everything else HTML),
+  the split between what Claude builds through the Rive MCP and what a person
+  draws, and the state-machine spec and accessibility checklist for
+  integration.
+
 - **`references/interactive-components.md`** — Growth-Engineered Conversational
   & Interactive Components (GEC Framework): design standards for ROI calculators,
   assessment quizzes, multi-step wizards, and comparison grids that drive conversion.
@@ -369,6 +387,11 @@ a recording, and it never repeats identically → **`references/sound.md`**.
 Write **both** `docs/design.md` (YAML tokens & VVA Matrix alignment the agent parses) and
 `docs/design.html` (a self-contained style guide and component preview a human can open and review).
 They must never drift: editing one regenerates the other in the same turn.
+
+The token file also declares the visual layer agents otherwise default on:
+**tinted, layered elevation** (no neutral grey shadow), **density** per surface
+mode, and **figure type tokens** for metrics — spec in
+`references/design-system-output.md`.
 
 Never inline a raw colour, size, or radius. If a needed token does not exist,
 add it to `docs/design.md` and record it under `New patterns needed`.

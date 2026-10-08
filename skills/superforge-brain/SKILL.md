@@ -18,7 +18,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.0"
+  version: "4.1"
 compatibility: >
   Standalone.
   Reads docs/brief.md when present and writes docs/product-idea.md plus,
@@ -347,7 +347,8 @@ revisit. Read it at §6, before killing anything.
 **`references/talk-to-users.md`** — the sweep runs entirely inside your own
 head. This is how to check it against real people without the questions
 producing flattery instead of information. Run it on Hero and Workhorse
-candidates before committing to one.
+candidates before committing to one. It also specifies the five-section research
+synthesis for when the interviews must brief a team.
 
 **`references/idea-map-output.md`** — the `docs/product-idea.html` spec: the
 all-ideas board that keeps killed cells visible, and the three 2×2 maps.
