@@ -102,6 +102,34 @@ invisible at rest. Then:
   asking — it teaches the user that their input does not matter, on their first
   interaction.
 
+## 4b. The long questionnaire is a different pattern, not a long intro
+
+The limits above are for screens that **explain**. Some of the most successful
+subscription apps run first-run flows of dozens of screens — a teardown counts
+up to 113 in Noom's web funnel, and calorie, fitness and language apps commonly
+run 20 or more — and they are not failing the rule above, because they are
+doing a different job. Treat 「短いほど良い」 as folklore, not law
+(`superforge-roast/references/claim-audit.md` §3).
+
+A long flow is justified only when **every** condition holds:
+
+| Condition | Why it matters |
+|---|---|
+| Each screen asks something, it does not tell something | Questions build commitment (the user is assembling *their* plan); explanations only build skip rates |
+| The answers visibly produce the result — a plan, a target, a score — shown before any paywall | Otherwise it is a toll road, and §4's last bullet applies to every screen in it |
+| Progress is shown and honest | Goal-gradient works only on real distance (`superforge-biz/references/behavioral-frameworks.md` §Finishing what was started) |
+| The product is a paid plan bought on intent (health, finance, learning, coaching) | The length also filters out low-intent installs; on a free utility it is pure loss |
+| A short path exists for the person who already knows what they want | The most motivated users must not pay the longest toll |
+
+The other end is equally legitimate: a tool whose value is obvious on contact can
+go from install to the working product in one or two screens. **Choose the length
+from what the first outcome needs, then measure completion per screen** — the
+screen where completion drops is the finding, not the total count.
+
+The trial offer belongs **inside** this first session, not after it: RevenueCat's
+subscription data puts roughly 82% of trial starts on the install day
+(`superforge-biz/references/conversion-patterns.md` §2).
+
 ## 5. Remembering that it happened
 
 Whatever marks first-run as complete is a **product decision, not an
@@ -153,7 +181,9 @@ person who built it and never again by anyone.
 - [ ] Tested on a small phone viewport and a desktop viewport separately
 - [ ] Every permission is requested at its point of use, with a preamble, and
       the denied path is designed
-- [ ] Intro screens (if any) are skippable, ≤4, one idea each
+- [ ] Intro screens (if any) are skippable, ≤4, one idea each — or, for a
+      questionnaire flow, every condition in §4b holds and completion is
+      measured per screen
 - [ ] Any question asked visibly changes what happens next
 - [ ] A reset control exists for testing
 - [ ] Reduced-motion and screen-reader passes done — hand to `superforge-a11y`

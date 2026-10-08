@@ -87,4 +87,4 @@ Point it at any artifact in `docs/`, a file, a screen, or pasted copy. The verdi
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); heuristic evaluation, the accessibility audit, cognitive load analysis, and simulated persona testing are in [references/evaluation-methods.md](references/evaluation-methods.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The full skill body is in [SKILL.md](SKILL.md); heuristic evaluation, the accessibility audit, cognitive load analysis, and simulated persona testing are in [references/evaluation-methods.md](references/evaluation-methods.md); tracing the statistics a proposal rests on to their source, with an A/B/C/D tier, is in [references/claim-audit.md](references/claim-audit.md). Suite overview: [superforge-skill](../../README.md).

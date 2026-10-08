@@ -149,3 +149,29 @@ Append to `docs/product-idea.md`:
 Recording the **questions you actually asked** is not bureaucracy. It is the
 only way anyone — including you, three months later — can tell the difference
 between "users validated it" and "users were being nice."
+
+### When the interviews must reach a team, not just the sweep
+
+The table above is for the sweep. When the same recordings and notes also have
+to brief people who were not in the room — a PM, a designer, an engineer — append
+a `## User research synthesis` section to `docs/product-idea.md` (it renders into
+`docs/product-idea.html` with the rest, per `idea-map-output.md`), with five
+parts in this order:
+
+1. **Executive summary** — three to five sentences a reader who stops here can
+   act on.
+2. **Pain points, with severity** — Blocker / Major / Minor, the same scale as
+   `superforge-roast`, each with how many people raised it and one verbatim
+   quote. A pain point heard once is labelled as such.
+3. **Behaviour and mental models** — what people actually do today, the
+   workaround they pay for in time or money, and the words they use for it.
+4. **Design implications** — specific UI or feature directions, each traced to
+   the pain point it addresses. Hand these to `superforge-ui`.
+5. **Next steps and what would disprove this** — the tasks, plus the
+   observation that would mean the synthesis was wrong.
+
+AI transcription and summarisation make this cheap to produce, which makes two
+rules matter more: **keep quotes verbatim and attributable to a participant
+number**, and **never let the summariser invent a severity or a count** — those
+come from the notes, or they are marked as missing.
+

@@ -225,6 +225,12 @@ reading is arguing with the measurement.
 
 ---
 
+For how each mechanism looks on a specific screen — paywall, booking summary,
+product page, filter — with an evidence tier on every pattern, see
+`references/conversion-patterns.md`.
+
+---
+
 ## 症状から引く索引
 
 | 症状 | 効く原理 | 最初に試すこと |

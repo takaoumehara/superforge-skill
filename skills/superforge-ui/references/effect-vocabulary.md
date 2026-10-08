@@ -82,6 +82,14 @@ nothing else on this list has.
 | **A real place, captured from photographs, that you move through** | Expensive — large assets, heavy decode | Only when the place is genuinely the subject |
 | **Light that behaves physically — glass, metal, shadow** | Expensive | Product visualisation where material accuracy matters |
 
+## 5b. Things the page itself does
+
+| The sensation | Roughly | Fits |
+|---|---|---|
+| **A story that plays as you scroll** — scenes that advance with the thumb, like scrubbing film | Moderate to expensive, mostly in assets | Launches and narratives. The full pipeline is `superforge-scroll`; propose it here, build it there |
+| **A cursor that becomes what it is over** — a disc that grows on links, a label on images, a magnifier on detail | Cheap | Portfolios, galleries, Experience surfaces. Desktop only: touch has no cursor, so nothing may depend on it, and the system cursor must never disappear while the custom one is loading |
+| **Type at a size that replaces the image** — one word filling the viewport, weight doing the work a photograph would | Cheap. Costs a font weight, nothing else | Brands with a strong name and no photography. Push this axis and keep the others quiet (`aesthetic-direction.md`) |
+
 ## 6. Sound, described the same way
 
 Companion to `references/sound.md`, which holds the rules. This is the menu.

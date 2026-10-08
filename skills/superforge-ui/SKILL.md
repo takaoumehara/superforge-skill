@@ -19,7 +19,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "10.1"
+  version: "10.2"
 compatibility: >
   Standalone.
   Reads docs/brand.md and docs/product-idea.md when present, writes docs/design.md and docs/design.html.
@@ -274,6 +274,10 @@ a recording, and it never repeats identically → **`references/sound.md`**.
 ### Android Native (Jetpack Compose / Kotlin):
 - **Material Design 3 (Material You)**: Dynamic Color extraction (`dynamicDarkColorScheme`), Predictive Back gestures, surface tonal elevation, 48dp minimum touch targets.
 
+Bottom navigation, search, live order status, empty states, and choosing a
+slider versus a stepper are specified per platform in
+**`references/component-patterns.md`**.
+
 ---
 
 ## Deeper references
@@ -359,6 +363,13 @@ a recording, and it never repeats identically → **`references/sound.md`**.
   (a denial there is often permanent), and marking completion in a way you can
   still test afterwards. Read it before building any welcome screen, intro
   carousel, or setup wizard.
+
+- **`references/component-patterns.md`** — the components almost every app
+  rebuilds the same weak way: bottom navigation (count, destinations not
+  actions, safe area, two-signal active state, badges), search that answers on
+  focus, live status of an order or booking, the four-part empty state, input
+  controls chosen by how often a value is entered, metric-card hierarchy, and
+  exposing content instead of framing it.
 
 - **`references/interactive-components.md`** — Growth-Engineered Conversational
   & Interactive Components (GEC Framework): design standards for ROI calculators,

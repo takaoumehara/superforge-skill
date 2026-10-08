@@ -10,7 +10,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.1"
+  version: "2.2"
 compatibility: >
   Standalone.
   Reads any docs/ artifact as the critique target, writes docs/critique.md.
@@ -46,6 +46,14 @@ Analyze the artifact across 4 ruthless lenses:
 4. **Copy & Positioning Roast**:
    - Is the copy preachy, jargon-filled, or vague?
    - Does it sound like corporate filler instead of direct human communication?
+
+### Before the lenses: audit the numbers
+
+When the target argues from evidence — 「3日で77%離脱」「短いオンボーディングが
+鉄則」「売上2,000%」 — trace every figure to its primary source and tag it
+A / B / C / D with year and scope before critiquing anything built on it. A
+design critiqued on top of an untraced number has had its decoration roasted and
+its foundation accepted → **`references/claim-audit.md`**.
 
 ### The lenses have to be independent, and in one context they are not
 
@@ -93,6 +101,10 @@ much to trust a critique should not have to infer it from tone.
 **`references/evaluation-methods.md`** — heuristic evaluation, accessibility
 audit, cognitive load analysis, simulated persona testing, strategic fit, and
 the synthesis rules that turn thirty findings into a usable verdict.
+
+**`references/claim-audit.md`** — the A/B/C/D evidence tiers applied to design
+claims, the five-step trace, the industry folklore already checked (with what
+the source really says), and the `## Evidence base` table for the critique.
 
 ## Artifact
 

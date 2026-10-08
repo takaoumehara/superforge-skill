@@ -18,7 +18,7 @@ description: >
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.0"
+  version: "4.1"
 compatibility: >
   Standalone.
   Reads docs/product-idea.md and docs/brief.md when present, writes docs/business-model.md.
@@ -78,6 +78,12 @@ When designing in-app paywalls and conversion triggers:
 2. **Frictionless Trial**: Offer zero-friction entry (e.g. 7-day trial with instant value demonstration before hard gate).
 3. **Paywall Placement**: Position paywalls at moments of peak user delight or achievement (e.g., right after generating a successful output).
 4. **Win-Back & Retention**: Define downgrade/cancellation flows with dynamic discount offers or tier-down options.
+
+What these look like on a concrete screen — smart defaults and 「◯件の結果を表示」,
+reciprocity (show the result before the account wall), the trial-timeline
+paywall shown in the first session, booking totals on the commit button, and
+D2C product pages — each tagged with its evidence tier so a C is tested, not
+promised → **`references/conversion-patterns.md`**.
 
 ---
 
@@ -153,6 +159,11 @@ placement — and the ethical line on each — are in
 diagnosis of why nobody acted (理由 / 容易さ / 合図), the symptom index for
 picking a mechanism from what is actually going wrong, and the list of widely
 recommended tactics this suite deliberately does not use.
+
+**`references/conversion-patterns.md`** — the frameworks applied screen by
+screen: six mechanisms as concrete decisions with their honest limits, the
+subscription paywall (timeline, not feature list), booking, and e-commerce
+patterns, every row tiered A/B/C/D.
 
 **`references/customer-acquisition.md`** — channel-market fit, lead magnets,
 fit×intent qualification, CAC/LTV sanity math, minimum viable scale per tactic,
