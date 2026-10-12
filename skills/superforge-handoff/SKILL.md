@@ -1,32 +1,44 @@
 ---
 name: superforge-handoff
 description: >
-  Write the session state to a structured capsule in .handoff/ so any AI model
-  or tool (Claude Code, Codex, Gemini CLI, Antigravity, Cursor) can resume the
-  work with zero context loss. Use before clearing a long thread or switching
-  tools. Also packages work for an async cloud agent such as Devin — deciding
-  whether a task belongs locally or should be sent, and generating the brief with
-  scope, completion criteria, and known traps rather than advice about how to
-  write one. Use when the user says "handoff", "save the session", "switch
-  models", "before I clear", "pick this up later", "context is getting long",
-  "send this to Devin", "should Devin do this", "hand this off",
-  "引き継ぎ", "ハンドオフ", "セッションを保存", "モデルを切り替える",
-  "コンテキストが長い", "Devinに投げる", "Devinでやるべき",
-  "非同期エージェント", or runs /superforge-handoff or /handoff.
+  Write the session state to a structured capsule in .handoff/, then commit and
+  push it, so a different AI tool or model (Codex, Gemini CLI, Antigravity,
+  Cursor, another Claude account) can resume the work from the repository.
+  Use before credits or a usage limit run out, or when switching tools. Not
+  needed to continue inside Claude Code itself: compaction, /compact, /clear,
+  and docs/ already cover that. Also packages work for an async cloud agent
+  such as Devin — deciding whether a task belongs locally or should be sent,
+  and generating the brief with scope, completion criteria, and known traps.
+  Use when the user says "handoff", "switch tools", "hand this to Codex",
+  "credits are running out", "usage limit", "send this to Devin",
+  "should Devin do this", "引き継ぎ", "ハンドオフ", "別のAIに引き継ぐ",
+  "クレジットが切れそう", "使用量の上限", "Devinに投げる", "Devinでやるべき",
+  or runs /superforge-handoff or /handoff.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "2.1"
+  version: "2.2"
 compatibility: >
   Standalone.
-  Writes .handoff/ in the project root.
+  Writes .handoff/ in the project root, then commits and pushes it.
   No other document or skill required.
   The Devin brief reads docs/plan.md and docs/failforward.md when they exist.
 ---
 
 # Superforge Handoff — Cross-Model Session Transition Protocol
 
-Use this skill whenever switching AI models, before clearing long chat threads, or when ending a work session. It writes a structured handoff capsule to `.handoff/` so any AI model can instantly resume work.
+Use this skill when the work must continue in a **different tool or model**, most
+often because credits or a usage limit are about to run out. It writes a
+structured capsule to `.handoff/`, commits it, and pushes it, so whatever reads
+the repository next can resume.
+
+**Not for continuing inside Claude Code.** A long thread is handled by automatic
+compaction, `/compact <what to keep>`, or `/clear` plus `docs/`; a later Claude
+Code session reads `CLAUDE.md` and `docs/` on its own. Writing a capsule there
+spends tokens to restate what is already on disk.
+
+**Run it early.** Writing the capsule costs tokens too. Start while there is
+budget left to finish and push it, not on the last message before the limit.
 
 ---
 
@@ -85,12 +97,23 @@ Five rules that make this worth writing:
 The capsule **points at** these files rather than restating them. That is what
 keeps it under 80 lines while losing nothing.
 
-4. Output the copy-paste-ready **Chat Resume Prompt**:
+4. **Commit and push** — the step that makes the capsule exist for anyone else:
+   - Commit the capsule *and* any finished, verified work it describes. Never
+     commit a secret; if one is staged, stop and route to `superforge-secure`.
+   - If `.handoff/` is git-ignored, add it with `git add -f`.
+   - Push to the current working branch, never the default branch. Retry a
+     network failure; if the push still fails, say so plainly — an unpushed
+     capsule in a cloud session is lost when the container is reclaimed, and
+     no other tool can read it.
+   - Put the branch name and commit hash in the resume prompt.
+
+5. Output the copy-paste-ready **Chat Resume Prompt**:
 
 ~~~text
 次の作業を再開してください。
 
 Project: <repo>
+Branch: <branch> @ <commit>
 Handoff file: .handoff/YYYY-MM-DD-<slug>.md
 Goal: <Goal>
 State: <Verified state>
@@ -100,11 +123,27 @@ Read first: <Files to read>
 上記のNextから開始してください。
 ~~~
 
+Show the prompt even when the push succeeded: it is the user's copy if the
+repository is unreachable from the next tool.
+
 ---
 
 ## 2. Resuming Session
 
-When a session opens with a Resume Capsule, read the indicated file in `.handoff/` and jump straight to `Next` without asking redundant background questions.
+When a session opens with a Resume Capsule, pull the named branch, read the
+indicated file in `.handoff/`, and jump straight to `Next` without asking
+redundant background questions.
+
+---
+
+## 3. Prevent the emergency: push at every checkpoint
+
+A handoff written after the limit is hit is too late — the work that matters is
+whatever was never pushed. In a cloud session (Claude Code on the web) that work
+exists only in a temporary container. The durable fix is a project rule, not this
+skill: commit and push at each verified checkpoint. A `CLAUDE.md` rule and an
+optional Stop hook that does it automatically →
+**`references/checkpoint-push.md`**. Offer it once when a project has neither.
 
 ---
 

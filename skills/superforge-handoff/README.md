@@ -48,6 +48,12 @@ Claude Code, Codex, Gemini CLI, Antigravity, Cursor — the capsule is a file in
 ### 📋 A resume prompt you paste and go
 Along with the capsule you get a copy-paste-ready chat prompt naming the project, the file, the goal, the verified state, and the next step. Restarting is one paste, not a reconstruction from memory.
 
+### ⬆️ Pushed, or it did not happen
+Other tools read GitHub, not your last session. The capsule is committed and pushed to the working branch, and the resume prompt names the branch and commit. To stop needing an emergency handoff at all, the skill ships a `CLAUDE.md` rule and an optional Stop hook that push at every checkpoint (`references/checkpoint-push.md`).
+
+### 🎯 For leaving Claude Code, not for staying in it
+Inside Claude Code, a long thread is handled by compaction, `/compact`, or `/clear`. This skill is for when the work moves elsewhere — most often because credits or a usage limit are about to run out. Run it while there is still budget to finish the push.
+
 ---
 
 ## 🔄 Before / After

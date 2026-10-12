@@ -73,7 +73,7 @@ superforge — 처음 온 사용자가 3분 안에 게시할 수 있도록 온�
 | 증명하기 | [`superforge-secure`](./skills/superforge-secure/README.md) | 소규모 팀을 위한 실용적인 보안 검토 |
 | 증명하기 | [`superforge-verify`](./skills/superforge-verify/README.md) | 완료라고 말하기 전 증거 확인 |
 | 출시하기 | [`superforge-ship`](./skills/superforge-ship/README.md) | 제품 공개 가능 여부 판단 |
-| 이어가기 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | 스레드나 도구를 바꾸기 전 상태 보존 |
+| 이어가기 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | 다른 도구나 에이전트로 푸시까지 해서 넘기기 |
 
 숙련자는 전문 스킬을 직접 호출할 수 있지만 필수는 아닙니다.
 

@@ -56,7 +56,7 @@ When uncertain, choose the smaller route until evidence requires promotion.
 | Functional proof | `superforge-verify` |
 | Security review or exposed secret | `superforge-secure` |
 | Release readiness, legal/ops checks | `superforge-ship` |
-| Session continuity | `superforge-handoff` |
+| Hand off to another tool, model, or async agent | `superforge-handoff` |
 
 Treat the desired outcome as sufficient input; do not require a specialist or technology name. Announce the entry, size, and current route in one line, then work. Ask about the route only
 when two materially different goals remain plausible.
@@ -68,7 +68,7 @@ when two materially different goals remain plausible.
 - Treat overlapping UI/design skills as alternatives. `superforge-ui` owns the
   integrated path; add another only when the user explicitly requests it.
 - If the selected specialist is unavailable, work inline; do not stop to install it.
-- Small work stays inline. Do not dispatch an agent merely to change models.
+- Small work stays inline: **load no specialist file**; dispatch no agent just to change models.
 - Before any actual agent dispatch, read `references/model-prompting.md` and
   show the assignment. Otherwise do not load that reference.
 - After choosing a primary specialist, read `references/wiring.md` only if a
@@ -91,6 +91,7 @@ An ordinary request to correct the product is not a log trigger. Read `reference
 - Before claiming completion, require **fresh verification evidence**. Use
   `superforge-verify` for a Large phase or consequential Medium phase.
 - `/superforge ship` always sequences `superforge-verify` → `superforge-ship`.
+- Commit and push at each verified checkpoint; unpushed work is lost when usage runs out.
 - Stop for irreversible loss, spending money, missing credentials, a security
   or privacy boundary, or a choice that changes the goal. Otherwise choose a
   defensible default, record it only if durable, and continue.

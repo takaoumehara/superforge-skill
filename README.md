@@ -73,7 +73,7 @@ This is a **Thin Router**. It does not load the whole suite on every request.
 | Prove | [`superforge-secure`](./skills/superforge-secure/README.md) | practical security review for small teams |
 | Prove | [`superforge-verify`](./skills/superforge-verify/README.md) | attach evidence before any completion claim |
 | Ship | [`superforge-ship`](./skills/superforge-ship/README.md) | decide whether a product may be released |
-| Continue | [`superforge-handoff`](./skills/superforge-handoff/README.md) | preserve session state before switching tools or threads |
+| Continue | [`superforge-handoff`](./skills/superforge-handoff/README.md) | hand work to another tool or agent, pushed so it can read it |
 
 Direct invocation still works for experts, but it is optional.
 
