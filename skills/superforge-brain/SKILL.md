@@ -164,7 +164,10 @@ cell_id, element_id, technique, sub_method, status, kill_code, prior_art, win_pa
 ```
 
 Statuses move one direction only:
-`todo → generated → survived | killed:<G|P|C> → developed → judged`.
+`todo → generated → survived | killed:<G|P|C> → developed → judged`. A duplicate
+absorbed during dedup ends at `merged` (with `merged_into`), and a cell left
+out on purpose by the resolution is not in the ledger at all — its element is
+marked `swept: false` instead.
 
 `prior_art` is a flag, not a verdict — a cell that already exists somewhere is
 tagged during generation and resolved after it (§6). `win_path` records which
