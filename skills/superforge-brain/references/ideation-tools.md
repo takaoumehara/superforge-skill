@@ -197,7 +197,7 @@ looked," which is exactly what used to happen.
 
 The judge is a separate context, given three inputs and nothing else:
 
-1. the concept card (one sentence, why surprising, user value, business value, risks, next experiment)
+1. the concept card (one sentence, one concrete scene, why surprising, user value, business value, price, risks, next experiment; rungs and hybrids add their extra fields from `amplify-and-recycle.md` §2–§3)
 2. the banned obvious three
 3. the scoring anchors below
 
@@ -206,6 +206,13 @@ impossible form, and the backwards derivation. A judge who sees the reasoning
 grades the reasoning; a judge who sees only the card grades the idea. It is
 also the only way `Novelty` can be measured honestly, because a clever
 derivation makes a familiar concept feel new to whoever followed it.
+
+**Vagueness scores low.** If the card's scene is missing or could describe any
+product (「ユーザーが便利に使える」), cap Wow at 3 and say so in the notes. A
+judge who rewards an abstract card for sounding deep pushes the whole shortlist
+toward the grey middle. An `open_world` rung is scored on the same anchors. Its
+far-out-ness earns nothing until its "impossible today" and "first step" fields
+make it concrete.
 
 Anchors, so scores mean the same thing across runs:
 

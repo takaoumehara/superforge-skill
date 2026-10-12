@@ -147,12 +147,14 @@ tasks ran on a tier above the one they needed.**
 
 ---
 
-## 6. The five shipped with this suite
+## 6. The six shipped with this suite
 
 They live in `workflows/` at the repository root. Each is written to sit under
 the default 15-agent size guideline **when nothing retries** — `dev-waves` adds
 one agent per task whose proof line fails, so a 6-task plan is 14 agents and 20
-in the worst case. Read the number as a floor, not a ceiling.
+in the worst case. Read the number as a floor, not a ceiling. `brain-sweep` is
+the deliberate exception: a sweep is volume work, so it scales with the element
+count and says so in its `whenToUse`.
 
 Each exists because a specific instruction in this suite was structurally
 unenforceable as prose.
@@ -163,6 +165,7 @@ unenforceable as prose.
 | `superforge-verify-evidence` | `superforge-verify` has the agent that did the work grade its own evidence, which no instruction can correct — it already believes the claim | 1 Opus extractor → per claim: a Sonnet runner that must actually execute, then an Opus grader **shown only the command and its output** → 1 Opus reporter. Up to 14 agents |
 | `superforge-dev-waves` | The parallel-safety check and the ledger are the two rules most often skipped, and both are checkable | 1 Opus planner → **the script computes write-set disjointness itself** and splits any wave the planner got wrong → per task: build on its assigned tier, then **a different agent** runs the proof line → 1 Haiku recorder. 1 + 2n + 1, +1 per retry |
 | `superforge-freshness` | Nothing checked whether this suite's claims about the outside world were still true | 1 Sonnet reader of `SOURCES.md` → 1 Sonnet checker per source, which must quote a line from the page or return `unreachable` → 1 Opus report. Reports; never rewrites |
+| `superforge-brain-sweep` | `superforge-brain` generates hundreds of cells in one context — by cell 200 the model is completing its own earlier forms, and the judge has read every derivation | 1 Opus decomposer → per element batch: an Opus generator that never sees other elements, then **a different agent** runs the kill check → 1 Opus salvage/revisit pass → per batch of 8: a Sonnet card writer, then an Opus judge **shown only cards** → push ladder and cross-breeding, each judged blind → 1 market pass → 1 Sonnet writer. ~25 agents at `quick`, 60–90 at `standard` — run `quick` first to size it |
 | `superforge-selfcheck` | Nothing checked whether the suite is any good to use — `superforge-verify` proves the *product*, not this | 1 Sonnet reader of `docs/superforge-log.md` → 1 Opus diagnostician per implicated skill, reading the skill against what the user had to repeat → 1 Opus report of proposed edits |
 
 The last two ask different questions with different evidence: `freshness` asks
@@ -170,7 +173,7 @@ whether the claims are still true, `selfcheck` asks whether the suite is worth
 using (`superforge/references/run-log.md`). Staleness and unfitness are not the
 same failure.
 
-The pattern common to all five: **the agent that produces something never grades
+The pattern common to all six: **the agent that produces something never grades
 it.** That is not a workflow feature — it is the one thing a workflow can
 guarantee that a prompt cannot. And every artifact they write opens with a
 `Mode:` line naming the path that produced it, so a downstream skill branches on

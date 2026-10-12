@@ -189,6 +189,11 @@ add the three sections the quadrants create:
 | 禁止した案 | 勝ち筋テスト結果 | 判定 |
 ```
 
+Quadrants also feed the three shortlist lanes of the range dial — Workhorse →
+定番, Hero → 本命, Lab → 飛び — derived the same way, never stored
+(`amplify-and-recycle.md` §1). The dial changes how many of each lane reach the
+shortlist; it never moves a card between quadrants.
+
 The HTML (`references/idea-map-output.md`) renders all four quadrants as its
 third 2×2 map. That map, not the survivor table, is what a reader looks at to
 decide whether they trust the run.

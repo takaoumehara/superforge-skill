@@ -65,6 +65,9 @@ flowchart TD
 ### 🗺️ 不只看到活下来的，也看到被砍掉的
 `docs/product-idea.html` 展示**每一个生成过的点子**，包括被淘汰的，各自带着判死代码和一句话理由——不会再只拿到最后三个名字。被当作「已存在」淘汰的点子，会把四条取胜路径都带删除线地列出来——**在丢掉它之前，确实从四个方向找过取胜的办法**。结果被摆进三张 2×2 地图：独创轴 × 事业轴（四个象限的名字直接标在图里）、Impact × Effort（标出「low-hanging fruit」象限）、User Impact × Company Impact，不用逐张卡片读完就能看出优先级。
 
+### 🎚️ v5: range dial · push ladder · recycle
+See the [English README](README.md) for the v5 additions — the `grounded` / `balanced` / `far-out` range dial, the push ladder and cross-breeding, recycling discarded ideas from the HTML, and fresh-context generation (`workflows/superforge-brain-sweep.js`). Spec: [references/amplify-and-recycle.md](references/amplify-and-recycle.md).
+
 ### 🔀 BreakBias 是一个选项，不是唯一方法
 一开始就问清楚：要彻底追踪的扫描，还是一种轻量方法——SCAMPER、六顶思考帽、Crazy 8s、How Might We、脑力写作、逆向头脑风暴。重的那套用在经得起推敲的时候，轻的那套用在快、低风险的第一轮。完整菜单见 [references/classic-methods.md](references/classic-methods.md)。
 
