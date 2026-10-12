@@ -1,30 +1,33 @@
 ---
 name: superforge-brain
 description: >
-  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep — or,
-  when the stakes don't call for it, a lighter classic method (SCAMPER, Six
-  Hats, Crazy 8s, How Might We). For a full sweep: decompose the problem across
-  five lenses, name the hidden bias on every element, ban the obvious three,
-  then push each through eight transformation techniques as a tracked cell
-  ledger, so no combination is silently skipped. Nothing dies for being
-  unoriginal: an existing idea survives if it can name a delta, a geographic
-  gap, a timing shift, or an execution flaw — judgment splits into an
-  originality axis and a viability axis so ordinary-but-needed and
-  brilliant-but-unfundable are told apart. Use when the user says "brainstorm",
-  "ideas", "what could we build", "reframe this", "concept", "something more
-  original", "worth building even though it exists", "アイデア", "発想",
-  "ブレスト", "企画", "ありきたりじゃないもの", "ありきたりだけど需要はある",
-  "何が作れる", "BreakBias", "SIT", "虱潰しで考えて", or runs /superforge-brain.
+  Run the BreakBias engine — an exhaustive, machine-checkable idea sweep — or a
+  lighter classic method (SCAMPER, Six Hats, Crazy 8s, How Might We). Decompose
+  across five lenses, name the hidden bias on every element, ban the obvious
+  three, and push each element through eight techniques as a tracked cell
+  ledger in fresh contexts. Nothing dies for being unoriginal: existing ideas
+  survive on a delta, geographic gap, timing shift, or execution flaw, and
+  judgment splits originality from viability. A range dial (grounded /
+  balanced / far-out) sets how safe or wild the shortlist is, a push ladder
+  stretches survivors toward far-out, and every killed idea stays visible and
+  recyclable. Use when the user says "brainstorm", "ideas", "what could we
+  build", "reframe this", "something more original", "far-out", "アイデア",
+  "発想", "ブレスト", "企画", "ありきたりじゃないもの", "ありきたりだけど需要はある",
+  "ぶっ飛んだ案", "捨てた案も見たい", "何が作れる", "BreakBias", "SIT",
+  "虱潰しで考えて", or runs /superforge-brain.
 license: MIT
 metadata:
   author: Takao Umehara
-  version: "4.1"
+  version: "5.0"
 compatibility: >
   Standalone.
   Reads docs/brief.md when present and writes docs/product-idea.md plus,
-  for a full sweep, docs/product-idea.html.
+  for a full sweep, docs/product-idea.ledger.json and docs/product-idea.html
+  (rendered from assets/idea-map.html).
   The market pass uses web search when available; without it, mark market
   status as unknown rather than guessing.
+  Claude Code can run the sweep as workflows/superforge-brain-sweep.js (fresh
+  context per element batch); elsewhere the prose procedure below is complete.
   Delegates to installed ideation skills when available; works alone when they are absent.
 ---
 
@@ -51,7 +54,10 @@ separate context, and a market gate placed after judgment.
 
 1. **Closed World** — never import an element from outside the system and its
    immediate boundary. The moment you add something external it stops being
-   non-obvious and becomes an addition anyone could have made.
+   non-obvious and becomes an addition anyone could have made. This binds the
+   **sweep**. The one sanctioned exception is the far-out rung of the push
+   ladder (§7.5), which runs after judgment and carries an `open_world` tag so
+   nobody mistakes it for a swept cell.
 2. **Form first** — construct the impossible state, **withhold judgment**, and
    derive the value backwards. Never reason forward from a benefit.
 3. **Ban the obvious three** — list the three answers any model reaches for
@@ -110,6 +116,24 @@ Then offer the three levels with what each one **means**, not only the count:
 State the resolution chosen and hold to it — do not quietly downgrade mid-run
 because the cell count got long.
 
+**Range dial — how safe or how wild the answer should be.** Ask it in the same
+breath as resolution, in these terms:
+
+> 「振れ幅は、最後に手渡す候補の配分です。どれを選んでも全セルは生成され、捨て
+> た案も全部見えます。変わるのは『定番・本命・飛び』の3レーンに何枠ずつ割くか
+> と、どこまで押し広げるかだけです。」
+
+| Dial | Shortlist of 10 (定番 / 本命 / 飛び) | Push ladder goes to | Use when |
+|---|---|---|---|
+| `grounded` | 5 / 3 / 2 | rung 2 (stretch) | the money or the deadline is real; you want something that ships |
+| `balanced` (default) | 3 / 4 / 3 | rung 3 on the top seeds only | most runs |
+| `far-out` | 2 / 3 / 5 | rung 3 on every seed, plus cross-breeding | you are tired of sensible answers and want to see the edge |
+
+The dial **never deletes anything** — it reallocates shortlist slots. Because
+lanes are derived from scores at render time, the HTML lets the reader turn the
+dial afterwards and watch the shortlist change without re-running anything.
+Lanes, seeds, and quotas → **`references/amplify-and-recycle.md`** §1.
+
 ---
 
 ## 3. Decompose, and name the bias on every element
@@ -140,7 +164,10 @@ cell_id, element_id, technique, sub_method, status, kill_code, prior_art, win_pa
 ```
 
 Statuses move one direction only:
-`todo → generated → survived | killed:<G|P|C> → developed → judged`.
+`todo → generated → survived | killed:<G|P|C> → developed → judged`. A duplicate
+absorbed during dedup ends at `merged` (with `merged_into`), and a cell left
+out on purpose by the resolution is not in the ledger at all — its element is
+marked `swept: false` instead.
 
 `prior_art` is a flag, not a verdict — a cell that already exists somewhere is
 tagged during generation and resolved after it (§6). `win_path` records which
@@ -172,6 +199,15 @@ Techniques 6–8 are BreakBias extensions, not part of classical SIT.
 When a cell keeps producing the same shape, apply an unblocking lens before
 moving on — TRIZ trade-off dissolution, inverted sabotage, or Jobs To Be Done
 (`references/ideation-tools.md` §2).
+
+**Generate each element batch in a fresh context.** The commonest reason a
+sweep returns weak ideas is not the method but fatigue: by cell 200 of one long
+context, every form is a variation of a form already written, and the model is
+pattern-completing its own earlier output. A batch sees only the brief, its own
+element rows, and the banned list — never another element's cells. In Claude
+Code, `workflows/superforge-brain-sweep.js` enforces this; without it, follow
+the prose fallback in `references/amplify-and-recycle.md` §4 (re-anchor per
+element, shape-repeat ledger).
 
 ---
 
@@ -211,9 +247,14 @@ The win-path tests, the C redefinition, and the revisit protocol →
 
 ## 7. Judge in a separate context
 
-Survivors are developed into cards — one sentence, why it is surprising, user
-value, business value, risks, next experiment — and judged **without the
-generation rationale**. The judge sees the card, the ban list, and the scoring
+Survivors are developed into cards — one sentence, **one concrete scene** (who,
+where, which moment, what they see or do), why it is surprising, user value,
+business value, a price or cost guess, risks, next experiment — and judged
+**without the generation rationale**. The scene is not decoration: a card that
+can only be written in abstract nouns (「体験価値を高める」「つながりを生む」)
+is the second commonest reason ideas feel weak, and the judge is told to score
+an unwritable scene as low Wow. Rewrite it concrete or let it score low —
+never let vagueness pass as depth. The judge sees the card, the ban list, and the scoring
 anchors. Nothing about how the idea was reached.
 
 Four axes, 1–10. **Novelty is the distance from the banned three**, so a
@@ -245,6 +286,33 @@ next → **`references/value-classification.md`** §1–§2.
 
 ---
 
+## 7.5 Amplify — push the survivors, then cross-breed them
+
+A cell is one transformation of one element. Good ideas are rarely one step
+from the obvious; they are usually a decent idea pushed two steps further, or
+two decent ideas from different corners combined. The sweep cannot produce
+either by construction, so this step does.
+
+- **Push ladder.** Each seed (chosen by the dial from Heroes, the strongest
+  Workhorses, Lab entries, and anything the user recycled) gets three rungs:
+  **L1 grounded** — the smallest version that could ship in 30 days, Closed
+  World intact · **L2 stretch** — one more premise broken · **L3 far-out** —
+  may import one outside element or jump ten years, must state *why it is
+  impossible today* and *the first step that is possible today*, tagged
+  `open_world`. Every rung is a new card with `parent` and `rung`, judged blind
+  like any other.
+- **Cross-breed** (`balanced` top pairs, `far-out` always). Pair survivors from
+  different techniques **and** different elements whose broken biases do not
+  contradict; the hybrid must name what each parent contributes. Tagged
+  `hybrid` with both parent IDs.
+
+Rungs and hybrids join the same ledger and the same quadrant map, so the reader
+can see whether the best idea came from the sweep, the push, or a cross.
+Protocol, seed counts, and card fields → **`references/amplify-and-recycle.md`**
+§2–§3.
+
+---
+
 ## 8. Market, only after judgment
 
 Never before. Market knowledge is the strongest source of premature collapse:
@@ -265,6 +333,10 @@ win-path code from §6 still hold once the incumbents are named."
 
 ## 9. Synthesise
 
+- **Shortlist by lane, using the dial** — 定番 (Workhorse) / 本命 (Hero) /
+  飛び (Lab, plus any `open_world` rung). Fill each lane's quota from §2 with
+  its strongest cards; if a lane cannot fill, say so rather than promoting a
+  card from another lane
 - **Cluster** the survivors (UX / 収益 / コスト / ブランド / コミュニティ / データ / ラディカル / 即試せる / 長期)
 - **Name the biases that broke repeatedly** — that repetition marks where the
   real opportunity is
@@ -288,8 +360,12 @@ done rather than what they would do →
 interviews, and asking a Workhorse the Hero questions is how a perfectly good
 ordinary business gets talked out of existence.
 
-**Build `docs/product-idea.html` alongside the markdown** — every generated
-cell, not only survivors, with kill codes and reasons left visible; an
+**Build `docs/product-idea.html` alongside the markdown** by copying
+`assets/idea-map.html` and replacing its embedded ledger with the run's
+`docs/product-idea.ledger.json` — never hand-write the page. It shows every
+generated cell, not only survivors, with kill codes and reasons left visible;
+a live range dial over the shortlist; a recycle tray that turns ticked cards
+into a command the user pastes back (§Execution modes); an
 Impact × Effort map with the low-hanging-fruit quadrant named; a User
 Impact × Company Impact map from the judge's own axes; and the
 独創軸 × 事業軸 quadrant map that separates Hero / Workhorse / Lab / Discard.
@@ -305,6 +381,17 @@ why — instead of being handed only the last three names standing.
 - **partner (default)** — 分解後・スイープ後・審判後で停止して方向を確認する。**創造フェーズは partner でも全セル生成する**
 - **facilitation** — 答えの前に問いを渡す（問い → 観点 → ヒント → 小例 → AI案）
 
+### Follow-up commands (read `docs/product-idea.ledger.json`, never regenerate the sweep)
+
+- `/superforge-brain recycle <cell_id…> [--push grounded|stretch|far-out]` —
+  拾い直す。指定セルを `recycled` にし、カード化 → 審判 →（指定時）Push ladder に通す
+- `/superforge-brain push <cell_id…> [--to stretch|far-out]` — 生き残りをさらに押し広げる
+- `/superforge-brain cross <cell_id> <cell_id>` — 2案を掛け合わせる
+- `/superforge-brain dial grounded|balanced|far-out` — ショートリストだけを組み直す（生成はしない）
+
+The HTML's recycle tray writes exactly these strings. Protocol →
+`references/amplify-and-recycle.md` §5.
+
 ## Quality check — ask these after the run
 
 - 手法（BreakBias か classic method か）を、始める前にユーザーに確認したか
@@ -319,6 +406,11 @@ why — instead of being handed only the last three names standing.
 - 審判は生成過程を見ずに採点したか。4軸を**1つの合計にせず**、独創軸と事業軸に分けたか
 - Workhorse を「独創性が低い」という理由で捨てていないか
 - Lab の各案に「戻ってくる条件」が1文で書かれているか。書けないものを棚に残していないか
+- 振れ幅ダイヤルを始める前に確認したか。ショートリストのレーン配分はダイヤル通りか。埋まらないレーンを他から水増ししていないか
+- 要素バッチごとに新しい文脈で生成したか（またはプロズ版のフォールバックで形の重複を数えたか）
+- 全カードに具体的な場面が1つ書かれているか。抽象語だけのカードを審判に通していないか
+- Push ladder の L3 に `open_world` タグ、「今はなぜ無理か」「今できる最初の一歩」が付いているか
+- `docs/product-idea.ledger.json` が書かれ、HTML がそれと同じデータで描画されているか
 - 市場判定は審判の後だったか
 - `docs/product-idea.html` は殺したセルも含めて全件見えるか。勝者だけになっていないか。4象限のマップが出ているか
 - 実在の人に確認したか。していないなら「していない」と成果物に書いたか。お世辞と証拠を区別できる形で質問を残したか
@@ -351,7 +443,14 @@ candidates before committing to one. It also specifies the five-section research
 synthesis for when the interviews must brief a team.
 
 **`references/idea-map-output.md`** — the `docs/product-idea.html` spec: the
-all-ideas board that keeps killed cells visible, and the three 2×2 maps.
+all-ideas board that keeps killed cells visible, the three 2×2 maps, the range
+dial, and the recycle tray. `assets/idea-map.html` is its reference
+implementation — copy it and swap the data.
+
+**`references/amplify-and-recycle.md`** — the v5 additions: range dial and
+lanes (§1), push ladder (§2), cross-breeding (§3), fresh-context generation and
+its prose fallback (§4), the ledger JSON and the recycle / push / cross / dial
+commands (§5).
 
 ## Artifact
 
@@ -362,8 +461,11 @@ idea, nobody loses an idea that was only early, and nobody mistakes a partial
 sweep for a complete one. Read `docs/brief.md` first if it exists and confirm
 its premise rather than re-asking.
 
-For a BreakBias sweep, also write `docs/product-idea.html` — see
-`references/idea-map-output.md`. Not required after a classic-method session,
+For a BreakBias sweep, also write `docs/product-idea.ledger.json` (the ledger,
+schema in `references/amplify-and-recycle.md` §5) and `docs/product-idea.html`
+rendered from it — see `references/idea-map-output.md`. The JSON is what makes
+recycle, push, and dial possible in a later session without re-running the
+sweep. Not required after a classic-method session,
 where there is no ledger to visualise.
 
 ## Delegate when a sharper skill is installed

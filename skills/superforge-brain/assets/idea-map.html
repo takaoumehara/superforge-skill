@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="ja" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BreakBias Idea Map</title>
+<!--
+  Reference implementation of references/idea-map-output.md.
+  To use: copy to docs/product-idea.html and replace ONLY the JSON inside
+  <script type="application/json" id="ledger"> with docs/product-idea.ledger.json.
+  Everything on the page — shortlist, maps, board, coverage line — is computed
+  from that one object. Quadrants and lanes are derived from scores here and
+  must never be written into the ledger.
+  Visual language: cie-ds rules (two colours via tokens, Outfit + DM Mono +
+  Zen Kaku Gothic New, no shadows, 280–420ms expo motion, reduced-motion aware).
+  Fonts are progressive enhancement; the page works offline from file://.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Outfit:wght@100..900&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<style>
+  :root {
+    --cie-ink: #0b0b0b;
+    --cie-paper: #f3f2ee;
+    --cie-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --cie-dur: 320ms;
+    --cie-dur-slow: 420ms;
+    --cie-font-sans: "Outfit", "Zen Kaku Gothic New", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+    --cie-font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --background: var(--cie-paper);
+    --foreground: var(--cie-ink);
+  }
+  :root.dark {
+    --background: var(--cie-ink);
+    --foreground: var(--cie-paper);
+  }
+  /* alpha steps of the foreground — the only "other colours" allowed */
+  :root { --fg-80: color-mix(in srgb, var(--foreground) 80%, transparent);
+          --fg-60: color-mix(in srgb, var(--foreground) 60%, transparent);
+          --fg-40: color-mix(in srgb, var(--foreground) 40%, transparent);
+          --fg-20: color-mix(in srgb, var(--foreground) 20%, transparent);
+          --fg-12: color-mix(in srgb, var(--foreground) 12%, transparent);
+          --fg-06: color-mix(in srgb, var(--foreground) 6%, transparent);
+          --fg-03: color-mix(in srgb, var(--foreground) 3%, transparent); }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--background); color: var(--foreground);
+         font-family: var(--cie-font-sans); font-weight: 400; line-height: 1.6;
+         transition: background var(--cie-dur) var(--cie-ease-expo), color var(--cie-dur) var(--cie-ease-expo); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px 160px; }
+  .mono { font-family: var(--cie-font-mono); letter-spacing: 0; }
+  h1 { font-weight: 200; font-size: clamp(32px, 6vw, 64px); line-height: 1.05; margin: 48px 0 12px; letter-spacing: -0.02em; }
+  h2 { font-weight: 300; font-size: clamp(22px, 3vw, 30px); margin: 64px 0 8px; letter-spacing: -0.01em; }
+  h3 { font-weight: 500; font-size: 15px; margin: 0; }
+  p.lead { color: var(--fg-60); margin: 0 0 20px; max-width: 70ch; }
+  hr { border: 0; border-top: 1px solid var(--fg-12); margin: 0; }
+  button, select, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            padding: 16px 0; border-bottom: 1px solid var(--fg-12); }
+  .tag { font-family: var(--cie-font-mono); font-size: 12px; color: var(--fg-60); }
+  .btn { background: transparent; border: 1px solid var(--fg-40); border-radius: 999px; padding: 6px 14px;
+         cursor: pointer; transition: background var(--cie-dur) var(--cie-ease-expo), border-color var(--cie-dur) var(--cie-ease-expo); }
+  .btn:hover { border-color: var(--foreground); }
+  .btn.solid { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+  .coverage { font-family: var(--cie-font-mono); font-size: 13px; color: var(--fg-80); padding: 12px 0; }
+  .warn { border: 1px solid var(--foreground); padding: 10px 14px; margin: 8px 0; font-weight: 600; }
+  .warn::before { content: "⚠ "; }
+
+  /* dial */
+  .dial { display: inline-flex; border: 1px solid var(--fg-40); border-radius: 999px; padding: 3px; gap: 2px; margin: 8px 0 20px; }
+  .dial button { border: 0; background: transparent; padding: 8px 18px; border-radius: 999px; cursor: pointer;
+                 transition: background var(--cie-dur) var(--cie-ease-expo), color var(--cie-dur) var(--cie-ease-expo); }
+  .dial button[aria-pressed="true"] { background: var(--foreground); color: var(--background); }
+  .lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .lane { border-top: 2px solid var(--foreground); padding-top: 10px; min-width: 0; }
+  .lane[data-lane="safe"] { border-top-style: solid; }
+  .lane[data-lane="core"] { border-top-width: 4px; }
+  .lane[data-lane="far"] { border-top-style: dashed; }
+  .lane-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .lane-head h3 { font-size: 18px; font-weight: 400; }
+  .slot-empty { border: 1px dashed var(--fg-20); padding: 12px; font-size: 13px; color: var(--fg-60); margin-bottom: 8px; }
+
+  /* cards */
+  .card { border: 1px solid var(--fg-20); padding: 12px 14px; margin-bottom: 8px; background: var(--fg-03);
+          transition: border-color var(--cie-dur) var(--cie-ease-expo), opacity var(--cie-dur) var(--cie-ease-expo), transform var(--cie-dur) var(--cie-ease-expo); }
+  .card:hover { border-color: var(--fg-60); }
+  .card.enter { animation: rise var(--cie-dur-slow) var(--cie-ease-expo) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .card .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+  .card .name { font-weight: 600; font-size: 15px; }
+  .card .line { font-size: 14px; color: var(--fg-80); }
+  .card .scene { font-size: 13px; color: var(--fg-60); margin-top: 4px; }
+  .card.killed { opacity: .5; background: transparent; border-style: dashed; }
+  .card.killed .name, .card.killed .line { text-decoration: line-through; text-decoration-color: var(--fg-60); }
+  .card.dim { opacity: .55; }
+  .badge { font-family: var(--cie-font-mono); font-size: 11px; border: 1px solid var(--fg-40); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+  .badge.solid { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+  .badge.strike { text-decoration: line-through; opacity: .6; }
+  .badge.dashed { border-style: dashed; }
+  .meta { font-family: var(--cie-font-mono); font-size: 11px; color: var(--fg-60); }
+  .card details { margin-top: 6px; font-size: 13px; }
+  .card summary { cursor: pointer; color: var(--fg-60); font-size: 12px; }
+  .trace { margin: 6px 0 0; padding: 0; list-style: none; border-left: 1px solid var(--fg-20); }
+  .trace li { padding: 2px 0 2px 10px; color: var(--fg-80); }
+  .trace b { font-weight: 500; color: var(--foreground); }
+  .actions { display: flex; gap: 10px; align-items: center; margin-top: 8px; font-size: 12px; flex-wrap: wrap; }
+  .actions label { display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
+  .actions select { background: transparent; border: 1px solid var(--fg-20); border-radius: 4px; padding: 2px 4px; font-size: 12px; }
+  .actions select option { background: var(--background); }
+
+  /* banned */
+  .banned { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+  /* maps */
+  .maps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .mapbox { border: 1px solid var(--fg-12); padding: 12px; }
+  .mapbox svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--fg-60); margin-top: 8px; }
+  .tray-inline { font-size: 12px; color: var(--fg-60); margin-top: 6px; }
+  svg text { fill: var(--foreground); font-family: var(--cie-font-sans); }
+  svg .q-label { font-size: 15px; font-weight: 500; }
+  svg .q-sub { font-size: 10px; fill: var(--fg-60); font-family: var(--cie-font-mono); }
+  svg .axis { stroke: var(--fg-40); stroke-width: 1; }
+  svg .grid { stroke: var(--fg-20); stroke-width: 1; stroke-dasharray: 3 4; }
+  svg .pt { fill: var(--foreground); stroke: var(--background); stroke-width: 1.5; cursor: pointer;
+            transition: transform var(--cie-dur) var(--cie-ease-expo); transform-box: fill-box; transform-origin: center; }
+  svg .pt:hover { transform: scale(1.6); }
+  svg .pt.hollow { fill: var(--background); stroke: var(--foreground); stroke-width: 1.5; }
+  svg .pt-label { font-size: 10px; fill: var(--fg-80); pointer-events: none; }
+
+  /* filters + board */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 16px; align-items: center; }
+  .filters select { background: transparent; border: 1px solid var(--fg-40); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
+  .filters select option { background: var(--background); }
+  .tech { margin-top: 24px; }
+  .tech-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--fg-12); padding-bottom: 6px; margin-bottom: 10px; }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+
+  .shelves { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  dl.kv { margin: 6px 0 0; font-size: 13px; }
+  dl.kv dt { color: var(--fg-60); font-size: 11px; font-family: var(--cie-font-mono); margin-top: 6px; }
+  dl.kv dd { margin: 0; }
+
+  /* recycle tray */
+  .tray { position: fixed; left: 0; right: 0; bottom: 0; background: var(--background); border-top: 1px solid var(--foreground);
+          transform: translateY(110%); transition: transform var(--cie-dur) var(--cie-ease-expo); z-index: 10; }
+  .tray.open { transform: none; }
+  .tray .inner { max-width: 1240px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .tray pre { flex: 1 1 420px; margin: 0; font-family: var(--cie-font-mono); font-size: 13px; white-space: pre-wrap; word-break: break-all;
+              border: 1px solid var(--fg-20); padding: 8px 10px; min-width: 0; }
+
+  @media (max-width: 860px) {
+    .lanes, .banned, .shelves { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <span class="tag">superforge-brain · BreakBias idea map</span>
+    <button class="btn" id="theme" type="button" aria-label="Toggle light and dark">Light / Dark</button>
+  </div>
+
+  <header>
+    <h1 id="title"></h1>
+    <div class="tag" id="meta"></div>
+    <div class="coverage" id="coverage"></div>
+    <div id="warnings"></div>
+  </header>
+
+  <section aria-labelledby="h-short">
+    <h2 id="h-short">ショートリスト</h2>
+    <p class="lead">振れ幅ダイヤルは、手渡す候補の配分だけを変えます。全セルは生成済みで、何も消えません。動かすとその場で組み替わります。</p>
+    <div class="dial" role="group" aria-label="Range dial" id="dial"></div>
+    <div class="lanes" id="lanes"></div>
+  </section>
+
+  <section aria-labelledby="h-banned">
+    <h2 id="h-banned">禁止した平凡3案と、その再訪結果</h2>
+    <p class="lead">生成中は禁止しましたが、検討からは外していません。スイープ後に勝ち筋テストを一度だけ通しています。</p>
+    <div class="banned" id="banned"></div>
+  </section>
+
+  <section aria-labelledby="h-maps">
+    <h2 id="h-maps">マップ</h2>
+    <p class="lead">位置はすべてスコアから計算しています。手で置いた点はありません。</p>
+    <div class="maps" id="maps"></div>
+  </section>
+
+  <section aria-labelledby="h-board">
+    <h2 id="h-board">全アイデア</h2>
+    <p class="lead">殺したセルも理由付きで全部出しています。「拾う」にチェックすると、下のトレイに再開用のコマンドが組み立てられます。</p>
+    <div class="filters" id="filters"></div>
+    <div id="board"></div>
+  </section>
+
+  <section aria-labelledby="h-shelves">
+    <h2 id="h-shelves">棚</h2>
+    <div class="shelves" id="shelves"></div>
+  </section>
+</div>
+
+<div class="tray" id="tray" aria-live="polite">
+  <div class="inner">
+    <span class="tag" id="tray-count"></span>
+    <pre id="tray-cmd"></pre>
+    <button class="btn solid" id="tray-copy" type="button">Copy</button>
+    <button class="btn" id="tray-clear" type="button">Clear</button>
+  </div>
+</div>
+
+<script type="application/json" id="ledger">
+{
+  "schema": "breakbias-ledger/1",
+  "subject": "駅前の小さなカフェ（デモデータ）",
+  "domain": "A",
+  "resolution": "quick",
+  "dial": "balanced",
+  "generated": "2026-10-12",
+  "elements": [
+    {"id": "E01", "name": "レジカウンター", "lens": "structural", "bias": "注文と会計は同じ場所で人が受ける", "break_potential": "high", "obvious": ["セルフレジ", "モバイルオーダー", "ポイントカード"]},
+    {"id": "E02", "name": "メニュー", "lens": "structural", "bias": "メニューは客が選ぶもの", "break_potential": "high", "obvious": ["季節限定", "写真付きメニュー", "おすすめ表示"]},
+    {"id": "E03", "name": "待ち時間", "lens": "process", "bias": "待ち時間は短いほど良い", "break_potential": "med", "obvious": ["呼び出しベル", "事前注文", "Wi-Fi"]},
+    {"id": "E04", "name": "天気", "lens": "relational", "bias": "天気は店の外の話", "break_potential": "high", "obvious": ["雨の日割引", "テラス席", "温かい新メニュー"]}
+  ],
+  "banned": [
+    {"id": "B1", "idea": "モバイルオーダーを入れる", "revisit": {"win_path": "w:exec", "reason": "近隣3店のアプリは常連登録が必須で、通勤客が一見で使えない", "card_id": "B1"}},
+    {"id": "B2", "idea": "ポイントカードで再来店を促す", "revisit": {"win_path": null, "reason": "差分・地理・時機・実行のどれも名指しできなかった", "card_id": null}},
+    {"id": "B3", "idea": "季節限定メニューを出す", "revisit": {"win_path": null, "reason": "全チェーンが既にやっており、変える一点が見つからない", "card_id": null}}
+  ],
+  "cells": [
+    {"id": "E01-SUB-1", "element_id": "E01", "technique": "Subtraction", "sub_method": "除去のみ", "bias": "注文は人が受ける", "form": "レジが無い店", "provider": "人件費とレジ待ちが消える", "user": "並ばずに座れる", "concept": "レジの無い喫茶", "status": "killed", "kill_code": "C", "kill_reason": "無人カフェは既に多く、4方向とも勝ち筋を名指しできなかった", "prior_art": true, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E01-SUB-2", "element_id": "E01", "technique": "Subtraction", "sub_method": "除去+代替", "bias": "会計は店員がする", "form": "会計を常連客が交代で受け持つ", "provider": "閉店前の人手が浮く", "user": "常連が店の一部になれる", "concept": "常連が会計番をする店", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": true, "merged_into": null, "recycled": false},
+    {"id": "E02-SUB-1", "element_id": "E02", "technique": "Subtraction", "sub_method": "除去のみ", "bias": "メニューは客が選ぶ", "form": "メニューが無い。客は今日の気分だけを言う", "provider": "仕入れを日替わりで最適化できる", "user": "選ぶ疲れが消える", "concept": "気分で頼む喫茶", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": true, "win_path": "w:delta", "win_reason": "おまかせ店はあるが、気分の一語だけで出す形式は無い", "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E02-DIV-1", "element_id": "E02", "technique": "Division", "sub_method": "時間分割", "bias": "メニューは一日中同じ", "form": "15分ごとにメニューが入れ替わる", "provider": "ロスを時間で吸収できる", "user": "その時間にしか無い一品", "concept": "15分メニュー", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E02-MUL-1", "element_id": "E02", "technique": "Multiplication", "sub_method": "×2（所有者を変える）", "bias": "メニューは店が書く", "form": "客が書いたメニューが店のメニューと並ぶ", "provider": "開発コストが下がる", "user": "自分の一品が店に載る", "concept": "客メニュー併記", "status": "killed", "kill_code": "G", "kill_reason": "書店や居酒屋に置き換えても同じ文が成立する。この店の話ではない", "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E03-REV-1", "element_id": "E03", "technique": "Reverse", "sub_method": "コア前提反転", "bias": "待ち時間は短いほど良い", "form": "わざと7分待たせる。その7分が商品", "provider": "回転率は落ちるが単価が上がる", "user": "強制的な休憩が手に入る", "concept": "7分待ちの店", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E03-TU-1", "element_id": "E03", "technique": "Task Unification", "sub_method": "内部要素に新機能", "bias": "待ち時間は無駄", "form": "待ち時間に豆の焙煎を客が手伝う", "provider": "焙煎の人手", "user": "体験が残る", "concept": "待ち焙煎", "status": "killed", "kill_code": "P", "kill_reason": "焙煎は火と時間の管理が要り、待ち時間の数分では成立しない", "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E04-AD-1", "element_id": "E04", "technique": "Attribute Dependency", "sub_method": "価格×雨量", "bias": "天気は店の外の話", "form": "雨量に応じて温かい一品の値段が下がる", "provider": "雨の日の客足を補える", "user": "雨の日に寄る理由ができる", "concept": "雨量連動プライス", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": true, "win_path": "w:timing", "win_reason": "降水量APIと電子値札が安くなり、個人店でも数千円で組める", "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E04-REP-1", "element_id": "E04", "technique": "Repurpose", "sub_method": "Senses", "bias": "天気は見るもの", "form": "店内の音が外の天気をそのまま流す", "provider": "雰囲気づくりが無料", "user": "外を見ずに天気が分かる", "concept": "天気の音がする店", "status": "judged", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E04-SHI-1", "element_id": "E04", "technique": "Shift", "sub_method": "2軸ベクトル反転", "bias": "晴れの日が稼ぎ時", "form": "雨の日だけ開く店", "provider": "晴れの日は別業態で稼ぐ", "user": "雨の日の居場所", "concept": "雨の日だけの喫茶", "status": "survived", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false},
+    {"id": "E03-DIV-1", "element_id": "E03", "technique": "Division", "sub_method": "時間分割", "bias": "待つのは店内", "form": "", "provider": "", "user": "", "concept": "", "status": "todo", "kill_code": null, "kill_reason": null, "prior_art": false, "win_path": null, "win_reason": null, "salvaged": false, "merged_into": null, "recycled": false}
+  ],
+  "cards": [
+    {"id": "B1", "source": "revisited", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "一見で使えるモバイルオーダー", "one_line": "登録なしでQRから注文と会計が終わる", "scene": "朝8時、改札を出た通勤客が店頭のQRを読み、歩きながら注文して受け取り口で受け取る", "why_surprising": "", "user_value": "朝の5分が戻る", "business_value": "朝のピークの取りこぼしが減る", "price": "決済手数料のみ", "risks": "常連の会話が減る", "next_experiment": "1週間、紙のQRだけで試す", "impossible_today": null, "first_step": null, "scores": {"novelty": 2, "wow": 2, "user": 8, "company": 7}, "effort": 2, "lab_reentry": null, "market": {"status": "red", "verdict": "wedge", "note": "近隣は会員登録必須。一見対応が楔"}},
+    {"id": "E01-SUB-2", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "常連が会計番をする店", "one_line": "閉店前の1時間、会計を常連が交代で受け持つ", "scene": "金曜20時、カウンターの常連が「お会計こちらです」と言い、店主は奥で翌日の仕込みをしている", "why_surprising": "客と店員の境目を店が自分で崩す", "user_value": "常連が役割を持てる", "business_value": "閉店前の人件費が浮く", "price": "会計番はコーヒー無料", "risks": "金銭トラブル、保険", "next_experiment": "常連3人と月1回だけ試す", "impossible_today": null, "first_step": null, "scores": {"novelty": 7, "wow": 7, "user": 5, "company": 5}, "effort": 2, "lab_reentry": "キャッシュレス比率が9割を超え、現金を触らずに会計番ができるようになったら再評価する", "market": null},
+    {"id": "E02-SUB-1", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "気分で頼む喫茶", "one_line": "メニューは無く、今日の気分を一語で伝えると一杯が出る", "scene": "雨上がりの15時、客が「ぼんやり」と言うと、店主が浅煎りと小さな焼き菓子を出す", "why_surprising": "選択を売らずに、選ばなくていいことを売る", "user_value": "決める疲れが消える", "business_value": "仕入れを日替わりで最適化できる", "price": "一律680円", "risks": "当たり外れの不満", "next_experiment": "週末だけ気分オーダー枠を作る", "impossible_today": null, "first_step": null, "scores": {"novelty": 7, "wow": 8, "user": 7, "company": 6}, "effort": 2, "lab_reentry": null, "market": {"status": "gray", "verdict": "open", "note": "おまかせ業態はあるが気分起点は無い"}},
+    {"id": "E02-SUB-1.L1", "source": "push", "parent": "E02-SUB-1", "rung": 1, "parents": null, "open_world": false, "name": "気分ボタン3つ", "one_line": "レジ横に「元気／ぼんやり／集中」の3ボタンだけ置く", "scene": "昼休み、会社員が「集中」を押すと、深煎りと小さなチョコが出てくる", "why_surprising": "", "user_value": "3秒で決まる", "business_value": "既存メニューのままで始められる", "price": "追加費用なし", "risks": "飽き", "next_experiment": "紙のボタンで1週間", "impossible_today": null, "first_step": null, "scores": {"novelty": 5, "wow": 5, "user": 7, "company": 7}, "effort": 1, "lab_reentry": null, "market": null},
+    {"id": "E02-SUB-1.L2", "source": "push", "parent": "E02-SUB-1", "rung": 2, "parents": null, "open_world": false, "name": "値段も気分で決まる店", "one_line": "気分を伝えると一杯が出て、払う額も客がその場の気分で決める", "scene": "給料日前の客が「しょんぼり」と言い、300円を置いて帰る。翌週、同じ客が1200円を置いていく", "why_surprising": "価格という前提まで客に渡す", "user_value": "懐具合に合わせられる", "business_value": "常連の平均単価が上がる事例がある", "price": "客が決める", "risks": "赤字日", "next_experiment": "閉店前1時間だけ試す", "impossible_today": null, "first_step": null, "scores": {"novelty": 8, "wow": 8, "user": 6, "company": 4}, "effort": 2, "lab_reentry": "常連比率が7割を超えたら再評価する", "market": null},
+    {"id": "E02-SUB-1.L3", "source": "push", "parent": "E02-SUB-1", "rung": 3, "parents": null, "open_world": true, "name": "顔色で淹れる一杯", "one_line": "入店時の表情と歩き方から、言葉なしで一杯が決まる", "scene": "入口のカメラが客の歩く速さを読み、客が座る頃にはぬるめのカフェオレが置かれている", "why_surprising": "注文という行為そのものが消える", "user_value": "言葉にしなくていい", "business_value": "体験そのものが話題になる", "price": "一律900円", "risks": "プライバシー、誤読", "next_experiment": "店主の目視で同じことを1日やってみる", "impossible_today": "表情推定の誤読が多く、無断の撮影は同意の問題がある", "first_step": "カメラ無しで、店主の観察だけで出す日を作る", "scores": {"novelty": 9, "wow": 9, "user": 5, "company": 4}, "effort": 5, "lab_reentry": "端末内で完結する表情推定が普及し、同意の取り方が定まったら再評価する", "market": null},
+    {"id": "E02-DIV-1", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "15分メニュー", "one_line": "15分ごとに一品が入れ替わる", "scene": "14:45に入った客だけが、14:45〜15:00限定の柚子トーストを頼める", "why_surprising": "時間が限定性を作る", "user_value": "偶然の一品", "business_value": "ロスを時間で吸収", "price": "通常価格", "risks": "厨房負荷", "next_experiment": "午後だけ1時間試す", "impossible_today": null, "first_step": null, "scores": {"novelty": 6, "wow": 6, "user": 5, "company": 5}, "effort": 3, "lab_reentry": "厨房が2人体制になったら再評価する", "market": null},
+    {"id": "E03-REV-1", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "7分待ちの店", "one_line": "わざと7分待たせ、その7分を店が演出する", "scene": "注文すると砂時計が置かれ、7分のあいだスマホを預けて窓の外を見る", "why_surprising": "待ち時間を短くする代わりに売り物にする", "user_value": "強制的に休める", "business_value": "単価が上がる", "price": "+200円", "risks": "急ぎの客が離れる", "next_experiment": "平日午後に7分枠を設ける", "impossible_today": null, "first_step": null, "scores": {"novelty": 7, "wow": 7, "user": 7, "company": 6}, "effort": 1, "lab_reentry": null, "market": null},
+    {"id": "E04-AD-1", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "雨量連動プライス", "one_line": "雨量に応じて温かい一品の値段が自動で下がる", "scene": "雨の火曜18時、傘を畳んだ客がレジ横の画面を見ると、今日の雨量で120円下がったスープが並んでいる", "why_surprising": "", "user_value": "雨の日に寄る理由", "business_value": "雨の日の客足を補う", "price": "値下げ幅は雨量で変動", "risks": "晴れの日との落差", "next_experiment": "手書き黒板で雨量割を1か月", "impossible_today": null, "first_step": null, "scores": {"novelty": 4, "wow": 5, "user": 7, "company": 7}, "effort": 2, "lab_reentry": null, "market": {"status": "gray", "verdict": "open", "note": "天候割引はあるが、雨量連動の自動化は個人店に無い"}},
+    {"id": "E04-REP-1", "source": "sweep", "parent": null, "rung": null, "parents": null, "open_world": false, "name": "天気の音がする店", "one_line": "店内のBGMが外の天気をそのまま流す", "scene": "", "why_surprising": "雰囲気がある", "user_value": "心地よい", "business_value": "差別化", "price": "", "risks": "", "next_experiment": "", "impossible_today": null, "first_step": null, "scores": {"novelty": 5, "wow": 3, "user": 3, "company": 2}, "effort": null, "lab_reentry": null, "market": null},
+    {"id": "X1", "source": "hybrid", "parent": null, "rung": null, "parents": ["E03-REV-1", "E04-AD-1"], "open_world": false, "name": "雨の日7分", "one_line": "雨の日だけ7分待ちの席が開き、雨量が強いほど一杯が安くなる", "scene": "土砂降りの夕方、7分の砂時計が置かれた窓際で、客は雨音を聞きながら値下がりしたココアを待つ", "why_surprising": "悪天候を、来店を減らす理由から来店の理由に変える", "user_value": "雨の日の居場所", "business_value": "雨の日の売上が平準化する", "price": "雨量で変動", "risks": "晴れが続く月", "next_experiment": "梅雨の1か月だけ実施", "impossible_today": null, "first_step": null, "scores": {"novelty": 7, "wow": 7, "user": 7, "company": 7}, "effort": 2, "lab_reentry": null, "market": null}
+  ]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var L = JSON.parse(document.getElementById("ledger").textContent);
+
+  var TECHS = ["Subtraction", "Division", "Multiplication", "Task Unification", "Attribute Dependency", "Reverse", "Shift", "Repurpose"];
+  var TECH_JA = { "Subtraction": "引き算", "Division": "分割", "Multiplication": "掛け算", "Task Unification": "タスク統合", "Attribute Dependency": "属性依存", "Reverse": "反転", "Shift": "シフト", "Repurpose": "転用" };
+  var QUOTA = { grounded: { safe: 5, core: 3, far: 2 }, balanced: { safe: 3, core: 4, far: 3 }, "far-out": { safe: 2, core: 3, far: 5 } };
+  var LANES = [
+    { key: "safe", ja: "定番", en: "Safe · Workhorse", empty: "定番が足りませんでした。ありふれていて確実に要る案が少ない、という結果です。" },
+    { key: "core", ja: "本命", en: "Core · Hero", empty: "本命が足りませんでした。見たことがなく、需要もある案がこれ以上出ていません。" },
+    { key: "far", ja: "飛び", en: "Far · Lab + open world", empty: "飛び枠が足りませんでした。Push ladder を far-out まで回すと増えます。" }
+  ];
+  var PUSH_FLAG = { grounded: "grounded", stretch: "stretch", "far-out": "far-out" };
+
+  var cellsById = {}; L.cells.forEach(function (c) { cellsById[c.id] = c; });
+  var cardsById = {}; L.cards.forEach(function (c) { cardsById[c.id] = c; });
+  var elementsById = {}; L.elements.forEach(function (e) { elementsById[e.id] = e; });
+
+  // ---- derived values (never stored) ----
+  function orig(c) { return c.scores ? c.scores.novelty + c.scores.wow : null; }
+  function viab(c) { return c.scores ? c.scores.user + c.scores.company : null; }
+  function quadrant(c) {
+    if (!c.scores) return null;
+    var o = orig(c) >= 12, v = viab(c) >= 12;
+    return o && v ? "Hero" : o ? "Lab" : v ? "Workhorse" : "Discard";
+  }
+  function lane(c) {
+    if (c.open_world) return "far";
+    var q = quadrant(c);
+    return q === "Hero" ? "core" : q === "Workhorse" ? "safe" : q === "Lab" ? "far" : null;
+  }
+  function laneScore(c, key) {
+    return key === "safe" ? viab(c) * 10 + (c.source === "revisited" ? 1 : 0) : key === "core" ? orig(c) + viab(c) : orig(c);
+  }
+
+  // ---- tiny DOM helper ----
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === "class") el.className = v;
+      else if (k === "text") el.textContent = v;
+      else if (k.slice(0, 2) === "on") el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? "" : v);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      var ch = arguments[i];
+      if (ch == null || ch === false) continue;
+      if (Array.isArray(ch)) ch.forEach(function (x) { if (x != null && x !== false) el.appendChild(typeof x === "string" ? document.createTextNode(x) : x); });
+      else el.appendChild(typeof ch === "string" ? document.createTextNode(ch) : ch);
+    }
+    return el;
+  }
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function s(tag, attrs, text) {
+    var el = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  // ---- theme ----
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("bb-theme"); if (saved === "light") root.classList.remove("dark"); } catch (e) {}
+  document.getElementById("theme").addEventListener("click", function () {
+    root.classList.toggle("dark");
+    try { localStorage.setItem("bb-theme", root.classList.contains("dark") ? "dark" : "light"); } catch (e) {}
+  });
+
+  // ---- header ----
+  document.getElementById("title").textContent = L.subject;
+  document.getElementById("meta").textContent =
+    "domain " + L.domain + " · resolution " + L.resolution + " · dial " + L.dial + " · " + L.generated + " · elements swept " +
+    L.elements.filter(function (e) { return e.swept !== false; }).length + " / " + L.elements.length;
+  (function coverage() {
+    var c = L.cells, n = function (f) { return c.filter(f).length; };
+    var gen = n(function (x) { return x.status !== "todo"; });
+    var kills = { G: 0, P: 0, C: 0 }; c.forEach(function (x) { if (x.kill_code) kills[x.kill_code]++; });
+    var tagged = n(function (x) { return x.prior_art; });
+    var passed = n(function (x) { return x.prior_art && x.win_path; });
+    var salv = n(function (x) { return x.salvaged; });
+    var judged = L.cards.filter(function (x) { return x.scores; }).length;
+    var push = L.cards.filter(function (x) { return x.source === "push"; }).length;
+    var hyb = L.cards.filter(function (x) { return x.source === "hybrid"; }).length;
+    var rec = n(function (x) { return x.recycled; });
+    document.getElementById("coverage").textContent =
+      gen + " generated · " + (kills.G + kills.P + kills.C) + " killed (G" + kills.G + "/P" + kills.P + "/C" + kills.C + ") · " +
+      tagged + " tagged 既出 → " + passed + " passed a win path · " + salv + " salvaged · " + push + " pushed · " + hyb + " hybrids · " +
+      rec + " recycled · " + judged + " judged / " + c.length + " cells";
+    var todo = n(function (x) { return x.status === "todo" || x.status === "generated"; });
+    var w = document.getElementById("warnings");
+    if (todo) w.appendChild(h("div", { class: "warn", text: todo + " セルが未完了（todo / generated）です。このスイープは終わっていません。" }));
+    var unshelved = L.cards.filter(function (x) { return quadrant(x) === "Lab" && !x.lab_reentry; });
+    if (unshelved.length) w.appendChild(h("div", { class: "warn", text: "戻る条件の無い Lab 案が " + unshelved.length + " 件あります: " + unshelved.map(function (x) { return x.id; }).join(", ") }));
+    var badL3 = L.cards.filter(function (x) { return x.rung === 3 && (!x.impossible_today || !x.first_step); });
+    if (badL3.length) w.appendChild(h("div", { class: "warn", text: "「今はなぜ無理か」か「最初の一歩」の欠けた L3 があります: " + badL3.map(function (x) { return x.id; }).join(", ") }));
+  })();
+
+  // ---- recycle tray state ----
+  var picks = {}; // id -> push level ("" = none)
+  function renderTray() {
+    var ids = Object.keys(picks);
+    var tray = document.getElementById("tray");
+    tray.classList.toggle("open", ids.length > 0);
+    document.getElementById("tray-count").textContent = ids.length + " 件を拾う";
+    var groups = {};
+    ids.forEach(function (id) { var lv = picks[id] || ""; (groups[lv] = groups[lv] || []).push(id); });
+    var lines = Object.keys(groups).sort().map(function (lv) {
+      return "/superforge-brain recycle " + groups[lv].join(" ") + (lv ? " --push " + PUSH_FLAG[lv] : "");
+    });
+    document.getElementById("tray-cmd").textContent = lines.join("\n");
+  }
+  document.getElementById("tray-copy").addEventListener("click", function () {
+    var txt = document.getElementById("tray-cmd").textContent, btn = this;
+    function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1200); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { fallback(); });
+    else fallback();
+    function fallback() { var r = document.createRange(); r.selectNodeContents(document.getElementById("tray-cmd")); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); try { document.execCommand("copy"); done(); } catch (e) {} }
+  });
+  document.getElementById("tray-clear").addEventListener("click", function () {
+    picks = {}; document.querySelectorAll("[data-pick]").forEach(function (x) { x.checked = false; }); renderTray();
+  });
+
+  function actions(id) {
+    var sel = h("select", { "aria-label": "Push level for " + id, onchange: function () { if (picks.hasOwnProperty(id)) { picks[id] = this.value; renderTray(); } } },
+      h("option", { value: "", text: "Push なし" }), h("option", { value: "grounded", text: "→ grounded" }),
+      h("option", { value: "stretch", text: "→ stretch" }), h("option", { value: "far-out", text: "→ far-out" }));
+    var cb = h("input", { type: "checkbox", "data-pick": id, onchange: function () {
+      if (this.checked) picks[id] = sel.value; else delete picks[id];
+      document.querySelectorAll('[data-pick="' + id + '"]').forEach(function (x) { x.checked = !!picks.hasOwnProperty(id); });
+      renderTray();
+    } });
+    return h("div", { class: "actions" }, h("label", null, cb, "拾う"), sel);
+  }
+
+  // ---- card renderers ----
+  function sourceBadges(c) {
+    var b = [];
+    if (c.source === "revisited") b.push(h("span", { class: "badge dashed", text: "revisited" }));
+    if (c.source === "push") b.push(h("span", { class: "badge", text: "L" + c.rung + " ← " + c.parent }));
+    if (c.source === "hybrid") b.push(h("span", { class: "badge", text: "× " + (c.parents || []).join(" + ") }));
+    if (c.source === "recycled") b.push(h("span", { class: "badge", text: "recycled" }));
+    if (c.open_world) b.push(h("span", { class: "badge solid", text: "open world" }));
+    return b;
+  }
+  function scoreLine(c) {
+    if (!c.scores) return h("span", { class: "meta", text: "unscored" });
+    var sc = c.scores;
+    return h("span", { class: "meta", text: "N" + sc.novelty + " W" + sc.wow + " U" + sc.user + " C" + sc.company + " · 独創 " + orig(c) + " / 事業 " + viab(c) + " · " + quadrant(c) });
+  }
+  function shortCard(c) {
+    var cell = cellsById[c.id];
+    return h("article", { class: "card enter", id: "card-" + c.id },
+      h("div", { class: "row" }, h("span", { class: "badge", text: c.id }), sourceBadges(c), c.market ? h("span", { class: "badge" + (c.market.status === "red" && quadrant(c) === "Workhorse" ? "" : " dashed"), text: c.market.status + (c.market.status === "red" && quadrant(c) === "Workhorse" ? " · expected" : "") + " · " + c.market.verdict }) : null),
+      h("div", { class: "name", text: c.name }),
+      h("div", { class: "line", text: c.one_line }),
+      c.scene ? h("div", { class: "scene", text: c.scene }) : h("div", { class: "scene", text: "場面が書かれていません（Wow は3以下）" }),
+      h("div", { class: "row", style: "margin-top:6px" }, scoreLine(c)),
+      cell && cell.win_path ? h("div", { class: "meta", text: cell.win_path + " — " + cell.win_reason }) : null,
+      c.source === "revisited" ? h("div", { class: "meta", text: (L.banned.filter(function (b) { return b.card_id === c.id; })[0] || {}).revisit ? L.banned.filter(function (b) { return b.card_id === c.id; })[0].revisit.win_path + " — " + L.banned.filter(function (b) { return b.card_id === c.id; })[0].revisit.reason : "" }) : null,
+      c.rung === 3 ? h("div", { class: "meta", text: "今はなぜ無理か: " + (c.impossible_today || "—") + " / 最初の一歩: " + (c.first_step || "—") }) : null,
+      quadrant(c) === "Lab" ? h("div", { class: "meta", text: c.lab_reentry ? "戻る条件: " + c.lab_reentry : "⚠ 戻る条件なし" }) : null,
+      actions(c.id));
+  }
+
+  // ---- shortlist + dial ----
+  var dial = QUOTA[L.dial] ? L.dial : "balanced";
+  var dialEl = document.getElementById("dial");
+  ["grounded", "balanced", "far-out"].forEach(function (d) {
+    dialEl.appendChild(h("button", { type: "button", "aria-pressed": d === dial ? "true" : "false", "data-d": d, text: d, onclick: function () {
+      dial = d; dialEl.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-d") === d ? "true" : "false"); });
+      renderLanes();
+    } }));
+  });
+  function renderLanes() {
+    var box = document.getElementById("lanes"); box.textContent = "";
+    var q = QUOTA[dial];
+    LANES.forEach(function (ln) {
+      var pool = L.cards.filter(function (c) { return lane(c) === ln.key; }).sort(function (a, b) { return laneScore(b, ln.key) - laneScore(a, ln.key); });
+      var take = pool.slice(0, q[ln.key]);
+      var col = h("div", { class: "lane", "data-lane": ln.key },
+        h("div", { class: "lane-head" }, h("h3", { text: ln.ja }), h("span", { class: "tag", text: ln.en + " · " + take.length + "/" + q[ln.key] })));
+      take.forEach(function (c) { col.appendChild(shortCard(c)); });
+      if (take.length < q[ln.key]) col.appendChild(h("div", { class: "slot-empty", text: ln.empty + "（空き " + (q[ln.key] - take.length) + " 枠）" }));
+      box.appendChild(col);
+    });
+  }
+  renderLanes();
+
+  // ---- banned ----
+  (function () {
+    var box = document.getElementById("banned");
+    L.banned.forEach(function (b) {
+      var r = b.revisit || {};
+      box.appendChild(h("article", { class: "card" + (r.win_path ? "" : " killed") },
+        h("div", { class: "row" }, h("span", { class: "badge", text: b.id }), r.win_path ? h("span", { class: "badge solid", text: r.win_path }) : h("span", { class: "badge strike", text: "w:delta w:geo w:timing w:exec" })),
+        h("div", { class: "name", text: b.idea }),
+        h("div", { class: "line", text: r.reason || "再訪結果が記録されていません（実行上のバグ）" }),
+        r.card_id ? h("div", { class: "meta", text: "→ " + r.card_id + " として審判へ" }) : h("div", { class: "meta", text: "禁止のまま（理由あり）" })));
+    });
+  })();
+
+  // ---- maps ----
+  function scatter(opts) {
+    var W = 640, H = 440, pad = 44;
+    var svg = s("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": opts.title });
+    function X(v) { return pad + (v - opts.xmin) / (opts.xmax - opts.xmin) * (W - pad * 2); }
+    function Y(v) { return H - pad - (v - opts.ymin) / (opts.ymax - opts.ymin) * (H - pad * 2); }
+    var mx = X(opts.xmid), my = Y(opts.ymid);
+    // quadrant fills: alpha of the foreground only
+    var fills = opts.fills || [0.06, 0.1, 0.0, 0.04]; // TL, TR, BL, BR
+    [[pad, pad, mx - pad, my - pad], [mx, pad, W - pad - mx, my - pad], [pad, my, mx - pad, H - pad - my], [mx, my, W - pad - mx, H - pad - my]].forEach(function (r, i) {
+      svg.appendChild(s("rect", { x: r[0], y: r[1], width: r[2], height: r[3], fill: "var(--foreground)", "fill-opacity": fills[i] }));
+    });
+    svg.appendChild(s("line", { x1: pad, y1: H - pad, x2: W - pad, y2: H - pad, class: "axis" }));
+    svg.appendChild(s("line", { x1: pad, y1: pad, x2: pad, y2: H - pad, class: "axis" }));
+    svg.appendChild(s("line", { x1: mx, y1: pad, x2: mx, y2: H - pad, class: "grid" }));
+    svg.appendChild(s("line", { x1: pad, y1: my, x2: W - pad, y2: my, class: "grid" }));
+    var ql = opts.quads; // [TL, TR, BL, BR] = [label, sub]
+    [[pad + 10, pad + 20, "start"], [W - pad - 10, pad + 20, "end"], [pad + 10, H - pad - 22, "start"], [W - pad - 10, H - pad - 22, "end"]].forEach(function (p, i) {
+      svg.appendChild(s("text", { x: p[0], y: p[1], "text-anchor": p[2], class: "q-label", opacity: opts.dimQuad === i ? 0.5 : 1 }, ql[i][0]));
+      svg.appendChild(s("text", { x: p[0], y: p[1] + 14, "text-anchor": p[2], class: "q-sub" }, ql[i][1]));
+    });
+    svg.appendChild(s("text", { x: W / 2, y: H - 10, "text-anchor": "middle", class: "q-sub" }, opts.xlabel));
+    svg.appendChild(s("text", { x: 14, y: H / 2, "text-anchor": "middle", class: "q-sub", transform: "rotate(-90 14 " + H / 2 + ")" }, opts.ylabel));
+    var unscored = [];
+    opts.points.forEach(function (c) {
+      var xv = opts.x(c), yv = opts.y(c);
+      if (xv == null || yv == null) { unscored.push(c); return; }
+      var cx = X(xv), cy = Y(yv), shape;
+      var cls = "pt" + (c.open_world ? " hollow" : "");
+      if (c.source === "revisited") shape = s("rect", { x: cx - 5, y: cy - 5, width: 10, height: 10, class: cls });
+      else if (c.source === "push") shape = s("polygon", { points: [cx, cy - 7, cx + 6, cy + 5, cx - 6, cy + 5].join(" "), class: cls });
+      else if (c.source === "hybrid") shape = s("polygon", { points: [cx, cy - 7, cx + 7, cy, cx, cy + 7, cx - 7, cy].join(" "), class: cls });
+      else shape = s("circle", { cx: cx, cy: cy, r: 5.5, class: cls });
+      shape.appendChild(s("title", {}, c.id + " " + c.name + (opts.hover ? " — " + opts.hover(c) : "")));
+      shape.addEventListener("click", function () { var t = document.getElementById("board-" + c.id) || document.getElementById("card-" + c.id); if (t) t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); });
+      svg.appendChild(shape);
+      svg.appendChild(s("text", { x: cx + 9, y: cy + 3, class: "pt-label" }, c.name.length > 12 ? c.name.slice(0, 12) + "…" : c.name));
+    });
+    var box = h("div", { class: "mapbox" }, h("h3", { text: opts.title }), opts.note ? h("p", { class: "lead", style: "font-size:13px;margin:4px 0 8px", text: opts.note }) : null);
+    box.appendChild(svg);
+    box.appendChild(h("div", { class: "legend" }, h("span", { text: "● スイープ" }), h("span", { text: "■ 再訪した禁止案" }), h("span", { text: "▲ Push rung" }), h("span", { text: "◆ 掛け合わせ" }), h("span", { text: "○ open world" })));
+    if (unscored.length) box.appendChild(h("div", { class: "tray-inline", text: "未配置（数値なし）: " + unscored.map(function (c) { return c.id; }).join(", ") }));
+    return box;
+  }
+  (function () {
+    var maps = document.getElementById("maps");
+    var judged = L.cards.filter(function (c) { return c.scores; });
+    maps.appendChild(scatter({
+      title: "独創軸 × 事業軸 — 4象限", xlabel: "事業軸 = User + Company →", ylabel: "独創軸 = Novelty + Wow →",
+      xmin: 2, xmax: 20, ymin: 2, ymax: 20, xmid: 11.5, ymid: 11.5, points: judged,
+      x: viab, y: orig, dimQuad: 2, fills: [0.05, 0.1, 0.0, 0.07],
+      quads: [["Lab", "思考実験 · 戻る条件付きで棚へ"], ["Hero", "本命"], ["Discard", "唯一の正当な廃棄"], ["Workhorse", "定番 · 勝ち筋で勝つ"]],
+      hover: function (c) { var q = quadrant(c); var cell = cellsById[c.id]; return q === "Lab" ? (c.lab_reentry || "⚠ 戻る条件なし") : q === "Workhorse" ? ((cell && cell.win_path) || (c.source === "revisited" ? "revisited" : "勝ち筋コードなし")) : q; }
+    }));
+    var hw = L.cards.filter(function (c) { var q = quadrant(c); return q === "Hero" || q === "Workhorse"; });
+    maps.appendChild(scatter({
+      title: "Impact × Effort（Hero と Workhorse）", xlabel: "Effort（1=半日 … 5=1年）→", ylabel: "Impact = 事業軸 →",
+      note: "Effort は各カードの次の実験とリスクからの見積もりで、計測値ではありません。",
+      xmin: 1, xmax: 5, ymin: 2, ymax: 20, xmid: 3, ymid: 11.5, points: hw,
+      x: function (c) { return c.effort; }, y: viab, dimQuad: 3, fills: [0.1, 0.05, 0.03, 0.0],
+      quads: [["Low-hanging fruit", "まずこれ"], ["Major bets", "計画して挑む"], ["Fill-ins", "時間があれば"], ["Thankless", "理由が無ければ切る"]]
+    }));
+    maps.appendChild(scatter({
+      title: "User Impact × Company Impact（事業軸の内訳）", xlabel: "Company Impact →", ylabel: "User Impact →",
+      xmin: 1, xmax: 10, ymin: 1, ymax: 10, xmid: 5.5, ymid: 5.5, points: judged,
+      x: function (c) { return c.scores.company; }, y: function (c) { return c.scores.user; }, dimQuad: 2, fills: [0.05, 0.1, 0.0, 0.05],
+      quads: [["User only", "収益化の仕方を変える"], ["Both", "最も強い"], ["Neither", ""], ["Company only", "ユーザーの犠牲に注意"]]
+    }));
+  })();
+
+  // ---- board ----
+  var F = { status: "all", tech: "all", kill: "all", quad: "all", win: "all" };
+  function sel(key, label, options) {
+    return h("select", { "aria-label": label, onchange: function () { F[key] = this.value; renderBoard(); } },
+      options.map(function (o) { return h("option", { value: o[0], text: o[1] }); }));
+  }
+  document.getElementById("filters").append(
+    sel("status", "Status", [["all", "全ステータス"], ["alive", "生存以上"], ["killed", "殺したもの"], ["todo", "未完了"]]),
+    sel("tech", "Technique", [["all", "全技法"]].concat(TECHS.map(function (t) { return [t, TECH_JA[t] + " " + t]; }))),
+    sel("kill", "Kill code", [["all", "全 kill code"], ["G", "G 汎用"], ["P", "P 物理矛盾"], ["C", "C 勝ち筋なし"]]),
+    sel("quad", "Quadrant", [["all", "全象限"], ["Hero", "Hero"], ["Workhorse", "Workhorse"], ["Lab", "Lab"], ["Discard", "Discard"]]),
+    sel("win", "Win path", [["all", "全勝ち筋"], ["w:delta", "w:delta"], ["w:geo", "w:geo"], ["w:timing", "w:timing"], ["w:exec", "w:exec"]])
+  );
+  function boardCard(cell) {
+    var card = cardsById[cell.id];
+    var killed = cell.status.indexOf("killed") === 0;
+    var el = elementsById[cell.element_id] || {};
+    var trace = h("ul", { class: "trace" },
+      h("li", null, h("b", { text: "要素 " }), (el.name || cell.element_id) + " — 「" + (el.bias || "") + "」"),
+      h("li", null, h("b", { text: "技法 " }), TECH_JA[cell.technique] + " / " + cell.sub_method),
+      h("li", null, h("b", { text: "壊す思い込み " }), cell.bias || "—"),
+      h("li", null, h("b", { text: "ありえない形 " }), cell.form || "—"),
+      h("li", null, h("b", { text: "逆算 " }), "提供側: " + (cell.provider || "—") + " / ユーザー側: " + (cell.user || "—")),
+      cell.prior_art ? h("li", null, h("b", { text: "既出 " }), cell.win_path ? cell.win_path + " — " + cell.win_reason : "4方向とも勝ち筋なし") : null,
+      killed ? h("li", null, h("b", { text: "kill " }), cell.kill_code + " — " + (cell.kill_reason || "")) : null,
+      cell.salvaged ? h("li", null, h("b", { text: "救済 " }), "誤殺として生存に戻した") : null,
+      cell.merged_into ? h("li", null, h("b", { text: "統合 " }), cell.merged_into + " に吸収") : null);
+    var badges = [h("span", { class: "badge", text: cell.id })];
+    if (cell.status === "todo") badges.push(h("span", { class: "badge solid", text: "todo" }));
+    if (killed) badges.push(h("span", { class: "badge solid", text: cell.kill_code }));
+    if (cell.prior_art) badges.push(h("span", { class: "badge dashed", text: "既出" }));
+    if (cell.prior_art && cell.win_path) badges.push(h("span", { class: "badge", text: cell.win_path }));
+    if (cell.kill_code === "C") badges.push(h("span", { class: "badge strike", text: "w:delta w:geo w:timing w:exec" }));
+    if (cell.salvaged) badges.push(h("span", { class: "badge", text: "salvaged" }));
+    if (cell.recycled) badges.push(h("span", { class: "badge", text: "recycled" }));
+    if (card) badges.push(h("span", { class: "badge", text: quadrant(card) || "unscored" }));
+    return h("article", { class: "card" + (killed ? " killed" : "") + (cell.status === "todo" ? " dim" : "") + (card && quadrant(card) === "Discard" ? " dim" : ""), id: "board-" + cell.id },
+      h("div", { class: "row" }, badges),
+      h("div", { class: "name", text: (card && card.name) || cell.concept || "（未生成）" }),
+      killed ? h("div", { class: "meta", text: cell.kill_code + " — " + (cell.kill_reason || "") }) : null,
+      card ? h("div", { class: "row" }, scoreLine(card)) : null,
+      h("details", null, h("summary", { text: "過程を見る" }), trace),
+      cell.status === "todo" ? null : actions(cell.id));
+  }
+  function passes(cell) {
+    var card = cardsById[cell.id], killed = cell.status.indexOf("killed") === 0;
+    if (F.status === "alive" && (killed || cell.status === "todo")) return false;
+    if (F.status === "killed" && !killed) return false;
+    if (F.status === "todo" && cell.status !== "todo") return false;
+    if (F.tech !== "all" && cell.technique !== F.tech) return false;
+    if (F.kill !== "all" && cell.kill_code !== F.kill) return false;
+    if (F.quad !== "all" && (!card || quadrant(card) !== F.quad)) return false;
+    if (F.win !== "all" && cell.win_path !== F.win) return false;
+    return true;
+  }
+  function renderBoard() {
+    var box = document.getElementById("board"); box.textContent = "";
+    TECHS.forEach(function (t) {
+      var all = L.cells.filter(function (c) { return c.technique === t; });
+      if (!all.length) return;
+      var shown = all.filter(passes);
+      if (!shown.length) return;
+      var g = h("div", { class: "grid-cards" }); shown.forEach(function (c) { g.appendChild(boardCard(c)); });
+      box.appendChild(h("div", { class: "tech" }, h("div", { class: "tech-head" }, h("h3", { text: TECH_JA[t] + " · " + t }), h("span", { class: "tag", text: shown.length + " / " + all.length })), g));
+    });
+    var extra = L.cards.filter(function (c) { return !cellsById[c.id] && c.source !== "revisited"; });
+    if (extra.length && F.status !== "killed" && F.status !== "todo" && F.tech === "all" && F.kill === "all" && F.win === "all") {
+      var g2 = h("div", { class: "grid-cards" });
+      extra.filter(function (c) { return F.quad === "all" || quadrant(c) === F.quad; }).forEach(function (c) { var x = shortCard(c); x.id = "board-" + c.id; g2.appendChild(x); });
+      box.appendChild(h("div", { class: "tech" }, h("div", { class: "tech-head" }, h("h3", { text: "Push ladder と掛け合わせ" }), h("span", { class: "tag", text: extra.length + " cards" })), g2));
+    }
+    // re-sync checkboxes
+    document.querySelectorAll("[data-pick]").forEach(function (x) { x.checked = picks.hasOwnProperty(x.getAttribute("data-pick")); });
+  }
+  renderBoard();
+
+  // ---- shelves ----
+  (function () {
+    var box = document.getElementById("shelves");
+    function col(title, q, fields) {
+      var list = L.cards.filter(function (c) { return quadrant(c) === q; });
+      var c = h("div", { class: "lane" }, h("div", { class: "lane-head" }, h("h3", { text: title }), h("span", { class: "tag", text: list.length + " 件" })));
+      list.forEach(function (x) {
+        var dl = h("dl", { class: "kv" });
+        fields(x).forEach(function (f) { if (f[1]) { dl.appendChild(h("dt", { text: f[0] })); dl.appendChild(h("dd", { text: f[1] })); } });
+        c.appendChild(h("article", { class: "card" }, h("div", { class: "row" }, h("a", { href: "#board-" + x.id, class: "badge", text: x.id }), sourceBadges(x)), h("div", { class: "name", text: x.name }), dl));
+      });
+      if (!list.length) c.appendChild(h("div", { class: "slot-empty", text: "該当なし" }));
+      box.appendChild(c);
+    }
+    col("Hero — 本命", "Hero", function (x) { return [["一行", x.one_line], ["場面", x.scene], ["なぜ驚きか", x.why_surprising], ["ユーザー価値", x.user_value], ["事業価値", x.business_value], ["価格", x.price], ["リスク", x.risks], ["次の実験", x.next_experiment]]; });
+    col("Workhorse — 定番", "Workhorse", function (x) { var cell = cellsById[x.id]; var b = L.banned.filter(function (y) { return y.card_id === x.id; })[0]; return [["勝ち筋", cell && cell.win_path ? cell.win_path + " — " + cell.win_reason : b ? b.revisit.win_path + " — " + b.revisit.reason : "⚠ 勝ち筋コードなし"], ["変える一点", x.one_line], ["場面", x.scene], ["次の実験", x.next_experiment]]; });
+    col("Lab — 棚", "Lab", function (x) { return [["独創軸", String(orig(x))], ["戻る条件", x.lab_reentry || "⚠ 戻る条件なし"], ["今はなぜ無理か", x.impossible_today]]; });
+  })();
+
+  renderTray();
+})();
+</script>
+</body>
+</html>

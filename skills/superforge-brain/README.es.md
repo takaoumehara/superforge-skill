@@ -65,6 +65,9 @@ Ahora las cuatro puntuaciones forman dos ejes que **nunca se suman** — **Origi
 ### 🗺️ Ves lo que se descartó, no solo lo que sobrevivió
 `docs/product-idea.html` muestra **cada idea generada**, incluidas las descartadas, cada una con su código de descarte y el motivo en una línea — se acabó recibir solo los tres nombres finales. Una idea descartada por ya existir muestra las cuatro vías de victoria tachadas: **la prueba de que se buscaron cuatro formas de ganar antes de soltarla**. Tres mapas 2×2 ubican los resultados espacialmente: Originalidad × Viabilidad (con los cuatro cuadrantes rotulados dentro del propio gráfico), Impacto × Esfuerzo (con el cuadrante de «fruta al alcance de la mano» nombrado) e Impacto en el usuario × Impacto en la empresa, para ver la prioridad antes de leer una sola tarjeta.
 
+### 🎚️ v5: range dial · push ladder · recycle
+See the [English README](README.md) for the v5 additions — the `grounded` / `balanced` / `far-out` range dial, the push ladder and cross-breeding, recycling discarded ideas from the HTML, and fresh-context generation (`workflows/superforge-brain-sweep.js`). Spec: [references/amplify-and-recycle.md](references/amplify-and-recycle.md).
+
 ### 🔀 BreakBias es una opción, no la única
 Se pregunta una sola vez, de entrada: el barrido completo y trazado, o un método clásico — SCAMPER, los Seis Sombreros, Crazy 8s, How Might We, brainwriting, lluvia de ideas inversa. El motor pesado es para cuando la idea tiene que aguantar el escrutinio; un método clásico es para una primera pasada rápida y de poco riesgo. Menú completo en [references/classic-methods.md](references/classic-methods.md).
 

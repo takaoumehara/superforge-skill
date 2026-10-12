@@ -65,6 +65,9 @@ flowchart TD
 ### 🗺️ 살아남은 것뿐 아니라 잘려나간 것도 보입니다
 `docs/product-idea.html`에는 **생성된 모든 아이디어**가, 폐기된 것까지 포함해서, 폐기 코드와 한 줄 이유와 함께 나옵니다 — 이제 마지막 세 개 이름만 받는 일은 없습니다. 「이미 존재한다」로 폐기된 아이디어에는 네 가지 승부 경로가 모두 취소선과 함께 표시됩니다 — **버리기 전에 네 방향에서 이길 길을 찾아봤다는 증거**입니다. 결과는 세 개의 4분면 지도에 배치됩니다 — 독창축 × 사업축(사분면 이름을 그림 안에 직접 표시), Impact × Effort(로우행잉 프루트 사분면에 이름을 붙임), User Impact × Company Impact. 카드를 한 장도 읽기 전에 우선순위가 눈에 보입니다.
 
+### 🎚️ v5: range dial · push ladder · recycle
+See the [English README](README.md) for the v5 additions — the `grounded` / `balanced` / `far-out` range dial, the push ladder and cross-breeding, recycling discarded ideas from the HTML, and fresh-context generation (`workflows/superforge-brain-sweep.js`). Spec: [references/amplify-and-recycle.md](references/amplify-and-recycle.md).
+
 ### 🔀 BreakBias는 선택지 중 하나이지, 유일한 방법이 아닙니다
 시작할 때 딱 한 번 묻습니다 — 철저히 추적하는 스윕으로 할지, 가벼운 방법으로 할지. SCAMPER, 여섯 모자 사고법, Crazy 8s, How Might We, 브레인라이팅, 역발상 브레인스토밍. 무거운 엔진은 아이디어가 검증을 견뎌야 할 때, 가벼운 방법은 빠르고 저위험인 첫 시도일 때 씁니다. 전체 메뉴는 [references/classic-methods.md](references/classic-methods.md)에 있습니다.
 

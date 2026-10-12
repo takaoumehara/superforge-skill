@@ -14,7 +14,12 @@ to show.
 
 They must never drift: the HTML is a **live consumer of the ledger**, built by
 embedding the ledger as data and rendering from it, never by hand-writing a
-description of what happened. If you edit the ledger after the HTML exists,
+description of what happened. **`assets/idea-map.html` is the reference
+implementation**: copy it to `docs/product-idea.html` and replace the contents
+of its `<script type="application/json" id="ledger">` block with
+`docs/product-idea.ledger.json` (schema in `amplify-and-recycle.md` §5.1).
+Change nothing else unless the spec below changed. A page rewritten from
+scratch every run drifts from this spec a little more each time. If you edit the ledger after the HTML exists,
 regenerate the HTML in the same turn.
 
 ---
@@ -44,12 +49,24 @@ The three complaints this fixes, directly:
 
 ---
 
+5. **"I want to choose how bold the answer is, and pick things back up."** The
+   range dial and the recycle tray (below) let the reader re-weight the
+   shortlist and send any card, killed or not, back for more work.
+
+---
+
 ## Structure
 
 One self-contained file. No build step, no CDN. Must open correctly from
 `file://` after being emailed to someone — same constraint as
 `superforge-ui`'s `docs/design.html`.
 
+0. **Shortlist with a live range dial** — at the very top: a three-way control
+   (`grounded` / `balanced` / `far-out`, starting at the ledger's `dial`) and
+   three lane columns 定番 / 本命 / 飛び filled by the quotas in
+   `amplify-and-recycle.md` §1. Moving the dial re-computes the shortlist in
+   the page. Nothing is re-run and nothing is hidden. An unfilled slot renders
+   as an empty slot with the sentence saying so, never as a borrowed card.
 1. **Header** — subject, domain (A/B), resolution used, generated date, and
    the coverage line: `<n> generated · <n> killed (G/P/C) · <n> tagged 既出
    → <n> passed a win path (delta/geo/timing/exec) · <n> salvaged ·
@@ -77,6 +94,12 @@ One self-contained file. No build step, no CDN. Must open correctly from
      ways to win were attempted before the idea was dropped, which is the
      entire difference between the new C and the old one.
    - This board is the direct answer to "show me what got cut and why."
+   - **Every card, killed or not, carries a 拾う checkbox and a Push select**
+     (none / grounded / stretch / far-out). Ticking adds the card to the
+     recycle tray.
+   - **Push rungs and hybrids show their lineage**: a rung card names its seed
+     and rung (L1/L2/L3), a hybrid names both parents, and an `open_world`
+     rung carries a distinct badge plus its 「今はなぜ無理か」 line.
 4. **独創軸 × 事業軸 quadrant map — the primary map, shown before the other
    two.** One point per judged concept, plotted from the judge's two sums
    (`value-classification.md` §1). Both axes run 2–20, gridlines at 11.5.
@@ -136,7 +159,14 @@ One self-contained file. No build step, no CDN. Must open correctly from
      in a discard pile.
 
    All three cross-link to their position on the maps above.
-8. **Market** (if the market pass ran) — red/gray/white and entry verdict per
+8. **Recycle tray** — sticky at the bottom, hidden while empty. It lists the
+   ticked cards and composes the exact follow-up command from `SKILL.md`
+   §Execution modes, e.g. `/superforge-brain recycle E04-DIV-2 E11-REV-1
+   --push far-out`. Group the ticked cards by push level, so mixed levels
+   produce one command line per level. One **Copy** button. The tray is the
+   whole bridge between looking at the board and acting on it, so it must
+   produce a command the skill accepts verbatim.
+9. **Market** (if the market pass ran) — red/gray/white and entry verdict per
    concept, attached to its card rather than in a separate table nobody
    connects back. On a Workhorse card, mark `red` as **expected** rather than
    as a warning colour — a crowded market is evidence the demand is real, and
@@ -168,6 +198,28 @@ One self-contained file. No build step, no CDN. Must open correctly from
   process" requirement — available on demand, not forced into the main view
   where it would bury the maps.
 - Dark/light toggle, consistent with the rest of the suite's HTML artifacts.
+  Ink ground (dark) is the default.
+
+## Visual language
+
+The reference implementation follows the cie-ds rules, and any edit should
+too:
+
+- **Two colours only**: ink `#0b0b0b` and paper `#f3f2ee`, plus alpha of the
+  same ink or paper. Every colour goes through tokens (`--background`,
+  `--foreground`, `--cie-*`). Never hard-code a colour inside a component.
+  Status is carried by **weight, opacity, strike-through, and shape**, not hue.
+  Killed cards are dimmed and struck through. Lanes are told apart by label and
+  outline style, not colour.
+- **Type**: Outfit for text, DM Mono for IDs, codes, and numbers, Zen Kaku
+  Gothic New for Japanese, each with a system fallback so the file still reads
+  offline.
+- **No drop shadows.** Separate things with hairlines and space.
+- **Motion** is fast and snappy, 280–420ms on `--cie-ease-expo`, and is
+  switched off under `prefers-reduced-motion`. CSS only, no animation library.
+- The page loads the Google Fonts stylesheet when it is online and works fully
+  without it. Fonts are progressive enhancement, never a dependency, so the
+  `file://` rule above still holds.
 
 ---
 

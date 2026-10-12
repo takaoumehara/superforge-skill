@@ -148,9 +148,9 @@ real decision, check it before relying on it.
 
 SKILL_NOTE = """## Workflows are not in this bundle
 
-Five of this suite's behaviours run as Claude Code dynamic workflows
+Six of this suite's behaviours run as Claude Code dynamic workflows
 (`/superforge-roast-council`, `/superforge-verify-evidence`, `/superforge-dev-waves`,
-`/superforge-freshness`, `/superforge-selfcheck`). They are not part of this zip
+`/superforge-freshness`, `/superforge-selfcheck`, `/superforge-brain-sweep`). They are not part of this zip
 and will not run on claude.ai, which has no workflow runtime.
 
 Nothing blocks without them — every skill that names one also states what to do

@@ -35,9 +35,10 @@ flowchart TD
     E --> F[⚔️ Kill only by G / P<br/>prior art → 4 win paths → salvage]
     F --> F2[♻️ Revisit the banned three<br/>the obvious answer gets one fair hearing]
     F2 --> G[⚖️ Judge two axes, never one total<br/>Hero / Workhorse / Lab / Discard]
-    G --> H[🌐 Market check<br/>after judgment only]
+    G --> G2[🪜 Push ladder L1 → L3 + cross-breed<br/>each new card judged blind]
+    G2 --> H[🌐 Market check<br/>after judgment only]
     H --> I[(📄 docs/product-idea.md)]
-    H --> J[(🗺️ docs/product-idea.html — every cell, killed ones included, plus three 2×2 maps)]
+    H --> J[(🗺️ docs/product-idea.html — every cell, a live range dial, a recycle tray, three 2×2 maps)]
 ```
 
 Nothing is pruned mid-sweep. Deduplication and scoring happen after generation, never during. The method itself is a choice stated up front, not an assumption.
@@ -65,6 +66,18 @@ Now the four scores become two axes that are never added together — **Original
 ### 🗺️ You see what got cut, not only what survived
 `docs/product-idea.html` shows **every generated idea**, killed ones included, each with its kill code and one-line reason — no more being handed only the final three names. An idea killed as prior art shows all four win paths struck through, so you can see that four ways to win were attempted before it was dropped. Three 2×2 maps plot the results spatially: Originality × Viability (the four quadrants, labelled in the plot area itself), Impact × Effort (with the low-hanging-fruit quadrant named), and User Impact × Company Impact.
 
+### 🎚️ Choose how safe the answer is (range dial)
+Some days you want something that ships, and other days you are tired of sensible answers. The range dial — `grounded` / `balanced` / `far-out` — splits the final shortlist into three lanes, **Safe** (Workhorse), **Core** (Hero) and **Far** (Lab plus far-out rungs), and decides how many slots each lane gets. It never deletes anything. Lanes are computed from scores, so you can turn the dial in the HTML afterwards and watch the shortlist change without re-running the sweep. If a lane can't fill its quota, the slot stays visibly empty. A gap is a finding, not something to pad.
+
+### 🪜 Push the good ones further (push ladder and cross-breeding)
+A cell is one transformation of one element, and good ideas are rarely one step from the obvious. So the top survivors climb a ladder: **L1 grounded** (the 30-day version), **L2 stretch** (one more premise broken), and **L3 far-out**, which may import one outside element or jump ten years but must say *why it is impossible today* and *the first step that is possible today*. Survivors from different techniques and elements are also **cross-bred**. Every rung and hybrid becomes its own card, judged blind, so you can see whether the best idea came from the sweep, the push, or a cross.
+
+### ♻️ Pick discarded ideas back up (recycle)
+Every card on the board, killed ones included, has a **pick** checkbox and a push level. Ticked cards collect in a tray that writes the follow-up command, e.g. `/superforge-brain recycle E04-DIV-2 --push far-out`. Paste it back, and the skill continues from `docs/product-idea.ledger.json` without re-running the sweep. Your pick decides what gets developed. The judge still decides how it scores.
+
+### 🧠 A fresh context for every element (why the ideas got better)
+By cell 200 of one long conversation, a model is completing its own earlier forms, and everything becomes "a subscription" or "a community". In Claude Code, `workflows/superforge-brain-sweep.js` generates each element batch in its own agent that never sees other elements. Kill checking, card writing, and judging each run in separate agents, and the judge never sees how an idea was reached. Every card must also describe **one concrete scene**, and a card that can only be written in abstract nouns scores low on Wow. Without the workflow runtime, the prose fallback re-anchors per element and keeps a shape-repeat ledger.
+
 ### 🔀 BreakBias is a choice, not the only option
 Ask once, up front: the full tracked sweep, or a classic method — SCAMPER, Six Thinking Hats, Crazy 8s, How Might We, brainwriting, reverse brainstorming. The heavy engine is for when the idea needs to hold up under scrutiny; a classic method is for a fast, low-stakes first pass. Full menu in `references/classic-methods.md`.
 
@@ -84,7 +97,10 @@ Ask once, up front: the full tracked sweep, or a classic method — SCAMPER, Six
 | A brilliant idea that makes no money | Discarded with everything else | Shelved as **Lab**, with the condition that brings it back |
 | The three obvious answers | Banned and never seen again | Banned from generation, revisited once before judging |
 | Which method runs | BreakBias, assumed | A choice, stated up front — full sweep or a classic method |
-| What remains | A chat log | `docs/product-idea.md` + `docs/product-idea.html` with the ban list and the coverage count |
+| How safe or bold the answer is | Whatever the engine happened to like | Your choice — `grounded` / `balanced` / `far-out`, changeable after the run |
+| A decent idea that could go further | Left as written | Pushed up a ladder to grounded, stretch, and far-out, plus cross-bred |
+| An idea you disagree was cut | Gone | Tick it in the HTML and paste the recycle command |
+| What remains | A chat log | `docs/product-idea.md` + `docs/product-idea.ledger.json` + `docs/product-idea.html` with the ban list and the coverage count |
 
 ---
 
@@ -108,7 +124,16 @@ Full options, single-skill installs, and the claude.ai upload route are in the [
 /superforge-brain
 ```
 
-It starts by asking which method: the full BreakBias sweep, or a faster classic method (SCAMPER, Six Hats, Crazy 8s, How Might We — see `references/classic-methods.md`). For a sweep, it then settles whether the subject is an object or a capability (Domain A / B), and explains the resolution dial in plain terms before asking — `quick` (~80 cells, one pass on the highest-potential elements), `standard` (~300, every element × every technique once), or `exhaustive` (900+, plus unblocking passes wherever a shape repeats). If `docs/brief.md` exists it reads that instead of re-asking.
+It starts by asking which method: the full BreakBias sweep, or a faster classic method (SCAMPER, Six Hats, Crazy 8s, How Might We — see `references/classic-methods.md`). For a sweep, it then settles whether the subject is an object or a capability (Domain A / B), and explains the resolution dial in plain terms before asking — `quick` (~80 cells, one pass on the highest-potential elements), `standard` (~300, every element × every technique once), or `exhaustive` (900+, plus unblocking passes wherever a shape repeats). In the same breath it asks the range dial: `grounded`, `balanced` (default), or `far-out`. If `docs/brief.md` exists it reads that instead of re-asking.
+
+In Claude Code, say *"use a workflow"* or run `/superforge-brain-sweep` for the fresh-context version. After a run:
+
+```
+/superforge-brain recycle E04-DIV-2 E11-REV-1 --push far-out
+/superforge-brain push E02-SUB-1 --to far-out
+/superforge-brain cross E03-REV-1 E04-AD-1
+/superforge-brain dial grounded
+```
 
 ---
 
@@ -139,4 +164,4 @@ Implementation and real run logs: [takaoumehara/breakbias-studio](https://github
 
 ## 📄 License
 
-MIT — see [LICENSE](../../LICENSE). The skill body is in [SKILL.md](SKILL.md); the sub-methods, kill tests, judge protocol, market rubric, and direction filter are in [references/ideation-tools.md](references/ideation-tools.md); the quadrants, win paths, and ban-list revisit are in [references/value-classification.md](references/value-classification.md); checking the result against real people is in [references/talk-to-users.md](references/talk-to-users.md); the classic-method menu (SCAMPER, Six Hats, Crazy 8s, and more) is in [references/classic-methods.md](references/classic-methods.md); the `docs/product-idea.html` spec — every idea visualised, plus the quadrant, Impact×Effort, and User×Company Impact maps — is in [references/idea-map-output.md](references/idea-map-output.md). Suite overview: [superforge-skill](../../README.md).
+MIT — see [LICENSE](../../LICENSE). The skill body is in [SKILL.md](SKILL.md); the sub-methods, kill tests, judge protocol, market rubric, and direction filter are in [references/ideation-tools.md](references/ideation-tools.md); the quadrants, win paths, and ban-list revisit are in [references/value-classification.md](references/value-classification.md); checking the result against real people is in [references/talk-to-users.md](references/talk-to-users.md); the classic-method menu (SCAMPER, Six Hats, Crazy 8s, and more) is in [references/classic-methods.md](references/classic-methods.md); the `docs/product-idea.html` spec — every idea visualised, plus the quadrant, Impact×Effort, and User×Company Impact maps — is in [references/idea-map-output.md](references/idea-map-output.md), with a working reference page in [assets/idea-map.html](assets/idea-map.html) (open it in a browser — it ships with demo data); the range dial, push ladder, cross-breeding, and recycle commands are in [references/amplify-and-recycle.md](references/amplify-and-recycle.md). Suite overview: [superforge-skill](../../README.md).
