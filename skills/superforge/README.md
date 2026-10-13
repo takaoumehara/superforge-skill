@@ -49,6 +49,15 @@ Model selection still happens before an actual agent dispatch, but its
 version-sensitive guidance lives in an on-demand reference instead of the
 always-loaded router.
 
+## First run in a project
+
+The first Medium or Large phase asks up to four multiple-choice questions in one
+message (file language, branch policy, other AI tools you hand work to, and
+whether to write shared rules) and never asks them again. Conversation language
+follows whatever you write in. With your yes, the rules go to `AGENTS.md`, and
+each other tool's instruction file only imports it, so every coding agent you
+use follows the same rules. See [setup.md](references/setup.md).
+
 ## Install
 
 ```bash
@@ -63,6 +72,7 @@ directly when you already know the domain.
 ## Files
 
 - [SKILL.md](SKILL.md) — thin router
+- [setup.md](references/setup.md) — first-run questions and shared `AGENTS.md` rules
 - [artifacts.md](references/artifacts.md) — durable-state policy
 - [run-log.md](references/run-log.md) — sparse exception log
 - [model-prompting.md](references/model-prompting.md) — dispatch-time guidance

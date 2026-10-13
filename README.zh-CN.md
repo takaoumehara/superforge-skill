@@ -73,7 +73,7 @@ superforge — 重新设计新手引导，让第一次使用的人能在三分�
 | 验证 | [`superforge-secure`](./skills/superforge-secure/README.md) | 面向小团队的实用安全审查 |
 | 验证 | [`superforge-verify`](./skills/superforge-verify/README.md) | 在宣布完成前附上证据 |
 | 发布 | [`superforge-ship`](./skills/superforge-ship/README.md) | 判断产品是否可以发布 |
-| 继续 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | 切换线程或工具前保存状态 |
+| 继续 | [`superforge-handoff`](./skills/superforge-handoff/README.md) | 推送后交接给其他工具或代理 |
 
 熟悉系统的人仍可直接调用专业技能，但这不是必需的。
 

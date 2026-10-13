@@ -73,7 +73,7 @@ Es un **Thin Router**: no carga toda la suite en cada petición.
 | Probar | [`superforge-secure`](./skills/superforge-secure/README.md) | revisión práctica de seguridad para equipos pequeños |
 | Probar | [`superforge-verify`](./skills/superforge-verify/README.md) | exigir pruebas antes de afirmar que algo está terminado |
 | Publicar | [`superforge-ship`](./skills/superforge-ship/README.md) | decidir si el producto puede publicarse |
-| Continuar | [`superforge-handoff`](./skills/superforge-handoff/README.md) | conservar el estado al cambiar de hilo o herramienta |
+| Continuar | [`superforge-handoff`](./skills/superforge-handoff/README.md) | pasar el trabajo a otra herramienta o agente, con push incluido |
 
 Las personas expertas pueden invocar una especialidad directamente, pero no es obligatorio.
 

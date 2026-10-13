@@ -73,7 +73,7 @@ superforge — 初めての人が3分で公開まで進めるよう、オンボ�
 | 確かめる | [`superforge-secure`](./skills/superforge-secure/README.md) | 小規模チーム向けの実践的なセキュリティ確認 |
 | 確かめる | [`superforge-verify`](./skills/superforge-verify/README.md) | 完了を宣言する前の証拠確認 |
 | 出す | [`superforge-ship`](./skills/superforge-ship/README.md) | 一般公開してよい状態かの判定 |
-| 引き継ぐ | [`superforge-handoff`](./skills/superforge-handoff/README.md) | スレッドやツールを移る前の作業状態保存 |
+| 引き継ぐ | [`superforge-handoff`](./skills/superforge-handoff/README.md) | 別のツールやエージェントへ、プッシュまでして引き継ぐ |
 
 慣れている人は専門スキルを直接指定できますが、必須ではありません。
 

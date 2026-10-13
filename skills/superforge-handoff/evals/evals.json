@@ -59,6 +59,28 @@
         {"name": "no-devin-question", "check": "Devin を使うか聞かない。Tools 行が none なら二度と持ち出さない", "weight": 1.0},
         {"name": "gets-on-with-it", "check": "作業に入る", "weight": 0.5}
       ]
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "credits-running-out-pushes-the-capsule",
+      "prompt": "クレジットがもうすぐ切れそう。続きはCodexでやるから引き継ぎして。（Claude Code on the web のセッション）",
+      "should_trigger": true,
+      "assertions": [
+        {"name": "writes-capsule", "check": ".handoff/YYYY-MM-DD-<slug>.md を書き、docs/ の一覧表を含める", "weight": 1.0},
+        {"name": "commits-and-pushes", "check": "カプセルを作業ブランチにコミットしてプッシュする。デフォルトブランチには直接プッシュしない", "weight": 1.0},
+        {"name": "names-branch-and-commit", "check": "再開用プロンプトにブランチ名とコミットハッシュを入れる", "weight": 1.0},
+        {"name": "reports-push-failure", "check": "プッシュに失敗したら成功したふりをせず、そのまま伝える", "weight": 0.5}
+      ]
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "long-context-inside-claude-code-is-not-a-handoff",
+      "prompt": "コンテキストが長くなってきた。このまま Claude Code で続けたいんだけど、どうすればいい？",
+      "should_trigger": false,
+      "assertions": [
+        {"name": "no-capsule", "check": ".handoff/ のカプセルを書かない", "weight": 1.0},
+        {"name": "suggests-native-tools", "check": "/compact（残す内容を指定）や、タスクの区切りでの /clear を提案する", "weight": 1.0}
+      ]
     }
   ]
 }

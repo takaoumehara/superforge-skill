@@ -30,15 +30,22 @@ This file contains only project-wide facts that are true now:
 Conversation: <language>
 Artifacts: <language>
 
+## Git
+Branch policy: <work branch + pull request | direct on default branch>
+Auto-push to default branch: <no | yes>
+
 ## Tools
 Interactive: <tool>
+Handoff targets: <Codex, Gemini CLI, Cursor, or none>
 Async agent: <name or none>
+Agent rules file: <AGENTS.md | declined>
 
 ## Pinned constraints
 - <constraint that still applies>
 ```
 
-Overwrite stale values. Remove superseded claims or move genuinely useful
+The first Medium or Large phase in a project fills these in once, through
+`references/setup.md`. Overwrite stale values. Remove superseded claims or move genuinely useful
 history to `docs/archive/`; never mix completed history with current state.
 
 ## Standard domain files

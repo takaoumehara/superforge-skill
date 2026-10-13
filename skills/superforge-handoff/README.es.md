@@ -48,6 +48,12 @@ Claude Code, Codex, Gemini CLI, Antigravity, Cursor: la cápsula es un archivo d
 ### 📋 Un prompt de reanudación que pegas y sigues
 Junto a la cápsula recibes un prompt listo para pegar con el proyecto, el archivo, el objetivo, el estado verificado y el siguiente paso. Retomar es pegar una vez, no reconstruir de memoria.
 
+### ⬆️ Si no está en el remoto, no existe
+Las otras herramientas leen GitHub, no tu sesión anterior. La cápsula se confirma y se sube a la rama de trabajo, y el prompt de reanudación nombra la rama y el commit. Para no necesitar un traspaso de emergencia, la skill incluye una regla para `CLAUDE.md` y un hook Stop opcional que suben el trabajo en cada punto de control (`references/checkpoint-push.md`).
+
+### 🎯 Para salir de Claude Code, no para quedarse
+Dentro de Claude Code, un hilo largo se resuelve con la compactación, `/compact` o `/clear`. Esta skill es para cuando el trabajo se va a otra parte, casi siempre porque se acaban los créditos o el límite de uso. Ejecútala mientras quede margen para terminar el push.
+
 ---
 
 ## 🔄 Antes / Después
