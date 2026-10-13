@@ -6,8 +6,10 @@
 <title>BreakBias Idea Map</title>
 <!--
   Reference implementation of references/idea-map-output.md.
-  To use: copy to docs/product-idea.html and replace ONLY the JSON inside
-  <script type="application/json" id="ledger"> with docs/product-idea.ledger.json.
+  To use: copy to docs/product-idea.html and replace ONLY the JSON inside the
+  application/json script block whose id is "ledger" (further down the page)
+  with docs/product-idea.ledger.json. This comment deliberately does not spell
+  out that tag, so a find-the-first-match replace cannot land inside it.
   Everything on the page — shortlist, maps, board, coverage line — is computed
   from that one object. Quadrants and lanes are derived from scores here and
   must never be written into the ledger.
