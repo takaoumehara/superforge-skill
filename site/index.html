@@ -48,6 +48,7 @@
         <span>superforge</span>
       </a>
       <ul class="nav-links">
+        <li><a href="#start" data-i18n="nav.start">New here?</a></li>
         <li><a href="#what" data-i18n="nav.what">Why a router</a></li>
         <li><a href="#specialists" data-i18n="nav.specialists">Specialists</a></li>
         <li><a href="#install" data-i18n="nav.install">Install</a></li>
@@ -68,6 +69,7 @@
     </div>
   </header>
   <nav class="mobile-menu" id="mobile-menu" aria-label="Sections">
+    <a href="#start" data-i18n="nav.start">New here?</a>
     <a href="#what" data-i18n="nav.what">Why a router</a>
     <a href="#specialists" data-i18n="nav.specialists">Specialists</a>
     <a href="#install" data-i18n="nav.install">Install</a>
@@ -105,6 +107,72 @@
         <figure class="hero-art">
           <img class="diagram" src="assets/img/hero.svg" width="1200" height="420" alt="A request enters a thin router, which sizes it and routes to one specialist out of fourteen arranged in five phases: Think, Build, Prove, Ship and Continue." data-i18n-attr="alt:hero.alt">
         </figure>
+      </div>
+    </section>
+
+    <!-- ================= START HERE (plain-language onboarding) ================= -->
+    <section id="start">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="sec-label"><span class="sec-num">00</span><span class="eyebrow" data-i18n="start.eyebrow">New here? Start here</span></p>
+          <div>
+            <h2 data-i18n="start.title">Your AI, with a team of specialists behind it</h2>
+            <p class="lead" data-i18n="start.lead">superforge gives Claude fourteen specialists: one for ideas, one for the business side, and others for design, building, checking and launching. You don't write code and you don't learn any names. Say what you want in plain words, and the right specialist picks it up.</p>
+          </div>
+        </div>
+
+        <h3 class="sub-head" data-i18n="start.likeTitle">What it is like</h3>
+        <p class="lead" style="max-width:68ch" data-i18n="start.likeBody">Think of the front desk at a good design-and-build firm. You say "I want to open a small café by the station." The receptionist doesn't send everyone at once. They call the planner first, then the designer, then the builder, then the inspector, each one only when it is their turn. superforge is that front desk.</p>
+
+        <h3 class="sub-head" data-i18n="start.askTitle">What you can ask for</h3>
+        <div class="cols cols-3" data-reveal>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a1k">Ideas</span>
+            <h3 data-i18n="start.a1Title">"What new thing could my café do?"</h3>
+            <p data-i18n="start.a1Body">Tries every combination instead of stopping at the first plausible answer. You get safe, core and far-out options side by side, plus everything it threw away and why.</p>
+          </article>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a2k">Business</span>
+            <h3 data-i18n="start.a2Title">"Would people pay for this?"</h3>
+            <p data-i18n="start.a2Body">Checks whether the market is worth entering, then works out the price, who pays, and how many customers it would take.</p>
+          </article>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a3k">Look and feel</span>
+            <h3 data-i18n="start.a3Title">"I need a name, a logo and a style."</h3>
+            <p data-i18n="start.a3Body">Shapes the brand and the screens so they look intentional, not like a template.</p>
+          </article>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a4k">Build</span>
+            <h3 data-i18n="start.a4Title">"Make a booking page for me."</h3>
+            <p data-i18n="start.a4Body">Plans the work, then builds it step by step in your project.</p>
+          </article>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a5k">Check</span>
+            <h3 data-i18n="start.a5Title">"Does it really work, for everyone?"</h3>
+            <p data-i18n="start.a5Body">Tests it, looks for security holes and accessibility problems, and only says "done" when it has evidence.</p>
+          </article>
+          <article class="col">
+            <span class="col-k" data-i18n="start.a6k">Launch</span>
+            <h3 data-i18n="start.a6Title">"Is it safe to publish?"</h3>
+            <p data-i18n="start.a6Body">Decides separately whether it is ready for real users, and what to watch after launch.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head" data-i18n="start.stepsTitle">Three steps to start</h3>
+        <ol class="steps" data-reveal>
+          <li data-i18n="start.s1">Open Claude Code: the desktop app, or claude.ai/code in your browser.</li>
+          <li data-i18n="start.s2">Install superforge once. Copy the two lines in the <a href="#install">Install</a> section and paste them in.</li>
+          <li data-i18n="start.s3">Type <code>superforge</code> and what you want, in your own words. For example: <code>superforge I want new ideas for a small café by the station</code></li>
+        </ol>
+
+        <h3 class="sub-head" data-i18n="start.exTitle">What a real idea session looks like</h3>
+        <p class="lead" style="max-width:68ch" data-i18n="start.exBody">We asked for ideas for a small café by a station. It split the café into ten parts (the counter, the menu, the seats, the waiting time, the regulars, the weather and more) and tried eight ways of changing each one: 80 ideas in total. Separate reviewers, who never saw how the ideas were made, scored them. At first none stood out. Then it pushed the best few further and combined ideas from different angles, and five strong ones appeared. One example: the café's record of its regulars becomes a gentle morning check-in that family members living far away pay for. Every discarded idea stayed visible, so you can disagree and pick one back up.</p>
+
+        <h3 class="sub-head" data-i18n="start.needTitle">What you don't need, and what it can't do</h3>
+        <ul class="paths" data-reveal>
+          <li><span class="num">01</span><div><h3 data-i18n="start.n1Title">No coding, no special phrases</h3><p data-i18n="start.n1Body">Plain requests work. You never need to know which specialist is answering.</p></div></li>
+          <li><span class="num">02</span><div><h3 data-i18n="start.n2Title">It still can't talk to your customers</h3><p data-i18n="start.n2Body">Every idea is a well-argued guess until real people react to it. superforge says so in its results, and tells you what to ask them.</p></div></li>
+        </ul>
       </div>
     </section>
 
