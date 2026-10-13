@@ -3,9 +3,10 @@
 # survives a usage limit or a reclaimed cloud container. Never blocks Claude:
 # every path exits 0 and reports problems on stderr.
 #
-# Skips: not a git repo, detached HEAD, the default branch, a merge or rebase
-# in progress, or SUPERFORGE_CHECKPOINT_PUSH=0. Refuses to commit files that
-# look like secrets.
+# Skips: not a git repo, detached HEAD, a merge or rebase in progress, or
+# SUPERFORGE_CHECKPOINT_PUSH=0. Skips the default branch too, unless
+# SUPERFORGE_CHECKPOINT_ALLOW_DEFAULT=1. Refuses to commit files that look
+# like secrets.
 
 set -u
 
@@ -16,9 +17,11 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 branch=$(git symbolic-ref --short -q HEAD) || exit 0
 default=$(git symbolic-ref --short -q refs/remotes/origin/HEAD 2>/dev/null)
 default=${default#origin/}
-case "$branch" in
-  main|master|"${default:-main}") exit 0 ;;
-esac
+if [ "${SUPERFORGE_CHECKPOINT_ALLOW_DEFAULT:-0}" != "1" ]; then
+  case "$branch" in
+    main|master|"${default:-main}") exit 0 ;;
+  esac
+fi
 
 for marker in MERGE_HEAD rebase-merge rebase-apply CHERRY_PICK_HEAD; do
   [ -e "$(git rev-parse --git-path "$marker")" ] && exit 0

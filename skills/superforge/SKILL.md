@@ -76,8 +76,8 @@ when two materially different goals remain plausible.
 
 ## 5. Keep only durable state
 
-If `docs/superforge.md` exists, read its current constraints. Keep **current state, never chronological history**;
-remove or archive superseded claims.
+If `docs/superforge.md` exists, read its current constraints; if not, a Medium or Large phase first
+reads `references/setup.md`. Keep **current state, never chronological history**; archive superseded claims.
 Create or update an artifact only for a Large decision, handoff, release, or a
 Medium decision that must survive a new session. Read `references/artifacts.md`
 only then.
@@ -91,7 +91,7 @@ An ordinary request to correct the product is not a log trigger. Read `reference
 - Before claiming completion, require **fresh verification evidence**. Use
   `superforge-verify` for a Large phase or consequential Medium phase.
 - `/superforge ship` always sequences `superforge-verify` → `superforge-ship`.
-- Commit and push at each verified checkpoint; unpushed work is lost when usage runs out.
+- Commit and push at each verified checkpoint, per the branch policy; unpushed work is lost when usage runs out.
 - Stop for irreversible loss, spending money, missing credentials, a security
   or privacy boundary, or a choice that changes the goal. Otherwise choose a
   defensible default, record it only if durable, and continue.

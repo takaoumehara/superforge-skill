@@ -105,3 +105,6 @@ Intake fails when it becomes a wall of questions. Guard rails:
 - **Batch.** One message, all open points, never a chain of single questions.
 - **Cap it.** Three unknowns maximum per round. Assume the rest and log the
   assumption.
+- **Setup rides along.** In a project without `docs/superforge.md`, the
+  first-run setup questions (`references/setup.md`) go in the same message and
+  do not count toward the cap.

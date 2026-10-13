@@ -101,8 +101,9 @@ keeps it under 80 lines while losing nothing.
    - Commit the capsule *and* any finished, verified work it describes. Never
      commit a secret; if one is staged, stop and route to `superforge-secure`.
    - If `.handoff/` is git-ignored, add it with `git add -f`.
-   - Push to the current working branch, never the default branch. Retry a
-     network failure; if the push still fails, say so plainly — an unpushed
+   - Push under the branch policy in `docs/superforge.md`. With no policy
+     recorded, push the current branch, but never the default branch unless
+     the user asked for it. Retry a network failure; if the push still fails, say so plainly — an unpushed
      capsule in a cloud session is lost when the container is reclaimed, and
      no other tool can read it.
    - Put the branch name and commit hash in the resume prompt.
@@ -141,9 +142,12 @@ redundant background questions.
 A handoff written after the limit is hit is too late — the work that matters is
 whatever was never pushed. In a cloud session (Claude Code on the web) that work
 exists only in a temporary container. The durable fix is a project rule, not this
-skill: commit and push at each verified checkpoint. A `CLAUDE.md` rule and an
-optional Stop hook that does it automatically →
-**`references/checkpoint-push.md`**. Offer it once when a project has neither.
+skill: commit and push at each verified checkpoint. The rule lives in
+`AGENTS.md` so every tool follows it, imported by `CLAUDE.md` and `GEMINI.md`;
+an optional Stop hook does it automatically → **`references/checkpoint-push.md`**.
+If the project has no `AGENTS.md` rules block, offer the first-run setup
+(`superforge/references/setup.md`) once; with it, the next tool also knows to
+read `.handoff/` without being told.
 
 ---
 

@@ -34,6 +34,10 @@ repetirlo en cada mensaje.
 - Las skills de UI/diseño son alternativas, no una pila automática.
 - El log registra correcciones repetidas, fallos, reintentos y publicaciones.
 
+## Primer uso en un proyecto
+
+La primera fase mediana o grande hace hasta cuatro preguntas de opción múltiple en un solo mensaje (idioma de los archivos, política de ramas, otras IA a las que pasas trabajo y si escribir reglas compartidas) y no las repite. El idioma de la conversación sigue al tuyo. Si aceptas, las reglas van a `AGENTS.md` y el archivo de instrucciones de cada otra herramienta solo lo importa, así todos tus agentes siguen las mismas reglas. Ver [setup.md](references/setup.md).
+
 ## Instalación
 
 ```bash
