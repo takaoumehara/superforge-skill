@@ -144,6 +144,12 @@ default, the four things a workflow cannot do (starting with: it cannot stop to
 ask you anything), what the three-wave cap does and does not limit, and the three
 workflows shipped in `workflows/`. Read it before writing or running one.
 
+**`references/emil-kowalski/write-swift/GUIDE.md`** — Emil Kowalski's guide
+to modern Swift (vendored under MIT; provenance in `NOTICE.md` beside it):
+value types, Swift 6 data-race safety and approachable concurrency, `some` vs
+`any`, API design, performance and ARC, Swift Testing, and macros. Read it when
+a task writes, reviews, or migrates Swift.
+
 Split first, then run: `decomposition.md` produces the task list that
 `autonomous-run.md` executes, or that `workflows/superforge-dev-waves.js`
 executes as a script.

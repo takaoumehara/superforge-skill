@@ -74,6 +74,13 @@ as a map of what ran rather than of what was checked, and the four-step order
 for adding tests to a codebase that has none (at the bug, at the change, at the
 seam, at the boundary).
 
+**`references/emil-kowalski/break-ui/GUIDE.md`** — Emil Kowalski's guide to
+breaking UI with worst-case data (vendored under MIT; provenance in
+`NOTICE.md` beside it): long and unbreakable strings, missing fields, huge and
+zero counts, non-Latin text, emoji, extreme numbers, rendered behind a
+"Demo data / Worst case" toggle with a fix per break. The case list is in
+`CATALOG.md`. Read it when a UI needs stress-testing for edge cases.
+
 ---
 
 ## Artifact
