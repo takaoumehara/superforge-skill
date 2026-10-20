@@ -143,6 +143,14 @@ Durations, the easing token set, the compositor pipeline, scroll-engine
 synchronisation, native-platform equivalents, and the eight-question interaction
 score → **`references/motion-system.md`**.
 
+Emil Kowalski's design-engineering skills ship here as guides: building an
+animation (web or Expo), reviewing or auditing existing motion, finding what
+should animate, frame drops, naming an effect, Apple-style fluid motion, making
+a web app feel native on a phone, prototype variants, picking a library, and
+Sonner. Pick the one guide that matches the task from
+**`references/emil-kowalski/INDEX.md`**, which also says how they sit with this
+skill's own rules.
+
 ---
 
 ## 4b. Performance and language are layout decisions, not later problems
@@ -281,6 +289,14 @@ slider versus a stepper are specified per platform in
 ---
 
 ## Deeper references
+
+- **`references/emil-kowalski/INDEX.md`** — Emil Kowalski's skills, vendored
+  under MIT as guides: the craft bar (`emil-design-eng`), `animate`,
+  `animate-expo`, `review-animations`, `improve-animations`,
+  `find-animation-opportunities`, `animation-performance`,
+  `animation-vocabulary`, `apple-design`, `mobile-native`, `prototype`,
+  `pick-ui-library`, and `ask-sonner`, with the task each one is for and
+  where it disagrees with `motion-system.md`.
 
 - **`references/design-sourcing.md`** — where the visual direction comes from:
   the six extraction layers, the line between reference and imitation, turning a
